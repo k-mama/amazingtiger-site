@@ -162,8 +162,37 @@ export interface Dictionary {
     eyebrow: string;
     heading: string;
     lead: string;
+    loggedOut: {
+      badge: string;
+      heading: string;
+      lead: string;
+      cta: string;
+    };
+    notAuthorized: {
+      badge: string;
+      heading: string;
+      lead: string;
+      cta: string;
+    };
     sections: { title: string; description: string }[];
     note: string;
+    consultations: {
+      heading: string;
+      lead: string;
+      filters: { id: "all" | "new" | "in_progress" | "closed"; label: string }[];
+      columns: {
+        name: string;
+        email: string;
+        projectType: string;
+        locale: string;
+        status: string;
+        createdAt: string;
+      };
+      statusLabels: Record<"new" | "in_progress" | "closed", string>;
+      loading: string;
+      empty: string;
+      error: string;
+    };
   };
   faqPage: {
     eyebrow: string;

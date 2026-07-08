@@ -34,7 +34,7 @@ app/
     login/page.tsx
     signup/page.tsx
     dashboard/page.tsx     Member dashboard — client-side Supabase Auth guard, see "Auth flow" below
-    admin/page.tsx         Admin dashboard (placeholder)
+    admin/page.tsx         Admin dashboard — client-side role guard, see "Auth flow" below
     faq/page.tsx
     consultation/page.tsx
     shop/page.tsx           Luxury catalogue UI
@@ -135,6 +135,14 @@ The header's Login link (`components/AuthNavLink.tsx`) similarly swaps to "Dashb
 
 Email confirmation: signup calls `emailRedirectTo: \`${origin}/${locale}/login?confirmed=1\``, so confirming the email link lands back on login with a "your email has been confirmed" banner. If your Supabase project has **Confirm email** disabled (Authentication → Providers → Email), signup will sign the user in immediately instead of requiring confirmation — the login page's not-confirmed error simply won't trigger in that case.
 
+### Admin guard
+
+`/[locale]/admin` uses the same client-side-only pattern as the member dashboard, in `components/AdminView.tsx`: `supabase.auth.getUser()` first (no user → "sign in" state), then a `profiles.select("role").eq("id", user.id)` read (role !== `"admin"` → "not authorized" state; only `role === "admin"` renders the dashboard). Like the dashboard, **this is not a security boundary** — it just avoids flashing admin content at the wrong visitor. The real protection is the `"Admins can manage consultations"` (and equivalent) RLS policies in `supabase/schema.sql`, which use the `is_admin()` helper to reject non-admin reads at the database level regardless of what the page renders.
+
+If `profiles.role` isn't already `admin` for your account, promote it manually per the "Promote the first admin" section above — there is no UI for this yet.
+
+The first real admin feature, `components/AdminConsultationList.tsx`, reads `consultations` (id, name, email, project_type, locale, status, created_at) filtered by status (`all` / `new` / `in_progress` / `closed` — matching the `consultations.status` check constraint in `schema.sql`) and only mounts once the role check above has passed.
+
 ### Multilingual content pattern
 
 `faqs`, `consultations`, `chat_sessions`, and `chat_messages` each carry their own `locale` column directly, since each row is inherently single-language content.
@@ -152,7 +160,7 @@ Framework preset: **Next.js (Static HTML Export)** — build command `npx next b
 
 ## What's implemented vs. placeholder (first pass)
 
-- **Implemented:** full premium homepage (EN/KO) with Hero, Philosophy, Featured Works, Publishing House, Book Making Atelier preview, Shop preview, Founder, Studio Notes, Membership, and Consultation sections; the standalone Atelier page (which routes into the shared consultation form); luxury shop catalogue UI; FAQ page; consultation form wired directly to Supabase via `supabase-js` (with the updated inquiry-type list: Publish with Amazing Tiger, Build My Book with Amazing Tiger Atelier, Author Website Inquiry, Shop Support, Membership Support, Other); static DB schema with RLS; **signup, login, and the member dashboard are fully wired to Supabase Auth** — client-side validation, localized (EN/KO) errors, email confirmation flow, client-side auth guard on the dashboard (see "Auth flow" above), logout, and a header link that swaps between Login and Dashboard based on session state.
-- **Placeholder (visually complete, not yet functional):** `functions/api/consultation.ts` and `functions/api/chat.ts` remain unused skeletons (the real consultation insert goes directly through `supabase-js` from `ConsultationForm.tsx`, not through this function); chatbot is not implemented; shop cart/checkout do not process anything yet (see `functions/api/create-checkout.ts`, intentionally left as a `not_implemented` skeleton — no real payment, no real orders); admin dashboard is a protected-looking static page with no real session/role gating yet.
+- **Implemented:** full premium homepage (EN/KO) with Hero, Philosophy, Featured Works, Publishing House, Book Making Atelier preview, Shop preview, Founder, Studio Notes, Membership, and Consultation sections; the standalone Atelier page (which routes into the shared consultation form); luxury shop catalogue UI; FAQ page; consultation form wired directly to Supabase via `supabase-js` (with the updated inquiry-type list: Publish with Amazing Tiger, Build My Book with Amazing Tiger Atelier, Author Website Inquiry, Shop Support, Membership Support, Other); static DB schema with RLS; **signup, login, and the member dashboard are fully wired to Supabase Auth** — client-side validation, localized (EN/KO) errors, email confirmation flow, client-side auth guard on the dashboard (see "Auth flow" above), logout, and a header link that swaps between Login and Dashboard based on session state; **the admin dashboard now has a real role guard** (see "Admin guard" above) with a working first admin feature — a live, status-filterable consultations list.
+- **Placeholder (visually complete, not yet functional):** `functions/api/consultation.ts` and `functions/api/chat.ts` remain unused skeletons (the real consultation insert goes directly through `supabase-js` from `ConsultationForm.tsx`, not through this function); chatbot is not implemented; shop cart/checkout do not process anything yet (see `functions/api/create-checkout.ts`, intentionally left as a `not_implemented` skeleton — no real payment, no real orders); the remaining admin sections (Members, FAQ, Products, Orders, Translation Queue, AI Drafts, Chat Sessions) are still static cards with no data behind them yet.
 
 These are the natural next steps once real Supabase keys are supplied.

@@ -1530,6 +1530,93 @@ button {
   }
 }
 
+.admin-panel {
+  padding: var(--space-4);
+}
+
+.admin-panel h2 {
+  margin-top: 0;
+}
+
+.category-filter__link.is-active {
+  border-color: var(--color-bronze);
+  color: var(--color-ink);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.admin-table-wrap {
+  margin-top: var(--space-3);
+  overflow-x: auto;
+  border: 1px solid var(--color-stone-line);
+  border-radius: var(--radius-md);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.admin-table th {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  background: rgba(255, 255, 255, 0.55);
+  border-bottom: 1px solid var(--color-stone-line);
+}
+
+.admin-table tbody tr:not(:last-child) td {
+  border-bottom: 1px solid rgba(191, 230, 220, 0.5);
+}
+
+.admin-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-stone-line);
+  white-space: nowrap;
+}
+
+.status-pill--new {
+  border-color: rgba(179, 193, 244, 0.9);
+  background: rgba(179, 193, 244, 0.22);
+  color: var(--color-ink);
+}
+
+.status-pill--in_progress {
+  border-color: rgba(250, 200, 158, 0.9);
+  background: rgba(250, 200, 158, 0.22);
+  color: var(--color-ink);
+}
+
+.status-pill--closed {
+  border-color: rgba(191, 230, 220, 0.9);
+  background: rgba(191, 230, 220, 0.3);
+  color: var(--color-ink-soft);
+}
+
+@media (max-width: 640px) {
+  .admin-table th,
+  .admin-table td {
+    padding: 0.6rem 0.75rem;
+  }
+}
+
 /* =========================================================================
    FAQ
    ========================================================================= */
