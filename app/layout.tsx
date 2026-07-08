@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Forum, Cormorant_Garamond, Inter } from "next/font/google";
+import { Forum, Bodoni_Moda, Manrope, Inter } from "next/font/google";
 import "./globals.css";
 
-// Three-tier type system:
+// Four-tier type system:
 // - Forum: an elegant classical serif for every content headline, h1-h4.
-// - Cormorant Garamond: the entire wordmark, both the "Amazing Tiger" line
-//   and the "PUBLISHING" line. Pairing a serif headline with a separate
-//   sans-serif subtitle (Jost) read as two unrelated logos stacked together
-//   and made consistent sizing hard to judge — a single refined Garamond
-//   revival across both lines, differentiated only by size, weight, and
-//   tracking, is the classic literary-press colophon pattern (name above,
-//   small tracked caps subtitle below) and reads as one coherent mark.
-// - Inter: body copy, untouched.
+// - Bodoni Moda: the wordmark's "Amazing Tiger" line. Cormorant Garamond
+//   read as a classic literary archive rather than a cinematic, editorial,
+//   modern-luxury mark — Bodoni Moda's high-contrast, fashion-editorial
+//   strokes are the deliberate replacement (medium weight, not the thin
+//   optical cut, so it stays confident rather than delicate).
+// - Manrope: the wordmark's "PUBLISHING" line — a quiet, geometric,
+//   supporting-cast sans, medium weight, wide tracking, uppercase.
+// - Inter: body copy and main navigation, untouched.
 const displaySerif = Forum({
   subsets: ["latin"],
   weight: ["400"],
@@ -19,10 +19,17 @@ const displaySerif = Forum({
   display: "swap",
 });
 
-const wordmarkSerif = Cormorant_Garamond({
+const wordmarkSerif = Bodoni_Moda({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["500"],
   variable: "--font-wordmark-serif",
+  display: "swap",
+});
+
+const wordmarkSans = Manrope({
+  subsets: ["latin"],
+  weight: ["500"],
+  variable: "--font-wordmark-sans",
   display: "swap",
 });
 
@@ -52,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${displaySerif.variable} ${wordmarkSerif.variable} ${inter.variable}`}
+      className={`${displaySerif.variable} ${wordmarkSerif.variable} ${wordmarkSans.variable} ${inter.variable}`}
     >
       <body>{children}</body>
     </html>
