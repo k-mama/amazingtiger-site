@@ -242,7 +242,8 @@ const en: Dictionary = {
     ],
     messageLabel: "About Your Project",
     submit: "Send Inquiry",
-    note: "This form is not yet connected. Submissions will be saved securely once Supabase and Cloudflare Pages Functions are wired together.",
+    note: "Thank you. Your inquiry has been received — we read every message personally and will be in touch soon.",
+    errorNote: "Something went wrong sending your inquiry. Please try again in a moment, or write to us directly.",
   },
   shopPage: {
     eyebrow: "The Shop",

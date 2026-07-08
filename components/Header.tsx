@@ -20,7 +20,7 @@ export default function Header({ locale, dict, basePath }: HeaderProps) {
     <header className="site-header">
       <div className="site-header__inner">
         <Link href={basePath} className="wordmark">
-          <WordmarkLogo idSuffix="header" />
+          <WordmarkLogo />
         </Link>
         <div className="site-nav">
           <ul className="site-nav__links">

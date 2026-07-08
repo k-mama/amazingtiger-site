@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Forum, Montserrat, Inter } from "next/font/google";
+import { Forum, Prata, Inter } from "next/font/google";
 import "./globals.css";
 
 // Three-tier type system:
 // - Forum: an elegant classical serif for every content headline, h1-h4.
-// - Montserrat: base letterforms for the header wordmark, rendered as
-//   hollow gradient-stroke SVG text (see Header.tsx) to match the
-//   requested outlined, multi-colour logotype treatment.
+// - Prata: the two-line wordmark ("Amazing Tiger" / "Publishing"). "Amagro"
+//   was requested but isn't on Google Fonts — Prata is the closest free
+//   match: the same confident, moderate-contrast bracketed-serif display
+//   character.
 // - Inter: body copy, untouched.
 const displaySerif = Forum({
   subsets: ["latin"],
@@ -15,9 +16,9 @@ const displaySerif = Forum({
   display: "swap",
 });
 
-const headingSans = Montserrat({
+const headingSans = Prata({
   subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: ["400"],
   variable: "--font-wordmark",
   display: "swap",
 });

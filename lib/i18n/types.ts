@@ -150,6 +150,7 @@ export interface Dictionary {
     messageLabel: string;
     submit: string;
     note: string;
+    errorNote: string;
   };
   shopPage: {
     eyebrow: string;

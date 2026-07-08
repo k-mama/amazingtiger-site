@@ -69,7 +69,7 @@ export default function MobileMenu({ locale, dict, basePath }: MobileMenuProps) 
             <div className="mobile-menu-panel__inner">
               <div className="mobile-menu-panel__header">
                 <span className="wordmark">
-                  <WordmarkLogo idSuffix="mobile-menu" />
+                  <WordmarkLogo />
                 </span>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
                   <LanguageSwitcher locale={locale} />

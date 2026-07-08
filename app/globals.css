@@ -68,7 +68,7 @@
   --radius-sm: 11px;
 
   --font-display: var(--font-heading), "Forum", "Iowan Old Style", Georgia, serif;
-  --font-logo: var(--font-wordmark), "Averia Serif Libre", "Iowan Old Style", Georgia, serif;
+  --font-logo: var(--font-wordmark), "Prata", "Iowan Old Style", Georgia, serif;
   --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --max-width: 1160px;
@@ -320,23 +320,33 @@ button {
   align-items: center;
 }
 
-.wordmark__svg {
-  display: block;
-  width: 238px;
-  height: 19px;
+.wordmark__lines {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
 }
 
-.wordmark__text {
+.wordmark__line1 {
   font-family: var(--font-logo);
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 1.15rem;
   letter-spacing: 0.01em;
+  color: var(--color-ink);
+}
+
+.wordmark__line2 {
+  font-family: var(--font-logo);
+  font-weight: 400;
+  font-size: 0.62rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-bronze);
+  margin-top: 0.2rem;
 }
 
 @media (max-width: 480px) {
-  .wordmark__svg {
-    width: 200px;
-    height: 16px;
+  .wordmark__line1 {
+    font-size: 1rem;
   }
 }
 
