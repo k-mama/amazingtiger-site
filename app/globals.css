@@ -335,10 +335,10 @@ button {
 }
 
 .wordmark__line2 {
-  font-family: var(--font-logo-serif);
+  font-family: var(--font-body);
   font-weight: 500;
-  font-size: 0.85rem;
-  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-bronze);
   margin-top: 0.18rem;
