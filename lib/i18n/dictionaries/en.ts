@@ -258,11 +258,18 @@ const en: Dictionary = {
         locale: "Locale",
         status: "Status",
         createdAt: "Received",
+        updateStatus: "Update Status",
       },
       statusLabels: {
         new: "New",
         in_progress: "In Progress",
         closed: "Closed",
+      },
+      statusUpdate: {
+        label: "Change status",
+        updating: "Updating…",
+        success: "Status updated.",
+        error: "Could not update status. Please try again.",
       },
       loading: "Loading consultations…",
       empty: "No consultations match this filter yet.",

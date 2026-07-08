@@ -12,6 +12,10 @@ interface AdminConsultationListProps {
 
 type StatusFilter = "all" | "new" | "in_progress" | "closed";
 type LoadState = "loading" | "ready" | "error";
+type ConsultationStatus = "new" | "in_progress" | "closed";
+type RowUpdateState = "idle" | "updating" | "success" | "error";
+
+const STATUS_VALUES: ConsultationStatus[] = ["new", "in_progress", "closed"];
 
 interface ConsultationRow {
   id: string;
@@ -27,6 +31,7 @@ export default function AdminConsultationList({ dict, locale }: AdminConsultatio
   const [filter, setFilter] = useState<StatusFilter>("all");
   const [rows, setRows] = useState<ConsultationRow[]>([]);
   const [loadState, setLoadState] = useState<LoadState>("loading");
+  const [rowUpdates, setRowUpdates] = useState<Record<string, RowUpdateState>>({});
 
   useEffect(() => {
     let active = true;
@@ -57,6 +62,20 @@ export default function AdminConsultationList({ dict, locale }: AdminConsultatio
       active = false;
     };
   }, [filter]);
+
+  async function handleStatusChange(id: string, nextStatus: ConsultationStatus) {
+    setRowUpdates((prev) => ({ ...prev, [id]: "updating" }));
+
+    const { error } = await supabase.from("consultations").update({ status: nextStatus }).eq("id", id);
+
+    if (error) {
+      setRowUpdates((prev) => ({ ...prev, [id]: "error" }));
+      return;
+    }
+
+    setRows((prev) => prev.map((row) => (row.id === id ? { ...row, status: nextStatus } : row)));
+    setRowUpdates((prev) => ({ ...prev, [id]: "success" }));
+  }
 
   return (
     <div className="glass-panel glass-panel--solid admin-panel">
@@ -98,29 +117,65 @@ export default function AdminConsultationList({ dict, locale }: AdminConsultatio
                 <th>{dict.columns.locale}</th>
                 <th>{dict.columns.status}</th>
                 <th>{dict.columns.createdAt}</th>
+                <th>{dict.columns.updateStatus}</th>
               </tr>
             </thead>
             <tbody>
-              {rows.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.name}</td>
-                  <td>{row.email}</td>
-                  <td>{row.project_type ?? "—"}</td>
-                  <td>{row.locale.toUpperCase()}</td>
-                  <td>
-                    <span className={`status-pill status-pill--${row.status}`}>
-                      {dict.statusLabels[row.status as "new" | "in_progress" | "closed"] ?? row.status}
-                    </span>
-                  </td>
-                  <td>
-                    {new Date(row.created_at).toLocaleDateString(locale === "ko" ? "ko-KR" : "en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </td>
-                </tr>
-              ))}
+              {rows.map((row) => {
+                const updateState = rowUpdates[row.id] ?? "idle";
+                return (
+                  <tr key={row.id}>
+                    <td>{row.name}</td>
+                    <td>{row.email}</td>
+                    <td>{row.project_type ?? "—"}</td>
+                    <td>{row.locale.toUpperCase()}</td>
+                    <td>
+                      <span className={`status-pill status-pill--${row.status}`}>
+                        {dict.statusLabels[row.status as "new" | "in_progress" | "closed"] ?? row.status}
+                      </span>
+                    </td>
+                    <td>
+                      {new Date(row.created_at).toLocaleDateString(locale === "ko" ? "ko-KR" : "en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </td>
+                    <td>
+                      <div className="admin-status-update">
+                        <select
+                          aria-label={dict.statusUpdate.label}
+                          className="admin-status-select"
+                          value={row.status}
+                          disabled={updateState === "updating"}
+                          onChange={(event) =>
+                            handleStatusChange(row.id, event.target.value as ConsultationStatus)
+                          }
+                        >
+                          {STATUS_VALUES.map((value) => (
+                            <option key={value} value={value}>
+                              {dict.statusLabels[value]}
+                            </option>
+                          ))}
+                        </select>
+                        {updateState === "updating" && (
+                          <span className="admin-status-message">{dict.statusUpdate.updating}</span>
+                        )}
+                        {updateState === "success" && (
+                          <span className="admin-status-message admin-status-message--success">
+                            {dict.statusUpdate.success}
+                          </span>
+                        )}
+                        {updateState === "error" && (
+                          <span className="admin-status-message admin-status-message--error">
+                            {dict.statusUpdate.error}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

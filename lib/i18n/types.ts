@@ -189,8 +189,15 @@ export interface Dictionary {
         locale: string;
         status: string;
         createdAt: string;
+        updateStatus: string;
       };
       statusLabels: Record<"new" | "in_progress" | "closed", string>;
+      statusUpdate: {
+        label: string;
+        updating: string;
+        success: string;
+        error: string;
+      };
       loading: string;
       empty: string;
       error: string;

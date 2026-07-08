@@ -258,11 +258,18 @@ const ko: Dictionary = {
         locale: "언어",
         status: "상태",
         createdAt: "접수일",
+        updateStatus: "상태 변경",
       },
       statusLabels: {
         new: "신규",
         in_progress: "진행 중",
         closed: "종료",
+      },
+      statusUpdate: {
+        label: "상태 변경",
+        updating: "업데이트 중…",
+        success: "상태가 업데이트되었습니다.",
+        error: "상태를 업데이트하지 못했습니다. 다시 시도해 주세요.",
       },
       loading: "상담 목록을 불러오는 중…",
       empty: "이 조건에 해당하는 상담이 아직 없습니다.",
