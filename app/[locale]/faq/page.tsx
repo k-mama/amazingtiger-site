@@ -12,7 +12,7 @@ export default function FaqPage({ params }: { params: { locale: string } }) {
   const dict = getDictionary(locale).faqPage;
 
   return (
-    <div className="container section">
+    <div className="container section" style={{ maxWidth: "820px" }}>
       <span className="eyebrow">{dict.eyebrow}</span>
       <h1 className="section-heading">{dict.heading}</h1>
       <p className="section-lead">{dict.lead}</p>

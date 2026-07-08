@@ -116,8 +116,8 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
                   key={point}
                   style={{
                     padding: "0.9rem 0",
-                    borderTop: "1px solid rgba(250,246,239,0.14)",
-                    color: "rgba(250,246,239,0.85)",
+                    borderTop: "1px solid rgba(26,23,18,0.14)",
+                    color: "var(--color-ink-soft)",
                     fontSize: "0.95rem",
                   }}
                 >
