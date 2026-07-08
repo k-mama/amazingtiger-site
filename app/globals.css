@@ -68,7 +68,7 @@
   --radius-sm: 11px;
 
   --font-display: var(--font-heading), "Forum", "Iowan Old Style", Georgia, serif;
-  --font-logo: var(--font-wordmark), "Prata", "Iowan Old Style", Georgia, serif;
+  --font-logo: var(--font-wordmark), "Jost", "Segoe UI", sans-serif;
   --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --max-width: 1160px;
@@ -328,20 +328,20 @@ button {
 
 .wordmark__line1 {
   font-family: var(--font-logo);
-  font-weight: 400;
-  font-size: 1.15rem;
+  font-weight: 500;
+  font-size: 1.1rem;
   letter-spacing: 0.01em;
   color: var(--color-ink);
 }
 
 .wordmark__line2 {
   font-family: var(--font-logo);
-  font-weight: 400;
-  font-size: 0.62rem;
-  letter-spacing: 0.26em;
+  font-weight: 500;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--color-bronze);
-  margin-top: 0.2rem;
+  margin-top: 0.22rem;
 }
 
 @media (max-width: 480px) {

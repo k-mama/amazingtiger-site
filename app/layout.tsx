@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Forum, Prata, Inter } from "next/font/google";
+import { Forum, Jost, Inter } from "next/font/google";
 import "./globals.css";
 
 // Three-tier type system:
 // - Forum: an elegant classical serif for every content headline, h1-h4.
-// - Prata: the two-line wordmark ("Amazing Tiger" / "Publishing"). "Amagro"
-//   was requested but isn't on Google Fonts — Prata is the closest free
-//   match: the same confident, moderate-contrast bracketed-serif display
-//   character.
+// - Jost: the two-line wordmark ("Amazing Tiger" / "Publishing"). "Athena"
+//   (Jade Brand Studio) was requested again but is still a paid font with
+//   no licensed file available — Jost remains the closest free match:
+//   tall, geometric, single-story "a", Futura-style proportions.
 // - Inter: body copy, untouched.
 const displaySerif = Forum({
   subsets: ["latin"],
@@ -16,9 +16,9 @@ const displaySerif = Forum({
   display: "swap",
 });
 
-const headingSans = Prata({
+const headingSans = Jost({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500", "600"],
   variable: "--font-wordmark",
   display: "swap",
 });
