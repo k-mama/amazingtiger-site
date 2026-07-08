@@ -737,39 +737,41 @@ button {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.7rem;
-  font-size: 0.88rem;
-  letter-spacing: 0.04em;
-  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.8rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-radius: 16px;
   border: 1px solid transparent;
   cursor: pointer;
   transform: translateY(0) scale(1);
-  transition: transform 0.25s var(--ease-soft), background-color 0.25s var(--ease-soft), border-color 0.25s var(--ease-soft), opacity 0.25s var(--ease-soft), box-shadow 0.25s var(--ease-soft);
+  transition: transform 0.25s var(--ease-soft), background-color 0.25s var(--ease-soft), border-color 0.25s var(--ease-soft), opacity 0.25s var(--ease-soft), box-shadow 0.25s var(--ease-soft), color 0.25s var(--ease-soft);
 }
 
+/* Primary CTA — soft periwinkle/lavender gradient, no black fill */
 .btn-primary {
-  background: var(--color-ink);
-  color: var(--color-ivory);
+  background: linear-gradient(135deg, var(--dg-periwinkle), var(--dg-lavender));
+  color: var(--color-ink);
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -10px 14px -8px rgba(0, 0, 0, 0.4),
-    0 3px 7px rgba(26, 23, 18, 0.28),
-    0 22px 38px -18px rgba(26, 23, 18, 0.55);
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -10px 14px -8px rgba(110, 100, 160, 0.22),
+    0 3px 7px rgba(110, 100, 160, 0.18),
+    0 22px 38px -18px rgba(110, 100, 160, 0.42);
 }
 
 .btn-primary:hover {
-  background: var(--color-ink-soft);
+  background: linear-gradient(135deg, var(--dg-lavender), var(--dg-periwinkle));
   transform: translateY(-1px) scale(1.01);
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.28),
-    inset 0 -10px 14px -8px rgba(0, 0, 0, 0.44),
-    0 4px 9px rgba(26, 23, 18, 0.32),
-    0 28px 48px -18px rgba(26, 23, 18, 0.6);
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -10px 14px -8px rgba(110, 100, 160, 0.26),
+    0 4px 9px rgba(110, 100, 160, 0.22),
+    0 28px 48px -18px rgba(110, 100, 160, 0.48);
 }
 
 .btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(185, 154, 91, 0.45);
+  box-shadow: 0 0 0 3px rgba(179, 193, 244, 0.6);
 }
 
 .btn-primary:active {
@@ -782,31 +784,33 @@ button {
   transform: none;
 }
 
+/* Secondary — light surface, soft pastel border, no black outline */
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.6);
   color: var(--color-ink);
-  border-color: var(--color-ink);
+  border-color: rgba(143, 220, 227, 0.7);
   box-shadow:
     inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -8px 12px -8px rgba(60, 40, 20, 0.08),
-    0 2px 5px rgba(60, 40, 20, 0.06),
-    0 18px 32px -18px rgba(60, 40, 20, 0.28);
+    inset 0 -8px 12px -8px rgba(60, 40, 20, 0.06),
+    0 2px 5px rgba(60, 40, 20, 0.05),
+    0 18px 32px -18px rgba(60, 40, 20, 0.22);
 }
 
 .btn-secondary:hover {
-  background: var(--color-ink);
-  color: var(--color-ivory);
+  background: linear-gradient(135deg, var(--dg-aqua), var(--dg-turquoise));
+  border-color: transparent;
+  color: var(--color-ink);
   transform: translateY(-1px) scale(1.01);
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -10px 14px -8px rgba(0, 0, 0, 0.4),
-    0 3px 7px rgba(26, 23, 18, 0.24),
-    0 22px 38px -18px rgba(26, 23, 18, 0.5);
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -10px 14px -8px rgba(50, 130, 130, 0.2),
+    0 3px 7px rgba(50, 130, 130, 0.16),
+    0 22px 38px -18px rgba(50, 130, 130, 0.4);
 }
 
 .btn-secondary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(185, 154, 91, 0.45);
+  box-shadow: 0 0 0 3px rgba(143, 220, 227, 0.6);
 }
 
 .btn-secondary:active {
@@ -819,29 +823,31 @@ button {
   transform: none;
 }
 
+/* "Gold" tier — kept the class name for markup stability, repainted as a
+   warm peach/rose pastel gradient. No metallic gold, no ink, no bronze. */
 .btn-gold {
-  background: linear-gradient(135deg, var(--color-gold), var(--dg-gold-bright));
+  background: linear-gradient(135deg, var(--dg-peach), var(--dg-rose));
   color: var(--color-ink);
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.65),
-    inset 0 -10px 16px -8px rgba(140, 111, 78, 0.4),
-    0 3px 7px rgba(185, 154, 91, 0.3),
-    0 22px 38px -18px rgba(185, 154, 91, 0.5);
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -10px 16px -8px rgba(200, 110, 120, 0.28),
+    0 3px 7px rgba(200, 110, 120, 0.22),
+    0 22px 38px -18px rgba(200, 110, 120, 0.42);
 }
 
 .btn-gold:hover {
-  background: linear-gradient(135deg, var(--dg-gold-bright), var(--color-gold-soft));
+  background: linear-gradient(135deg, var(--dg-rose), var(--dg-peach));
   transform: translateY(-1px) scale(1.01);
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.75),
-    inset 0 -10px 16px -8px rgba(140, 111, 78, 0.44),
-    0 4px 9px rgba(185, 154, 91, 0.34),
-    0 28px 48px -18px rgba(185, 154, 91, 0.55);
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -10px 16px -8px rgba(200, 110, 120, 0.32),
+    0 4px 9px rgba(200, 110, 120, 0.26),
+    0 28px 48px -18px rgba(200, 110, 120, 0.48);
 }
 
 .btn-gold:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(140, 111, 78, 0.4);
+  box-shadow: 0 0 0 3px rgba(246, 184, 201, 0.6);
 }
 
 .btn-gold:active {
@@ -899,22 +905,6 @@ button {
   display: flex;
   gap: var(--space-2);
   flex-wrap: wrap;
-}
-
-.hero__objects {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-5);
-}
-
-@media (max-width: 860px) {
-  .hero__objects {
-    display: none;
-  }
 }
 
 /* =========================================================================

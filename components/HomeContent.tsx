@@ -49,19 +49,6 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
             </Link>
           </div>
         </div>
-        <div className="container">
-          <div className="hero__objects">
-            <div style={{ width: 118, height: 148, borderRadius: 20, overflow: "hidden", transform: "rotate(-5deg)", boxShadow: "0 30px 60px -25px rgba(70,50,30,0.35)" }}>
-              <EditorialObject toneA="var(--dg-aqua)" toneB="var(--dg-periwinkle)" emblem="ring" />
-            </div>
-            <div style={{ width: 106, height: 168, borderRadius: 20, overflow: "hidden", transform: "rotate(3deg) translateY(18px)", boxShadow: "0 30px 60px -25px rgba(70,50,30,0.35)" }}>
-              <EditorialObject toneA="var(--dg-rose)" toneB="var(--dg-lemon)" emblem="line" />
-            </div>
-            <div style={{ width: 128, height: 138, borderRadius: 20, overflow: "hidden", transform: "rotate(-2deg) translateY(-14px)", boxShadow: "0 30px 60px -25px rgba(70,50,30,0.35)" }}>
-              <EditorialObject toneA="var(--dg-lavender)" toneB="var(--dg-mint)" emblem="ring" />
-            </div>
-          </div>
-        </div>
       </section>
 
       <section id="philosophy" className="section">
