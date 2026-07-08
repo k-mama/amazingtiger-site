@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Source_Serif_4, Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Source_Serif_4, Averia_Serif_Libre, Inter } from "next/font/google";
 import "./globals.css";
 
 // Three-tier type system:
 // - Source Serif 4: an elegant modern serif for every content headline,
 //   h1-h4, built to pair cleanly with a grotesque sans body.
-// - Plus Jakarta Sans: the header wordmark/logotype only. "TT Norms Pro"
-//   (TypeType) was requested but is a paid font with no licensed file
-//   available here — Plus Jakarta Sans is the closest free match: the
-//   same clean, slightly rounded, neutral-but-warm grotesque character.
+// - Averia Serif Libre: the header wordmark/logotype only — available
+//   directly (unlike Athena/TT Norms), used at Regular so it stays
+//   neither too thin nor too wide.
 // - Inter: body copy, untouched.
 const displaySerif = Source_Serif_4({
   subsets: ["latin"],
@@ -17,9 +16,9 @@ const displaySerif = Source_Serif_4({
   display: "swap",
 });
 
-const headingSans = Plus_Jakarta_Sans({
+const headingSans = Averia_Serif_Libre({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "700"],
   variable: "--font-wordmark",
   display: "swap",
 });
