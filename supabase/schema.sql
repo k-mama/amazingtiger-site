@@ -378,6 +378,23 @@ create policy "Admins can manage order items"
   with check (is_admin());
 
 -- =========================================================================
+-- Role grants — required alongside RLS, and easy to miss.
+--
+-- RLS policies only filter *rows*; Postgres still requires the anon/
+-- authenticated roles to hold base table-level privileges before a policy
+-- ever gets evaluated. Supabase's dashboard "New Table" UI applies these
+-- grants automatically, but tables created by running raw SQL in the SQL
+-- Editor (like this file) do not get them for free — without this block,
+-- every insert/select above fails with "permission denied for table X"
+-- even though the RLS policies are otherwise correct.
+-- =========================================================================
+grant usage on schema public to anon, authenticated;
+grant select, insert, update, delete on all tables in schema public to anon, authenticated;
+grant usage, select on all sequences in schema public to anon, authenticated;
+alter default privileges in schema public grant select, insert, update, delete on tables to anon, authenticated;
+alter default privileges in schema public grant usage, select on sequences to anon, authenticated;
+
+-- =========================================================================
 -- Promote the first admin (run manually, once):
 --
 --   update profiles set role = 'admin' where email = 'you@example.com';
