@@ -1,0 +1,340 @@
+import type { Dictionary } from "../types";
+
+const en: Dictionary = {
+  meta: {
+    title: "Amazing Tiger Publishing — A Quiet Entrance",
+    description:
+      "Amazing Tiger Publishing is a refined entrance into Emma Kwon's publishing universe: books, memoirs, music, and rare voices, shaped with care.",
+  },
+  nav: {
+    philosophy: "Philosophy",
+    works: "Works",
+    founder: "Founder",
+    studioNotes: "Studio Notes",
+    shop: "Shop",
+    membership: "Membership",
+    consultation: "Consultation",
+    faq: "FAQ",
+    login: "Login",
+  },
+  hero: {
+    eyebrow: "Amazing Tiger Publishing",
+    headline: "This is not a store. This is an entrance.",
+    subhead:
+      "A quiet gateway into Emma Kwon's publishing universe — books, memoirs, music, and rare voices, shaped with care and intelligence.",
+    ctaPrimary: "Enter the House",
+    ctaSecondary: "Request a Consultation",
+  },
+  philosophy: {
+    eyebrow: "Philosophy",
+    heading: "A publishing house, not a platform.",
+    body: [
+      "We work slowly, on purpose. Every title that carries our name has been read closely, argued over, and shaped by hand before it is allowed to leave the room.",
+      "We believe a book is still one of the few places where a life can be told without apology. Our work is to protect that space — for the writer, and for the reader who will meet them there.",
+      "This is a house built for the long life of a voice, not the short life of a launch.",
+    ],
+  },
+  works: {
+    eyebrow: "Selected Works",
+    heading: "A small, considered list.",
+    lead: "We publish few books a year, by design. Each one is chosen for the life it can lead, not the quarter it can fill.",
+    items: [
+      {
+        label: "Memoir",
+        title: "The Long Quiet",
+        description: "A memoir of departure, return, and the years between.",
+      },
+      {
+        label: "Literary Nonfiction",
+        title: "Notes on Leaving",
+        description: "Essays on migration, memory, and the architecture of home.",
+      },
+      {
+        label: "Music & Text",
+        title: "Between Measures",
+        description: "A composer's notebook, reproduced in her own hand.",
+      },
+    ],
+  },
+  house: {
+    eyebrow: "The Publishing House",
+    heading: "What we make room for.",
+    body: [
+      "Amazing Tiger Publishing is the publishing imprint inside the wider Emma Kwon and EMMAESTRO universe — a house for memoir, literary nonfiction, music-adjacent writing, and carefully assisted new forms of creation.",
+      "We are small by choice. Every manuscript is read by the same few people, from first pages to final proof.",
+    ],
+    points: [
+      "Memoir and literary nonfiction",
+      "Music-adjacent and archival writing",
+      "AI-assisted creation, always human-led",
+      "Rare and first-time voices, carefully brought forward",
+    ],
+  },
+  founder: {
+    eyebrow: "Founder",
+    heading: "A note from Emma Kwon.",
+    body: [
+      "I started this house because I kept meeting stories that didn't fit anywhere — too quiet for the market, too true for the trend cycle. Amazing Tiger Publishing is where those stories are allowed to stay whole.",
+      "I still edit every line myself, before anyone else sees it. That will not change as the house grows.",
+    ],
+    name: "Emma Kwon",
+    role: "Founder & Editor",
+  },
+  studioNotes: {
+    eyebrow: "Studio Notes",
+    heading: "From the editing room.",
+    lead: "Short, occasional notes on the work in progress.",
+    notes: [
+      {
+        date: "Spring",
+        title: "On the second draft",
+        excerpt: "Most books are actually written in the second draft. The first is just the excavation.",
+      },
+      {
+        date: "Spring",
+        title: "What a good title does",
+        excerpt: "A title is a promise made quietly. It should be kept, not announced.",
+      },
+      {
+        date: "Winter",
+        title: "Reading aloud",
+        excerpt: "If a sentence cannot survive being read aloud, it is not finished yet.",
+      },
+    ],
+  },
+  membership: {
+    eyebrow: "Membership",
+    heading: "An invitation, not a subscription.",
+    body: "Membership is access, not a mailing list. It opens a private reading room within the house — where new work, and the people making it, can be met before the rest of the world arrives.",
+    perks: [
+      "A private reading room for new and forthcoming titles",
+      "Collector notes on limited and first editions",
+      "Selected releases, shared before public announcement",
+      "Studio letters from the editing room",
+      "Early access to limited objects from the shop",
+    ],
+    cta: "Join as a Member",
+  },
+  shopPreview: {
+    eyebrow: "The Shop",
+    heading: "A private catalogue.",
+    lead: "Books, limited editions, and quiet artifacts from the Amazing Tiger universe — not merchandise, but objects with memory and voice.",
+    cta: "Enter the Catalogue",
+  },
+  consultationInvite: {
+    eyebrow: "Consultation",
+    heading: "Bring us your manuscript, quietly.",
+    body: "If you are working on a memoir, a literary project, or something harder to name, we would like to hear about it. Every inquiry is read personally.",
+    cta: "Request a Consultation",
+  },
+  footer: {
+    rights: "Amazing Tiger Publishing. All rights reserved.",
+    links: [
+      { label: "FAQ", href: "/faq" },
+      { label: "Consultation", href: "/consultation" },
+      { label: "Login", href: "/login" },
+    ],
+  },
+  auth: {
+    login: {
+      eyebrow: "Member Access",
+      heading: "Welcome back.",
+      lead: "Sign in to your Amazing Tiger Publishing account.",
+      emailLabel: "Email",
+      passwordLabel: "Password",
+      submit: "Sign In",
+      switchPrompt: "New to the house?",
+      switchCta: "Create an account",
+      switchHref: "/signup",
+      note: "Authentication is being connected to Supabase. This form is not active yet.",
+    },
+    signup: {
+      eyebrow: "Membership",
+      heading: "Join the house.",
+      lead: "Create an account to receive early access and studio notes.",
+      nameLabel: "Full Name",
+      emailLabel: "Email",
+      passwordLabel: "Password",
+      submit: "Create Account",
+      switchPrompt: "Already a member?",
+      switchCta: "Sign in",
+      switchHref: "/login",
+      note: "Authentication is being connected to Supabase. This form is not active yet.",
+    },
+  },
+  dashboard: {
+    eyebrow: "Member Dashboard",
+    heading: "Your place in the house.",
+    lead: "This is a placeholder for the member dashboard. Once Supabase Auth is connected, this page will show your membership status, saved titles, and studio note archive.",
+    cards: [
+      { title: "Membership Status", description: "Coming soon — synced from your profile." },
+      { title: "Saved Works", description: "Coming soon — titles you have marked to follow." },
+      { title: "Studio Note Archive", description: "Coming soon — early notes for members." },
+    ],
+    note: "Protected route placeholder. Real session handling will be added with Supabase Auth.",
+  },
+  admin: {
+    eyebrow: "Admin",
+    heading: "House operations.",
+    lead: "This is a placeholder for the admin dashboard. It will manage FAQs, consultations, and translation workflow once connected to Supabase.",
+    sections: [
+      { title: "Overview", description: "A summary of members, consultations, and orders at a glance." },
+      { title: "Members", description: "Browse member profiles and manage roles." },
+      { title: "FAQ by Language", description: "Review and publish FAQ entries per locale." },
+      { title: "Consultations by Language", description: "Filter and respond to inquiries by locale." },
+      { title: "Products", description: "Manage the catalogue: books, limited editions, objects, and gift sets." },
+      { title: "Orders", description: "Review orders and fulfillment status once checkout is connected." },
+      { title: "Translation Queue", description: "Track content awaiting translation into secondary languages." },
+      { title: "AI Reply Drafts", description: "Review AI-assisted reply and translation drafts before sending." },
+      { title: "Chat Sessions", description: "Monitor consultation chatbot sessions once it is connected." },
+      { title: "Studio Notes", description: "Draft and publish studio notes shown on the homepage." },
+    ],
+    note: "Protected route placeholder. Access will be restricted to profiles.role = admin.",
+  },
+  faqPage: {
+    eyebrow: "FAQ",
+    heading: "Frequently asked questions.",
+    lead: "A short list for now. This page will read published entries from Supabase.",
+    items: [
+      {
+        question: "How does Amazing Tiger Publishing choose titles?",
+        answer: "By close reading and long conversation, not by market trend. We publish a small number of titles each year.",
+      },
+      {
+        question: "Do you accept unsolicited manuscripts?",
+        answer: "We review a limited number of submissions through our consultation form. Please tell us about the work before sending pages.",
+      },
+      {
+        question: "What does membership include?",
+        answer: "Early access to new titles, studio notes before they are public, and occasional invitations to readings.",
+      },
+      {
+        question: "Is Amazing Tiger Publishing connected to Emma Kwon's other work?",
+        answer: "Yes. It is the publishing imprint within the wider Emma Kwon and EMMAESTRO universe.",
+      },
+      {
+        question: "How can I reach the editorial team?",
+        answer: "Through the consultation form. Every inquiry is read personally.",
+      },
+    ],
+    note: "This list is static for now. Supabase-backed FAQ management arrives with Phase 3.",
+  },
+  consultationPage: {
+    eyebrow: "Consultation",
+    heading: "Tell us about your work.",
+    lead: "Share a little about your project. We read every inquiry personally and respond with care, not haste.",
+    nameLabel: "Full Name",
+    emailLabel: "Email",
+    phoneLabel: "Phone (optional)",
+    projectTypeLabel: "Project Type",
+    projectTypeOptions: ["Memoir", "Literary Nonfiction", "Music & Text", "Something Else"],
+    messageLabel: "About Your Project",
+    submit: "Send Inquiry",
+    note: "This form is not yet connected. Submissions will be saved securely once Supabase and Cloudflare Pages Functions are wired together.",
+  },
+  shopPage: {
+    eyebrow: "The Shop",
+    heading: "A private catalogue.",
+    lead: "Not merchandise. Not souvenirs. A small collection of books, objects, and quiet artifacts carrying the memory and voice of the Amazing Tiger universe.",
+    categories: [
+      { id: "all", label: "All" },
+      { id: "books", label: "Books" },
+      { id: "limited", label: "Limited Editions" },
+      { id: "objects", label: "Objects & Goods" },
+      { id: "gifts", label: "Gift Sets" },
+    ],
+    sections: {
+      featuredBooks: {
+        heading: "Featured Books",
+        lead: "Hardcover and paperback editions from the current list.",
+      },
+      limitedEditions: {
+        heading: "Limited Editions",
+        lead: "Numbered, hand-finished, and produced in small runs.",
+      },
+      objects: {
+        heading: "Objects & Goods",
+        lead: "Writing objects, stationery, and music-related pieces from the studio.",
+      },
+      giftSets: {
+        heading: "Gift Sets",
+        lead: "Considered pairings, wrapped for giving.",
+      },
+      comingSoon: {
+        heading: "Coming Soon",
+        lead: "Digital downloads and membership-only access are in preparation.",
+      },
+      privateInquiry: {
+        heading: "A Private Inquiry",
+        lead: "For collector requests, bulk gifting, or questions about a specific edition, write to us directly.",
+        cta: "Make a Private Inquiry",
+      },
+    },
+    products: [
+      {
+        id: "the-long-quiet-hardcover",
+        category: "books",
+        title: "The Long Quiet",
+        subtitle: "Hardcover Edition, First Printing",
+        price: "$48",
+      },
+      {
+        id: "notes-on-leaving",
+        category: "books",
+        title: "Notes on Leaving",
+        subtitle: "Paperback Edition",
+        price: "$26",
+      },
+      {
+        id: "between-measures-ltd",
+        category: "limited",
+        title: "Between Measures",
+        subtitle: "Numbered Edition of 200, Slipcased",
+        price: "$185",
+        badge: "Limited",
+      },
+      {
+        id: "founders-proof",
+        category: "limited",
+        title: "Founder's Proof Set",
+        subtitle: "Signed Proof Pages, Archival Box",
+        price: "$420",
+        badge: "Limited",
+      },
+      {
+        id: "studio-fountain-pen",
+        category: "objects",
+        title: "Studio Fountain Pen",
+        subtitle: "Brushed Bronze, Hand Assembled",
+        price: "$165",
+      },
+      {
+        id: "manuscript-notebook",
+        category: "objects",
+        title: "Manuscript Notebook",
+        subtitle: "Cotton Paper, Smyth Sewn",
+        price: "$38",
+      },
+      {
+        id: "reading-room-set",
+        category: "gifts",
+        title: "The Reading Room Set",
+        subtitle: "Notebook, Pen, and First Edition, Boxed",
+        price: "$210",
+      },
+      {
+        id: "listening-notes-set",
+        category: "gifts",
+        title: "Listening Notes Gift Set",
+        subtitle: "Between Measures with Studio Notebook",
+        price: "$225",
+      },
+    ],
+    addToCart: "Add to Cart",
+    viewDetail: "View Details",
+    cartNote: "Cart and checkout are in preparation. No payment is processed yet.",
+    checkoutCta: "Proceed to Checkout",
+  },
+};
+
+export default en;

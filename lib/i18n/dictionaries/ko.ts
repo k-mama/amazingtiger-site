@@ -1,0 +1,340 @@
+import type { Dictionary } from "../types";
+
+const ko: Dictionary = {
+  meta: {
+    title: "어메이징 타이거 퍼블리싱 — 조용한 입구",
+    description:
+      "어메이징 타이거 퍼블리싱은 에마 권의 출판 세계로 들어서는 조용한 입구입니다. 책, 회고록, 음악, 그리고 드문 목소리들을 정성으로 빚습니다.",
+  },
+  nav: {
+    philosophy: "철학",
+    works: "작품",
+    founder: "설립자",
+    studioNotes: "스튜디오 노트",
+    shop: "숍",
+    membership: "멤버십",
+    consultation: "상담",
+    faq: "자주 묻는 질문",
+    login: "로그인",
+  },
+  hero: {
+    eyebrow: "어메이징 타이거 퍼블리싱",
+    headline: "이곳은 상점이 아닙니다. 입구입니다.",
+    subhead:
+      "에마 권의 출판 세계로 들어서는 조용한 입구 — 책, 회고록, 음악, 그리고 드문 목소리들을 정성과 지성으로 빚어냅니다.",
+    ctaPrimary: "하우스로 들어가기",
+    ctaSecondary: "상담 신청하기",
+  },
+  philosophy: {
+    eyebrow: "철학",
+    heading: "플랫폼이 아닌, 출판사입니다.",
+    body: [
+      "저희는 일부러 천천히 일합니다. 이름을 걸고 내는 모든 책은 세상에 나가기 전, 여러 번 정독되고 논의되고 손끝으로 다듬어집니다.",
+      "책은 여전히 한 사람의 삶을 변명 없이 온전히 담아낼 수 있는 몇 안 되는 공간이라고 믿습니다. 저희의 일은 그 공간을 지키는 것입니다 — 쓰는 이를 위해서, 그리고 그곳에서 그를 만나게 될 독자를 위해서.",
+      "이 하우스는 짧은 런칭이 아니라, 한 목소리의 긴 생을 위해 지어졌습니다.",
+    ],
+  },
+  works: {
+    eyebrow: "선정 작품",
+    heading: "작지만, 신중하게 고른 목록.",
+    lead: "저희는 의도적으로 한 해에 몇 권만 펴냅니다. 분기 실적을 채우기 위해서가 아니라, 그 책이 살아갈 삶을 위해 선택합니다.",
+    items: [
+      {
+        label: "회고록",
+        title: "긴 침묵",
+        description: "떠남과 돌아옴, 그리고 그 사이의 시간들에 관한 회고록.",
+      },
+      {
+        label: "문학 논픽션",
+        title: "떠남에 대한 기록",
+        description: "이주와 기억, 그리고 집이라는 구조에 관한 에세이.",
+      },
+      {
+        label: "음악과 글",
+        title: "마디 사이",
+        description: "한 작곡가의 노트, 그녀의 손글씨 그대로 재현되다.",
+      },
+    ],
+  },
+  house: {
+    eyebrow: "출판사 소개",
+    heading: "저희가 자리를 내어주는 것들.",
+    body: [
+      "어메이징 타이거 퍼블리싱은 에마 권과 EMMAESTRO 세계 안에 자리한 출판 임프린트입니다 — 회고록과 문학 논픽션, 음악과 맞닿은 글쓰기, 그리고 신중하게 조력받은 새로운 형태의 창작을 위한 집입니다.",
+      "저희는 스스로 작음을 선택했습니다. 모든 원고는 첫 페이지부터 최종 교정까지 같은 소수의 사람들이 읽습니다.",
+    ],
+    points: [
+      "회고록과 문학 논픽션",
+      "음악과 맞닿은 글쓰기, 기록물",
+      "AI의 도움을 받되, 언제나 사람이 이끄는 창작",
+      "드물고 처음인 목소리를, 조심스럽게 세상에",
+    ],
+  },
+  founder: {
+    eyebrow: "설립자",
+    heading: "에마 권의 글.",
+    body: [
+      "저는 어디에도 맞지 않는 이야기들을 계속 만나면서 이 출판사를 시작했습니다 — 시장에 내놓기엔 너무 조용하고, 유행을 따르기엔 너무 진실한 이야기들이었습니다. 어메이징 타이거 퍼블리싱은 그런 이야기들이 온전한 모습 그대로 머물 수 있는 곳입니다.",
+      "저는 지금도 다른 누구보다 먼저, 모든 문장을 직접 편집합니다. 하우스가 성장하더라도 이는 변하지 않을 것입니다.",
+    ],
+    name: "에마 권",
+    role: "설립자 겸 편집장",
+  },
+  studioNotes: {
+    eyebrow: "스튜디오 노트",
+    heading: "편집실에서.",
+    lead: "작업 중인 글에 관한, 짧고 이따금씩 전하는 노트입니다.",
+    notes: [
+      {
+        date: "봄",
+        title: "두 번째 원고에 관하여",
+        excerpt: "대부분의 책은 사실 두 번째 원고에서 쓰입니다. 첫 원고는 그저 발굴일 뿐입니다.",
+      },
+      {
+        date: "봄",
+        title: "좋은 제목이 하는 일",
+        excerpt: "제목은 조용히 건네는 약속입니다. 요란하게 알리는 것이 아니라, 지켜져야 하는 것입니다.",
+      },
+      {
+        date: "겨울",
+        title: "소리 내어 읽기",
+        excerpt: "소리 내어 읽었을 때 살아남지 못하는 문장이라면, 아직 끝나지 않은 것입니다.",
+      },
+    ],
+  },
+  membership: {
+    eyebrow: "멤버십",
+    heading: "구독이 아닌, 초대입니다.",
+    body: "멤버십은 메일링 리스트가 아니라 접근의 문제입니다. 하우스 안에 마련된 조용한 독서실로 들어서는 일입니다 — 새로운 작업과, 그것을 만든 사람을 세상보다 먼저 만나는 자리입니다.",
+    perks: [
+      "신간과 예정작을 위한 조용한 독서실",
+      "한정판과 초판에 관한 컬렉터 노트",
+      "공식 발표 전에 먼저 전해지는 선정 소식",
+      "편집실에서 보내는 스튜디오 레터",
+      "숍의 한정 오브제에 대한 얼리 액세스",
+    ],
+    cta: "멤버로 함께하기",
+  },
+  shopPreview: {
+    eyebrow: "숍",
+    heading: "비공개 카탈로그.",
+    lead: "어메이징 타이거 세계의 책과 한정판, 그리고 조용한 오브제들 — 굿즈가 아니라, 기억과 목소리를 지닌 물건들입니다.",
+    cta: "카탈로그 둘러보기",
+  },
+  consultationInvite: {
+    eyebrow: "상담",
+    heading: "조용히, 원고를 보내주세요.",
+    body: "회고록이나 문학적인 작업, 혹은 이름 붙이기 어려운 무언가를 준비 중이시라면, 그 이야기를 듣고 싶습니다. 모든 문의는 직접 읽습니다.",
+    cta: "상담 신청하기",
+  },
+  footer: {
+    rights: "Amazing Tiger Publishing. All rights reserved.",
+    links: [
+      { label: "자주 묻는 질문", href: "/faq" },
+      { label: "상담", href: "/consultation" },
+      { label: "로그인", href: "/login" },
+    ],
+  },
+  auth: {
+    login: {
+      eyebrow: "멤버 접속",
+      heading: "다시 오셨군요.",
+      lead: "어메이징 타이거 퍼블리싱 계정으로 로그인하세요.",
+      emailLabel: "이메일",
+      passwordLabel: "비밀번호",
+      submit: "로그인",
+      switchPrompt: "아직 계정이 없으신가요?",
+      switchCta: "계정 만들기",
+      switchHref: "/signup",
+      note: "Supabase 인증 연동이 준비 중입니다. 이 양식은 아직 작동하지 않습니다.",
+    },
+    signup: {
+      eyebrow: "멤버십",
+      heading: "하우스에 함께하기.",
+      lead: "계정을 만들면 신간 소식과 스튜디오 노트를 가장 먼저 받아보실 수 있습니다.",
+      nameLabel: "이름",
+      emailLabel: "이메일",
+      passwordLabel: "비밀번호",
+      submit: "계정 만들기",
+      switchPrompt: "이미 멤버이신가요?",
+      switchCta: "로그인",
+      switchHref: "/login",
+      note: "Supabase 인증 연동이 준비 중입니다. 이 양식은 아직 작동하지 않습니다.",
+    },
+  },
+  dashboard: {
+    eyebrow: "멤버 대시보드",
+    heading: "하우스 안, 당신의 자리.",
+    lead: "멤버 대시보드의 임시 화면입니다. Supabase 인증이 연동되면 이곳에서 멤버십 상태와 저장한 작품, 스튜디오 노트 아카이브를 확인하실 수 있습니다.",
+    cards: [
+      { title: "멤버십 상태", description: "곧 제공됩니다 — 프로필과 연동됩니다." },
+      { title: "저장한 작품", description: "곧 제공됩니다 — 팔로우한 작품 목록입니다." },
+      { title: "스튜디오 노트 아카이브", description: "곧 제공됩니다 — 멤버 전용 노트입니다." },
+    ],
+    note: "보호된 경로의 임시 화면입니다. 실제 세션 처리는 Supabase 인증과 함께 추가될 예정입니다.",
+  },
+  admin: {
+    eyebrow: "관리자",
+    heading: "하우스 운영.",
+    lead: "관리자 대시보드의 임시 화면입니다. Supabase 연동 후 FAQ, 상담 신청, 번역 워크플로를 관리하게 됩니다.",
+    sections: [
+      { title: "개요", description: "멤버, 상담, 주문 현황을 한눈에 확인합니다." },
+      { title: "멤버", description: "멤버 프로필을 조회하고 권한을 관리합니다." },
+      { title: "언어별 FAQ", description: "언어별로 FAQ 항목을 검토하고 게시합니다." },
+      { title: "언어별 상담 신청", description: "언어별로 문의를 필터링하고 응답합니다." },
+      { title: "상품", description: "도서, 한정판, 오브제, 선물 세트 등 카탈로그를 관리합니다." },
+      { title: "주문", description: "결제 연동 후 주문과 배송 상태를 검토합니다." },
+      { title: "번역 대기열", description: "다른 언어로 번역이 필요한 콘텐츠를 관리합니다." },
+      { title: "AI 답변 초안", description: "발송 전 AI 답변 및 번역 초안을 검토합니다." },
+      { title: "채팅 세션", description: "상담 챗봇 연동 후 대화 세션을 모니터링합니다." },
+      { title: "스튜디오 노트", description: "홈페이지에 게시될 스튜디오 노트를 작성하고 관리합니다." },
+    ],
+    note: "보호된 경로의 임시 화면입니다. 접근 권한은 profiles.role = admin으로 제한될 예정입니다.",
+  },
+  faqPage: {
+    eyebrow: "자주 묻는 질문",
+    heading: "자주 묻는 질문.",
+    lead: "지금은 짧은 목록입니다. 이후 Supabase에 게시된 항목을 불러오도록 연동됩니다.",
+    items: [
+      {
+        question: "어메이징 타이거 퍼블리싱은 어떻게 작품을 선정하나요?",
+        answer: "시장의 유행이 아니라, 정독과 긴 대화를 통해 선정합니다. 한 해에 소수의 작품만 펴냅니다.",
+      },
+      {
+        question: "투고 원고를 받나요?",
+        answer: "상담 양식을 통해 제한된 수의 투고를 검토합니다. 원고를 보내시기 전에 작품에 대해 먼저 알려주세요.",
+      },
+      {
+        question: "멤버십에는 무엇이 포함되나요?",
+        answer: "신간을 가장 먼저 만나는 것, 공개 전 스튜디오 노트, 그리고 이따금의 낭독회 초대가 포함됩니다.",
+      },
+      {
+        question: "에마 권의 다른 작업과 연결되어 있나요?",
+        answer: "네. 에마 권과 EMMAESTRO 세계 안에 자리한 출판 임프린트입니다.",
+      },
+      {
+        question: "편집팀에게는 어떻게 연락할 수 있나요?",
+        answer: "상담 양식을 통해 연락해 주세요. 모든 문의는 직접 읽습니다.",
+      },
+    ],
+    note: "현재는 정적인 목록입니다. Supabase 기반 FAQ 관리는 3단계에서 추가됩니다.",
+  },
+  consultationPage: {
+    eyebrow: "상담",
+    heading: "작품에 대해 들려주세요.",
+    lead: "진행 중인 작업에 대해 조금 알려주세요. 모든 문의를 직접 읽고, 서두르지 않고 정성껏 답합니다.",
+    nameLabel: "이름",
+    emailLabel: "이메일",
+    phoneLabel: "전화번호 (선택)",
+    projectTypeLabel: "작품 유형",
+    projectTypeOptions: ["회고록", "문학 논픽션", "음악과 글", "그 외"],
+    messageLabel: "작품 소개",
+    submit: "문의 보내기",
+    note: "이 양식은 아직 연동되지 않았습니다. Supabase와 Cloudflare Pages Functions 연결 후 안전하게 저장됩니다.",
+  },
+  shopPage: {
+    eyebrow: "숍",
+    heading: "비공개 카탈로그.",
+    lead: "굿즈도, 기념품도 아닙니다. 어메이징 타이거 세계의 기억과 목소리를 담은, 작은 책과 오브제, 그리고 조용한 유물들의 모음입니다.",
+    categories: [
+      { id: "all", label: "전체" },
+      { id: "books", label: "도서" },
+      { id: "limited", label: "한정판" },
+      { id: "objects", label: "오브제 & 굿즈" },
+      { id: "gifts", label: "선물 세트" },
+    ],
+    sections: {
+      featuredBooks: {
+        heading: "주요 도서",
+        lead: "현재 목록의 양장본과 페이퍼백 에디션입니다.",
+      },
+      limitedEditions: {
+        heading: "한정판",
+        lead: "번호가 매겨지고, 소량으로 제작되어 손으로 마무리한 에디션입니다.",
+      },
+      objects: {
+        heading: "오브제 & 굿즈",
+        lead: "스튜디오에서 만든 필기구와 문구, 음악과 맞닿은 물건들입니다.",
+      },
+      giftSets: {
+        heading: "선물 세트",
+        lead: "정성껏 짝지어, 선물하기 좋게 포장했습니다.",
+      },
+      comingSoon: {
+        heading: "곧 공개됩니다",
+        lead: "디지털 다운로드와 멤버 전용 접근이 준비 중입니다.",
+      },
+      privateInquiry: {
+        heading: "비공개 문의",
+        lead: "컬렉터 요청, 대량 선물, 특정 에디션에 관한 문의는 직접 연락 주세요.",
+        cta: "비공개 문의 남기기",
+      },
+    },
+    products: [
+      {
+        id: "the-long-quiet-hardcover",
+        category: "books",
+        title: "긴 침묵",
+        subtitle: "양장본, 초판",
+        price: "$48",
+      },
+      {
+        id: "notes-on-leaving",
+        category: "books",
+        title: "떠남에 대한 기록",
+        subtitle: "페이퍼백 에디션",
+        price: "$26",
+      },
+      {
+        id: "between-measures-ltd",
+        category: "limited",
+        title: "마디 사이",
+        subtitle: "200부 한정, 슬립케이스 포함",
+        price: "$185",
+        badge: "한정판",
+      },
+      {
+        id: "founders-proof",
+        category: "limited",
+        title: "설립자 교정쇄 세트",
+        subtitle: "서명된 교정쇄, 아카이브 박스",
+        price: "$420",
+        badge: "한정판",
+      },
+      {
+        id: "studio-fountain-pen",
+        category: "objects",
+        title: "스튜디오 만년필",
+        subtitle: "브러시드 브론즈, 핸드메이드",
+        price: "$165",
+      },
+      {
+        id: "manuscript-notebook",
+        category: "objects",
+        title: "원고 노트북",
+        subtitle: "면지 재질, 사철 제본",
+        price: "$38",
+      },
+      {
+        id: "reading-room-set",
+        category: "gifts",
+        title: "리딩룸 세트",
+        subtitle: "노트북, 만년필, 초판 도서 박스 구성",
+        price: "$210",
+      },
+      {
+        id: "listening-notes-set",
+        category: "gifts",
+        title: "리스닝 노트 세트",
+        subtitle: "마디 사이 + 스튜디오 노트북",
+        price: "$225",
+      },
+    ],
+    addToCart: "장바구니에 담기",
+    viewDetail: "자세히 보기",
+    cartNote: "장바구니와 결제 기능은 준비 중입니다. 아직 결제가 진행되지 않습니다.",
+    checkoutCta: "결제 진행하기",
+  },
+};
+
+export default ko;
