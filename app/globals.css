@@ -215,27 +215,29 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
   padding: 0;
   background: transparent;
-  border: 1px solid transparent;
+  border: 1px solid rgba(185, 154, 91, 0.28);
   border-radius: 999px;
   color: var(--color-gold);
   cursor: pointer;
-  transition: color 0.25s var(--ease-soft), border-color 0.25s var(--ease-soft), background-color 0.25s var(--ease-soft);
+  transition: color 0.3s var(--ease-soft), border-color 0.3s var(--ease-soft), background-color 0.3s var(--ease-soft), box-shadow 0.3s var(--ease-soft);
 }
 
 .lang-switch__trigger:hover {
   color: var(--color-gold-soft);
-  background: var(--color-ivory-deep);
-  border-color: var(--color-stone-line);
+  border-color: rgba(185, 154, 91, 0.55);
+  background: rgba(185, 154, 91, 0.06);
+  box-shadow: 0 0 0 6px rgba(185, 154, 91, 0.08);
 }
 
 .lang-switch__trigger:focus-visible {
   outline: none;
   color: var(--color-gold-soft);
-  box-shadow: 0 0 0 3px rgba(185, 154, 91, 0.3);
+  border-color: rgba(185, 154, 91, 0.6);
+  box-shadow: 0 0 0 3px rgba(185, 154, 91, 0.28);
 }
 
 .lang-switch__trigger:active {
@@ -244,8 +246,9 @@ button {
 
 .lang-switch__trigger[aria-expanded="true"] {
   color: var(--color-gold-soft);
-  background: var(--color-ivory-deep);
-  border-color: var(--color-stone-line);
+  border-color: rgba(185, 154, 91, 0.6);
+  background: rgba(185, 154, 91, 0.08);
+  box-shadow: 0 0 0 6px rgba(185, 154, 91, 0.1);
 }
 
 .lang-switch__menu {

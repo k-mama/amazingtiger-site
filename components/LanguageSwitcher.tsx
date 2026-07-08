@@ -14,22 +14,43 @@ function stripLocalePrefix(pathname: string): string {
   return pathname === "/" ? "" : pathname;
 }
 
-function GlobeIcon() {
+/**
+ * A small house mark, not a stock globe icon: an outer seal circle, one
+ * tilted meridian, two asymmetric latitude arcs, and a single quiet
+ * off-axis trace (a route line / spine curve) ending in a champagne
+ * coordinate dot. Reads as "globe" at a glance, but the diagonal trace
+ * and dot are what make it Amazing Tiger's, not a UI kit's.
+ */
+function AmazingTigerGlobeMark() {
   return (
     <svg
-      viewBox="0 0 24 24"
-      width="17"
-      height="17"
+      viewBox="0 0 28 28"
+      width="25"
+      height="25"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.1"
+      strokeWidth="1.25"
       strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
-      <circle cx="12" cy="12" r="8" />
-      <ellipse cx="12" cy="12" rx="3.4" ry="8" />
-      <line x1="4.3" y1="8.4" x2="19.7" y2="8.4" />
-      <line x1="4.3" y1="15.6" x2="19.7" y2="15.6" />
+      <circle cx="14" cy="14" r="10" vectorEffect="non-scaling-stroke" />
+      <ellipse
+        cx="14"
+        cy="14"
+        rx="3.6"
+        ry="10"
+        transform="rotate(-6 14 14)"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path d="M7.2 10 Q14 8.1 20.8 10" vectorEffect="non-scaling-stroke" />
+      <path d="M8 18.6 Q14 20.1 20 18.6" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M6.5 19.5 C9.6 14.4 14.8 9.8 19.6 8.3"
+        opacity="0.6"
+        vectorEffect="non-scaling-stroke"
+      />
+      <circle cx="23" cy="6.6" r="1.3" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -77,7 +98,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
       >
-        <GlobeIcon />
+        <AmazingTigerGlobeMark />
       </button>
       {open && (
         <div className="lang-switch__menu" role="menu">
