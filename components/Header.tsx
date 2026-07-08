@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
+import AuthNavLink from "./AuthNavLink";
 import LanguageSwitcher from "./LanguageSwitcher";
 import MobileMenu from "./MobileMenu";
 import WordmarkLogo from "./WordmarkLogo";
@@ -32,9 +33,12 @@ export default function Header({ locale, dict, basePath }: HeaderProps) {
             <li><Link href={`${navBase}/faq`}>{dict.nav.faq}</Link></li>
             <li><Link href={`${navBase}/consultation`}>{dict.nav.consultation}</Link></li>
           </ul>
-          <Link href={`${navBase}/login`} className="site-nav__login">
-            {dict.nav.login}
-          </Link>
+          <AuthNavLink
+            navBase={navBase}
+            loginLabel={dict.nav.login}
+            dashboardLabel={dict.nav.dashboard}
+            className="site-nav__login"
+          />
           <LanguageSwitcher locale={locale} />
           <MobileMenu locale={locale} dict={dict} basePath={basePath} />
         </div>

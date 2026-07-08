@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
+import AuthNavLink from "./AuthNavLink";
 import LanguageSwitcher from "./LanguageSwitcher";
 import WordmarkLogo from "./WordmarkLogo";
 
@@ -98,9 +99,13 @@ export default function MobileMenu({ locale, dict, basePath }: MobileMenuProps) 
               </ul>
 
               <div className="mobile-menu-panel__foot">
-                <Link href={`${navBase}/login`} className="site-nav__login" onClick={() => setOpen(false)}>
-                  {dict.nav.login}
-                </Link>
+                <AuthNavLink
+                  navBase={navBase}
+                  loginLabel={dict.nav.login}
+                  dashboardLabel={dict.nav.dashboard}
+                  className="site-nav__login"
+                  onClick={() => setOpen(false)}
+                />
               </div>
             </div>
           </div>,

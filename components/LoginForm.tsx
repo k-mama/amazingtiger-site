@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import type { Dictionary } from "@/lib/i18n/types";
 
@@ -11,27 +12,56 @@ interface LoginFormProps {
 }
 
 type Status = "idle" | "loading" | "error" | "success";
+type FieldErrors = Partial<Record<"email" | "password", string>>;
 
 export default function LoginForm({ dict, navBase }: LoginFormProps) {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<Status>("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [formError, setFormError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [justConfirmed, setJustConfirmed] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setJustConfirmed(params.get("confirmed") === "1");
+  }, []);
+
+  function validate(): FieldErrors {
+    const errors: FieldErrors = {};
+    if (!email.trim()) errors.email = dict.errors.emailRequired;
+    if (!password) errors.password = dict.errors.passwordRequired;
+    return errors;
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    setStatus("loading");
-    setErrorMessage("");
+    setFormError("");
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const errors = validate();
+    setFieldErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+
+    setStatus("loading");
+
+    const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
 
     if (error) {
       setStatus("error");
-      setErrorMessage(error.message);
+      const message = error.message.toLowerCase();
+      if (message.includes("email not confirmed") || message.includes("email is not confirmed")) {
+        setFormError(dict.errors.emailNotConfirmed);
+      } else if (message.includes("invalid login credentials")) {
+        setFormError(dict.errors.invalidCredentials);
+      } else {
+        setFormError(dict.errors.generic);
+      }
       return;
     }
 
     setStatus("success");
+    router.push(`${navBase}/dashboard`);
   }
 
   return (
@@ -40,7 +70,13 @@ export default function LoginForm({ dict, navBase }: LoginFormProps) {
       <h1>{dict.heading}</h1>
       <p className="section-lead" style={{ marginBottom: "1.75rem" }}>{dict.lead}</p>
 
-      <form onSubmit={handleSubmit}>
+      {justConfirmed && (
+        <p className="status-note status-note--success" style={{ marginBottom: "1.5rem" }}>
+          {dict.confirmedBanner}
+        </p>
+      )}
+
+      <form onSubmit={handleSubmit} noValidate>
         <div className="form-field">
           <label htmlFor="login-email">{dict.emailLabel}</label>
           <input
@@ -50,7 +86,9 @@ export default function LoginForm({ dict, navBase }: LoginFormProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === "loading"}
+            aria-invalid={Boolean(fieldErrors.email)}
           />
+          {fieldErrors.email && <p className="field-error">{fieldErrors.email}</p>}
         </div>
         <div className="form-field">
           <label htmlFor="login-password">{dict.passwordLabel}</label>
@@ -61,15 +99,18 @@ export default function LoginForm({ dict, navBase }: LoginFormProps) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={status === "loading"}
+            aria-invalid={Boolean(fieldErrors.password)}
           />
+          {fieldErrors.password && <p className="field-error">{fieldErrors.password}</p>}
         </div>
         <button type="submit" className="btn btn-primary btn-block" disabled={status === "loading"}>
-          {dict.submit}
+          {status === "loading" ? dict.submitting : dict.submit}
         </button>
       </form>
 
-      {status === "error" && <p className="status-note" style={{ marginTop: "1.25rem" }}>{errorMessage}</p>}
-      {status === "success" && <p className="status-note" style={{ marginTop: "1.25rem" }}>Signed in.</p>}
+      {status === "error" && (
+        <p className="status-note status-note--error" style={{ marginTop: "1.25rem" }}>{formError}</p>
+      )}
 
       <p style={{ marginTop: "1.75rem", fontSize: "0.85rem" }}>
         {dict.switchPrompt}{" "}

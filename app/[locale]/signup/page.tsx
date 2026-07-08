@@ -14,7 +14,7 @@ export default function SignupPage({ params }: { params: { locale: string } }) {
 
   return (
     <div className="container">
-      <SignupForm dict={dict.auth.signup} navBase={`/${locale}`} />
+      <SignupForm dict={dict.auth.signup} navBase={`/${locale}`} locale={locale} />
     </div>
   );
 }

@@ -23,6 +23,7 @@ export interface Dictionary {
     faq: string;
     consultation: string;
     login: string;
+    dashboard: string;
   };
   hero: {
     eyebrow: string;
@@ -98,10 +99,19 @@ export interface Dictionary {
       emailLabel: string;
       passwordLabel: string;
       submit: string;
+      submitting: string;
       switchPrompt: string;
       switchCta: string;
       switchHref: string;
       note: string;
+      confirmedBanner: string;
+      errors: {
+        emailRequired: string;
+        passwordRequired: string;
+        invalidCredentials: string;
+        emailNotConfirmed: string;
+        generic: string;
+      };
     };
     signup: {
       eyebrow: string;
@@ -110,17 +120,41 @@ export interface Dictionary {
       nameLabel: string;
       emailLabel: string;
       passwordLabel: string;
+      confirmPasswordLabel: string;
       submit: string;
+      submitting: string;
       switchPrompt: string;
       switchCta: string;
       switchHref: string;
       note: string;
+      success: string;
+      errors: {
+        emailRequired: string;
+        emailInvalid: string;
+        passwordRequired: string;
+        passwordTooShort: string;
+        passwordMismatch: string;
+        alreadyRegistered: string;
+        generic: string;
+      };
     };
   };
   dashboard: {
     eyebrow: string;
     heading: string;
     lead: string;
+    loggedOut: {
+      badge: string;
+      heading: string;
+      lead: string;
+      cta: string;
+    };
+    loggedIn: {
+      signedInAs: string;
+      statusLabel: string;
+      statusValue: string;
+      logout: string;
+    };
     cards: { title: string; description: string }[];
     note: string;
   };

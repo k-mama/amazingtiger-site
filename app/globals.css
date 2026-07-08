@@ -1233,6 +1233,24 @@ button {
   border-radius: var(--radius-sm);
 }
 
+.status-note--success {
+  border-color: rgba(179, 236, 194, 0.9);
+  background: rgba(179, 236, 194, 0.2);
+  color: var(--color-ink);
+}
+
+.status-note--error {
+  border-color: rgba(246, 184, 201, 0.9);
+  background: rgba(246, 184, 201, 0.22);
+  color: var(--color-ink);
+}
+
+.field-error {
+  font-size: 0.78rem;
+  color: #b9527a;
+  margin: -0.2rem 0 0;
+}
+
 /* =========================================================================
    Shop
    ========================================================================= */
