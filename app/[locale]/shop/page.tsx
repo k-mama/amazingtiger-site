@@ -5,6 +5,7 @@ import { getDictionary } from "@/lib/i18n/getDictionary";
 import type { ProductCategory } from "@/lib/i18n/types";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
+import AmbientBackdrop from "@/components/AmbientBackdrop";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
@@ -28,6 +29,12 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
   return (
     <>
       <section className="shop-hero">
+        <AmbientBackdrop
+          blobs={[
+            { color: "rgba(201,238,232,0.85)", size: 360, top: "-110px", left: "-60px" },
+            { color: "rgba(248,215,222,0.7)", size: 320, top: "-80px", right: "-60px" },
+          ]}
+        />
         <div className="container">
           <span className="eyebrow">{dict.eyebrow}</span>
           <h1 className="section-heading">{dict.heading}</h1>
@@ -66,7 +73,7 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
           <div className="product-grid">
             {byCategory("books").map((product, i) => (
               <Reveal key={product.id} delay={i * 70}>
-                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} />
+                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} index={i} />
               </Reveal>
             ))}
           </div>
@@ -82,7 +89,7 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
           <div className="product-grid">
             {byCategory("limited").map((product, i) => (
               <Reveal key={product.id} delay={i * 70}>
-                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} />
+                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} index={i + 2} />
               </Reveal>
             ))}
           </div>
@@ -98,7 +105,7 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
           <div className="product-grid">
             {byCategory("objects").map((product, i) => (
               <Reveal key={product.id} delay={i * 70}>
-                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} />
+                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} index={i + 4} />
               </Reveal>
             ))}
           </div>
@@ -114,7 +121,7 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
           <div className="product-grid">
             {byCategory("gifts").map((product, i) => (
               <Reveal key={product.id} delay={i * 70}>
-                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} />
+                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} index={i + 6} />
               </Reveal>
             ))}
           </div>
@@ -122,15 +129,13 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
       </section>
 
       <section className="panel">
-        <div className="container">
-          <Reveal>
-            <span className="eyebrow">{dict.sections.comingSoon.heading}</span>
-            <p style={{ maxWidth: "560px" }}>{dict.sections.comingSoon.lead}</p>
-          </Reveal>
-        </div>
+        <Reveal>
+          <span className="eyebrow">{dict.sections.comingSoon.heading}</span>
+          <p style={{ maxWidth: "560px" }}>{dict.sections.comingSoon.lead}</p>
+        </Reveal>
       </section>
 
-      <section className="shop-section" style={{ borderTop: "none" }}>
+      <section className="shop-section">
         <div className="container">
           <Reveal>
             <h2 className="section-heading">{dict.sections.privateInquiry.heading}</h2>

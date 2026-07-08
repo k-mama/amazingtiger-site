@@ -13,7 +13,7 @@ export default function ShopPreview({ dict, basePath }: ShopPreviewProps) {
   const featured = dict.shopPage.products.slice(0, 4);
 
   return (
-    <section id="shop" className="section" style={{ borderTop: "1px solid var(--color-stone-line)" }}>
+    <section id="shop" className="section">
       <div className="container">
         <Reveal>
           <span className="eyebrow">{dict.shopPreview.eyebrow}</span>
@@ -27,6 +27,7 @@ export default function ShopPreview({ dict, basePath }: ShopPreviewProps) {
                 product={product}
                 addToCartLabel={dict.shopPage.addToCart}
                 viewDetailLabel={dict.shopPage.viewDetail}
+                index={i}
               />
             </Reveal>
           ))}

@@ -4,6 +4,8 @@ import type { Dictionary } from "@/lib/i18n/types";
 import Reveal from "./Reveal";
 import ShopPreview from "./ShopPreview";
 import AtelierPreview from "./AtelierPreview";
+import AmbientBackdrop from "./AmbientBackdrop";
+import EditorialObject from "./EditorialObject";
 
 interface HomeContentProps {
   locale: Locale;
@@ -11,12 +13,26 @@ interface HomeContentProps {
   basePath: string;
 }
 
+const workTones: Array<{ a: string; b: string; emblem: "ring" | "line" }> = [
+  { a: "var(--dg-aqua)", b: "var(--dg-periwinkle)", emblem: "ring" },
+  { a: "var(--dg-rose)", b: "var(--dg-peach)", emblem: "line" },
+  { a: "var(--dg-lemon)", b: "var(--dg-mint)", emblem: "ring" },
+];
+
 export default function HomeContent({ dict, basePath }: HomeContentProps) {
   const navBase = basePath === "/" ? "/en" : basePath;
 
   return (
     <>
       <section className="hero">
+        <AmbientBackdrop
+          blobs={[
+            { color: "rgba(201,238,232,0.9)", size: 420, top: "-120px", left: "-80px" },
+            { color: "rgba(248,215,222,0.75)", size: 360, top: "-60px", right: "-100px" },
+            { color: "rgba(228,218,247,0.7)", size: 380, bottom: "-160px", left: "20%" },
+            { color: "rgba(251,240,195,0.7)", size: 300, bottom: "-100px", right: "10%" },
+          ]}
+        />
         <div className="container hero__inner">
           <div className="hero__eyebrow">
             <span className="hero__eyebrow-mark" />
@@ -31,6 +47,19 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
             <Link href={`${navBase}/consultation`} className="btn btn-secondary">
               {dict.hero.ctaSecondary}
             </Link>
+          </div>
+        </div>
+        <div className="container">
+          <div className="hero__objects">
+            <div style={{ width: 118, height: 148, borderRadius: 20, overflow: "hidden", transform: "rotate(-5deg)", boxShadow: "0 30px 60px -25px rgba(70,50,30,0.35)" }}>
+              <EditorialObject toneA="var(--dg-aqua)" toneB="var(--dg-periwinkle)" emblem="ring" />
+            </div>
+            <div style={{ width: 106, height: 168, borderRadius: 20, overflow: "hidden", transform: "rotate(3deg) translateY(18px)", boxShadow: "0 30px 60px -25px rgba(70,50,30,0.35)" }}>
+              <EditorialObject toneA="var(--dg-rose)" toneB="var(--dg-lemon)" emblem="line" />
+            </div>
+            <div style={{ width: 128, height: 138, borderRadius: 20, overflow: "hidden", transform: "rotate(-2deg) translateY(-14px)", boxShadow: "0 30px 60px -25px rgba(70,50,30,0.35)" }}>
+              <EditorialObject toneA="var(--dg-lavender)" toneB="var(--dg-mint)" emblem="ring" />
+            </div>
           </div>
         </div>
       </section>
@@ -51,7 +80,7 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
         </div>
       </section>
 
-      <section id="works" className="section" style={{ borderTop: "1px solid var(--color-stone-line)" }}>
+      <section id="works" className="section">
         <div className="container">
           <Reveal>
             <span className="eyebrow">{dict.works.eyebrow}</span>
@@ -59,59 +88,57 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
             <p className="section-lead">{dict.works.lead}</p>
           </Reveal>
           <div className="grid-3" style={{ marginTop: "2.5rem" }}>
-            {dict.works.items.map((item, i) => (
-              <Reveal key={item.title} delay={i * 100}>
-                <article className="work-card">
-                  <div className="work-card__media">
-                    <img
-                      src={`https://placehold.co/480x600/ece5d8/1a1712?text=${encodeURIComponent(item.title)}`}
-                      alt={item.title}
-                    />
-                  </div>
-                  <div className="work-card__body">
-                    <div className="work-card__label">{item.label}</div>
-                    <h3 className="work-card__title">{item.title}</h3>
-                    <p style={{ margin: 0, fontSize: "0.92rem" }}>{item.description}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
+            {dict.works.items.map((item, i) => {
+              const tone = workTones[i % workTones.length];
+              return (
+                <Reveal key={item.title} delay={i * 100}>
+                  <article className="work-card">
+                    <div className="work-card__media">
+                      <EditorialObject toneA={tone.a} toneB={tone.b} emblem={tone.emblem} />
+                    </div>
+                    <div className="work-card__body">
+                      <div className="work-card__label">{item.label}</div>
+                      <h3 className="work-card__title">{item.title}</h3>
+                      <p style={{ margin: 0, fontSize: "0.92rem" }}>{item.description}</p>
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
 
       <section id="house" className="panel">
-        <div className="container">
+        <Reveal>
+          <span className="eyebrow">{dict.house.eyebrow}</span>
+          <h2 className="section-heading">{dict.house.heading}</h2>
+        </Reveal>
+        <div className="grid-2" style={{ marginTop: "2.5rem", alignItems: "start" }}>
           <Reveal>
-            <span className="eyebrow">{dict.house.eyebrow}</span>
-            <h2 className="section-heading">{dict.house.heading}</h2>
+            <div>
+              {dict.house.body.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
+            </div>
           </Reveal>
-          <div className="grid-2" style={{ marginTop: "2.5rem", alignItems: "start" }}>
-            <Reveal>
-              <div>
-                {dict.house.body.map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
-              </div>
-            </Reveal>
-            <Reveal delay={100}>
-              <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-                {dict.house.points.map((point) => (
-                  <li
-                    key={point}
-                    style={{
-                      padding: "0.9rem 0",
-                      borderTop: "1px solid rgba(250,246,239,0.14)",
-                      color: "rgba(250,246,239,0.85)",
-                      fontSize: "0.95rem",
-                    }}
-                  >
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
+          <Reveal delay={100}>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              {dict.house.points.map((point) => (
+                <li
+                  key={point}
+                  style={{
+                    padding: "0.9rem 0",
+                    borderTop: "1px solid rgba(250,246,239,0.14)",
+                    color: "rgba(250,246,239,0.85)",
+                    fontSize: "0.95rem",
+                  }}
+                >
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </section>
 
@@ -119,15 +146,12 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
 
       <ShopPreview dict={dict} basePath={basePath} />
 
-      <section id="founder" className="section" style={{ borderTop: "1px solid var(--color-stone-line)" }}>
+      <section id="founder" className="section">
         <div className="container">
           <div className="grid-2">
             <Reveal>
               <div className="founder-portrait">
-                <img
-                  src={`https://placehold.co/480x640/ece5d8/1a1712?text=${encodeURIComponent(dict.founder.name)}`}
-                  alt={dict.founder.name}
-                />
+                <EditorialObject toneA="var(--dg-turquoise)" toneB="var(--dg-lavender)" emblem="ring" />
               </div>
             </Reveal>
             <Reveal delay={100}>
@@ -150,7 +174,7 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
         </div>
       </section>
 
-      <section id="studio-notes" className="section" style={{ borderTop: "1px solid var(--color-stone-line)" }}>
+      <section id="studio-notes" className="section">
         <div className="container">
           <Reveal>
             <span className="eyebrow">{dict.studioNotes.eyebrow}</span>
@@ -171,7 +195,7 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
         </div>
       </section>
 
-      <section id="membership" className="section-tight" style={{ borderTop: "1px solid var(--color-stone-line)" }}>
+      <section id="membership" className="section-tight">
         <div className="container">
           <div className="grid-2" style={{ alignItems: "start" }}>
             <Reveal>

@@ -25,8 +25,8 @@ function AmazingTigerGlobeMark() {
   return (
     <svg
       viewBox="0 0 28 28"
-      width="25"
-      height="25"
+      width="26"
+      height="26"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.25"

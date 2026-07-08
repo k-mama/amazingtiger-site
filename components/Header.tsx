@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import LanguageSwitcher from "./LanguageSwitcher";
+import MobileMenu from "./MobileMenu";
 
 interface HeaderProps {
   locale: Locale;
@@ -34,6 +35,7 @@ export default function Header({ locale, dict, basePath }: HeaderProps) {
             {dict.nav.login}
           </Link>
           <LanguageSwitcher locale={locale} />
+          <MobileMenu locale={locale} dict={dict} basePath={basePath} />
         </div>
       </div>
     </header>

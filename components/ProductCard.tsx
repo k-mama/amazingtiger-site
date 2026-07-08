@@ -1,20 +1,23 @@
 import type { ShopProduct } from "@/lib/i18n/types";
+import EditorialObject from "./EditorialObject";
+import { dreamGlassTones } from "./DreamGlassIcon";
 
 interface ProductCardProps {
   product: ShopProduct;
   addToCartLabel: string;
   viewDetailLabel: string;
+  index?: number;
 }
 
-export default function ProductCard({ product, addToCartLabel, viewDetailLabel }: ProductCardProps) {
+export default function ProductCard({ product, addToCartLabel, viewDetailLabel, index = 0 }: ProductCardProps) {
+  const toneA = dreamGlassTones[index % dreamGlassTones.length];
+  const toneB = dreamGlassTones[(index + 3) % dreamGlassTones.length];
+
   return (
     <article className="product-card">
       <div className="product-card__media">
         {product.badge && <span className="product-card__badge">{product.badge}</span>}
-        <img
-          src={`https://placehold.co/480x600/ece5d8/1a1712?text=${encodeURIComponent(product.title)}`}
-          alt={product.title}
-        />
+        <EditorialObject toneA={toneA} toneB={toneB} emblem={index % 2 === 0 ? "ring" : "line"} />
       </div>
       <div className="product-card__body">
         <h3 className="product-card__title">{product.title}</h3>

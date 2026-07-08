@@ -359,7 +359,6 @@ const en: Dictionary = {
     servicesLead: "Each project is scoped individually. This is the range of work we take on.",
     services: [
       { title: "Memoirs", description: "A life, shaped into a book that reads like one." },
-      { title: "Author Books", description: "For writers moving from manuscript to finished object." },
       { title: "Founder Stories", description: "The story behind a company or a body of work, told properly." },
       { title: "Brand Books", description: "A brand's voice and history, bound." },
       { title: "Artist Books", description: "Visual work translated carefully into printed form." },
@@ -369,7 +368,8 @@ const en: Dictionary = {
       { title: "KDP-Ready Publishing Packages", description: "Print-ready files prepared to specification." },
       { title: "Author Websites", description: "A quiet, considered home for a writer online." },
       { title: "Book Launch Assets", description: "The material a launch actually needs, nothing more." },
-      { title: "Premium Editorial Design Systems", description: "A consistent design language across a body of work." },
+      { title: "Editorial Design Systems", description: "A consistent design language across a body of work." },
+      { title: "Private Consultation", description: "A quiet first conversation about the work, before anything is scoped." },
     ],
     forHeading: "Who this is for",
     forBody: "The Atelier is selective by design. We take on a limited number of projects at a time, for clients ready to give a serious piece of work the attention it deserves — authors, founders, artists, and memoir writers with something worth binding.",
