@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import Reveal from "./Reveal";
 import ShopPreview from "./ShopPreview";
+import AtelierPreview from "./AtelierPreview";
 
 interface HomeContentProps {
   locale: Locale;
@@ -79,7 +80,7 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
         </div>
       </section>
 
-      <section className="panel">
+      <section id="house" className="panel">
         <div className="container">
           <Reveal>
             <span className="eyebrow">{dict.house.eyebrow}</span>
@@ -114,7 +115,11 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
         </div>
       </section>
 
-      <section id="founder" className="section">
+      <AtelierPreview dict={dict} basePath={basePath} />
+
+      <ShopPreview dict={dict} basePath={basePath} />
+
+      <section id="founder" className="section" style={{ borderTop: "1px solid var(--color-stone-line)" }}>
         <div className="container">
           <div className="grid-2">
             <Reveal>
@@ -166,9 +171,7 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
         </div>
       </section>
 
-      <ShopPreview dict={dict} basePath={basePath} />
-
-      <section className="section-tight" style={{ borderTop: "1px solid var(--color-stone-line)" }}>
+      <section id="membership" className="section-tight" style={{ borderTop: "1px solid var(--color-stone-line)" }}>
         <div className="container">
           <div className="grid-2" style={{ alignItems: "start" }}>
             <Reveal>

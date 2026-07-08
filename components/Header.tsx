@@ -22,11 +22,11 @@ export default function Header({ locale, dict, basePath }: HeaderProps) {
         </Link>
         <div className="site-nav">
           <ul className="site-nav__links">
-            <li><Link href={anchor("philosophy")}>{dict.nav.philosophy}</Link></li>
-            <li><Link href={anchor("works")}>{dict.nav.works}</Link></li>
-            <li><Link href={anchor("founder")}>{dict.nav.founder}</Link></li>
-            <li><Link href={anchor("studio-notes")}>{dict.nav.studioNotes}</Link></li>
+            <li><Link href={basePath}>{dict.nav.home}</Link></li>
+            <li><Link href={anchor("house")}>{dict.nav.house}</Link></li>
+            <li><Link href={`${navBase}/atelier`}>{dict.nav.atelier}</Link></li>
             <li><Link href={`${navBase}/shop`}>{dict.nav.shop}</Link></li>
+            <li><Link href={anchor("membership")}>{dict.nav.membership}</Link></li>
             <li><Link href={`${navBase}/faq`}>{dict.nav.faq}</Link></li>
             <li><Link href={`${navBase}/consultation`}>{dict.nav.consultation}</Link></li>
           </ul>

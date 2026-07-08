@@ -15,14 +15,13 @@ export interface Dictionary {
     description: string;
   };
   nav: {
-    philosophy: string;
-    works: string;
-    founder: string;
-    studioNotes: string;
+    home: string;
+    house: string;
+    atelier: string;
     shop: string;
     membership: string;
-    consultation: string;
     faq: string;
+    consultation: string;
     login: string;
   };
   hero: {
@@ -70,6 +69,12 @@ export interface Dictionary {
     cta: string;
   };
   shopPreview: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+    cta: string;
+  };
+  atelierPreview: {
     eyebrow: string;
     heading: string;
     lead: string;
@@ -164,5 +169,18 @@ export interface Dictionary {
     viewDetail: string;
     cartNote: string;
     checkoutCta: string;
+  };
+  atelierPage: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+    intro: string[];
+    servicesHeading: string;
+    servicesLead: string;
+    services: { title: string; description: string }[];
+    forHeading: string;
+    forBody: string;
+    cta: string;
+    note: string;
   };
 }

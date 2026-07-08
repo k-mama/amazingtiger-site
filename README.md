@@ -2,6 +2,15 @@
 
 Official website for Amazing Tiger Publishing — a quiet global literary house inside the Emma Kwon and EMMAESTRO universe. Built as a database-ready, multilingual, luxury-commerce-ready learning web app, not a static brochure site.
 
+## Dual identity
+
+The site carries two identities under one house, and both must read as premium, restrained, and editorial — never as a template, a self-publishing service, or an AI book generator:
+
+1. **Publishing house** — the homepage, featured works, founder, studio notes, and shop present Amazing Tiger as a small, selective literary publisher.
+2. **Book Making Atelier** (`/en/atelier`, `/ko/atelier`) — a high-touch service for selected authors, founders, artists, and memoir writers who want a life, manuscript, archive, or brand story turned into a finished book (memoirs, author books, founder stories, brand books, artist books, children's books, AI-assisted creative books, multilingual editions, KDP-ready packages, author websites, launch assets, editorial design systems). Copy for this section deliberately avoids "instant," "easy," "cheap," "one-click," "AI-generated," "mass production," "discount," and "limited-time" language — the Atelier is positioned as selective and high-touch, not transactional.
+
+**Primary market: North America. Default public language: English.** `/` and `/en` both render the English homepage — English is the first impression, not a language-selection screen.
+
 ## Stack
 
 - **Next.js 14** (App Router), **TypeScript**, static export (`output: "export"`)
@@ -29,8 +38,9 @@ app/
     faq/page.tsx
     consultation/page.tsx
     shop/page.tsx           Luxury catalogue UI
+    atelier/page.tsx        Book Making Atelier — services, who it's for, inquiry CTA
 components/               Header, Footer, LanguageSwitcher, HomeContent, ProductCard, ShopPreview,
-                           LoginForm, SignupForm, ConsultationForm, Reveal, LocaleHtmlLang
+                           AtelierPreview, LoginForm, SignupForm, ConsultationForm, Reveal, LocaleHtmlLang
 lib/
   supabaseClient.ts        Browser-safe Supabase client (public keys only)
   types.ts                 Shared DB row types
@@ -51,7 +61,7 @@ supabase/schema.sql        Full DB schema + RLS policies
 
 - `/` and `/en` both render the English homepage — English is the primary experience for the North American launch market.
 - `/ko` renders the Korean homepage.
-- Every other route lives under a locale prefix: `/en/faq`, `/ko/faq`, `/en/shop`, `/ko/shop`, etc.
+- Every other route lives under a locale prefix: `/en/faq`, `/ko/faq`, `/en/shop`, `/ko/shop`, `/en/atelier`, `/ko/atelier`, etc.
 - No middleware is used (middleware isn't compatible with static export). Locale routing is handled entirely by the `[locale]` dynamic segment plus `generateStaticParams` in `app/[locale]/layout.tsx`, which pre-renders `/en` and `/ko` at build time.
 - The `<html lang>` attribute is fixed to `"en"` at build time in the root layout (it sits above `[locale]` and never receives locale params). `components/LocaleHtmlLang.tsx` corrects it client-side on `/ko` pages — a pragmatic workaround for static export without middleware.
 - The small `EN / KR` switcher in the header (`components/LanguageSwitcher.tsx`) preserves the current page when switching languages (e.g. `/en/faq` → `/ko/faq`).
@@ -132,7 +142,7 @@ Framework preset: **Next.js (Static HTML Export)** — build command `npx next b
 
 ## What's implemented vs. placeholder (first pass)
 
-- **Implemented:** full premium homepage (EN/KO), luxury shop catalogue UI, FAQ page, consultation form UI, login/signup forms wired to Supabase Auth client calls, static DB schema with RLS.
-- **Placeholder (visually complete, not yet functional):** consultation form does not persist to Supabase yet (see `functions/api/consultation.ts`); chatbot is not implemented (see `functions/api/chat.ts`); shop cart/checkout do not process anything yet (see `functions/api/create-checkout.ts`); member dashboard and admin dashboard are protected-looking static pages with no real session/role gating yet.
+- **Implemented:** full premium homepage (EN/KO) with Hero, Philosophy, Featured Works, Publishing House, Book Making Atelier preview, Shop preview, Founder, Studio Notes, Membership, and Consultation sections; the standalone Atelier page; luxury shop catalogue UI; FAQ page; consultation form UI (with the updated inquiry-type list: Publish with Amazing Tiger, Build My Book with Amazing Tiger Atelier, Author Website Inquiry, Shop Support, Membership Support, Other); login/signup forms wired to Supabase Auth client calls; static DB schema with RLS.
+- **Placeholder (visually complete, not yet functional):** consultation and Atelier inquiries do not persist to Supabase yet (see `functions/api/consultation.ts`); chatbot is not implemented (see `functions/api/chat.ts`); shop cart/checkout do not process anything yet (see `functions/api/create-checkout.ts`, intentionally left as a `not_implemented` skeleton — no real payment, no real orders); member dashboard and admin dashboard are protected-looking static pages with no real session/role gating yet.
 
 These are the natural next steps once real Supabase keys are supplied.
