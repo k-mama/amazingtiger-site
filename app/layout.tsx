@@ -1,18 +1,28 @@
 import type { Metadata } from "next";
-import { Forum, Jost, Inter } from "next/font/google";
+import { Forum, Jost, Averia_Serif_Libre, Inter } from "next/font/google";
 import "./globals.css";
 
-// Three-tier type system:
+// Four-tier type system:
 // - Forum: an elegant classical serif for every content headline, h1-h4.
-// - Jost: the two-line wordmark ("Amazing Tiger" / "Publishing"). "Athena"
-//   (Jade Brand Studio) was requested again but is still a paid font with
-//   no licensed file available — Jost remains the closest free match:
-//   tall, geometric, single-story "a", Futura-style proportions.
+// - Averia Serif Libre: the wordmark's "Amazing Tiger" line, matching the
+//   "Hazel" reference specimen (a paid font with no licensed file available;
+//   Averia Serif Libre is the closest free match — the same quirky, warm,
+//   slightly irregular serif character).
+// - Jost: the wordmark's "PUBLISHING" line, matching the "Athena" (Jade
+//   Brand Studio) reference specimen — closest free match: tall, geometric,
+//   single-story "a", Futura-style proportions.
 // - Inter: body copy, untouched.
 const displaySerif = Forum({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-heading",
+  display: "swap",
+});
+
+const wordmarkSerif = Averia_Serif_Libre({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-wordmark-serif",
   display: "swap",
 });
 
@@ -47,7 +57,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${displaySerif.variable} ${headingSans.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${displaySerif.variable} ${wordmarkSerif.variable} ${headingSans.variable} ${inter.variable}`}
+    >
       <body>{children}</body>
     </html>
   );
