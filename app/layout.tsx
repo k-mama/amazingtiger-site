@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
-import { Source_Serif_4, Averia_Serif_Libre, Inter } from "next/font/google";
+import { Forum, Averia_Serif_Libre, Inter } from "next/font/google";
 import "./globals.css";
 
 // Three-tier type system:
-// - Source Serif 4: an elegant modern serif for every content headline,
-//   h1-h4, built to pair cleanly with a grotesque sans body.
-// - Averia Serif Libre: the header wordmark/logotype only — available
-//   directly (unlike Athena/TT Norms), used at Regular so it stays
-//   neither too thin nor too wide.
+// - Forum: an elegant classical serif for every content headline, h1-h4.
+// - Averia Serif Libre: the header wordmark/logotype only.
 // - Inter: body copy, untouched.
-const displaySerif = Source_Serif_4({
+const displaySerif = Forum({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400"],
   variable: "--font-heading",
   display: "swap",
 });
