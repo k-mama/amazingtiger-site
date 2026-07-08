@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import AdminConsultationList from "./AdminConsultationList";
+import ProtectedStateCard from "./ProtectedStateCard";
 
 interface AdminViewProps {
   dict: Dictionary["admin"];
@@ -47,32 +47,30 @@ export default function AdminView({ dict, navBase, locale }: AdminViewProps) {
   }, []);
 
   if (state === "checking") {
-    return <div className="container protected-page" />;
+    return <ProtectedStateCard lead={dict.checking} />;
   }
 
   if (state === "loggedOut") {
     return (
-      <div className="container protected-page">
-        <span className="protected-badge">{dict.loggedOut.badge}</span>
-        <h1>{dict.loggedOut.heading}</h1>
-        <p className="section-lead">{dict.loggedOut.lead}</p>
-        <Link href={`${navBase}/login`} className="btn btn-primary" style={{ marginTop: "var(--space-3)" }}>
-          {dict.loggedOut.cta}
-        </Link>
-      </div>
+      <ProtectedStateCard
+        badge={dict.loggedOut.badge}
+        heading={dict.loggedOut.heading}
+        lead={dict.loggedOut.lead}
+        ctaLabel={dict.loggedOut.cta}
+        ctaHref={`${navBase}/login`}
+      />
     );
   }
 
   if (state === "notAuthorized") {
     return (
-      <div className="container protected-page">
-        <span className="protected-badge">{dict.notAuthorized.badge}</span>
-        <h1>{dict.notAuthorized.heading}</h1>
-        <p className="section-lead">{dict.notAuthorized.lead}</p>
-        <Link href={`${navBase}/dashboard`} className="btn btn-primary" style={{ marginTop: "var(--space-3)" }}>
-          {dict.notAuthorized.cta}
-        </Link>
-      </div>
+      <ProtectedStateCard
+        badge={dict.notAuthorized.badge}
+        heading={dict.notAuthorized.heading}
+        lead={dict.notAuthorized.lead}
+        ctaLabel={dict.notAuthorized.cta}
+        ctaHref={`${navBase}/dashboard`}
+      />
     );
   }
 

@@ -1487,6 +1487,51 @@ button {
   border-radius: 999px;
 }
 
+/* Centered card for auth-gated states (checking / signed out / not
+   authorized) — same glass treatment and rhythm as .auth-card, just wider,
+   so the message reads as an intentional moment, not a stray left-aligned
+   paragraph. */
+.protected-card {
+  max-width: 680px;
+  margin: var(--space-6) auto;
+  padding: var(--space-5) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+  background: var(--glass-light-bg-strong);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid var(--glass-light-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glossy);
+}
+
+.protected-card .protected-badge {
+  margin-bottom: 0;
+}
+
+.protected-card h1 {
+  margin: 0;
+}
+
+.protected-card .section-lead {
+  margin: 0;
+  max-width: 480px;
+}
+
+.protected-card .btn {
+  margin-top: var(--space-1);
+}
+
+@media (max-width: 560px) {
+  .protected-card {
+    margin: var(--space-4) auto;
+    padding: var(--space-4) var(--space-3);
+  }
+}
+
 .info-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -143,6 +143,7 @@ export interface Dictionary {
     eyebrow: string;
     heading: string;
     lead: string;
+    checking: string;
     loggedOut: {
       badge: string;
       heading: string;
@@ -162,6 +163,7 @@ export interface Dictionary {
     eyebrow: string;
     heading: string;
     lead: string;
+    checking: string;
     loggedOut: {
       badge: string;
       heading: string;

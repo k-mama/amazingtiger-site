@@ -193,6 +193,7 @@ const ko: Dictionary = {
     eyebrow: "멤버 대시보드",
     heading: "하우스 안, 당신의 자리.",
     lead: "어메이징 타이거 퍼블리싱 멤버를 위한 사적인 공간입니다.",
+    checking: "세션을 확인하는 중…",
     loggedOut: {
       badge: "멤버 전용",
       heading: "멤버를 위해 마련된 공간입니다.",
@@ -217,6 +218,7 @@ const ko: Dictionary = {
     eyebrow: "관리자",
     heading: "하우스 운영.",
     lead: "스튜디오 팀을 위한 사적인 업무 공간입니다 — 상담, 멤버, 카탈로그를 한곳에서 확인합니다.",
+    checking: "접근 권한을 확인하는 중…",
     loggedOut: {
       badge: "관리자 전용",
       heading: "이 공간은 스튜디오 팀을 위해 마련되었습니다.",
@@ -225,8 +227,8 @@ const ko: Dictionary = {
     },
     notAuthorized: {
       badge: "접근 제한",
-      heading: "이 계정으로는 접근할 수 없는 공간입니다.",
-      lead: "관리자 권한은 스튜디오 팀에게만 부여됩니다. 착오가 있다고 생각되시면 스튜디오로 직접 문의해 주세요.",
+      heading: "이 공간은 회원님의 계정으로 이용하실 수 없습니다.",
+      lead: "로그인하셨지만, 이 영역은 관리자 전용입니다.",
       cta: "대시보드로 돌아가기",
     },
     sections: [

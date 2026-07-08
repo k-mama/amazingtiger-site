@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import type { Dictionary } from "@/lib/i18n/types";
+import ProtectedStateCard from "./ProtectedStateCard";
 
 interface DashboardViewProps {
   dict: Dictionary["dashboard"];
@@ -57,19 +57,18 @@ export default function DashboardView({ dict, navBase }: DashboardViewProps) {
   }
 
   if (state === "checking") {
-    return <div className="container protected-page" />;
+    return <ProtectedStateCard lead={dict.checking} />;
   }
 
   if (state === "loggedOut") {
     return (
-      <div className="container protected-page">
-        <span className="protected-badge">{dict.loggedOut.badge}</span>
-        <h1>{dict.loggedOut.heading}</h1>
-        <p className="section-lead">{dict.loggedOut.lead}</p>
-        <Link href={`${navBase}/login`} className="btn btn-primary" style={{ marginTop: "var(--space-3)" }}>
-          {dict.loggedOut.cta}
-        </Link>
-      </div>
+      <ProtectedStateCard
+        badge={dict.loggedOut.badge}
+        heading={dict.loggedOut.heading}
+        lead={dict.loggedOut.lead}
+        ctaLabel={dict.loggedOut.cta}
+        ctaHref={`${navBase}/login`}
+      />
     );
   }
 

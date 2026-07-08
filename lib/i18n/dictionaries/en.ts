@@ -193,6 +193,7 @@ const en: Dictionary = {
     eyebrow: "Member Dashboard",
     heading: "Your place in the house.",
     lead: "A private space for members of Amazing Tiger Publishing.",
+    checking: "Checking your session…",
     loggedOut: {
       badge: "Members Only",
       heading: "This room is reserved for members.",
@@ -217,6 +218,7 @@ const en: Dictionary = {
     eyebrow: "Admin",
     heading: "House operations.",
     lead: "A private working room for the studio team — consultations, members, and the catalogue in one place.",
+    checking: "Checking access…",
     loggedOut: {
       badge: "Admin Only",
       heading: "This room is reserved for the studio team.",
@@ -224,10 +226,10 @@ const en: Dictionary = {
       cta: "Sign In",
     },
     notAuthorized: {
-      badge: "Restricted",
-      heading: "This room isn't open to your account.",
-      lead: "Admin access is limited to the studio team. If you believe this is a mistake, contact the studio directly.",
-      cta: "Return to your dashboard",
+      badge: "Access Limited",
+      heading: "This room is not open to your account.",
+      lead: "You are signed in, but this area is reserved for administrators.",
+      cta: "Return to Dashboard",
     },
     sections: [
       { title: "Consultations", description: "Review incoming consultation requests by status and language." },
