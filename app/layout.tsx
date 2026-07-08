@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { Forum, Jost, Averia_Serif_Libre, Inter } from "next/font/google";
+import { Forum, Jost, Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 
 // Four-tier type system:
 // - Forum: an elegant classical serif for every content headline, h1-h4.
-// - Averia Serif Libre: the wordmark's "Amazing Tiger" line, matching the
-//   "Hazel" reference specimen (a paid font with no licensed file available;
-//   Averia Serif Libre is the closest free match — the same quirky, warm,
-//   slightly irregular serif character).
+// - Cormorant Garamond: the wordmark's "Amazing Tiger" line. Averia Serif
+//   Libre (a stand-in for the "Hazel" reference) read too casual/handwritten
+//   for a quiet-luxury publishing house — Cormorant Garamond is a refined
+//   Garamond revival instead: the archetypal literary-press serif, restrained
+//   and timeless rather than decorative, at a moderate width so it doesn't
+//   stretch the lockup.
 // - Jost: the wordmark's "PUBLISHING" line, matching the "Athena" (Jade
 //   Brand Studio) reference specimen — closest free match: tall, geometric,
 //   single-story "a", Futura-style proportions.
@@ -19,9 +21,9 @@ const displaySerif = Forum({
   display: "swap",
 });
 
-const wordmarkSerif = Averia_Serif_Libre({
+const wordmarkSerif = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["500", "600"],
   variable: "--font-wordmark-serif",
   display: "swap",
 });
