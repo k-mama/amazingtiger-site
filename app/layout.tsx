@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Source_Serif_4, Space_Grotesk, Inter } from "next/font/google";
+import { Source_Serif_4, Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 
 // Three-tier type system:
 // - Source Serif 4: an elegant modern serif for every content headline,
-//   h1-h4. Replaces Forum — Forum's eccentric classical proportions read
-//   as mismatched next to Inter's neutral body text. Source Serif 4 is
-//   built by the same team as Inter's sibling (Source Sans) specifically
-//   to pair with a grotesque sans body, so it resolves that clash.
-// - Space Grotesk: a geometric sans with a distinct, currently-trending
-//   global-brand character — used only for the header wordmark/logotype.
-// - Inter: body copy, untouched — it was never flagged as inelegant.
+//   h1-h4, built to pair cleanly with a grotesque sans body.
+// - Plus Jakarta Sans: the header wordmark/logotype only. "TT Norms Pro"
+//   (TypeType) was requested but is a paid font with no licensed file
+//   available here — Plus Jakarta Sans is the closest free match: the
+//   same clean, slightly rounded, neutral-but-warm grotesque character.
+// - Inter: body copy, untouched.
 const displaySerif = Source_Serif_4({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -18,7 +17,7 @@ const displaySerif = Source_Serif_4({
   display: "swap",
 });
 
-const headingSans = Space_Grotesk({
+const headingSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--font-wordmark",
