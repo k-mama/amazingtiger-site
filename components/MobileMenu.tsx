@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import LanguageSwitcher from "./LanguageSwitcher";
+import WordmarkLogo from "./WordmarkLogo";
 
 interface MobileMenuProps {
   locale: Locale;
@@ -68,7 +69,7 @@ export default function MobileMenu({ locale, dict, basePath }: MobileMenuProps) 
             <div className="mobile-menu-panel__inner">
               <div className="mobile-menu-panel__header">
                 <span className="wordmark">
-                  Amazing Tiger <span>Publishing</span>
+                  <WordmarkLogo idSuffix="mobile-menu" />
                 </span>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
                   <LanguageSwitcher locale={locale} />

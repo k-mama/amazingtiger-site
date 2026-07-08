@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import LanguageSwitcher from "./LanguageSwitcher";
 import MobileMenu from "./MobileMenu";
+import WordmarkLogo from "./WordmarkLogo";
 
 interface HeaderProps {
   locale: Locale;
@@ -19,7 +20,7 @@ export default function Header({ locale, dict, basePath }: HeaderProps) {
     <header className="site-header">
       <div className="site-header__inner">
         <Link href={basePath} className="wordmark">
-          Amazing Tiger <span>Publishing</span>
+          <WordmarkLogo idSuffix="header" />
         </Link>
         <div className="site-nav">
           <ul className="site-nav__links">

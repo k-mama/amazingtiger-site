@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Forum, Averia_Serif_Libre, Inter } from "next/font/google";
+import { Forum, Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 
 // Three-tier type system:
 // - Forum: an elegant classical serif for every content headline, h1-h4.
-// - Averia Serif Libre: the header wordmark/logotype only.
+// - Montserrat: base letterforms for the header wordmark, rendered as
+//   hollow gradient-stroke SVG text (see Header.tsx) to match the
+//   requested outlined, multi-colour logotype treatment.
 // - Inter: body copy, untouched.
 const displaySerif = Forum({
   subsets: ["latin"],
@@ -13,9 +15,9 @@ const displaySerif = Forum({
   display: "swap",
 });
 
-const headingSans = Averia_Serif_Libre({
+const headingSans = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["600", "700"],
   variable: "--font-wordmark",
   display: "swap",
 });

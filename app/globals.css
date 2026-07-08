@@ -316,16 +316,28 @@ button {
 }
 
 .wordmark {
-  font-family: var(--font-logo);
-  font-weight: 400;
-  font-size: 1.15rem;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  color: var(--color-ink);
+  display: inline-flex;
+  align-items: center;
 }
 
-.wordmark span {
-  color: var(--color-gold);
+.wordmark__svg {
+  display: block;
+  width: 238px;
+  height: 19px;
+}
+
+.wordmark__text {
+  font-family: var(--font-logo);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 480px) {
+  .wordmark__svg {
+    width: 200px;
+    height: 16px;
+  }
 }
 
 .site-nav {
