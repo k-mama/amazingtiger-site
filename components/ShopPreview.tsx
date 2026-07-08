@@ -1,16 +1,19 @@
 import Link from "next/link";
+import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
+import { getHomeFeaturedProducts } from "@/lib/shop/products";
 import ProductCard from "./ProductCard";
 import Reveal from "./Reveal";
 
 interface ShopPreviewProps {
   dict: Dictionary;
   basePath: string;
+  locale: Locale;
 }
 
-export default function ShopPreview({ dict, basePath }: ShopPreviewProps) {
+export default function ShopPreview({ dict, basePath, locale }: ShopPreviewProps) {
   const navBase = basePath === "/" ? "/en" : basePath;
-  const featured = dict.shopPage.products.slice(0, 4);
+  const featured = getHomeFeaturedProducts();
 
   return (
     <section id="shop" className="section">
@@ -23,12 +26,7 @@ export default function ShopPreview({ dict, basePath }: ShopPreviewProps) {
         <div className="product-grid">
           {featured.map((product, i) => (
             <Reveal key={product.id} delay={i * 80}>
-              <ProductCard
-                product={product}
-                addToCartLabel={dict.shopPage.addToCart}
-                viewDetailLabel={dict.shopPage.viewDetail}
-                index={i}
-              />
+              <ProductCard product={product} locale={locale} navBase={navBase} dict={dict.shopPage} />
             </Reveal>
           ))}
         </div>

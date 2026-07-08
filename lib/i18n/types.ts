@@ -1,13 +1,4 @@
-export type ProductCategory = "books" | "limited" | "objects" | "gifts";
-
-export interface ShopProduct {
-  id: string;
-  category: ProductCategory;
-  title: string;
-  subtitle: string;
-  price: string;
-  badge?: string;
-}
+import type { ProductAvailability, ProductCategory } from "@/lib/shop/products";
 
 export interface Dictionary {
   meta: {
@@ -223,6 +214,7 @@ export interface Dictionary {
     submit: string;
     note: string;
     errorNote: string;
+    shopInquiryPrefix: string;
   };
   shopPage: {
     eyebrow: string;
@@ -234,14 +226,37 @@ export interface Dictionary {
       limitedEditions: { heading: string; lead: string };
       objects: { heading: string; lead: string };
       giftSets: { heading: string; lead: string };
-      comingSoon: { heading: string; lead: string };
+      comingSoon: { heading: string; lead: string; future: string[] };
       privateInquiry: { heading: string; lead: string; cta: string };
     };
-    products: ShopProduct[];
-    addToCart: string;
+    addToPrivateCart: string;
+    requestAvailability: string;
+    joinReleaseList: string;
+    privateInquiryCta: string;
     viewDetail: string;
+    availabilityLabels: Record<ProductAvailability, string>;
     cartNote: string;
-    checkoutCta: string;
+  };
+  shopDetail: {
+    backToCatalogue: string;
+    categoryLabel: string;
+    availabilityLabel: string;
+    detailsHeading: string;
+    relatedHeading: string;
+    inquiryNote: string;
+  };
+  cart: {
+    eyebrow: string;
+    title: string;
+    empty: string;
+    remove: string;
+    quantityLabel: string;
+    subtotalLabel: string;
+    subtotalNote: string;
+    checkoutNote: string;
+    requestCheckout: string;
+    close: string;
+    open: string;
   };
   atelierPage: {
     eyebrow: string;

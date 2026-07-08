@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import AuthNavLink from "./AuthNavLink";
+import CartWidget from "./CartWidget";
 import LanguageSwitcher from "./LanguageSwitcher";
 import MobileMenu from "./MobileMenu";
 import WordmarkLogo from "./WordmarkLogo";
@@ -39,6 +40,7 @@ export default function Header({ locale, dict, basePath }: HeaderProps) {
             dashboardLabel={dict.nav.dashboard}
             className="site-nav__login"
           />
+          <CartWidget locale={locale} dict={dict.cart} navBase={navBase} />
           <LanguageSwitcher locale={locale} />
           <MobileMenu locale={locale} dict={dict} basePath={basePath} />
         </div>

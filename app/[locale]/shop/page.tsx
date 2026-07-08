@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
-import type { ProductCategory } from "@/lib/i18n/types";
+import { getProductsByCategory, type ProductCategory } from "@/lib/shop/products";
 import ProductCard from "@/components/ProductCard";
+import CartWidget from "@/components/CartWidget";
 import Reveal from "@/components/Reveal";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
 
@@ -12,7 +13,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   return { title: getDictionary(params.locale).shopPage.heading };
 }
 
-const sectionAnchors: Record<Exclude<ProductCategory, never>, string> = {
+const sectionAnchors: Record<ProductCategory, string> = {
   books: "featured-books",
   limited: "limited-editions",
   objects: "objects-goods",
@@ -21,10 +22,9 @@ const sectionAnchors: Record<Exclude<ProductCategory, never>, string> = {
 
 export default function ShopPage({ params }: { params: { locale: string } }) {
   const locale = (isLocale(params.locale) ? params.locale : "en") as Locale;
-  const dict = getDictionary(locale).shopPage;
+  const fullDict = getDictionary(locale);
+  const dict = fullDict.shopPage;
   const navBase = `/${locale}`;
-
-  const byCategory = (category: ProductCategory) => dict.products.filter((p) => p.category === category);
 
   return (
     <>
@@ -41,14 +41,9 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
           <p className="section-lead">{dict.lead}</p>
 
           <div className="cart-preview">
-            <span className="cart-preview__label">
-              <strong>0</strong>items in your cart
-            </span>
-            <button type="button" className="btn btn-primary" disabled>
-              {dict.checkoutCta}
-            </button>
+            <span className="cart-preview__label">{dict.cartNote}</span>
+            <CartWidget locale={locale} dict={fullDict.cart} navBase={navBase} variant="inline" />
           </div>
-          <p className="cart-note">{dict.cartNote}</p>
 
           <nav className="category-filter" aria-label="Shop categories">
             {dict.categories.map((cat) => (
@@ -71,9 +66,9 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
             <p className="section-lead">{dict.sections.featuredBooks.lead}</p>
           </Reveal>
           <div className="product-grid">
-            {byCategory("books").map((product, i) => (
+            {getProductsByCategory("books").map((product, i) => (
               <Reveal key={product.id} delay={i * 70}>
-                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} index={i} />
+                <ProductCard product={product} locale={locale} navBase={navBase} dict={dict} />
               </Reveal>
             ))}
           </div>
@@ -87,9 +82,9 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
             <p className="section-lead">{dict.sections.limitedEditions.lead}</p>
           </Reveal>
           <div className="product-grid">
-            {byCategory("limited").map((product, i) => (
+            {getProductsByCategory("limited").map((product, i) => (
               <Reveal key={product.id} delay={i * 70}>
-                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} index={i + 2} />
+                <ProductCard product={product} locale={locale} navBase={navBase} dict={dict} />
               </Reveal>
             ))}
           </div>
@@ -103,9 +98,9 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
             <p className="section-lead">{dict.sections.objects.lead}</p>
           </Reveal>
           <div className="product-grid">
-            {byCategory("objects").map((product, i) => (
+            {getProductsByCategory("objects").map((product, i) => (
               <Reveal key={product.id} delay={i * 70}>
-                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} index={i + 4} />
+                <ProductCard product={product} locale={locale} navBase={navBase} dict={dict} />
               </Reveal>
             ))}
           </div>
@@ -119,9 +114,9 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
             <p className="section-lead">{dict.sections.giftSets.lead}</p>
           </Reveal>
           <div className="product-grid">
-            {byCategory("gifts").map((product, i) => (
+            {getProductsByCategory("gifts").map((product, i) => (
               <Reveal key={product.id} delay={i * 70}>
-                <ProductCard product={product} addToCartLabel={dict.addToCart} viewDetailLabel={dict.viewDetail} index={i + 6} />
+                <ProductCard product={product} locale={locale} navBase={navBase} dict={dict} />
               </Reveal>
             ))}
           </div>
@@ -132,6 +127,13 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
         <Reveal>
           <span className="eyebrow">{dict.sections.comingSoon.heading}</span>
           <p style={{ maxWidth: "560px" }}>{dict.sections.comingSoon.lead}</p>
+          <div className="coming-soon-chips">
+            {dict.sections.comingSoon.future.map((label) => (
+              <span key={label} className="coming-soon-chip">
+                {label}
+              </span>
+            ))}
+          </div>
         </Reveal>
       </section>
 
@@ -140,7 +142,7 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
           <Reveal>
             <h2 className="section-heading">{dict.sections.privateInquiry.heading}</h2>
             <p className="section-lead">{dict.sections.privateInquiry.lead}</p>
-            <Link href={`${navBase}/consultation`} className="btn btn-secondary" style={{ marginTop: "0.5rem" }}>
+            <Link href={`${navBase}/consultation?type=shop_support`} className="btn btn-secondary" style={{ marginTop: "0.5rem" }}>
               {dict.sections.privateInquiry.cta}
             </Link>
           </Reveal>

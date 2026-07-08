@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import { supabase } from "@/lib/supabaseClient";
+import { getProductBySlug, getProductCopy } from "@/lib/shop/products";
 
 interface ConsultationFormProps {
   dict: Dictionary["consultationPage"];
@@ -12,8 +13,35 @@ interface ConsultationFormProps {
 
 type Status = "idle" | "loading" | "success" | "error";
 
+// Index of "Shop Support" in projectTypeOptions — same position in every
+// locale dictionary, since option order (not wording) is what's shared.
+const SHOP_SUPPORT_OPTION_INDEX = 3;
+
 export default function ConsultationForm({ dict, locale }: ConsultationFormProps) {
   const [status, setStatus] = useState<Status>("idle");
+  const [projectType, setProjectType] = useState(dict.projectTypeOptions[0]);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    const productSlug = params.get("product");
+
+    if (type === "shop_support" && dict.projectTypeOptions[SHOP_SUPPORT_OPTION_INDEX]) {
+      setProjectType(dict.projectTypeOptions[SHOP_SUPPORT_OPTION_INDEX]);
+    }
+
+    if (productSlug) {
+      const product = getProductBySlug(productSlug);
+      if (product) {
+        const copy = getProductCopy(product, locale);
+        setMessage(`${dict.shopInquiryPrefix}${copy.title}. `);
+      }
+    }
+    // Runs once on mount to read the initial URL — intentionally ignores
+    // later prop changes so it doesn't clobber what the visitor has typed.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -55,7 +83,8 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
         <select
           id="consult-project-type"
           name="project_type"
-          defaultValue={dict.projectTypeOptions[0]}
+          value={projectType}
+          onChange={(event) => setProjectType(event.target.value)}
           disabled={status === "loading"}
         >
           {dict.projectTypeOptions.map((option) => (
@@ -67,7 +96,14 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
       </div>
       <div className="form-field">
         <label htmlFor="consult-message">{dict.messageLabel}</label>
-        <textarea id="consult-message" name="message" required disabled={status === "loading"} />
+        <textarea
+          id="consult-message"
+          name="message"
+          required
+          disabled={status === "loading"}
+          value={message}
+          onChange={(event) => setMessage(event.target.value)}
+        />
       </div>
       <button type="submit" className="btn btn-primary btn-block" disabled={status === "loading"}>
         {dict.submit}

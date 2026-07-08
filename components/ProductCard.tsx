@@ -1,35 +1,70 @@
-import type { ShopProduct } from "@/lib/i18n/types";
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import type { Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/types";
+import type { Product } from "@/lib/shop/products";
+import { getProductCopy } from "@/lib/shop/products";
+import { useCart } from "./useCart";
 import EditorialObject from "./EditorialObject";
-import { dreamGlassTones } from "./DreamGlassIcon";
 
 interface ProductCardProps {
-  product: ShopProduct;
-  addToCartLabel: string;
-  viewDetailLabel: string;
-  index?: number;
+  product: Product;
+  locale: Locale;
+  navBase: string;
+  dict: Pick<
+    Dictionary["shopPage"],
+    "addToPrivateCart" | "requestAvailability" | "joinReleaseList" | "privateInquiryCta" | "viewDetail" | "availabilityLabels"
+  >;
 }
 
-export default function ProductCard({ product, addToCartLabel, viewDetailLabel, index = 0 }: ProductCardProps) {
-  const toneA = dreamGlassTones[index % dreamGlassTones.length];
-  const toneB = dreamGlassTones[(index + 3) % dreamGlassTones.length];
+export default function ProductCard({ product, locale, navBase, dict }: ProductCardProps) {
+  const { addToCart } = useCart();
+  const [added, setAdded] = useState(false);
+  const copy = getProductCopy(product, locale);
+  const detailHref = `${navBase}/shop/${product.slug}`;
+  const inquiryHref = `${navBase}/consultation?type=shop_support&product=${product.slug}`;
+
+  function handleAddToCart() {
+    addToCart(product.slug);
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 1800);
+  }
 
   return (
     <article className="product-card">
-      <div className="product-card__media">
-        {product.badge && <span className="product-card__badge">{product.badge}</span>}
-        <EditorialObject toneA={toneA} toneB={toneB} emblem={index % 2 === 0 ? "ring" : "line"} />
-      </div>
+      <Link href={detailHref} className="product-card__media">
+        {copy.badge && <span className="product-card__badge">{copy.badge}</span>}
+        <EditorialObject toneA={product.visualToneA} toneB={product.visualToneB} emblem={product.emblem} />
+      </Link>
       <div className="product-card__body">
-        <h3 className="product-card__title">{product.title}</h3>
-        <p className="product-card__subtitle">{product.subtitle}</p>
-        <p className="product-card__price">{product.price}</p>
+        <h3 className="product-card__title">
+          <Link href={detailHref}>{copy.title}</Link>
+        </h3>
+        <p className="product-card__subtitle">{copy.subtitle}</p>
+        <p className="product-card__description">{copy.description}</p>
+        <div className="product-card__meta">
+          <span className="product-card__price">{product.priceLabel}</span>
+          <span className={`availability-pill availability-pill--${product.availability}`}>
+            {dict.availabilityLabels[product.availability]}
+          </span>
+        </div>
         <div className="product-card__actions">
-          <button type="button" className="btn btn-secondary btn-block">
-            {addToCartLabel}
-          </button>
-          <button type="button" className="btn-link">
-            {viewDetailLabel}
-          </button>
+          {product.availability === "available" ? (
+            <button type="button" className="btn btn-secondary btn-block" onClick={handleAddToCart}>
+              {added ? "✓" : dict.addToPrivateCart}
+            </button>
+          ) : (
+            <Link href={inquiryHref} className="btn btn-secondary btn-block">
+              {product.availability === "limited" && dict.requestAvailability}
+              {product.availability === "coming_soon" && dict.joinReleaseList}
+              {product.availability === "inquiry_only" && dict.privateInquiryCta}
+            </Link>
+          )}
+          <Link href={detailHref} className="btn-link">
+            {dict.viewDetail}
+          </Link>
         </div>
       </div>
     </article>

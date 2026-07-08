@@ -19,7 +19,7 @@ const workTones: Array<{ a: string; b: string; emblem: "ring" | "line" }> = [
   { a: "var(--dg-lemon)", b: "var(--dg-mint)", emblem: "ring" },
 ];
 
-export default function HomeContent({ dict, basePath }: HomeContentProps) {
+export default function HomeContent({ dict, basePath, locale }: HomeContentProps) {
   const navBase = basePath === "/" ? "/en" : basePath;
 
   return (
@@ -131,7 +131,7 @@ export default function HomeContent({ dict, basePath }: HomeContentProps) {
 
       <AtelierPreview dict={dict} basePath={basePath} />
 
-      <ShopPreview dict={dict} basePath={basePath} />
+      <ShopPreview dict={dict} basePath={basePath} locale={locale} />
 
       <section id="founder" className="section">
         <div className="container">

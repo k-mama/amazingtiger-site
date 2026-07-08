@@ -37,13 +37,18 @@ app/
     admin/page.tsx         Admin dashboard — client-side role guard, see "Auth flow" below
     faq/page.tsx
     consultation/page.tsx
-    shop/page.tsx           Luxury catalogue UI
+    shop/page.tsx           Luxury catalogue UI — Shop V1, see "Shop V1" below
+    shop/[slug]/page.tsx    Static product detail pages, generateStaticParams from lib/shop/products.ts
     atelier/page.tsx        Book Making Atelier — services, who it's for, inquiry CTA
-components/               Header, Footer, LanguageSwitcher, HomeContent, ProductCard, ShopPreview,
-                           AtelierPreview, LoginForm, SignupForm, ConsultationForm, Reveal, LocaleHtmlLang
+components/               Header, Footer, LanguageSwitcher, HomeContent, ProductCard, ProductDetail,
+                           ShopPreview, CartWidget, useCart, AtelierPreview, LoginForm, SignupForm,
+                           ConsultationForm, Reveal, LocaleHtmlLang
 lib/
   supabaseClient.ts        Browser-safe Supabase client (public keys only)
   types.ts                 Shared DB row types
+  shop/
+    products.ts             Local product catalogue (EN/KO), prepared for later Supabase migration
+    cart.ts                 Client-only private cart (localStorage: product slugs + quantities only)
   i18n/
     config.ts               Supported locales, default locale
     types.ts                 Dictionary shape (all translatable UI copy)
@@ -149,6 +154,17 @@ The first real admin feature, `components/AdminConsultationList.tsx`, reads `con
 
 `products` uses a different, more scalable pattern: the parent `products` row holds locale-independent data (price, category, status, SKU), and `product_translations` holds one row per `(product_id, locale)` pair with the translatable copy (title, subtitle, description). **This parent + `*_translations` pattern is the template to reuse for any future content type that needs multiple languages** — e.g. a future `articles` / `article_translations` pair for Studio Notes once they move into the database.
 
+## Shop V1
+
+The shop is a **static luxury catalogue**, not a working store. No payment is active and no orders are stored anywhere.
+
+- **Product data is local**, in `lib/shop/products.ts` — stable fields (`id`, `slug`, `category`, `priceLabel`, `availability`, `relatedProductIds`, visual tone/emblem) separate from per-locale copy (`translations.en` / `translations.ko`: title, subtitle, description, badge, details). This mirrors the `products` / `product_translations` split in `supabase/schema.sql` on purpose, so a later pass can swap this module for a Supabase read without reshaping the shop UI.
+- **Product detail pages** (`/en/shop/[slug]`, `/ko/shop/[slug]`) are fully static, generated at build time via `generateStaticParams` in `app/[locale]/shop/[slug]/page.tsx` — one page per product per locale.
+- **The cart (`components/CartWidget.tsx`, `components/useCart.ts`, `lib/shop/cart.ts`) is client-side only.** It stores nothing but `{ slug, quantity }` pairs in `localStorage` — no personal data, no pricing snapshot, no payment fields. It is a private selection tray, not an order.
+- **Availability drives the call to action**, not a single "Buy" button: `available` items go into the cart; `limited`, `coming_soon`, and `inquiry_only` items link to the consultation form instead (`/[locale]/consultation?type=shop_support&product=<slug>`), which preselects "Shop Support" and prefills the message with the item's title. This is intentional — private purchase interest becomes a personal inquiry, not a checkout, until real payment is built.
+- "Request private checkout" in the cart drawer links to the same consultation flow (without a specific product) — it does not submit an order.
+- Payment, real order saving, and moving product management into Supabase are all explicitly out of scope for this pass — see `functions/api/create-checkout.ts` (still a `not_implemented` skeleton) and the `orders` / `order_items` tables in `supabase/schema.sql` (schema exists, nothing writes to them yet).
+
 ## Cloudflare Pages
 
 Framework preset: **Next.js (Static HTML Export)** — build command `npx next build`, output directory `out`. Once this repo is pushed:
@@ -160,7 +176,7 @@ Framework preset: **Next.js (Static HTML Export)** — build command `npx next b
 
 ## What's implemented vs. placeholder (first pass)
 
-- **Implemented:** full premium homepage (EN/KO) with Hero, Philosophy, Featured Works, Publishing House, Book Making Atelier preview, Shop preview, Founder, Studio Notes, Membership, and Consultation sections; the standalone Atelier page (which routes into the shared consultation form); luxury shop catalogue UI; FAQ page; consultation form wired directly to Supabase via `supabase-js` (with the updated inquiry-type list: Publish with Amazing Tiger, Build My Book with Amazing Tiger Atelier, Author Website Inquiry, Shop Support, Membership Support, Other); static DB schema with RLS; **signup, login, and the member dashboard are fully wired to Supabase Auth** — client-side validation, localized (EN/KO) errors, email confirmation flow, client-side auth guard on the dashboard (see "Auth flow" above), logout, and a header link that swaps between Login and Dashboard based on session state; **the admin dashboard now has a real role guard** (see "Admin guard" above) with a working first admin feature — a live, status-filterable consultations list.
-- **Placeholder (visually complete, not yet functional):** `functions/api/consultation.ts` and `functions/api/chat.ts` remain unused skeletons (the real consultation insert goes directly through `supabase-js` from `ConsultationForm.tsx`, not through this function); chatbot is not implemented; shop cart/checkout do not process anything yet (see `functions/api/create-checkout.ts`, intentionally left as a `not_implemented` skeleton — no real payment, no real orders); the remaining admin sections (Members, FAQ, Products, Orders, Translation Queue, AI Drafts, Chat Sessions) are still static cards with no data behind them yet.
+- **Implemented:** full premium homepage (EN/KO) with Hero, Philosophy, Featured Works, Publishing House, Book Making Atelier preview, Shop preview, Founder, Studio Notes, Membership, and Consultation sections; the standalone Atelier page (which routes into the shared consultation form); FAQ page; consultation form wired directly to Supabase via `supabase-js` (with the updated inquiry-type list: Publish with Amazing Tiger, Build My Book with Amazing Tiger Atelier, Author Website Inquiry, Shop Support, Membership Support, Other), plus query-param prefill from the shop (`?type=shop_support&product=<slug>`); static DB schema with RLS; **signup, login, and the member dashboard are fully wired to Supabase Auth** — client-side validation, localized (EN/KO) errors, email confirmation flow, client-side auth guard on the dashboard (see "Auth flow" above), logout, and a header link that swaps between Login and Dashboard based on session state; **the admin dashboard now has a real role guard** (see "Admin guard" above) with a working first admin feature — a live, status-filterable consultations list with per-row status updates (new / in_progress / closed); **Shop V1** — a complete static luxury catalogue with product detail pages, availability-aware calls to action, and a client-only private cart (see "Shop V1" above).
+- **Placeholder (visually complete, not yet functional):** `functions/api/consultation.ts` and `functions/api/chat.ts` remain unused skeletons (the real consultation insert goes directly through `supabase-js` from `ConsultationForm.tsx`, not through this function); chatbot is not implemented; shop cart/checkout do not process anything yet (see `functions/api/create-checkout.ts`, intentionally left as a `not_implemented` skeleton — no real payment, no real orders); product data is still local to `lib/shop/products.ts`, not yet read from Supabase's `products` / `product_translations` tables; the remaining admin sections (Members, FAQ, Products, Orders, Translation Queue, AI Drafts, Chat Sessions) are still static cards with no data behind them yet.
 
 These are the natural next steps once real Supabase keys are supplied.
