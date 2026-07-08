@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
-import { Forum, Jost, Cormorant_Garamond, Inter } from "next/font/google";
+import { Forum, Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 
-// Four-tier type system:
+// Three-tier type system:
 // - Forum: an elegant classical serif for every content headline, h1-h4.
-// - Cormorant Garamond: the wordmark's "Amazing Tiger" line. Averia Serif
-//   Libre (a stand-in for the "Hazel" reference) read too casual/handwritten
-//   for a quiet-luxury publishing house — Cormorant Garamond is a refined
-//   Garamond revival instead: the archetypal literary-press serif, restrained
-//   and timeless rather than decorative, at a moderate width so it doesn't
-//   stretch the lockup.
-// - Jost: the wordmark's "PUBLISHING" line, matching the "Athena" (Jade
-//   Brand Studio) reference specimen — closest free match: tall, geometric,
-//   single-story "a", Futura-style proportions.
+// - Cormorant Garamond: the entire wordmark, both the "Amazing Tiger" line
+//   and the "PUBLISHING" line. Pairing a serif headline with a separate
+//   sans-serif subtitle (Jost) read as two unrelated logos stacked together
+//   and made consistent sizing hard to judge — a single refined Garamond
+//   revival across both lines, differentiated only by size, weight, and
+//   tracking, is the classic literary-press colophon pattern (name above,
+//   small tracked caps subtitle below) and reads as one coherent mark.
 // - Inter: body copy, untouched.
 const displaySerif = Forum({
   subsets: ["latin"],
@@ -25,13 +23,6 @@ const wordmarkSerif = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["500", "600"],
   variable: "--font-wordmark-serif",
-  display: "swap",
-});
-
-const headingSans = Jost({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-wordmark",
   display: "swap",
 });
 
@@ -61,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${displaySerif.variable} ${wordmarkSerif.variable} ${headingSans.variable} ${inter.variable}`}
+      className={`${displaySerif.variable} ${wordmarkSerif.variable} ${inter.variable}`}
     >
       <body>{children}</body>
     </html>
