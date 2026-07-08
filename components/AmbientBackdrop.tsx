@@ -30,8 +30,8 @@ export default function AmbientBackdrop({ blobs }: AmbientBackdropProps) {
             left: blob.left,
             right: blob.right,
             bottom: blob.bottom,
-            opacity: blob.opacity ?? 0.6,
-            background: `radial-gradient(circle, ${blob.color}, transparent 70%)`,
+            opacity: blob.opacity ?? 0.7,
+            background: `radial-gradient(circle at 32% 28%, rgba(255,255,255,0.9), ${blob.color} 38%, transparent 72%)`,
           }}
         />
       ))}
