@@ -417,15 +417,31 @@ create table if not exists order_items (
 
 alter table order_items enable row level security;
 
+-- Helper used by the order_items insert policy below. SECURITY DEFINER
+-- avoids RLS recursion: without it, checking "does this order exist and
+-- have status = pending_inquiry" would itself run under the caller's RLS
+-- on `orders` — and since guests have no SELECT policy on `orders`, that
+-- inner check always came back empty, silently rejecting every order_items
+-- insert even for orders the guest had just created themselves.
+create or replace function is_order_pending_inquiry(target_order_id uuid)
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1 from orders where id = target_order_id and status = 'pending_inquiry'
+  );
+$$;
+
 create policy "Users can view items of their own orders"
   on order_items for select
   using (exists (select 1 from orders o where o.id = order_items.order_id and o.user_id = auth.uid()));
 
 create policy "Public can submit items for a pending order request"
   on order_items for insert
-  with check (
-    exists (select 1 from orders o where o.id = order_items.order_id and o.status = 'pending_inquiry')
-  );
+  with check (is_order_pending_inquiry(order_items.order_id));
 
 create policy "Admins can manage order items"
   on order_items for all
@@ -527,3 +543,34 @@ alter table orders add column if not exists shipping_city text;
 alter table orders add column if not exists shipping_state text;
 alter table orders add column if not exists shipping_postal_code text;
 alter table orders add column if not exists order_notes text;
+
+-- =========================================================================
+-- MIGRATION — Fix order_items RLS (pending_inquiry check)
+--
+-- Bug: the order_items insert policy checked the parent order via a plain
+-- subquery ("exists (select 1 from orders o where ...)"), which runs under
+-- the CALLER's RLS on `orders` — and guests have no SELECT policy on
+-- `orders`. Result: the subquery always saw zero rows, so every guest
+-- order_items insert was silently rejected (42501), even for orders the
+-- same guest had just created. Orders were saved with no line items.
+-- Fix: a SECURITY DEFINER helper (same pattern as is_admin()) that checks
+-- the order's status while bypassing `orders`' RLS. Safe to run more than
+-- once.
+-- =========================================================================
+
+create or replace function is_order_pending_inquiry(target_order_id uuid)
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1 from orders where id = target_order_id and status = 'pending_inquiry'
+  );
+$$;
+
+drop policy if exists "Public can submit items for a pending order request" on order_items;
+create policy "Public can submit items for a pending order request"
+  on order_items for insert
+  with check (is_order_pending_inquiry(order_items.order_id));
