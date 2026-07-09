@@ -193,6 +193,30 @@ export interface Dictionary {
       empty: string;
       error: string;
     };
+    orders: {
+      heading: string;
+      lead: string;
+      loading: string;
+      empty: string;
+      error: string;
+      columns: {
+        createdAt: string;
+        customer: string;
+        email: string;
+        country: string;
+        region: string;
+        status: string;
+        subtotal: string;
+        items: string;
+      };
+      statusLabels: Record<"pending_inquiry" | "pending" | "paid" | "fulfilled" | "cancelled" | "refunded", string>;
+      viewDetails: string;
+      hideDetails: string;
+      itemsHeading: string;
+      itemsLoading: string;
+      itemsEmpty: string;
+      itemsError: string;
+    };
   };
   faqPage: {
     eyebrow: string;
@@ -255,8 +279,28 @@ export interface Dictionary {
     subtotalNote: string;
     checkoutNote: string;
     requestCheckout: string;
+    consultationFallback: string;
     close: string;
     open: string;
+    orderRequest: {
+      heading: string;
+      lead: string;
+      selectedObjectsHeading: string;
+      nameLabel: string;
+      emailLabel: string;
+      countryLabel: string;
+      regionLabel: string;
+      messageLabel: string;
+      submit: string;
+      submitting: string;
+      back: string;
+      retry: string;
+      successHeading: string;
+      successMessage: string;
+      errorMessage: string;
+      errorFallback: string;
+      continueLabel: string;
+    };
   };
   atelierPage: {
     eyebrow: string;

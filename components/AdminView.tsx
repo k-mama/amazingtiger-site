@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabaseClient";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import AdminConsultationList from "./AdminConsultationList";
+import AdminOrdersList from "./AdminOrdersList";
 import ProtectedStateCard from "./ProtectedStateCard";
 
 interface AdminViewProps {
@@ -91,6 +92,10 @@ export default function AdminView({ dict, navBase, locale }: AdminViewProps) {
 
       <div style={{ marginTop: "var(--space-4)" }}>
         <AdminConsultationList dict={dict.consultations} locale={locale} />
+      </div>
+
+      <div style={{ marginTop: "var(--space-4)" }}>
+        <AdminOrdersList dict={dict.orders} locale={locale} />
       </div>
 
       <p className="status-note" style={{ marginTop: "var(--space-4)" }}>{dict.note}</p>

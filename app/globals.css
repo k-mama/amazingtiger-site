@@ -1727,6 +1727,60 @@ button {
 }
 
 /* =========================================================================
+   Private order request — form embedded in the cart drawer
+   ========================================================================= */
+
+.order-request-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.order-request-form .form-field {
+  margin-bottom: var(--space-2);
+}
+
+.order-request-form .btn-link {
+  align-self: center;
+  margin-top: 0.2rem;
+}
+
+.order-request-form__summary {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--color-stone-line);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1rem;
+  margin-bottom: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.order-request-form__summary-heading {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.order-request-form__summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--color-ink);
+}
+
+.order-request-result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.order-request-result .btn-link {
+  align-self: center;
+}
+
+/* =========================================================================
    Product detail page
    ========================================================================= */
 
@@ -2017,6 +2071,74 @@ button {
   border-color: rgba(191, 230, 220, 0.9);
   background: rgba(191, 230, 220, 0.3);
   color: var(--color-ink-soft);
+}
+
+.status-pill--pending_inquiry {
+  border-color: rgba(179, 193, 244, 0.9);
+  background: rgba(179, 193, 244, 0.22);
+  color: var(--color-ink);
+}
+
+.status-pill--pending {
+  border-color: rgba(250, 200, 158, 0.9);
+  background: rgba(250, 200, 158, 0.22);
+  color: var(--color-ink);
+}
+
+.status-pill--paid {
+  border-color: rgba(179, 236, 194, 0.9);
+  background: rgba(179, 236, 194, 0.22);
+  color: var(--color-ink);
+}
+
+.status-pill--fulfilled {
+  border-color: rgba(163, 230, 218, 0.9);
+  background: rgba(163, 230, 218, 0.28);
+  color: var(--color-ink);
+}
+
+.status-pill--cancelled {
+  border-color: rgba(246, 184, 201, 0.9);
+  background: rgba(246, 184, 201, 0.22);
+  color: var(--color-ink);
+}
+
+.status-pill--refunded {
+  border-color: var(--color-stone-line);
+  background: rgba(220, 216, 210, 0.3);
+  color: var(--color-ink-soft);
+}
+
+.admin-order-items {
+  padding: var(--space-2) 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  white-space: normal;
+}
+
+.admin-order-items__heading {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.admin-order-items__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.admin-order-items__list li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: 0.85rem;
+  white-space: normal;
 }
 
 @media (max-width: 640px) {

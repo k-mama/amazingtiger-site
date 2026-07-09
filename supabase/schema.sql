@@ -330,17 +330,41 @@ create policy "Users can manage items in their own cart"
   with check (exists (select 1 from carts c where c.id = cart_items.cart_id and c.user_id = auth.uid()));
 
 -- =========================================================================
--- orders / order_items — created server-side (Cloudflare Pages Function
--- with the service role key) after checkout. Regular users may only read
--- their own orders; there is intentionally no client-side insert policy.
+-- orders / order_items
+--
+-- Two write paths share this table:
+--  1. Order Request V1 (current): a public visitor submits a private order
+--     request straight from the shop cart (no auth, no payment). The row
+--     lands with status = 'pending_inquiry'. product_slug /
+--     product_title_snapshot / unit_price_label snapshot the local
+--     lib/shop/products.ts catalogue at request time, since products are
+--     not migrated into the `products` table yet — product_id stays null
+--     for these rows until that migration happens.
+--  2. A future real checkout, created server-side (Cloudflare Pages
+--     Function with the service role key) once payment is implemented,
+--     which can populate product_id/variant_id against real `products` rows.
+--
+-- Regular users may only read their own orders (rows where user_id is set
+-- to their auth.uid()). Guest order requests (user_id null) are insert-only
+-- from the browser — nobody but an admin can read them back, so the
+-- browser never relies on Postgres RETURNING for the new row; the client
+-- generates the order id itself before inserting (see lib/shop/orders.ts).
 -- =========================================================================
 create table if not exists orders (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users (id) on delete set null,
-  status text not null default 'pending' check (status in ('pending', 'paid', 'fulfilled', 'cancelled', 'refunded')),
+  status text not null default 'pending' check (
+    status in ('pending_inquiry', 'pending', 'paid', 'fulfilled', 'cancelled', 'refunded')
+  ),
   total_cents integer not null default 0,
   currency text not null default 'USD',
   shipping_address jsonb,
+  customer_name text,
+  customer_email text,
+  locale text not null default 'en',
+  message text,
+  country text,
+  region text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -350,6 +374,10 @@ alter table orders enable row level security;
 create policy "Users can view their own orders"
   on orders for select
   using (auth.uid() = user_id);
+
+create policy "Public can submit private order requests"
+  on orders for insert
+  with check (status = 'pending_inquiry');
 
 create policy "Admins can manage orders"
   on orders for all
@@ -361,8 +389,11 @@ create table if not exists order_items (
   order_id uuid not null references orders (id) on delete cascade,
   product_id uuid references products (id),
   variant_id uuid references product_variants (id),
+  product_slug text,
+  product_title_snapshot text,
   quantity integer not null,
   unit_price_cents integer not null,
+  unit_price_label text,
   created_at timestamptz not null default now()
 );
 
@@ -371,6 +402,12 @@ alter table order_items enable row level security;
 create policy "Users can view items of their own orders"
   on order_items for select
   using (exists (select 1 from orders o where o.id = order_items.order_id and o.user_id = auth.uid()));
+
+create policy "Public can submit items for a pending order request"
+  on order_items for insert
+  with check (
+    exists (select 1 from orders o where o.id = order_items.order_id and o.status = 'pending_inquiry')
+  );
 
 create policy "Admins can manage order items"
   on order_items for all
@@ -401,3 +438,43 @@ alter default privileges in schema public grant usage, select on sequences to an
 --
 -- See README.md for the full walkthrough.
 -- =========================================================================
+
+-- =========================================================================
+-- MIGRATION — Order Request V1
+--
+-- Running this whole file again is safe on a brand new database (every
+-- statement above is create-if-not-exists), but it will NOT alter tables
+-- that already exist on a live project — `create table if not exists`
+-- is a no-op once `orders` / `order_items` already exist. If your Supabase
+-- project already ran this schema before this section was added, run the
+-- block below once in the SQL Editor to bring an existing `orders` /
+-- `order_items` up to date. Every statement here is idempotent — safe to
+-- run more than once.
+-- =========================================================================
+
+alter table orders drop constraint if exists orders_status_check;
+alter table orders add constraint orders_status_check
+  check (status in ('pending_inquiry', 'pending', 'paid', 'fulfilled', 'cancelled', 'refunded'));
+
+alter table orders add column if not exists customer_name text;
+alter table orders add column if not exists customer_email text;
+alter table orders add column if not exists locale text not null default 'en';
+alter table orders add column if not exists message text;
+alter table orders add column if not exists country text;
+alter table orders add column if not exists region text;
+
+alter table order_items add column if not exists product_slug text;
+alter table order_items add column if not exists product_title_snapshot text;
+alter table order_items add column if not exists unit_price_label text;
+
+drop policy if exists "Public can submit private order requests" on orders;
+create policy "Public can submit private order requests"
+  on orders for insert
+  with check (status = 'pending_inquiry');
+
+drop policy if exists "Public can submit items for a pending order request" on order_items;
+create policy "Public can submit items for a pending order request"
+  on order_items for insert
+  with check (
+    exists (select 1 from orders o where o.id = order_items.order_id and o.status = 'pending_inquiry')
+  );

@@ -41,7 +41,8 @@ app/
     shop/[slug]/page.tsx    Static product detail pages, generateStaticParams from lib/shop/products.ts
     atelier/page.tsx        Book Making Atelier — services, who it's for, inquiry CTA
 components/               Header, Footer, LanguageSwitcher, HomeContent, ProductCard, ProductDetail,
-                           ShopPreview, CartWidget, useCart, AtelierPreview, LoginForm, SignupForm,
+                           ShopPreview, CartWidget (cart + private order request form), useCart,
+                           AdminConsultationList, AdminOrdersList, AtelierPreview, LoginForm, SignupForm,
                            ConsultationForm, Reveal, LocaleHtmlLang
 lib/
   supabaseClient.ts        Browser-safe Supabase client (public keys only)
@@ -49,6 +50,7 @@ lib/
   shop/
     products.ts             Local product catalogue (EN/KO), prepared for later Supabase migration
     cart.ts                 Client-only private cart (localStorage: product slugs + quantities only)
+    orders.ts                submitOrderRequest() — inserts orders + order_items, see "Shop V1" below
   i18n/
     config.ts               Supported locales, default locale
     types.ts                 Dictionary shape (all translatable UI copy)
@@ -156,14 +158,28 @@ The first real admin feature, `components/AdminConsultationList.tsx`, reads `con
 
 ## Shop V1
 
-The shop is a **static luxury catalogue**, not a working store. No payment is active and no orders are stored anywhere.
+The shop is a **static luxury catalogue with a real private order request flow** — not a working store. No payment is active, no credit card data is ever collected, and nothing is ever marked as paid.
 
-- **Product data is local**, in `lib/shop/products.ts` — stable fields (`id`, `slug`, `category`, `priceLabel`, `availability`, `relatedProductIds`, visual tone/emblem) separate from per-locale copy (`translations.en` / `translations.ko`: title, subtitle, description, badge, details). This mirrors the `products` / `product_translations` split in `supabase/schema.sql` on purpose, so a later pass can swap this module for a Supabase read without reshaping the shop UI.
+- **Product data is local**, in `lib/shop/products.ts` — stable fields (`id`, `slug`, `category`, `priceLabel`, `availability`, `relatedProductIds`, visual tone/emblem) separate from per-locale copy (`translations.en` / `translations.ko`: title, subtitle, description, badge, details). This mirrors the `products` / `product_translations` split in `supabase/schema.sql` on purpose, so a later pass can swap this module for a Supabase read without reshaping the shop UI. Products are **not** migrated into the `products` table yet.
 - **Product detail pages** (`/en/shop/[slug]`, `/ko/shop/[slug]`) are fully static, generated at build time via `generateStaticParams` in `app/[locale]/shop/[slug]/page.tsx` — one page per product per locale.
-- **The cart (`components/CartWidget.tsx`, `components/useCart.ts`, `lib/shop/cart.ts`) is client-side only.** It stores nothing but `{ slug, quantity }` pairs in `localStorage` — no personal data, no pricing snapshot, no payment fields. It is a private selection tray, not an order.
-- **Availability drives the call to action**, not a single "Buy" button: `available` items go into the cart; `limited`, `coming_soon`, and `inquiry_only` items link to the consultation form instead (`/[locale]/consultation?type=shop_support&product=<slug>`), which preselects "Shop Support" and prefills the message with the item's title. This is intentional — private purchase interest becomes a personal inquiry, not a checkout, until real payment is built.
-- "Request private checkout" in the cart drawer links to the same consultation flow (without a specific product) — it does not submit an order.
-- Payment, real order saving, and moving product management into Supabase are all explicitly out of scope for this pass — see `functions/api/create-checkout.ts` (still a `not_implemented` skeleton) and the `orders` / `order_items` tables in `supabase/schema.sql` (schema exists, nothing writes to them yet).
+- **The cart (`components/CartWidget.tsx`, `components/useCart.ts`, `lib/shop/cart.ts`) is client-side only.** It stores nothing but `{ slug, quantity }` pairs in `localStorage` — no personal data, no pricing snapshot, no payment fields. It is a private selection tray, not an order — until the visitor submits the order request form below.
+- **Availability drives the call to action**, not a single "Buy" button: `available` items go into the cart; `limited`, `coming_soon`, and `inquiry_only` items link to the consultation form instead (`/[locale]/consultation?type=shop_support&product=<slug>`), which preselects "Shop Support" and prefills the message with the item's title.
+
+### Private order request (Order Request V1)
+
+From the cart drawer, "Request private checkout" opens a form (name, email, country, city/region, optional message) right inside the drawer — **"Ask through consultation instead"** stays as a secondary fallback link. Submitting it (`lib/shop/orders.ts`, `submitOrderRequest`):
+
+1. Generates the order id client-side (`crypto.randomUUID()`) and inserts one row into `orders` with `status: 'pending_inquiry'`, the customer's name/email/locale/country/region/message, and a computed subtotal (`total_cents`) — **never** payment details.
+2. Inserts one row per cart item into `order_items`, snapshotting `product_slug`, `product_title_snapshot`, `quantity`, and `unit_price_label` at request time (products aren't in Supabase yet, so `product_id` stays null on these rows).
+3. On success: clears the cart and shows a confirmation panel in the drawer (no redirect, no payment step). On failure: the cart is **not** cleared, a refined error message shows, with a fallback link to consultation.
+
+The client never reads an order back after inserting it (RLS grants public visitors insert-only access — see below), which is why the order id is generated up front instead of relying on Postgres `RETURNING`.
+
+**RLS model for `orders` / `order_items`:** public visitors can only *insert* a row with `status = 'pending_inquiry'` (order_items inserts are only allowed against an order that's still `pending_inquiry`); they cannot select, update, or delete any order. Signed-in users can read their own orders (`user_id = auth.uid()` — unused by the current guest flow, reserved for a future authenticated checkout). Admins can do everything, gated by the existing `is_admin()` helper. See the "Order Request V1" migration block at the bottom of `supabase/schema.sql` if your Supabase project already had the original schema applied — `create table if not exists` won't add the new columns/policies to an existing table, so that block must be run once, manually, in the SQL Editor.
+
+**Admin visibility:** `/[locale]/admin` now has a live Orders section (`components/AdminOrdersList.tsx`) below the consultations list — recent order requests with created date, customer, email, country, region, status, subtotal, and item count, with an expandable per-order items panel. Read-only for this pass: no status editing, no delete, no refund/shipping/inventory tooling.
+
+Payment, real checkout, marking anything as paid, and moving product management into Supabase are all explicitly out of scope for this pass — see `functions/api/create-checkout.ts` (still a `not_implemented` skeleton).
 
 ## Cloudflare Pages
 
@@ -176,7 +192,7 @@ Framework preset: **Next.js (Static HTML Export)** — build command `npx next b
 
 ## What's implemented vs. placeholder (first pass)
 
-- **Implemented:** full premium homepage (EN/KO) with Hero, Philosophy, Featured Works, Publishing House, Book Making Atelier preview, Shop preview, Founder, Studio Notes, Membership, and Consultation sections; the standalone Atelier page (which routes into the shared consultation form); FAQ page; consultation form wired directly to Supabase via `supabase-js` (with the updated inquiry-type list: Publish with Amazing Tiger, Build My Book with Amazing Tiger Atelier, Author Website Inquiry, Shop Support, Membership Support, Other), plus query-param prefill from the shop (`?type=shop_support&product=<slug>`); static DB schema with RLS; **signup, login, and the member dashboard are fully wired to Supabase Auth** — client-side validation, localized (EN/KO) errors, email confirmation flow, client-side auth guard on the dashboard (see "Auth flow" above), logout, and a header link that swaps between Login and Dashboard based on session state; **the admin dashboard now has a real role guard** (see "Admin guard" above) with a working first admin feature — a live, status-filterable consultations list with per-row status updates (new / in_progress / closed); **Shop V1** — a complete static luxury catalogue with product detail pages, availability-aware calls to action, and a client-only private cart (see "Shop V1" above).
-- **Placeholder (visually complete, not yet functional):** `functions/api/consultation.ts` and `functions/api/chat.ts` remain unused skeletons (the real consultation insert goes directly through `supabase-js` from `ConsultationForm.tsx`, not through this function); chatbot is not implemented; shop cart/checkout do not process anything yet (see `functions/api/create-checkout.ts`, intentionally left as a `not_implemented` skeleton — no real payment, no real orders); product data is still local to `lib/shop/products.ts`, not yet read from Supabase's `products` / `product_translations` tables; the remaining admin sections (Members, FAQ, Products, Orders, Translation Queue, AI Drafts, Chat Sessions) are still static cards with no data behind them yet.
+- **Implemented:** full premium homepage (EN/KO) with Hero, Philosophy, Featured Works, Publishing House, Book Making Atelier preview, Shop preview, Founder, Studio Notes, Membership, and Consultation sections; the standalone Atelier page (which routes into the shared consultation form); FAQ page; consultation form wired directly to Supabase via `supabase-js` (with the updated inquiry-type list: Publish with Amazing Tiger, Build My Book with Amazing Tiger Atelier, Author Website Inquiry, Shop Support, Membership Support, Other), plus query-param prefill from the shop (`?type=shop_support&product=<slug>`); static DB schema with RLS; **signup, login, and the member dashboard are fully wired to Supabase Auth** — client-side validation, localized (EN/KO) errors, email confirmation flow, client-side auth guard on the dashboard (see "Auth flow" above), logout, and a header link that swaps between Login and Dashboard based on session state; **the admin dashboard now has a real role guard** (see "Admin guard" above) with a live, status-filterable consultations list with per-row status updates (new / in_progress / closed), and a live Orders list with an expandable items panel; **Shop V1** — a complete static luxury catalogue with product detail pages, availability-aware calls to action, and a client-only private cart (see "Shop V1" above); **Order Request V1** — the cart can submit a real private order request straight to Supabase (`orders` + `order_items`, `status: 'pending_inquiry'`), with success/error states and cart-clearing on success (see "Private order request" above) — this is a request for a human to follow up, not a payment.
+- **Placeholder (visually complete, not yet functional):** `functions/api/consultation.ts` and `functions/api/chat.ts` remain unused skeletons (the real consultation insert goes directly through `supabase-js` from `ConsultationForm.tsx`, not through this function); chatbot is not implemented; real checkout/payment does not exist yet (see `functions/api/create-checkout.ts`, intentionally left as a `not_implemented` skeleton — no credit card data, nothing is ever marked `paid`); product data is still local to `lib/shop/products.ts`, not yet read from Supabase's `products` / `product_translations` tables (so `order_items.product_id` stays null on every row); the remaining admin sections (Members, FAQ, Products, Translation Queue, AI Drafts, Chat Sessions) are still static cards with no data behind them yet; order status management (beyond viewing) is deferred — admins can view orders but not yet change their status from the UI.
 
 These are the natural next steps once real Supabase keys are supplied.
