@@ -26,7 +26,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, locale, navBase, dict }: ProductCardProps) {
-  const { addToCart } = useCart();
+  const { addToCart, openCart } = useCart();
   const [added, setAdded] = useState(false);
   const copy = getProductCopy(product, locale);
   const detailHref = `${navBase}/shop/${product.slug}`;
@@ -36,6 +36,7 @@ export default function ProductCard({ product, locale, navBase, dict }: ProductC
   function handleAddToCart() {
     addToCart(product.slug);
     setAdded(true);
+    openCart();
     window.setTimeout(() => setAdded(false), 1800);
   }
 

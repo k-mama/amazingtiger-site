@@ -11,13 +11,14 @@ interface AdminOrdersListProps {
 }
 
 type LoadState = "loading" | "ready" | "error";
-type ItemsState = "loading" | "ready" | "error";
+type DetailState = "loading" | "ready" | "error";
 
 interface OrderRow {
   id: string;
   created_at: string;
   customer_name: string | null;
   customer_email: string | null;
+  phone: string | null;
   country: string | null;
   region: string | null;
   status: string;
@@ -32,13 +33,34 @@ interface OrderItemRow {
   unit_price_label: string | null;
 }
 
+interface OrderAddressDetail {
+  billing_first_name: string | null;
+  billing_last_name: string | null;
+  billing_address_line1: string | null;
+  billing_address_line2: string | null;
+  billing_city: string | null;
+  billing_state: string | null;
+  billing_postal_code: string | null;
+  shipping_same_as_billing: boolean;
+  shipping_first_name: string | null;
+  shipping_last_name: string | null;
+  shipping_country: string | null;
+  shipping_address_line1: string | null;
+  shipping_address_line2: string | null;
+  shipping_city: string | null;
+  shipping_state: string | null;
+  shipping_postal_code: string | null;
+  order_notes: string | null;
+}
+
 export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) {
   const [rows, setRows] = useState<OrderRow[]>([]);
   const [itemCounts, setItemCounts] = useState<Record<string, number>>({});
   const [loadState, setLoadState] = useState<LoadState>("loading");
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [itemsById, setItemsById] = useState<Record<string, OrderItemRow[]>>({});
-  const [itemsState, setItemsState] = useState<Record<string, ItemsState>>({});
+  const [addressById, setAddressById] = useState<Record<string, OrderAddressDetail>>({});
+  const [detailState, setDetailState] = useState<Record<string, DetailState>>({});
 
   useEffect(() => {
     let active = true;
@@ -48,7 +70,7 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
       const [ordersResult, itemsResult] = await Promise.all([
         supabase
           .from("orders")
-          .select("id, created_at, customer_name, customer_email, country, region, status, total_cents, currency")
+          .select("id, created_at, customer_name, customer_email, phone, country, region, status, total_cents, currency")
           .order("created_at", { ascending: false })
           .limit(100),
         supabase.from("order_items").select("order_id"),
@@ -85,22 +107,34 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
 
     setExpandedId(orderId);
 
-    if (itemsById[orderId]) return;
+    if (itemsById[orderId] && addressById[orderId]) return;
 
-    setItemsState((prev) => ({ ...prev, [orderId]: "loading" }));
+    setDetailState((prev) => ({ ...prev, [orderId]: "loading" }));
 
-    const { data, error } = await supabase
-      .from("order_items")
-      .select("id, product_title_snapshot, quantity, unit_price_label")
-      .eq("order_id", orderId);
+    const [itemsResult, addressResult] = await Promise.all([
+      supabase
+        .from("order_items")
+        .select("id, product_title_snapshot, quantity, unit_price_label")
+        .eq("order_id", orderId),
+      supabase
+        .from("orders")
+        .select(
+          "billing_first_name, billing_last_name, billing_address_line1, billing_address_line2, billing_city, billing_state, billing_postal_code, shipping_same_as_billing, shipping_first_name, shipping_last_name, shipping_country, shipping_address_line1, shipping_address_line2, shipping_city, shipping_state, shipping_postal_code, order_notes"
+        )
+        .eq("id", orderId)
+        .single(),
+    ]);
 
-    if (error) {
-      setItemsState((prev) => ({ ...prev, [orderId]: "error" }));
+    if (itemsResult.error || addressResult.error) {
+      setDetailState((prev) => ({ ...prev, [orderId]: "error" }));
       return;
     }
 
-    setItemsById((prev) => ({ ...prev, [orderId]: data ?? [] }));
-    setItemsState((prev) => ({ ...prev, [orderId]: "ready" }));
+    setItemsById((prev) => ({ ...prev, [orderId]: itemsResult.data ?? [] }));
+    if (addressResult.data) {
+      setAddressById((prev) => ({ ...prev, [orderId]: addressResult.data as OrderAddressDetail }));
+    }
+    setDetailState((prev) => ({ ...prev, [orderId]: "ready" }));
   }
 
   function formatSubtotal(cents: number, currency: string) {
@@ -131,6 +165,7 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
                 <th>{dict.columns.createdAt}</th>
                 <th>{dict.columns.customer}</th>
                 <th>{dict.columns.email}</th>
+                <th>{dict.columns.phone}</th>
                 <th>{dict.columns.country}</th>
                 <th>{dict.columns.region}</th>
                 <th>{dict.columns.status}</th>
@@ -142,8 +177,9 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
             <tbody>
               {rows.map((row) => {
                 const expanded = expandedId === row.id;
-                const rowItemsState = itemsState[row.id];
+                const rowDetailState = detailState[row.id];
                 const rowItems = itemsById[row.id];
+                const address = addressById[row.id];
                 return (
                   <Fragment key={row.id}>
                     <tr>
@@ -156,6 +192,7 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
                       </td>
                       <td>{row.customer_name ?? "—"}</td>
                       <td>{row.customer_email ?? "—"}</td>
+                      <td>{row.phone ?? "—"}</td>
                       <td>{row.country ?? "—"}</td>
                       <td>{row.region ?? "—"}</td>
                       <td>
@@ -173,17 +210,17 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
                     </tr>
                     {expanded && (
                       <tr>
-                        <td colSpan={9}>
+                        <td colSpan={10}>
                           <div className="admin-order-items">
                             <span className="admin-order-items__heading">{dict.itemsHeading}</span>
-                            {rowItemsState === "loading" && <p className="status-note">{dict.itemsLoading}</p>}
-                            {rowItemsState === "error" && (
+                            {rowDetailState === "loading" && <p className="status-note">{dict.itemsLoading}</p>}
+                            {rowDetailState === "error" && (
                               <p className="status-note status-note--error">{dict.itemsError}</p>
                             )}
-                            {rowItemsState === "ready" && rowItems && rowItems.length === 0 && (
+                            {rowDetailState === "ready" && rowItems && rowItems.length === 0 && (
                               <p className="status-note">{dict.itemsEmpty}</p>
                             )}
-                            {rowItemsState === "ready" && rowItems && rowItems.length > 0 && (
+                            {rowDetailState === "ready" && rowItems && rowItems.length > 0 && (
                               <ul className="admin-order-items__list">
                                 {rowItems.map((item) => (
                                   <li key={item.id}>
@@ -194,6 +231,44 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
                                   </li>
                                 ))}
                               </ul>
+                            )}
+
+                            {rowDetailState === "ready" && address && (
+                              <div className="admin-order-address">
+                                <div>
+                                  <span className="admin-order-items__heading">{dict.billingHeading}</span>
+                                  <p>
+                                    {address.billing_first_name} {address.billing_last_name}
+                                    <br />
+                                    {address.billing_address_line1}
+                                    {address.billing_address_line2 ? `, ${address.billing_address_line2}` : ""}
+                                    <br />
+                                    {address.billing_city}, {address.billing_state} {address.billing_postal_code}
+                                  </p>
+                                </div>
+                                <div>
+                                  <span className="admin-order-items__heading">{dict.shippingHeading}</span>
+                                  {address.shipping_same_as_billing ? (
+                                    <p>{dict.shippingSameAsBilling}</p>
+                                  ) : (
+                                    <p>
+                                      {address.shipping_first_name} {address.shipping_last_name}
+                                      <br />
+                                      {address.shipping_address_line1}
+                                      {address.shipping_address_line2 ? `, ${address.shipping_address_line2}` : ""}
+                                      <br />
+                                      {address.shipping_city}, {address.shipping_state} {address.shipping_postal_code}
+                                      {address.shipping_country ? `, ${address.shipping_country}` : ""}
+                                    </p>
+                                  )}
+                                </div>
+                                {address.order_notes && (
+                                  <div>
+                                    <span className="admin-order-items__heading">{dict.notesHeading}</span>
+                                    <p>{address.order_notes}</p>
+                                  </div>
+                                )}
+                              </div>
                             )}
                           </div>
                         </td>

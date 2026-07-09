@@ -130,10 +130,28 @@ export interface Order {
   shipping_address: Record<string, unknown> | null;
   customer_name: string | null;
   customer_email: string | null;
+  phone: string | null;
   locale: string;
   message: string | null;
   country: string | null;
   region: string | null;
+  billing_first_name: string | null;
+  billing_last_name: string | null;
+  billing_address_line1: string | null;
+  billing_address_line2: string | null;
+  billing_city: string | null;
+  billing_state: string | null;
+  billing_postal_code: string | null;
+  shipping_same_as_billing: boolean;
+  shipping_first_name: string | null;
+  shipping_last_name: string | null;
+  shipping_country: string | null;
+  shipping_address_line1: string | null;
+  shipping_address_line2: string | null;
+  shipping_city: string | null;
+  shipping_state: string | null;
+  shipping_postal_code: string | null;
+  order_notes: string | null;
   created_at: string;
   updated_at: string;
 }

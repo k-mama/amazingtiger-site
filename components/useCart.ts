@@ -7,6 +7,7 @@ import {
   clearCart as clearCartStorage,
   getCart,
   removeFromCart as removeFromCartStorage,
+  requestCartOpen,
   setQuantity as setQuantityStorage,
   type CartItem,
 } from "@/lib/shop/cart";
@@ -45,7 +46,11 @@ export function useCart() {
     clearCartStorage();
   }, []);
 
+  const openCart = useCallback(() => {
+    requestCartOpen();
+  }, []);
+
   const count = items.reduce((sum, item) => sum + item.quantity, 0);
 
-  return { items, count, addToCart, setQuantity, removeFromCart, clearCart };
+  return { items, count, addToCart, setQuantity, removeFromCart, clearCart, openCart };
 }

@@ -34,6 +34,8 @@ export default function ProductDetailPage({ params }: { params: { locale: string
       shopDict={dict.shopPage}
       detailDict={dict.shopDetail}
       categoryLabel={categoryLabel}
+      homeLabel={dict.nav.home}
+      shopLabel={dict.nav.shop}
     />
   );
 }

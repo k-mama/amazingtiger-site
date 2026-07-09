@@ -5,6 +5,7 @@
 
 const CART_STORAGE_KEY = "at_private_cart_v1";
 export const CART_EVENT = "at-cart-updated";
+export const CART_OPEN_EVENT = "at-cart-open-request";
 
 export interface CartItem {
   slug: string;
@@ -75,4 +76,10 @@ export function removeFromCart(slug: string): void {
 
 export function clearCart(): void {
   writeCart([]);
+}
+
+/** Asks the header's cart drawer to open — dispatched after "Add to private cart" from any page. */
+export function requestCartOpen(): void {
+  if (!isBrowser()) return;
+  window.dispatchEvent(new Event(CART_OPEN_EVENT));
 }

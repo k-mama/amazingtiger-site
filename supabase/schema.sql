@@ -361,10 +361,28 @@ create table if not exists orders (
   shipping_address jsonb,
   customer_name text,
   customer_email text,
+  phone text,
   locale text not null default 'en',
   message text,
   country text,
   region text,
+  billing_first_name text,
+  billing_last_name text,
+  billing_address_line1 text,
+  billing_address_line2 text,
+  billing_city text,
+  billing_state text,
+  billing_postal_code text,
+  shipping_same_as_billing boolean not null default true,
+  shipping_first_name text,
+  shipping_last_name text,
+  shipping_country text,
+  shipping_address_line1 text,
+  shipping_address_line2 text,
+  shipping_city text,
+  shipping_state text,
+  shipping_postal_code text,
+  order_notes text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -478,3 +496,34 @@ create policy "Public can submit items for a pending order request"
   with check (
     exists (select 1 from orders o where o.id = order_items.order_id and o.status = 'pending_inquiry')
   );
+
+-- =========================================================================
+-- MIGRATION — Checkout V1 (billing / shipping / order notes)
+--
+-- Adds full checkout-page fields to `orders`. No RLS changes are needed
+-- here: the existing "Public can submit private order requests" INSERT
+-- policy (status = 'pending_inquiry') already covers whatever columns are
+-- in the payload, and there is still no public SELECT policy on `orders`
+-- or `order_items` — visitors can create a request but never read any
+-- order back, which matters now that checkout collects address and phone.
+-- Safe to run once, or more than once — every statement is idempotent.
+-- =========================================================================
+
+alter table orders add column if not exists phone text;
+alter table orders add column if not exists billing_first_name text;
+alter table orders add column if not exists billing_last_name text;
+alter table orders add column if not exists billing_address_line1 text;
+alter table orders add column if not exists billing_address_line2 text;
+alter table orders add column if not exists billing_city text;
+alter table orders add column if not exists billing_state text;
+alter table orders add column if not exists billing_postal_code text;
+alter table orders add column if not exists shipping_same_as_billing boolean not null default true;
+alter table orders add column if not exists shipping_first_name text;
+alter table orders add column if not exists shipping_last_name text;
+alter table orders add column if not exists shipping_country text;
+alter table orders add column if not exists shipping_address_line1 text;
+alter table orders add column if not exists shipping_address_line2 text;
+alter table orders add column if not exists shipping_city text;
+alter table orders add column if not exists shipping_state text;
+alter table orders add column if not exists shipping_postal_code text;
+alter table orders add column if not exists order_notes text;

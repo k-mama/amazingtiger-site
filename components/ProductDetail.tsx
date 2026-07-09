@@ -8,6 +8,7 @@ import { getProductCopy, getRelatedProducts, type Product } from "@/lib/shop/pro
 import { useCart } from "./useCart";
 import EditorialObject from "./EditorialObject";
 import ProductCard from "./ProductCard";
+import QuantityStepper from "./QuantityStepper";
 import Reveal from "./Reveal";
 
 interface ProductDetailProps {
@@ -17,27 +18,44 @@ interface ProductDetailProps {
   shopDict: Dictionary["shopPage"];
   detailDict: Dictionary["shopDetail"];
   categoryLabel: string;
+  homeLabel: string;
+  shopLabel: string;
 }
 
-export default function ProductDetail({ product, locale, navBase, shopDict, detailDict, categoryLabel }: ProductDetailProps) {
-  const { addToCart } = useCart();
+export default function ProductDetail({
+  product,
+  locale,
+  navBase,
+  shopDict,
+  detailDict,
+  categoryLabel,
+  homeLabel,
+  shopLabel,
+}: ProductDetailProps) {
+  const { addToCart, openCart } = useCart();
   const [added, setAdded] = useState(false);
+  const [quantity, setQuantity] = useState(1);
   const copy = getProductCopy(product, locale);
   const related = getRelatedProducts(product);
   const inquiryHref = `${navBase}/consultation?type=shop_support&product=${product.slug}`;
 
   function handleAddToCart() {
-    addToCart(product.slug);
+    addToCart(product.slug, quantity);
     setAdded(true);
+    openCart();
     window.setTimeout(() => setAdded(false), 1800);
   }
 
   return (
     <div className="section">
       <div className="container">
-        <Link href={`${navBase}/shop`} className="btn-link">
-          {detailDict.backToCatalogue}
-        </Link>
+        <nav className="breadcrumb" aria-label="Breadcrumb">
+          <Link href={navBase}>{homeLabel}</Link>
+          <span className="breadcrumb__sep">/</span>
+          <Link href={`${navBase}/shop`}>{shopLabel}</Link>
+          <span className="breadcrumb__sep">/</span>
+          <span className="breadcrumb__current">{copy.title}</span>
+        </nav>
 
         <div className="product-detail">
           <div className="product-detail__media">
@@ -63,9 +81,12 @@ export default function ProductDetail({ product, locale, navBase, shopDict, deta
             </div>
 
             {product.availability === "available" ? (
-              <button type="button" className="btn btn-primary" onClick={handleAddToCart}>
-                {added ? "✓" : shopDict.addToPrivateCart}
-              </button>
+              <div className="product-detail__purchase">
+                <QuantityStepper label={detailDict.quantityLabel} value={quantity} onChange={setQuantity} />
+                <button type="button" className="btn btn-primary" onClick={handleAddToCart}>
+                  {added ? "✓" : shopDict.addToPrivateCart}
+                </button>
+              </div>
             ) : (
               <Link href={inquiryHref} className="btn btn-primary">
                 {product.availability === "limited" && shopDict.requestAvailability}
