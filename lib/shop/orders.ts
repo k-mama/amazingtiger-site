@@ -1,7 +1,7 @@
 import type { Locale } from "@/lib/i18n/config";
 import { supabase } from "@/lib/supabaseClient";
 import type { CartItem } from "./cart";
-import { getProductBySlug, getProductCopy, parsePriceLabel } from "./products";
+import { getProductBySlug, getProductCopy } from "./products";
 
 export interface OrderRequestInput {
   locale: Locale;
@@ -23,7 +23,7 @@ export async function submitOrderRequest(input: OrderRequestInput): Promise<{ er
       const product = getProductBySlug(item.slug);
       if (!product) return null;
       const copy = getProductCopy(product, input.locale);
-      const unitPrice = parsePriceLabel(product.priceLabel);
+      const unitPrice = product.priceAmount;
       return { item, product, copy, unitPrice };
     })
     .filter((row): row is NonNullable<typeof row> => Boolean(row));
@@ -36,6 +36,7 @@ export async function submitOrderRequest(input: OrderRequestInput): Promise<{ er
   const totalCents = hasNumericSubtotal
     ? Math.round(rows.reduce((sum, row) => sum + (row.unitPrice as number) * row.item.quantity, 0) * 100)
     : 0;
+  const currency = rows[0]?.product.currency ?? "USD";
 
   // Generated client-side so order_items can reference it immediately —
   // RLS intentionally grants guests no SELECT on `orders`, so we never
@@ -46,7 +47,7 @@ export async function submitOrderRequest(input: OrderRequestInput): Promise<{ er
     id: orderId,
     status: "pending_inquiry",
     total_cents: totalCents,
-    currency: "USD",
+    currency,
     customer_name: input.name,
     customer_email: input.email,
     locale: input.locale,

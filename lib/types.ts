@@ -57,7 +57,7 @@ export interface AdminNote {
   created_at: string;
 }
 
-export type ProductCategoryDb = "books" | "limited" | "objects" | "gifts";
+export type ProductCategoryDb = "stationery" | "objects" | "prints" | "small_goods";
 export type ProductStatus = "draft" | "active" | "archived";
 
 export interface ProductRow {

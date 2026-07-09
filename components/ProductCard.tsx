@@ -15,7 +15,13 @@ interface ProductCardProps {
   navBase: string;
   dict: Pick<
     Dictionary["shopPage"],
-    "addToPrivateCart" | "requestAvailability" | "joinReleaseList" | "privateInquiryCta" | "viewDetail" | "availabilityLabels"
+    | "addToPrivateCart"
+    | "requestAvailability"
+    | "joinReleaseList"
+    | "privateInquiryCta"
+    | "viewDetail"
+    | "availabilityLabels"
+    | "categories"
   >;
 }
 
@@ -25,6 +31,7 @@ export default function ProductCard({ product, locale, navBase, dict }: ProductC
   const copy = getProductCopy(product, locale);
   const detailHref = `${navBase}/shop/${product.slug}`;
   const inquiryHref = `${navBase}/consultation?type=shop_support&product=${product.slug}`;
+  const categoryLabel = dict.categories.find((c) => c.id === product.category)?.label ?? product.category;
 
   function handleAddToCart() {
     addToCart(product.slug);
@@ -39,6 +46,9 @@ export default function ProductCard({ product, locale, navBase, dict }: ProductC
         <EditorialObject toneA={product.visualToneA} toneB={product.visualToneB} emblem={product.emblem} />
       </Link>
       <div className="product-card__body">
+        <span className="product-card__category">
+          {categoryLabel} · {copy.type}
+        </span>
         <h3 className="product-card__title">
           <Link href={detailHref}>{copy.title}</Link>
         </h3>

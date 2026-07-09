@@ -46,7 +46,9 @@ export default function ProductDetail({ product, locale, navBase, shopDict, deta
           </div>
 
           <div className="product-detail__body">
-            <span className="eyebrow">{categoryLabel}</span>
+            <span className="eyebrow">
+              {categoryLabel} · {copy.type}
+            </span>
             <h1 className="section-heading">{copy.title}</h1>
             <p className="product-detail__subtitle">{copy.subtitle}</p>
             <p className="section-lead">{copy.description}</p>

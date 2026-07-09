@@ -5,7 +5,7 @@ import Link from "next/link";
 import { createPortal } from "react-dom";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
-import { getProductBySlug, getProductCopy, parsePriceLabel } from "@/lib/shop/products";
+import { getProductBySlug, getProductCopy } from "@/lib/shop/products";
 import { submitOrderRequest } from "@/lib/shop/orders";
 import { useCart } from "./useCart";
 import EditorialObject from "./EditorialObject";
@@ -58,7 +58,7 @@ export default function CartWidget({ locale, dict, navBase, variant = "header" }
       const product = getProductBySlug(item.slug);
       if (!product) return null;
       const copy = getProductCopy(product, locale);
-      const unitPrice = parsePriceLabel(product.priceLabel);
+      const unitPrice = product.priceAmount;
       return { item, product, copy, unitPrice };
     })
     .filter((row): row is NonNullable<typeof row> => Boolean(row));

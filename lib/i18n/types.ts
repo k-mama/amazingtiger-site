@@ -246,10 +246,8 @@ export interface Dictionary {
     lead: string;
     categories: { id: "all" | ProductCategory; label: string }[];
     sections: {
-      featuredBooks: { heading: string; lead: string };
-      limitedEditions: { heading: string; lead: string };
-      objects: { heading: string; lead: string };
-      giftSets: { heading: string; lead: string };
+      featured: { heading: string; lead: string };
+      collection: { heading: string; lead: string };
       comingSoon: { heading: string; lead: string; future: string[] };
       privateInquiry: { heading: string; lead: string; cta: string };
     };

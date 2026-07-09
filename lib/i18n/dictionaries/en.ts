@@ -118,7 +118,7 @@ const en: Dictionary = {
   shopPreview: {
     eyebrow: "The Shop",
     heading: "A private catalogue.",
-    lead: "Books, limited editions, and quiet artifacts from the Amazing Tiger universe — not merchandise, but objects with memory and voice.",
+    lead: "Journals, objects, prints, and studio goods from the Amazing Tiger universe — not merchandise, but objects with memory and voice.",
     cta: "Enter the Catalogue",
   },
   atelierPreview: {
@@ -360,30 +360,22 @@ const en: Dictionary = {
   shopPage: {
     eyebrow: "The Shop",
     heading: "A private catalogue.",
-    lead: "Not merchandise. Not souvenirs. A small collection of books, objects, and quiet artifacts carrying the memory and voice of the Amazing Tiger universe.",
+    lead: "Not merchandise. Not souvenirs. A small, considered collection of journals, objects, prints, and studio goods carrying the memory and voice of the Amazing Tiger universe.",
     categories: [
       { id: "all", label: "All" },
-      { id: "books", label: "Books" },
-      { id: "limited", label: "Limited Editions" },
-      { id: "objects", label: "Objects & Goods" },
-      { id: "gifts", label: "Gift Sets" },
+      { id: "stationery", label: "Stationery" },
+      { id: "objects", label: "Objects" },
+      { id: "prints", label: "Prints" },
+      { id: "small_goods", label: "Small Goods" },
     ],
     sections: {
-      featuredBooks: {
-        heading: "Featured Books",
-        lead: "Hardcover and paperback editions from the current list.",
+      featured: {
+        heading: "Featured",
+        lead: "Three pieces that open the Amazing Tiger goods collection.",
       },
-      limitedEditions: {
-        heading: "Limited Editions",
-        lead: "Numbered, hand-finished, and produced in small runs.",
-      },
-      objects: {
-        heading: "Objects & Goods",
-        lead: "Writing objects, stationery, and music-related pieces from the studio.",
-      },
-      giftSets: {
-        heading: "Gift Sets",
-        lead: "Considered pairings, wrapped for giving.",
+      collection: {
+        heading: "The Full Collection",
+        lead: "All six flagship objects from Emma's creative universe.",
       },
       comingSoon: {
         heading: "Coming Soon",

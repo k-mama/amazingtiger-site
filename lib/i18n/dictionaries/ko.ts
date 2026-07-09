@@ -118,7 +118,7 @@ const ko: Dictionary = {
   shopPreview: {
     eyebrow: "숍",
     heading: "비공개 카탈로그.",
-    lead: "어메이징 타이거 세계의 책과 한정판, 그리고 조용한 오브제들 — 굿즈가 아니라, 기억과 목소리를 지닌 물건들입니다.",
+    lead: "어메이징 타이거 세계의 저널과 오브제, 프린트, 스튜디오 굿즈 — 그저 굿즈가 아니라, 기억과 목소리를 지닌 물건들입니다.",
     cta: "카탈로그 둘러보기",
   },
   atelierPreview: {
@@ -360,30 +360,22 @@ const ko: Dictionary = {
   shopPage: {
     eyebrow: "숍",
     heading: "비공개 카탈로그.",
-    lead: "굿즈도, 기념품도 아닙니다. 어메이징 타이거 세계의 기억과 목소리를 담은, 작은 책과 오브제, 그리고 조용한 유물들의 모음입니다.",
+    lead: "굿즈도, 기념품도 아닙니다. 어메이징 타이거 세계의 기억과 목소리를 담은, 저널과 오브제, 프린트, 스튜디오 굿즈로 이루어진 작고 정성스러운 컬렉션입니다.",
     categories: [
       { id: "all", label: "전체" },
-      { id: "books", label: "도서" },
-      { id: "limited", label: "한정판" },
-      { id: "objects", label: "오브제 & 굿즈" },
-      { id: "gifts", label: "선물 세트" },
+      { id: "stationery", label: "문구" },
+      { id: "objects", label: "오브제" },
+      { id: "prints", label: "프린트" },
+      { id: "small_goods", label: "스몰 굿즈" },
     ],
     sections: {
-      featuredBooks: {
-        heading: "주요 도서",
-        lead: "현재 목록의 양장본과 페이퍼백 에디션입니다.",
+      featured: {
+        heading: "대표 컬렉션",
+        lead: "어메이징 타이거 굿즈 컬렉션을 여는 세 가지 오브제입니다.",
       },
-      limitedEditions: {
-        heading: "한정판",
-        lead: "번호가 매겨지고, 소량으로 제작되어 손으로 마무리한 에디션입니다.",
-      },
-      objects: {
-        heading: "오브제 & 굿즈",
-        lead: "스튜디오에서 만든 필기구와 문구, 음악과 맞닿은 물건들입니다.",
-      },
-      giftSets: {
-        heading: "선물 세트",
-        lead: "정성껏 짝지어, 선물하기 좋게 포장했습니다.",
+      collection: {
+        heading: "전체 컬렉션",
+        lead: "Emma의 창작 세계에서 탄생한 여섯 가지 대표 오브제입니다.",
       },
       comingSoon: {
         heading: "곧 공개됩니다",
