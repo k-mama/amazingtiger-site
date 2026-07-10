@@ -109,6 +109,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
               key={l}
               href={hrefFor(l)}
               role="menuitem"
+              lang={l}
               className={`lang-switch__option ${l === locale ? "is-active" : ""}`}
               aria-current={l === locale ? "true" : undefined}
               onClick={() => setOpen(false)}
