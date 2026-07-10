@@ -136,7 +136,7 @@ const ko: Dictionary = {
   footer: {
     rights: "Amazing Tiger Publishing. All rights reserved.",
     links: [
-      { label: "자주 묻는 질문", href: "/faq" },
+      { label: "자주 묻는 질문", href: "/consultation#faq" },
       { label: "상담", href: "/consultation" },
       { label: "로그인", href: "/login" },
     ],
@@ -361,6 +361,7 @@ const ko: Dictionary = {
     note: "감사합니다. 문의가 접수되었습니다 — 모든 메시지를 직접 읽고 곧 연락드리겠습니다.",
     errorNote: "문의를 보내는 중 문제가 발생했습니다. 잠시 후 다시 시도해 주시거나, 직접 연락해 주세요.",
     shopInquiryPrefix: "관심 있는 상품: ",
+    faqHeading: "상담 전에 많이 묻는 질문",
   },
   shopPage: {
     eyebrow: "숍",

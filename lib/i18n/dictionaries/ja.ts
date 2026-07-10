@@ -136,7 +136,7 @@ const ja: Dictionary = {
   footer: {
     rights: "Amazing Tiger Publishing. All rights reserved.",
     links: [
-      { label: "よくある質問", href: "/faq" },
+      { label: "よくある質問", href: "/consultation#faq" },
       { label: "ご相談", href: "/consultation" },
       { label: "ログイン", href: "/login" },
     ],
@@ -361,6 +361,7 @@ const ja: Dictionary = {
     note: "ありがとうございます。お問い合わせを受け付けました——すべてのメッセージを個人的に読み、まもなくご連絡いたします。",
     errorNote: "お問い合わせの送信中に問題が発生しました。しばらくしてからもう一度お試しいただくか、直接ご連絡ください。",
     shopInquiryPrefix: "こちらの商品に関心があります: ",
+    faqHeading: "よくある質問。",
   },
   shopPage: {
     eyebrow: "ショップ",

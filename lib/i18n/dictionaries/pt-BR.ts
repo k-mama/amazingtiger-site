@@ -136,7 +136,7 @@ const ptBR: Dictionary = {
   footer: {
     rights: "Amazing Tiger Publishing. Todos os direitos reservados.",
     links: [
-      { label: "Perguntas Frequentes", href: "/faq" },
+      { label: "Perguntas Frequentes", href: "/consultation#faq" },
       { label: "Consultoria", href: "/consultation" },
       { label: "Entrar", href: "/login" },
     ],
@@ -361,6 +361,7 @@ const ptBR: Dictionary = {
     note: "Obrigado. Sua consulta foi recebida — lemos cada mensagem pessoalmente e entraremos em contato em breve.",
     errorNote: "Algo deu errado ao enviar sua consulta. Por favor, tente novamente em instantes, ou escreva diretamente para nós.",
     shopInquiryPrefix: "Tenho interesse neste item: ",
+    faqHeading: "Perguntas frequentes.",
   },
   shopPage: {
     eyebrow: "A Loja",

@@ -244,6 +244,7 @@ export interface Dictionary {
     note: string;
     errorNote: string;
     shopInquiryPrefix: string;
+    faqHeading: string;
   };
   shopPage: {
     eyebrow: string;

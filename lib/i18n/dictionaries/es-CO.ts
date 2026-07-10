@@ -136,7 +136,7 @@ const esCO: Dictionary = {
   footer: {
     rights: "Amazing Tiger Publishing. Todos los derechos reservados.",
     links: [
-      { label: "Preguntas Frecuentes", href: "/faq" },
+      { label: "Preguntas Frecuentes", href: "/consultation#faq" },
       { label: "Consulta", href: "/consultation" },
       { label: "Iniciar Sesión", href: "/login" },
     ],
@@ -361,6 +361,7 @@ const esCO: Dictionary = {
     note: "Gracias. Su consulta ya fue recibida — leemos cada mensaje personalmente y nos vamos a poner en contacto pronto.",
     errorNote: "Algo salió mal al enviar su consulta. Por favor intente de nuevo en un momento, o escríbanos directamente.",
     shopInquiryPrefix: "Estoy interesado/a en este artículo: ",
+    faqHeading: "Preguntas frecuentes.",
   },
   shopPage: {
     eyebrow: "La Tienda",

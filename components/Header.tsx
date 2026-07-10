@@ -31,7 +31,6 @@ export default function Header({ locale, dict, basePath }: HeaderProps) {
             <li><Link href={`${navBase}/atelier`}>{dict.nav.atelier}</Link></li>
             <li><Link href={`${navBase}/shop`}>{dict.nav.shop}</Link></li>
             <li><Link href={anchor("membership")}>{dict.nav.membership}</Link></li>
-            <li><Link href={`${navBase}/faq`}>{dict.nav.faq}</Link></li>
             <li><Link href={`${navBase}/consultation`}>{dict.nav.consultation}</Link></li>
           </ul>
           <AuthNavLink

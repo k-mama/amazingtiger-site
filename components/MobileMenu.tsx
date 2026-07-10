@@ -42,7 +42,6 @@ export default function MobileMenu({ locale, dict, basePath }: MobileMenuProps) 
     { label: dict.nav.atelier, href: `${navBase}/atelier` },
     { label: dict.nav.shop, href: `${navBase}/shop` },
     { label: dict.nav.membership, href: anchor("membership") },
-    { label: dict.nav.faq, href: `${navBase}/faq` },
     { label: dict.nav.consultation, href: `${navBase}/consultation` },
   ];
 

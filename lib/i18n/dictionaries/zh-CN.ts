@@ -136,7 +136,7 @@ const zhCN: Dictionary = {
   footer: {
     rights: "Amazing Tiger Publishing. 版权所有。",
     links: [
-      { label: "常见问题", href: "/faq" },
+      { label: "常见问题", href: "/consultation#faq" },
       { label: "咨询", href: "/consultation" },
       { label: "登录", href: "/login" },
     ],
@@ -361,6 +361,7 @@ const zhCN: Dictionary = {
     note: "感谢您。我们已收到您的来信——所有消息皆由专人亲自阅读,将尽快与您联系。",
     errorNote: "发送咨询时发生问题,请稍后再试一次,或直接与我们联系。",
     shopInquiryPrefix: "我对这件商品有兴趣: ",
+    faqHeading: "常见问题。",
   },
   shopPage: {
     eyebrow: "商店",

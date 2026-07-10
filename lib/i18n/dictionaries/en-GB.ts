@@ -136,7 +136,7 @@ const enGB: Dictionary = {
   footer: {
     rights: "Amazing Tiger Publishing. All rights reserved.",
     links: [
-      { label: "FAQ", href: "/faq" },
+      { label: "FAQ", href: "/consultation#faq" },
       { label: "Consultation", href: "/consultation" },
       { label: "Login", href: "/login" },
     ],
@@ -361,6 +361,7 @@ const enGB: Dictionary = {
     note: "Thank you. Your enquiry has been received — we read every message personally and will be in touch soon.",
     errorNote: "Something went wrong sending your enquiry. Please try again in a moment, or write to us directly.",
     shopInquiryPrefix: "I am interested in this item: ",
+    faqHeading: "Frequently asked questions.",
   },
   shopPage: {
     eyebrow: "The Shop",

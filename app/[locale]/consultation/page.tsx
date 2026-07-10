@@ -11,7 +11,9 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
 
 export default function ConsultationPage({ params }: { params: { locale: string } }) {
   const locale = (isLocale(params.locale) ? params.locale : "en") as Locale;
-  const dict = getDictionary(locale).consultationPage;
+  const fullDict = getDictionary(locale);
+  const dict = fullDict.consultationPage;
+  const faqItems = fullDict.faqPage.items;
 
   return (
     <div className="section" style={{ position: "relative", overflow: "hidden" }}>
@@ -27,6 +29,18 @@ export default function ConsultationPage({ params }: { params: { locale: string 
         <p className="section-lead" style={{ marginBottom: "var(--space-4)" }}>{dict.lead}</p>
         <div className="glass-panel glass-panel--solid" style={{ padding: "var(--space-4)" }}>
           <ConsultationForm dict={dict} locale={locale} />
+        </div>
+
+        <div id="faq" style={{ marginTop: "var(--space-6)" }}>
+          <h2 className="section-heading">{dict.faqHeading}</h2>
+          <div className="faq-list">
+            {faqItems.map((item) => (
+              <details key={item.question} className="faq-item">
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </div>
     </div>
