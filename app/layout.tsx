@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Forum, Bodoni_Moda, Manrope, Inter } from "next/font/google";
+import { locales } from "@/lib/i18n/config";
 import "./globals.css";
 
 // Four-tier type system:
@@ -48,8 +49,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     languages: {
-      en: "/en",
-      ko: "/ko",
+      ...Object.fromEntries(locales.map((l) => [l, l === "en" ? "/en" : `/${l}`])),
       "x-default": "/",
     },
   },

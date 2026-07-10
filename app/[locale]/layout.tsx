@@ -20,6 +20,11 @@ export function generateMetadata({ params }: LocaleLayoutProps): Metadata {
   const dict = getDictionary(params.locale);
   const canonical = params.locale === "en" ? "/" : `/${params.locale}`;
 
+  const languages: Record<string, string> = { "x-default": "/" };
+  for (const l of locales) {
+    languages[l] = l === "en" ? "/en" : `/${l}`;
+  }
+
   return {
     title: {
       default: dict.meta.title,
@@ -28,11 +33,7 @@ export function generateMetadata({ params }: LocaleLayoutProps): Metadata {
     description: dict.meta.description,
     alternates: {
       canonical,
-      languages: {
-        en: "/en",
-        ko: "/ko",
-        "x-default": "/",
-      },
+      languages,
     },
   };
 }

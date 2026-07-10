@@ -71,25 +71,25 @@ supabase/schema.sql        Full DB schema + RLS policies
 ## Routing and languages
 
 - `/` and `/en` both render the English homepage — English is the primary experience for the North American launch market.
-- `/ko` renders the Korean homepage.
-- Every other route lives under a locale prefix: `/en/faq`, `/ko/faq`, `/en/shop`, `/ko/shop`, `/en/atelier`, `/ko/atelier`, etc.
-- No middleware is used (middleware isn't compatible with static export). Locale routing is handled entirely by the `[locale]` dynamic segment plus `generateStaticParams` in `app/[locale]/layout.tsx`, which pre-renders `/en` and `/ko` at build time.
-- The `<html lang>` attribute is fixed to `"en"` at build time in the root layout (it sits above `[locale]` and never receives locale params). `components/LocaleHtmlLang.tsx` corrects it client-side on `/ko` pages — a pragmatic workaround for static export without middleware.
-- The small `EN / KR` switcher in the header (`components/LanguageSwitcher.tsx`) preserves the current page when switching languages (e.g. `/en/faq` → `/ko/faq`).
+- `/ko` renders the Korean homepage. `/es` renders general/Latin American Spanish. `/es-CO` renders a Colombian Spanish variant (regional address terms like "Departamento", warmer literary register). `/pt-BR` renders Brazilian Portuguese.
+- Every other route lives under a locale prefix: `/en/faq`, `/ko/faq`, `/es/faq`, `/es-CO/faq`, `/pt-BR/faq`, `/en/shop`, `/ko/shop`, `/es/shop`, `/es-CO/shop`, `/pt-BR/shop`, etc.
+- No middleware is used (middleware isn't compatible with static export). Locale routing is handled entirely by the `[locale]` dynamic segment plus `generateStaticParams` in `app/[locale]/layout.tsx`, which pre-renders `/en`, `/ko`, `/es`, `/es-CO`, and `/pt-BR` at build time.
+- The `<html lang>` attribute is fixed to `"en"` at build time in the root layout (it sits above `[locale]` and never receives locale params). `components/LocaleHtmlLang.tsx` corrects it client-side on non-English pages — a pragmatic workaround for static export without middleware.
+- The small `EN / KR / ES / CO / BR` switcher in the header (`components/LanguageSwitcher.tsx`) preserves the current page when switching languages (e.g. `/en/faq` → `/pt-BR/faq`).
 
 `lib/i18n/config.ts` splits locales into two lists:
 
-- `activeLocales` (`en`, `ko`) — the only locales wired into `generateStaticParams`, the language switcher, and routing. This is what actually ships.
-- `plannedLocales` (`es`, `ja`, `hi`, `zh-TW`, `fr`, `de`, `pt-BR`, `ar`) — reserved codes for future markets. They are not activated, not built, and have no dictionary files yet. Listing them here is just a shared checklist so the repo shape doesn't need to change later.
+- `activeLocales` (`en`, `ko`, `es`, `es-CO`, `pt-BR`) — the only locales wired into `generateStaticParams`, the language switcher, and routing. This is what actually ships.
+- `plannedLocales` (`ja`, `hi`, `zh-TW`, `fr`, `de`, `ar`) — reserved codes for future markets. They are not activated, not built, and have no dictionary files yet. Listing them here is just a shared checklist so the repo shape doesn't need to change later.
 
 **Adding a new language later:**
 
-1. Add the locale code to `activeLocales` in `lib/i18n/config.ts` (and remove it from `plannedLocales`).
+1. Add the locale code to `activeLocales` in `lib/i18n/config.ts` (and remove it from `plannedLocales`), plus entries in `localeLabels` and `localeNames`.
 2. Create `lib/i18n/dictionaries/<locale>.ts` implementing the `Dictionary` type from `lib/i18n/types.ts`.
 3. Register it in `lib/i18n/getDictionary.ts`.
-4. Add the locale to the `languages` map in the metadata blocks (`app/layout.tsx`, `app/[locale]/layout.tsx`) for hreflang.
+4. Nothing else to touch for hreflang — the `languages` map in both metadata blocks (`app/layout.tsx`, `app/[locale]/layout.tsx`) is generated from `activeLocales` automatically.
 5. Add locale-aware rows for that language in the Supabase content tables (`faqs`, `product_translations`, etc. — see "Multilingual content pattern" below).
-6. Run `npx next build` and confirm the new locale's static routes (e.g. `/es`, `/es/shop`, `/es/faq`) appear in `out/`.
+6. Run `npx next build` and confirm the new locale's static routes (e.g. `/ja`, `/ja/shop`, `/ja/faq`) appear in `out/`.
 
 ## Environment variables
 

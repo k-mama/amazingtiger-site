@@ -67,7 +67,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
     if (target === "en") {
       return subpath === "" ? "/" : `/en${subpath}`;
     }
-    return `/ko${subpath}`;
+    return `/${target}${subpath}`;
   };
 
   useEffect(() => {
