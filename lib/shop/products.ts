@@ -129,6 +129,54 @@ export const products: Product[] = [
           "Pensado para notas de leitura, fragmentos de memórias e frases privadas",
         ],
       },
+      ja: {
+        title: "BORN RARE アノテーテッド・リーダーズジャーナル",
+        subtitle: "本と並んで、静かに書き綴るための伴侶。",
+        type: "プレミアム・リーダーズジャーナル",
+        badge: "リーダーズジャーナル",
+        description:
+          "BORN RAREにインスパイアされたアイボリートーンのジャーナル。記憶、声、境界、そして変化についての問いを収めています。",
+        details: [
+          "ハードカバー仕立てのジャーナル",
+          "120ページの罫線入り",
+          "アイボリーの紙面",
+          "記憶、声、変化についての内省的な問い",
+          "Amazing Tigerタイトルページ",
+          "読書ノート、回想の断片、私的な一文のために",
+        ],
+      },
+      "zh-TW": {
+        title: "BORN RARE 讀者手記",
+        subtitle: "陪伴讀者在書頁旁靜靜書寫的靜謐夥伴。",
+        type: "頂級讀者手記",
+        badge: "讀者手記",
+        description:
+          "靈感源自 BORN RARE 的象牙白書寫手記,收錄關於記憶、聲音、界線與蛻變的提問。",
+        details: [
+          "精裝風格手記本",
+          "120 頁劃線內頁",
+          "象牙白內頁",
+          "關於記憶、聲音與蛻變的反思提問",
+          "Amazing Tiger 標題頁",
+          "適合閱讀筆記、回憶錄片段與私密文字",
+        ],
+      },
+      "zh-CN": {
+        title: "BORN RARE 读者手记",
+        subtitle: "陪伴读者在书页旁静静书写的静谧伙伴。",
+        type: "高级读者手记",
+        badge: "读者手记",
+        description:
+          "灵感源自 BORN RARE 的象牙白书写手记,收录关于记忆、声音、边界与蜕变的提问。",
+        details: [
+          "精装风格手记本",
+          "120 页划线内页",
+          "象牙白内页",
+          "关于记忆、声音与蜕变的反思提问",
+          "Amazing Tiger 标题页",
+          "适合阅读笔记、回忆片段与私密文字",
+        ],
+      },
     },
   },
   {
@@ -220,6 +268,51 @@ export const products: Product[] = [
           "Tamanho prático para o uso diário",
         ],
       },
+      ja: {
+        title: "Quiet Power スタジオトート",
+        subtitle: "本、ノート、ヘッドホン、そして動き続ける私的な世界を運ぶスタジオトート。",
+        type: "プレミアム・キャンバストート",
+        badge: "スタジオオブジェクト",
+        description:
+          "Amazing Tigerの文章のエネルギー——静かで、強く、実用的で、文学的——を宿した、洗練された日常使いのトートバッグです。",
+        details: [
+          "厚手のコットンキャンバス素材",
+          "ミニマルなフロントワードマーク",
+          "内側にクオートカードを封入",
+          "本、ノートパソコン、ジャーナル、日々の創作作業に対応",
+          "北米の日常に馴染む実用的なサイズ",
+        ],
+      },
+      "zh-TW": {
+        title: "Quiet Power 工作室托特包",
+        subtitle: "容納書籍、筆記本、耳機,以及不斷前行的私人世界的工作室托特包。",
+        type: "頂級帆布托特包",
+        badge: "工作室物件",
+        description:
+          "承載 Amazing Tiger 語句能量——靜謐、堅定、實用、富有文學氣息——的日常精緻托特包。",
+        details: [
+          "厚實純棉帆布材質",
+          "極簡正面標誌",
+          "內附語錄卡片",
+          "可容納書籍、筆電、手記與日常創作用品",
+          "貼合北美生活的實用尺寸",
+        ],
+      },
+      "zh-CN": {
+        title: "Quiet Power 工作室托特包",
+        subtitle: "容纳书籍、笔记本、耳机,以及不断前行的私人世界的工作室托特包。",
+        type: "高级帆布托特包",
+        badge: "工作室物件",
+        description:
+          "承载 Amazing Tiger 语句能量——静谧、坚定、实用、富有文学气息——的日常精致托特包。",
+        details: [
+          "厚实纯棉帆布材质",
+          "极简正面标志",
+          "内附语录卡片",
+          "可容纳书籍、笔记本电脑、手记与日常创作用品",
+          "贴合日常生活的实用尺寸",
+        ],
+      },
     },
   },
   {
@@ -303,6 +396,48 @@ export const products: Product[] = [
           "Toque pastel Dream Glass",
           "Frase inspirada na música da EMMAESTRO",
           "Para café, chá e sessões de escrita noturnas",
+        ],
+      },
+      ja: {
+        title: "Rest Your Busy Mind セラミックマグ",
+        subtitle: "動きすぎる心のための、書き手と読み手の朝のオブジェクト。",
+        type: "セラミックマグ",
+        badge: "スタジオマグ",
+        description: "Emmaの音楽とRest Your Busy Mindというフレーズにインスパイアされた、温かみのあるマグ。",
+        details: [
+          "セラミックマグ",
+          "柔らかなポーセリンホワイト",
+          "Dream Glassパステルアクセント",
+          "EMMAESTROの音楽にインスパイアされたフレーズ",
+          "コーヒー、お茶、そして夜の執筆の時間に",
+        ],
+      },
+      "zh-TW": {
+        title: "Rest Your Busy Mind 陶瓷馬克杯",
+        subtitle: "獻給步調過快的心靈,作家與讀者的晨間物件。",
+        type: "陶瓷馬克杯",
+        badge: "工作室馬克杯",
+        description: "靈感源自 Emma 的音樂與 Rest Your Busy Mind 這句話的溫暖馬克杯。",
+        details: [
+          "陶瓷馬克杯",
+          "柔和瓷白色澤",
+          "Dream Glass 粉彩點綴",
+          "靈感源自 EMMAESTRO 音樂的字句",
+          "適合咖啡、茶,以及深夜書寫的時光",
+        ],
+      },
+      "zh-CN": {
+        title: "Rest Your Busy Mind 陶瓷马克杯",
+        subtitle: "献给节奏过快的心灵,作家与读者的晨间物件。",
+        type: "陶瓷马克杯",
+        badge: "工作室马克杯",
+        description: "灵感源自 Emma 的音乐与 Rest Your Busy Mind 这句话的温暖马克杯。",
+        details: [
+          "陶瓷马克杯",
+          "柔和瓷白色泽",
+          "Dream Glass 粉彩点缀",
+          "灵感源自 EMMAESTRO 音乐的字句",
+          "适合咖啡、茶,以及深夜书写的时光",
         ],
       },
     },
@@ -396,6 +531,51 @@ export const products: Product[] = [
           "Pensada para salas de leitura, estúdios e mesas de trabalho criativas",
         ],
       },
+      ja: {
+        title: "Aurora After the Storm アートプリント",
+        subtitle: "新しい章が始まる部屋のための、光を纏ったプリント。",
+        type: "ウォールアートプリント",
+        badge: "限定プリント",
+        description:
+          "BORN RARE付録の情緒——衝突、色彩、そしてその後の方向性——にインスパイアされた、パステルオーロラのアートプリント。",
+        details: [
+          "美術館ポスター品質",
+          "柔らかなオーロラパレット",
+          "Dream Glassカラーフィールド",
+          "ナンバリング・エディション",
+          "リーディングルーム、スタジオ、創作デスクのために",
+        ],
+      },
+      "zh-TW": {
+        title: "Aurora After the Storm 藝術版畫",
+        subtitle: "為新篇章開始的空間,獻上一幅光影流動的版畫。",
+        type: "牆面藝術版畫",
+        badge: "限量版畫",
+        description:
+          "靈感源自 BORN RARE 附錄氛圍——衝撞、色彩,以及衝擊之後的方向——的粉彩極光藝術版畫。",
+        details: [
+          "博物館海報品質",
+          "柔和極光色調",
+          "Dream Glass 色域",
+          "編號限量版",
+          "適合閱讀室、工作室與創作書桌",
+        ],
+      },
+      "zh-CN": {
+        title: "Aurora After the Storm 艺术版画",
+        subtitle: "为新篇章开始的空间,献上一幅光影流动的版画。",
+        type: "墙面艺术版画",
+        badge: "限量版画",
+        description:
+          "灵感源自 BORN RARE 附录氛围——碰撞、色彩,以及冲击之后的方向——的粉彩极光艺术版画。",
+        details: [
+          "博物馆海报质量",
+          "柔和极光色调",
+          "Dream Glass 色域",
+          "编号限量版",
+          "适合阅读室、工作室与创作书桌",
+        ],
+      },
     },
   },
   {
@@ -484,6 +664,51 @@ export const products: Product[] = [
           "Refinado, sem cair no infantil",
         ],
       },
+      ja: {
+        title: "Amazing Tiger センテンス・ステッカーカプセル",
+        subtitle: "ジャーナル、ノートパソコン、手紙、スタジオの壁のための、小さな文学的な印。",
+        type: "ステッカーパック",
+        badge: "ステッカーカプセル",
+        description:
+          "Amazing Tiger世界観の短いフレーズとシンボルをあしらった、洗練されたステッカーカプセル。",
+        details: [
+          "12枚セット",
+          "Dream Glassパステルパレット",
+          "短いフレーズと抽象的なタイガーのトレース",
+          "ジャーナル、梱包、ノートパソコン、読者への贈り物に",
+          "子供っぽくならない、洗練されたトーン",
+        ],
+      },
+      "zh-TW": {
+        title: "Amazing Tiger 語句貼紙膠囊",
+        subtitle: "獻給手記、筆電、信件與工作室牆面的微小文學印記。",
+        type: "貼紙組合包",
+        badge: "貼紙膠囊",
+        description:
+          "以 Amazing Tiger 世界觀的短句與符號構成的精緻貼紙膠囊。",
+        details: [
+          "12 枚一組",
+          "Dream Glass 粉彩色調",
+          "短句與抽象老虎印記",
+          "適合手記、包裝、筆電與讀者贈禮",
+          "精緻而不流於童趣",
+        ],
+      },
+      "zh-CN": {
+        title: "Amazing Tiger 语句贴纸胶囊",
+        subtitle: "献给手记、笔记本电脑、信件与工作室墙面的微小文学印记。",
+        type: "贴纸组合包",
+        badge: "贴纸胶囊",
+        description:
+          "以 Amazing Tiger 世界观的短句与符号构成的精致贴纸胶囊。",
+        details: [
+          "12 枚一组",
+          "Dream Glass 粉彩色调",
+          "短句与抽象老虎印记",
+          "适合手记、包装、笔记本电脑与读者赠礼",
+          "精致而不流于童趣",
+        ],
+      },
     },
   },
   {
@@ -567,6 +792,48 @@ export const products: Product[] = [
           "Marca EMMAESTRO sutil",
           "Inspirada em ondas sonoras, cor e movimento",
           "Futuro produto da expansão de itens para criadores",
+        ],
+      },
+      ja: {
+        title: "EMMAESTRO Dream Glass フォンケース",
+        subtitle: "Emmaの音楽と色彩の世界を宿した、ポケットサイズの断片。",
+        type: "フォンケース",
+        badge: "近日公開",
+        description:
+          "EMMAESTROのサウンド、ウェーブ、そしてDream Glassのビジュアル言語をあしらった、カラフルでいてエレガントなフォンケース。",
+        details: [
+          "柔らかく虹色に輝くDream Glassパターン",
+          "控えめなEMMAESTROマーク",
+          "サウンドウェーブ、色彩、動きにインスパイアされたデザイン",
+          "クリエイターグッズ拡張のための今後の製品",
+        ],
+      },
+      "zh-TW": {
+        title: "EMMAESTRO Dream Glass 手機殼",
+        subtitle: "承載 Emma 音樂與色彩世界的口袋尺寸片段。",
+        type: "手機殼",
+        badge: "即將推出",
+        description:
+          "融合 EMMAESTRO 聲音、波形與 Dream Glass 視覺語言的手機殼,繽紛卻不失優雅。",
+        details: [
+          "柔和的珠光 Dream Glass 圖案",
+          "低調的 EMMAESTRO 標誌",
+          "靈感源自音波、色彩與動態",
+          "創作者商品系列的未來新品",
+        ],
+      },
+      "zh-CN": {
+        title: "EMMAESTRO Dream Glass 手机壳",
+        subtitle: "承载 Emma 音乐与色彩世界的口袋尺寸片段。",
+        type: "手机壳",
+        badge: "即将推出",
+        description:
+          "融合 EMMAESTRO 声音、波形与 Dream Glass 视觉语言的手机壳,缤纷却不失优雅。",
+        details: [
+          "柔和的珠光 Dream Glass 图案",
+          "低调的 EMMAESTRO 标志",
+          "灵感源自音波、色彩与动态",
+          "创作者商品系列的未来新品",
         ],
       },
     },

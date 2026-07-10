@@ -71,16 +71,16 @@ supabase/schema.sql        Full DB schema + RLS policies
 ## Routing and languages
 
 - `/` and `/en` both render the English homepage — English is the primary experience for the North American launch market.
-- `/ko` renders the Korean homepage. `/es` renders general/Latin American Spanish. `/es-CO` renders a Colombian Spanish variant (regional address terms like "Departamento", warmer literary register). `/pt-BR` renders Brazilian Portuguese.
-- Every other route lives under a locale prefix: `/en/faq`, `/ko/faq`, `/es/faq`, `/es-CO/faq`, `/pt-BR/faq`, `/en/shop`, `/ko/shop`, `/es/shop`, `/es-CO/shop`, `/pt-BR/shop`, etc.
-- No middleware is used (middleware isn't compatible with static export). Locale routing is handled entirely by the `[locale]` dynamic segment plus `generateStaticParams` in `app/[locale]/layout.tsx`, which pre-renders `/en`, `/ko`, `/es`, `/es-CO`, and `/pt-BR` at build time.
+- `/ko` renders the Korean homepage. `/es` renders general/Latin American Spanish. `/es-CO` renders a Colombian Spanish variant (regional address terms like "Departamento", warmer literary register). `/pt-BR` renders Brazilian Portuguese. `/ja` renders Japanese. `/zh-TW` renders Traditional Chinese. `/zh-CN` renders Simplified Chinese with Mainland-preferred wording (e.g. 项目 not 專案, 目录 not 型錄, 登录/退出登录 not 登入/登出).
+- Every other route lives under a locale prefix: `/en/faq`, `/ko/faq`, `/es/faq`, `/es-CO/faq`, `/pt-BR/faq`, `/ja/faq`, `/zh-TW/faq`, `/zh-CN/faq`, `/en/shop`, `/ko/shop`, etc. — the same pattern for every active locale.
+- No middleware is used (middleware isn't compatible with static export). Locale routing is handled entirely by the `[locale]` dynamic segment plus `generateStaticParams` in `app/[locale]/layout.tsx`, which pre-renders every entry in `activeLocales` at build time.
 - The `<html lang>` attribute is fixed to `"en"` at build time in the root layout (it sits above `[locale]` and never receives locale params). `components/LocaleHtmlLang.tsx` corrects it client-side on non-English pages — a pragmatic workaround for static export without middleware.
-- The small `EN / KR / ES / CO / BR` switcher in the header (`components/LanguageSwitcher.tsx`) preserves the current page when switching languages (e.g. `/en/faq` → `/pt-BR/faq`).
+- The small `EN / KR / ES / CO / BR / JP / TW / CN` switcher in the header (`components/LanguageSwitcher.tsx`) preserves the current page when switching languages (e.g. `/en/faq` → `/zh-CN/faq`).
 
 `lib/i18n/config.ts` splits locales into two lists:
 
-- `activeLocales` (`en`, `ko`, `es`, `es-CO`, `pt-BR`) — the only locales wired into `generateStaticParams`, the language switcher, and routing. This is what actually ships.
-- `plannedLocales` (`ja`, `hi`, `zh-TW`, `fr`, `de`, `ar`) — reserved codes for future markets. They are not activated, not built, and have no dictionary files yet. Listing them here is just a shared checklist so the repo shape doesn't need to change later.
+- `activeLocales` (`en`, `ko`, `es`, `es-CO`, `pt-BR`, `ja`, `zh-TW`, `zh-CN`) — the only locales wired into `generateStaticParams`, the language switcher, and routing. This is what actually ships.
+- `plannedLocales` (`hi`, `fr`, `de`, `ar`) — reserved codes for future markets. They are not activated, not built, and have no dictionary files yet. Listing them here is just a shared checklist so the repo shape doesn't need to change later.
 
 **Adding a new language later:**
 

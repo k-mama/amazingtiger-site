@@ -5,8 +5,20 @@ import ko from "./dictionaries/ko";
 import es from "./dictionaries/es";
 import esCO from "./dictionaries/es-CO";
 import ptBR from "./dictionaries/pt-BR";
+import ja from "./dictionaries/ja";
+import zhTW from "./dictionaries/zh-TW";
+import zhCN from "./dictionaries/zh-CN";
 
-const dictionaries: Record<Locale, Dictionary> = { en, ko, es, "es-CO": esCO, "pt-BR": ptBR };
+const dictionaries: Record<Locale, Dictionary> = {
+  en,
+  ko,
+  es,
+  "es-CO": esCO,
+  "pt-BR": ptBR,
+  ja,
+  "zh-TW": zhTW,
+  "zh-CN": zhCN,
+};
 
 export function getDictionary(locale: Locale): Dictionary {
   return dictionaries[locale] ?? dictionaries.en;
