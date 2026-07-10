@@ -1,7 +1,7 @@
 // Active locales are the only ones wired into routing (generateStaticParams,
 // the language switcher, dictionaries). This is the single source of truth
 // for what actually ships.
-export const activeLocales = ["en", "ko", "es", "es-CO", "pt-BR", "ja", "zh-TW", "zh-CN", "en-GB"] as const;
+export const activeLocales = ["en", "en-GB", "ko", "ja", "zh-TW", "zh-CN", "es", "es-CO", "pt-BR"] as const;
 export type Locale = (typeof activeLocales)[number];
 
 // Alias kept for readability at call sites (Header, Footer, LanguageSwitcher).
@@ -16,26 +16,26 @@ export const plannedLocales = ["hi", "fr", "de", "ar"] as const;
 
 export const localeLabels: Record<Locale, string> = {
   en: "EN",
+  "en-GB": "UK",
   ko: "KR",
-  es: "ES",
-  "es-CO": "CO",
-  "pt-BR": "BR",
   ja: "JP",
   "zh-TW": "TW",
   "zh-CN": "CN",
-  "en-GB": "UK",
+  es: "ES",
+  "es-CO": "CO",
+  "pt-BR": "BR",
 };
 
 export const localeNames: Record<Locale, string> = {
   en: "English",
+  "en-GB": "English (UK)",
   ko: "한국어",
-  es: "Español",
-  "es-CO": "Español (Colombia)",
-  "pt-BR": "Português (Brasil)",
   ja: "日本語",
   "zh-TW": "繁體中文",
   "zh-CN": "简体中文",
-  "en-GB": "English (UK)",
+  es: "Español",
+  "es-CO": "Español (Colombia)",
+  "pt-BR": "Português (Brasil)",
 };
 
 export function isLocale(value: string): value is Locale {
