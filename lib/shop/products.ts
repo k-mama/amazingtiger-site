@@ -177,6 +177,22 @@ export const products: Product[] = [
           "适合阅读笔记、回忆片段与私密文字",
         ],
       },
+      "en-GB": {
+        title: "BORN RARE Annotated Reader's Journal",
+        subtitle: "A quiet companion for readers who want to write beside the book.",
+        type: "Premium Reader's Journal",
+        badge: "Reader's Journal",
+        description:
+          "A soft ivory writing journal inspired by BORN RARE, with prompts for memory, voice, boundaries, and becoming.",
+        details: [
+          "Hardcover-style journal",
+          "120 lined pages",
+          "Ivory interior",
+          "Reflection prompts for memory, voice, and becoming",
+          "Amazing Tiger title page",
+          "Designed for reading notes, memoir fragments, and private sentences",
+        ],
+      },
     },
   },
   {
@@ -313,6 +329,21 @@ export const products: Product[] = [
           "贴合日常生活的实用尺寸",
         ],
       },
+      "en-GB": {
+        title: "Quiet Power Studio Tote",
+        subtitle: "A studio tote for books, notebooks, headphones, and a private universe in motion.",
+        type: "Premium Canvas Tote",
+        badge: "Studio Object",
+        description:
+          "A refined everyday tote carrying the Amazing Tiger sentence energy: quiet, strong, useful, literary.",
+        details: [
+          "Heavy cotton canvas feel",
+          "Minimal front wordmark",
+          "Inside quote card",
+          "Fits books, laptop, journal, and daily creative work",
+          "Practical everyday size",
+        ],
+      },
     },
   },
   {
@@ -438,6 +469,20 @@ export const products: Product[] = [
           "Dream Glass 粉彩点缀",
           "灵感源自 EMMAESTRO 音乐的字句",
           "适合咖啡、茶,以及深夜书写的时光",
+        ],
+      },
+      "en-GB": {
+        title: "Rest Your Busy Mind Ceramic Mug",
+        subtitle: "A morning object for writers, readers, and minds that move too fast.",
+        type: "Ceramic Mug",
+        badge: "Studio Mug",
+        description: "A warm mug inspired by Emma's music and the phrase Rest Your Busy Mind.",
+        details: [
+          "Ceramic mug",
+          "Soft porcelain white",
+          "Dream Glass pastel accent",
+          "Quote inspired by EMMAESTRO music",
+          "For coffee, tea, and late-night writing sessions",
         ],
       },
     },
@@ -576,6 +621,21 @@ export const products: Product[] = [
           "适合阅读室、工作室与创作书桌",
         ],
       },
+      "en-GB": {
+        title: "Aurora After the Storm Art Print",
+        subtitle: "A luminous print for rooms where a new chapter begins.",
+        type: "Wall Art Print",
+        badge: "Limited Print",
+        description:
+          "A pastel aurora inspired art print based on the BORN RARE appendix mood: collision, colour, and direction after impact.",
+        details: [
+          "Museum poster quality",
+          "Soft aurora palette",
+          "Dream Glass colour field",
+          "Numbered edition",
+          "Designed for reading rooms, studios, and creative desks",
+        ],
+      },
     },
   },
   {
@@ -709,6 +769,21 @@ export const products: Product[] = [
           "精致而不流于童趣",
         ],
       },
+      "en-GB": {
+        title: "Amazing Tiger Sentence Sticker Capsule",
+        subtitle: "Tiny literary marks for journals, laptops, letters, and studio walls.",
+        type: "Sticker Pack",
+        badge: "Sticker Capsule",
+        description:
+          "A refined sticker capsule using short phrases and symbols from the Amazing Tiger universe.",
+        details: [
+          "Set of 12 stickers",
+          "Dream Glass pastel palette",
+          "Short phrases and abstract tiger trace marks",
+          "For journals, packaging, laptops, and reader gifts",
+          "Refined, not childish or cartoonish",
+        ],
+      },
     },
   },
   {
@@ -834,6 +909,20 @@ export const products: Product[] = [
           "低调的 EMMAESTRO 标志",
           "灵感源自音波、色彩与动态",
           "创作者商品系列的未来新品",
+        ],
+      },
+      "en-GB": {
+        title: "EMMAESTRO Dream Glass Phone Case",
+        subtitle: "A pocket-sized fragment of Emma's music and colour universe.",
+        type: "Phone Case",
+        badge: "Coming Soon",
+        description:
+          "A colourful but elegant phone case using EMMAESTRO sound, wave, and Dream Glass visual language.",
+        details: [
+          "Soft iridescent Dream Glass pattern",
+          "Subtle EMMAESTRO mark",
+          "Inspired by sound waves, colour, and motion",
+          "Future product for the creator goods expansion",
         ],
       },
     },

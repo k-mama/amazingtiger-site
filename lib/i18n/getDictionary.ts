@@ -8,6 +8,7 @@ import ptBR from "./dictionaries/pt-BR";
 import ja from "./dictionaries/ja";
 import zhTW from "./dictionaries/zh-TW";
 import zhCN from "./dictionaries/zh-CN";
+import enGB from "./dictionaries/en-GB";
 
 const dictionaries: Record<Locale, Dictionary> = {
   en,
@@ -18,6 +19,7 @@ const dictionaries: Record<Locale, Dictionary> = {
   ja,
   "zh-TW": zhTW,
   "zh-CN": zhCN,
+  "en-GB": enGB,
 };
 
 export function getDictionary(locale: Locale): Dictionary {
