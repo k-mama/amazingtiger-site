@@ -303,6 +303,14 @@ export interface Dictionary {
     checkoutNote: string;
     proceedToCheckout: string;
     continueShopping: string;
+    discountCodeLabel: string;
+    discountCodePlaceholder: string;
+    discountApply: string;
+    discountRemove: string;
+    discountInvalid: string;
+    discountAppliedLabel: string;
+    discountLabel: string;
+    totalLabel: string;
   };
   checkoutPage: {
     eyebrow: string;
@@ -326,6 +334,14 @@ export interface Dictionary {
     orderNotesLabel: string;
     summaryHeading: string;
     subtotalLabel: string;
+    discountCodeLabel: string;
+    discountCodePlaceholder: string;
+    discountApply: string;
+    discountRemove: string;
+    discountInvalid: string;
+    discountAppliedLabel: string;
+    discountLabel: string;
+    totalLabel: string;
     paymentNote: string;
     submit: string;
     submitting: string;

@@ -358,6 +358,8 @@ create table if not exists orders (
   ),
   total_cents integer not null default 0,
   currency text not null default 'USD',
+  discount_code text,
+  discount_amount_cents integer not null default 0,
   shipping_address jsonb,
   customer_name text,
   customer_email text,
@@ -574,3 +576,18 @@ drop policy if exists "Public can submit items for a pending order request" on o
 create policy "Public can submit items for a pending order request"
   on order_items for insert
   with check (is_order_pending_inquiry(order_items.order_id));
+
+-- =========================================================================
+-- MIGRATION — Discount codes (Shop V1)
+--
+-- Adds discount tracking to `orders`. Codes are validated entirely
+-- client-side against the static list in lib/shop/discounts.ts (no
+-- `discount_codes` table yet), so these columns just record what was
+-- applied at request time for the admin to see. `total_cents` already
+-- reflects the discount — `discount_amount_cents` is kept alongside it so
+-- the pre-discount subtotal can be reconstructed. Safe to run more than
+-- once.
+-- =========================================================================
+
+alter table orders add column if not exists discount_code text;
+alter table orders add column if not exists discount_amount_cents integer not null default 0;

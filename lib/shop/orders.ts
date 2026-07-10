@@ -1,6 +1,7 @@
 import type { Locale } from "@/lib/i18n/config";
 import { supabase } from "@/lib/supabaseClient";
 import type { CartItem } from "./cart";
+import { calculateDiscountCents, findDiscountCode } from "./discounts";
 import { getProductBySlug, getProductCopy } from "./products";
 
 export interface AddressFields {
@@ -21,6 +22,7 @@ export interface CheckoutRequestInput {
   shipToDifferentAddress: boolean;
   shipping: AddressFields;
   orderNotes: string;
+  discountCode: string | null;
 }
 
 export interface OrderRequestResult {
@@ -48,9 +50,16 @@ export async function submitCheckoutRequest(input: CheckoutRequestInput): Promis
   }
 
   const hasNumericSubtotal = rows.every((row) => row.unitPrice !== null);
-  const totalCents = hasNumericSubtotal
-    ? Math.round(rows.reduce((sum, row) => sum + (row.unitPrice as number) * row.item.quantity, 0) * 100)
+  const subtotal = hasNumericSubtotal
+    ? rows.reduce((sum, row) => sum + (row.unitPrice as number) * row.item.quantity, 0)
     : 0;
+  // Cents from here on — integer arithmetic only, so total_cents can never
+  // land on a fractional cent the way a two-step dollar-then-cents
+  // conversion could.
+  const subtotalCents = Math.round(subtotal * 100);
+  const discount = findDiscountCode(input.discountCode);
+  const discountAmountCents = hasNumericSubtotal ? calculateDiscountCents(discount, subtotalCents) : 0;
+  const totalCents = hasNumericSubtotal ? subtotalCents - discountAmountCents : 0;
   const currency = rows[0]?.product.currency ?? "USD";
 
   const { billing, shipping, shipToDifferentAddress } = input;
@@ -65,6 +74,8 @@ export async function submitCheckoutRequest(input: CheckoutRequestInput): Promis
     status: "pending_inquiry",
     total_cents: totalCents,
     currency,
+    discount_code: discount?.code ?? null,
+    discount_amount_cents: discountAmountCents,
     customer_name: `${billing.firstName} ${billing.lastName}`.trim(),
     customer_email: billing.email,
     phone: billing.phone || null,

@@ -4,6 +4,7 @@
 // saving arrives in a later phase (functions/api/create-checkout.ts).
 
 const CART_STORAGE_KEY = "at_private_cart_v1";
+const DISCOUNT_STORAGE_KEY = "at_private_cart_discount_v1";
 export const CART_EVENT = "at-cart-updated";
 export const CART_OPEN_EVENT = "at-cart-open-request";
 
@@ -82,4 +83,21 @@ export function clearCart(): void {
 export function requestCartOpen(): void {
   if (!isBrowser()) return;
   window.dispatchEvent(new Event(CART_OPEN_EVENT));
+}
+
+export function getDiscountCode(): string | null {
+  if (!isBrowser()) return null;
+  return window.localStorage.getItem(DISCOUNT_STORAGE_KEY);
+}
+
+export function setDiscountCode(code: string): void {
+  if (!isBrowser()) return;
+  window.localStorage.setItem(DISCOUNT_STORAGE_KEY, code);
+  window.dispatchEvent(new Event(CART_EVENT));
+}
+
+export function clearDiscountCode(): void {
+  if (!isBrowser()) return;
+  window.localStorage.removeItem(DISCOUNT_STORAGE_KEY);
+  window.dispatchEvent(new Event(CART_EVENT));
 }

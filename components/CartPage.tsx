@@ -3,7 +3,10 @@
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
+import { calculateDiscountDollars, findDiscountCode } from "@/lib/shop/discounts";
+import { formatMoney } from "@/lib/shop/format";
 import { getProductBySlug, getProductCopy } from "@/lib/shop/products";
+import DiscountCodeForm from "./DiscountCodeForm";
 import { useCart } from "./useCart";
 import EditorialObject from "./EditorialObject";
 import QuantityStepper from "./QuantityStepper";
@@ -16,7 +19,7 @@ interface CartPageProps {
 }
 
 export default function CartPage({ locale, navBase, dict }: CartPageProps) {
-  const { items, setQuantity, removeFromCart } = useCart();
+  const { items, setQuantity, removeFromCart, discountCode, applyDiscountCode, clearDiscountCode } = useCart();
 
   const rows = items
     .map((item) => {
@@ -31,6 +34,11 @@ export default function CartPage({ locale, navBase, dict }: CartPageProps) {
   const subtotal = hasNumericSubtotal
     ? rows.reduce((sum, row) => sum + (row.product.priceAmount as number) * row.item.quantity, 0)
     : null;
+
+  const discount = findDiscountCode(discountCode);
+  const discountAmount = subtotal !== null ? calculateDiscountDollars(discount, subtotal) : 0;
+  const total = subtotal !== null ? subtotal - discountAmount : null;
+  const numberLocale = locale === "ko" ? "ko-KR" : "en-US";
 
   return (
     <div className="section">
@@ -93,9 +101,39 @@ export default function CartPage({ locale, navBase, dict }: CartPageProps) {
               {subtotal !== null && (
                 <div className="cart-page__totals-row">
                   <span>{dict.subtotalLabel}</span>
-                  <span>${subtotal.toLocaleString(locale === "ko" ? "ko-KR" : "en-US")}</span>
+                  <span>${formatMoney(subtotal, numberLocale)}</span>
                 </div>
               )}
+              {discountAmount > 0 && (
+                <div className="cart-page__totals-row cart-page__totals-row--discount">
+                  <span>
+                    {dict.discountLabel}
+                    {discount ? ` (${discount.code})` : ""}
+                  </span>
+                  <span>-${formatMoney(discountAmount, numberLocale)}</span>
+                </div>
+              )}
+              {total !== null && (
+                <div className="cart-page__totals-row cart-page__totals-row--total">
+                  <span>{dict.totalLabel}</span>
+                  <span>${formatMoney(total, numberLocale)}</span>
+                </div>
+              )}
+
+              <DiscountCodeForm
+                appliedCode={discountCode}
+                onApply={applyDiscountCode}
+                onRemove={clearDiscountCode}
+                dict={{
+                  label: dict.discountCodeLabel,
+                  placeholder: dict.discountCodePlaceholder,
+                  apply: dict.discountApply,
+                  remove: dict.discountRemove,
+                  invalid: dict.discountInvalid,
+                  appliedLabel: dict.discountAppliedLabel,
+                }}
+              />
+
               <p className="status-note">{dict.subtotalNote}</p>
               <p className="status-note">{dict.checkoutNote}</p>
               <Link href={`${navBase}/checkout`} className="btn btn-primary btn-block">

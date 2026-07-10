@@ -5,21 +5,27 @@ import {
   addToCart as addToCartStorage,
   CART_EVENT,
   clearCart as clearCartStorage,
+  clearDiscountCode as clearDiscountCodeStorage,
   getCart,
+  getDiscountCode,
   removeFromCart as removeFromCartStorage,
   requestCartOpen,
+  setDiscountCode as setDiscountCodeStorage,
   setQuantity as setQuantityStorage,
   type CartItem,
 } from "@/lib/shop/cart";
 
 export function useCart() {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [discountCode, setDiscountCodeState] = useState<string | null>(null);
 
   useEffect(() => {
     setItems(getCart());
+    setDiscountCodeState(getDiscountCode());
 
     function sync() {
       setItems(getCart());
+      setDiscountCodeState(getDiscountCode());
     }
 
     window.addEventListener(CART_EVENT, sync);
@@ -50,7 +56,26 @@ export function useCart() {
     requestCartOpen();
   }, []);
 
+  const applyDiscountCode = useCallback((code: string) => {
+    setDiscountCodeStorage(code);
+  }, []);
+
+  const clearDiscountCode = useCallback(() => {
+    clearDiscountCodeStorage();
+  }, []);
+
   const count = items.reduce((sum, item) => sum + item.quantity, 0);
 
-  return { items, count, addToCart, setQuantity, removeFromCart, clearCart, openCart };
+  return {
+    items,
+    count,
+    addToCart,
+    setQuantity,
+    removeFromCart,
+    clearCart,
+    openCart,
+    discountCode,
+    applyDiscountCode,
+    clearDiscountCode,
+  };
 }

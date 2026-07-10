@@ -4,8 +4,11 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
+import { calculateDiscountDollars, findDiscountCode } from "@/lib/shop/discounts";
+import { formatMoney } from "@/lib/shop/format";
 import { getProductBySlug, getProductCopy } from "@/lib/shop/products";
 import { submitCheckoutRequest, type AddressFields } from "@/lib/shop/orders";
+import DiscountCodeForm from "./DiscountCodeForm";
 import { useCart } from "./useCart";
 
 interface CheckoutPageProps {
@@ -72,7 +75,7 @@ function Field({ id, label, value, onChange, error, type = "text", disabled }: F
 }
 
 export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProps) {
-  const { items, clearCart } = useCart();
+  const { items, clearCart, discountCode, applyDiscountCode, clearDiscountCode } = useCart();
   const [billing, setBilling] = useState<BillingState>(emptyBilling);
   const [shipToDifferentAddress, setShipToDifferentAddress] = useState(false);
   const [shipping, setShipping] = useState<AddressFields>(emptyShipping);
@@ -94,6 +97,11 @@ export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProp
   const subtotal = hasNumericSubtotal
     ? rows.reduce((sum, row) => sum + (row.product.priceAmount as number) * row.item.quantity, 0)
     : null;
+
+  const discount = findDiscountCode(discountCode);
+  const discountAmount = subtotal !== null ? calculateDiscountDollars(discount, subtotal) : 0;
+  const total = subtotal !== null ? subtotal - discountAmount : null;
+  const numberLocale = locale === "ko" ? "ko-KR" : "en-US";
 
   function updateBilling(key: keyof BillingState, value: string) {
     setBilling((prev) => ({ ...prev, [key]: value }));
@@ -173,6 +181,7 @@ export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProp
       shipToDifferentAddress,
       shipping,
       orderNotes,
+      discountCode: discount?.code ?? null,
     });
 
     if (error) {
@@ -181,6 +190,7 @@ export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProp
     }
 
     clearCart();
+    clearDiscountCode();
     setOrderId(newOrderId);
     setView("success");
   }
@@ -314,11 +324,42 @@ export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProp
                 ))}
               </div>
               {subtotal !== null && (
-                <div className="checkout-summary__subtotal">
+                <div className="checkout-summary__row">
                   <span>{dict.subtotalLabel}</span>
-                  <span>${subtotal.toLocaleString(locale === "ko" ? "ko-KR" : "en-US")}</span>
+                  <span>${formatMoney(subtotal, numberLocale)}</span>
                 </div>
               )}
+              {discountAmount > 0 && (
+                <div className="checkout-summary__row checkout-summary__row--discount">
+                  <span>
+                    {dict.discountLabel}
+                    {discount ? ` (${discount.code})` : ""}
+                  </span>
+                  <span>-${formatMoney(discountAmount, numberLocale)}</span>
+                </div>
+              )}
+              {total !== null && (
+                <div className="checkout-summary__subtotal">
+                  <span>{dict.totalLabel}</span>
+                  <span>${formatMoney(total, numberLocale)}</span>
+                </div>
+              )}
+
+              <DiscountCodeForm
+                appliedCode={discountCode}
+                onApply={applyDiscountCode}
+                onRemove={clearDiscountCode}
+                disabled={view === "submitting"}
+                dict={{
+                  label: dict.discountCodeLabel,
+                  placeholder: dict.discountCodePlaceholder,
+                  apply: dict.discountApply,
+                  remove: dict.discountRemove,
+                  invalid: dict.discountInvalid,
+                  appliedLabel: dict.discountAppliedLabel,
+                }}
+              />
+
               <p className="status-note">{dict.paymentNote}</p>
               <button type="submit" className="btn btn-primary btn-block" disabled={view === "submitting"}>
                 {view === "submitting" ? dict.submitting : dict.submit}
