@@ -1021,32 +1021,25 @@ button {
 
 /* =========================================================================
    Reveal on scroll
-   Progressive enhancement only: content is visible by default. The
-   opacity: 0 starting state is scoped to `scripting: enabled` so browsers
-   without JS (or JS blocked/failed) never hide it in the first place —
-   Reveal.tsx also carries a timeout fallback in case IntersectionObserver
-   never fires once JS is running.
+   Content is never gated by this: opacity stays 1 unconditionally, in every
+   media context, from the first server-rendered frame. Reveal only ever
+   controls a small translateY slide-in as a purely cosmetic enhancement —
+   it cannot make text or cards unreadable regardless of JS, observer, or
+   timing state.
    ========================================================================= */
 
 .reveal {
-  transition: opacity 0.9s var(--ease-soft), transform 0.9s var(--ease-soft);
+  opacity: 1;
+  transform: translateY(8px);
+  transition: transform 0.6s var(--ease-soft);
 }
 
-@media (scripting: enabled) {
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.reveal.is-visible {
+  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
-    opacity: 1;
     transform: none;
     transition: none;
   }

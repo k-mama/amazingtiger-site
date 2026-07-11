@@ -8,17 +8,16 @@ interface RevealProps {
   delay?: number;
 }
 
-// Progressive enhancement only: content is visible by default (see the
-// `.reveal` base rule in globals.css, scoped to `@media (scripting: enabled)`
-// so it never applies without JS at all). Below-the-fold elements still get
-// the scroll-reveal treatment, but two guarantees keep them from ever being
-// stuck invisible while holding their layout space:
+// This component never controls whether content is readable — `.reveal` in
+// globals.css keeps opacity at 1 unconditionally. All this does is decide
+// when to add `is-visible`, which only triggers a small translateY slide-in.
+// Two guarantees keep that motion from ever getting stuck mid-slide:
 //   1. A synchronous, pre-paint check (useLayoutEffect + getBoundingClientRect)
 //      marks anything already in the viewport visible immediately — no
-//      observer/timer round-trip, so above-the-fold content never flashes.
-//   2. A short fallback timer forces visibility if IntersectionObserver never
-//      reports an intersection (broken observer, or content never scrolled
-//      into view — e.g. a full-page screenshot tool).
+//      observer/timer round-trip for above-the-fold content.
+//   2. A short fallback timer settles the slide-in even if IntersectionObserver
+//      never reports an intersection (broken observer, or content never
+//      scrolled into view — e.g. a full-page screenshot tool).
 const REVEAL_FALLBACK_MS = 350;
 
 export default function Reveal({ children, className = "", delay = 0 }: RevealProps) {
