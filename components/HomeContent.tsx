@@ -6,6 +6,7 @@ import ShopPreview from "./ShopPreview";
 import AtelierPreview from "./AtelierPreview";
 import AmbientBackdrop from "./AmbientBackdrop";
 import EditorialObject from "./EditorialObject";
+import NoBreakText from "./NoBreakText";
 
 interface HomeContentProps {
   locale: Locale;
@@ -39,7 +40,9 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.hero.eyebrow}</span>
           </div>
           <h1>{dict.hero.headline}</h1>
-          <p className="hero__sub">{dict.hero.subhead}</p>
+          <p className="hero__sub">
+            <NoBreakText text={dict.hero.subhead} />
+          </p>
           <div className="hero__actions">
             <Link href={`${basePath === "/" ? "" : basePath}#philosophy`} className="btn btn-primary">
               {dict.hero.ctaPrimary}
@@ -105,7 +108,9 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
           <Reveal>
             <div>
               {dict.house.body.map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
+                <p key={i}>
+                  <NoBreakText text={paragraph} />
+                </p>
               ))}
             </div>
           </Reveal>
@@ -143,14 +148,16 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             </Reveal>
             <Reveal delay={100}>
               <span className="eyebrow">{dict.founder.eyebrow}</span>
-              <h2 className="section-heading">{dict.founder.heading}</h2>
+              <h2 className="section-heading">
+                <NoBreakText text={dict.founder.heading} />
+              </h2>
               {dict.founder.body.map((paragraph, i) => (
                 <p key={i} className="section-lead" style={{ maxWidth: "520px" }}>
                   {paragraph}
                 </p>
               ))}
               <p style={{ marginTop: "1.5rem", fontFamily: "var(--font-display)", fontSize: "1.05rem" }}>
-                {dict.founder.name}
+                <NoBreakText text={dict.founder.name} />
                 <br />
                 <span style={{ fontFamily: "var(--font-body)", fontSize: "0.85rem", color: "var(--color-bronze)" }}>
                   {dict.founder.role}

@@ -3,6 +3,7 @@ import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
 import ConsultationForm from "@/components/ConsultationForm";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
+import NoBreakText from "@/components/NoBreakText";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
@@ -36,8 +37,12 @@ export default function ConsultationPage({ params }: { params: { locale: string 
           <div className="faq-list">
             {faqItems.map((item) => (
               <details key={item.question} className="faq-item">
-                <summary>{item.question}</summary>
-                <p>{item.answer}</p>
+                <summary>
+                  <NoBreakText text={item.question} />
+                </summary>
+                <p>
+                  <NoBreakText text={item.answer} />
+                </p>
               </details>
             ))}
           </div>

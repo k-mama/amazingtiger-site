@@ -206,6 +206,40 @@ button {
   color: var(--color-ink-soft);
 }
 
+/* =========================================================================
+   Locale-aware line breaking
+   Korean wraps by whole word (never mid-syllable); Japanese and Chinese keep
+   their own natural character-based wrapping but avoid awkward punctuation
+   breaks. `.no-break` guards specific proper names/brand phrases in any
+   locale so they never split across a line wrap.
+   ========================================================================= */
+
+:lang(ko) .hero h1,
+:lang(ko) .section-heading {
+  word-break: keep-all;
+  overflow-wrap: normal;
+  text-wrap: balance;
+}
+
+:lang(ko) .section-lead {
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+:lang(ja) .hero h1,
+:lang(ja) .section-heading,
+:lang(zh-TW) .hero h1,
+:lang(zh-TW) .section-heading,
+:lang(zh-CN) .hero h1,
+:lang(zh-CN) .section-heading {
+  line-break: strict;
+  word-break: normal;
+}
+
+.no-break {
+  white-space: nowrap;
+}
+
 .rule {
   border: none;
   border-top: 1px solid var(--color-stone-line);
