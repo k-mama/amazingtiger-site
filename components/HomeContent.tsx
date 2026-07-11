@@ -76,6 +76,18 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             <span className="eyebrow">{dict.philosophy.eyebrow}</span>
             <h2 className="section-heading">{dict.philosophy.heading}</h2>
           </Reveal>
+          <Reveal delay={60}>
+            <div className="philosophy-image">
+              <Image
+                src="/images/homepage/editorial/atelier-worktable.webp"
+                alt={dict.philosophy.heading}
+                fill
+                loading="lazy"
+                sizes="(min-width: 900px) 760px, 100vw"
+                style={{ objectFit: "cover", objectPosition: "center" }}
+              />
+            </div>
+          </Reveal>
           <div className="grid-2" style={{ marginTop: "2.5rem", alignItems: "start" }}>
             {dict.philosophy.body.map((paragraph, i) => (
               <Reveal key={i} delay={i * 90}>

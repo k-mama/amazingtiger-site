@@ -1183,6 +1183,16 @@ button {
   position: relative;
 }
 
+.philosophy-image {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  max-width: 760px;
+  margin-top: var(--space-3);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-glossy);
+}
+
 .work-card__cover-inset {
   position: absolute;
   right: 0.7rem;

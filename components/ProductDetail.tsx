@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
@@ -60,7 +61,17 @@ export default function ProductDetail({
         <div className="product-detail">
           <div className="product-detail__media">
             {copy.badge && <span className="product-card__badge">{copy.badge}</span>}
-            <EditorialObject toneA={product.visualToneA} toneB={product.visualToneB} emblem={product.emblem} />
+            {product.image ? (
+              <Image
+                src={product.image}
+                alt={copy.title}
+                fill
+                sizes="(min-width: 900px) 50vw, 100vw"
+                style={{ objectFit: "cover", objectPosition: "center" }}
+              />
+            ) : (
+              <EditorialObject toneA={product.visualToneA} toneB={product.visualToneB} emblem={product.emblem} />
+            )}
           </div>
 
           <div className="product-detail__body">

@@ -501,6 +501,7 @@ export const products: Product[] = [
     currency: "USD",
     availability: "limited",
     relatedProductIds: ["rest-your-busy-mind-mug", "emmaestro-dream-glass-phone-case"],
+    image: "/images/homepage/shop/aurora-after-the-storm-print.webp",
     visualToneA: "var(--dg-lavender)",
     visualToneB: "var(--dg-periwinkle)",
     emblem: "line",
