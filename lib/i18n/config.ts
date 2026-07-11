@@ -28,14 +28,14 @@ export const localeLabels: Record<Locale, string> = {
 
 export const localeNames: Record<Locale, string> = {
   en: "English",
-  "en-GB": "English (UK)",
-  ko: "한국어",
+  "en-GB": "English · UK",
+  ko: "Korean",
   ja: "Japanese",
   "zh-TW": "Traditional Chinese",
   "zh-CN": "Simplified Chinese",
-  es: "Español",
-  "es-CO": "Español (Colombia)",
-  "pt-BR": "Português (Brasil)",
+  es: "Spanish",
+  "es-CO": "Spanish · Colombia",
+  "pt-BR": "Portuguese · Brazil",
 };
 
 export function isLocale(value: string): value is Locale {
