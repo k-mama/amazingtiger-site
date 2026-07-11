@@ -56,6 +56,12 @@ const en: Dictionary = {
       },
     ],
   },
+  homeStatusLabels: {
+    published: "Published",
+    forthcoming: "Forthcoming",
+    studioConcept: "Studio Concept",
+    viewConcept: "View Concept",
+  },
   house: {
     eyebrow: "The Publishing House",
     heading: "What we make room for.",

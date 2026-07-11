@@ -56,6 +56,12 @@ const ja: Dictionary = {
       },
     ],
   },
+  homeStatusLabels: {
+    published: "刊行済み",
+    forthcoming: "刊行予定",
+    studioConcept: "スタジオコンセプト",
+    viewConcept: "コンセプトを見る",
+  },
   house: {
     eyebrow: "出版社について",
     heading: "私たちが場所を用意しているもの。",

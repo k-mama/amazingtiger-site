@@ -31,6 +31,8 @@ export interface Product {
   visualToneB: string;
   emblem: "ring" | "line";
   homeFeatured?: boolean;
+  /** Optional real product photo (falls back to the EditorialObject mark when absent). */
+  image?: string;
   translations: Record<Locale, ProductCopy>;
 }
 
@@ -48,6 +50,7 @@ export const products: Product[] = [
     visualToneB: "var(--dg-peach)",
     emblem: "line",
     homeFeatured: true,
+    image: "/images/homepage/shop/born-rare-readers-journal.webp",
     translations: {
       en: {
         title: "BORN RARE Annotated Reader's Journal",
@@ -204,6 +207,7 @@ export const products: Product[] = [
     currency: "USD",
     availability: "available",
     relatedProductIds: ["born-rare-readers-journal", "rest-your-busy-mind-mug"],
+    image: "/images/homepage/shop/quiet-power-studio-tote.webp",
     visualToneA: "var(--dg-mint)",
     visualToneB: "var(--dg-turquoise)",
     emblem: "ring",
@@ -355,6 +359,7 @@ export const products: Product[] = [
     currency: "USD",
     availability: "available",
     relatedProductIds: ["quiet-power-studio-tote", "aurora-after-the-storm-print"],
+    image: "/images/homepage/shop/rest-your-busy-mind-mug.webp",
     visualToneA: "var(--dg-peach)",
     visualToneB: "var(--dg-rose)",
     emblem: "ring",

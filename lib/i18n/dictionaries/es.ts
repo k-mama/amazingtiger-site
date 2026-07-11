@@ -56,6 +56,12 @@ const es: Dictionary = {
       },
     ],
   },
+  homeStatusLabels: {
+    published: "Publicado",
+    forthcoming: "Próximamente",
+    studioConcept: "Concepto de Estudio",
+    viewConcept: "Ver Concepto",
+  },
   house: {
     eyebrow: "La Casa Editorial",
     heading: "Aquello para lo que hacemos espacio.",

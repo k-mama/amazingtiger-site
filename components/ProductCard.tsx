@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
@@ -44,7 +45,18 @@ export default function ProductCard({ product, locale, navBase, dict }: ProductC
     <article className="product-card">
       <Link href={detailHref} className="product-card__media">
         {copy.badge && <span className="product-card__badge">{copy.badge}</span>}
-        <EditorialObject toneA={product.visualToneA} toneB={product.visualToneB} emblem={product.emblem} />
+        {product.image ? (
+          <Image
+            src={product.image}
+            alt={copy.title}
+            fill
+            loading="lazy"
+            sizes="(min-width: 900px) 33vw, 100vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+        ) : (
+          <EditorialObject toneA={product.visualToneA} toneB={product.visualToneB} emblem={product.emblem} />
+        )}
       </Link>
       <div className="product-card__body">
         <span className="product-card__category">

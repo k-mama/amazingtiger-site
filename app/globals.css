@@ -982,10 +982,43 @@ button {
   padding: var(--space-6) 0 var(--space-5);
 }
 
-.hero__inner {
+.hero__layout {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.hero__inner {
   max-width: 760px;
+}
+
+.hero__cover {
+  width: 100%;
+  max-width: 220px;
+  flex-shrink: 0;
+}
+
+.hero__cover img {
+  display: block;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-glossy);
+}
+
+@media (min-width: 900px) {
+  .hero__layout {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .hero__cover {
+    max-width: 280px;
+    margin-top: var(--space-2);
+  }
 }
 
 .hero__eyebrow {
@@ -1143,9 +1176,29 @@ button {
 }
 
 .work-card__media {
-  aspect-ratio: 4 / 5;
+  /* Landscape to suit real desk/editorial photography (was 4/5 for the
+     abstract EditorialObject placeholder, which worked at any ratio). */
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   position: relative;
+}
+
+.work-card__cover-inset {
+  position: absolute;
+  right: 0.7rem;
+  bottom: 0.7rem;
+  z-index: 2;
+  width: 56px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow-glossy);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+.work-card__cover-inset img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .work-card__body {

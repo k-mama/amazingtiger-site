@@ -81,6 +81,10 @@ web_modules/
 .next
 out
 
+# Original/source image assets (large, unoptimized) — only the processed
+# public/images/homepage/*.webp outputs are committed.
+assets/source/
+
 # Nuxt.js build / generate output
 .nuxt
 dist

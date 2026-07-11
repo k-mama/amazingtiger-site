@@ -57,6 +57,12 @@ const ko: Dictionary = {
       },
     ],
   },
+  homeStatusLabels: {
+    published: "출간됨",
+    forthcoming: "출간 예정",
+    studioConcept: "스튜디오 콘셉트",
+    viewConcept: "콘셉트 보기",
+  },
   house: {
     eyebrow: "출판사 소개",
     heading: "저희가 자리를 내어주는 것들.",

@@ -56,6 +56,12 @@ const ptBR: Dictionary = {
       },
     ],
   },
+  homeStatusLabels: {
+    published: "Publicado",
+    forthcoming: "Em Breve",
+    studioConcept: "Conceito de Estúdio",
+    viewConcept: "Ver Conceito",
+  },
   house: {
     eyebrow: "A Casa Editorial",
     heading: "Aquilo para o que abrimos espaço.",

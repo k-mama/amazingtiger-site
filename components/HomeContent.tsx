@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
@@ -18,6 +19,21 @@ const workTones: Array<{ a: string; b: string; emblem: "ring" | "line" }> = [
   { a: "var(--dg-aqua)", b: "var(--dg-periwinkle)", emblem: "ring" },
   { a: "var(--dg-rose)", b: "var(--dg-peach)", emblem: "line" },
   { a: "var(--dg-lemon)", b: "var(--dg-mint)", emblem: "ring" },
+];
+
+// Real photography for the three Selected Works cards, matched by position —
+// the underlying dict.works.items copy is unchanged in every locale.
+const workImages = [
+  "/images/homepage/projects/born-rare-project.webp",
+  "/images/homepage/projects/emmaestro-project.webp",
+  "/images/homepage/projects/esther-cho-project.webp",
+];
+
+// Status tags for the same three cards, by position — null means no tag.
+const workStatusKeys: Array<keyof Dictionary["homeStatusLabels"] | null> = [
+  "published",
+  null,
+  "forthcoming",
 ];
 
 export default function HomeContent({ dict, basePath, locale }: HomeContentProps) {
@@ -80,11 +96,37 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
           <div className="grid-3" style={{ marginTop: "2.5rem" }}>
             {dict.works.items.map((item, i) => {
               const tone = workTones[i % workTones.length];
+              const image = workImages[i];
+              const statusKey = workStatusKeys[i];
               return (
                 <Reveal key={item.title} delay={i * 100}>
                   <article className="work-card">
                     <div className="work-card__media">
-                      <EditorialObject toneA={tone.a} toneB={tone.b} emblem={tone.emblem} />
+                      {image ? (
+                        <Image
+                          src={image}
+                          alt={item.title}
+                          fill
+                          loading="lazy"
+                          sizes="(min-width: 900px) 33vw, 100vw"
+                          style={{ objectFit: "cover", objectPosition: "center" }}
+                        />
+                      ) : (
+                        <EditorialObject toneA={tone.a} toneB={tone.b} emblem={tone.emblem} />
+                      )}
+                      {statusKey && (
+                        <span className="product-card__badge">{dict.homeStatusLabels[statusKey]}</span>
+                      )}
+                      {i === 0 && (
+                        <div className="work-card__cover-inset">
+                          <Image
+                            src="/images/homepage/covers/born-rare-cover.webp"
+                            alt="BORN RARE — Emma Kwon"
+                            width={90}
+                            height={134}
+                          />
+                        </div>
+                      )}
                     </div>
                     <div className="work-card__body">
                       <div className="work-card__label">{item.label}</div>
@@ -143,7 +185,14 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
           <div className="grid-2">
             <Reveal>
               <div className="founder-portrait">
-                <EditorialObject toneA="var(--dg-turquoise)" toneB="var(--dg-lavender)" emblem="ring" />
+                <Image
+                  src="/images/homepage/editorial/emma-kwon-at-work.webp"
+                  alt={`${dict.founder.name} — ${dict.founder.role}`}
+                  fill
+                  loading="lazy"
+                  sizes="(min-width: 900px) 50vw, 100vw"
+                  style={{ objectFit: "cover", objectPosition: "center" }}
+                />
               </div>
             </Reveal>
             <Reveal delay={100}>

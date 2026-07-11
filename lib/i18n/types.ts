@@ -34,6 +34,12 @@ export interface Dictionary {
     lead: string;
     items: { label: string; title: string; description: string }[];
   };
+  homeStatusLabels: {
+    published: string;
+    forthcoming: string;
+    studioConcept: string;
+    viewConcept: string;
+  };
   house: {
     eyebrow: string;
     heading: string;

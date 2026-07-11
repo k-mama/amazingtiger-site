@@ -56,6 +56,12 @@ const zhCN: Dictionary = {
       },
     ],
   },
+  homeStatusLabels: {
+    published: "已出版",
+    forthcoming: "即将出版",
+    studioConcept: "工作室概念",
+    viewConcept: "查看概念",
+  },
   house: {
     eyebrow: "出版社",
     heading: "我们为此腾出空间。",
