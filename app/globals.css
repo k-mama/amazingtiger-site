@@ -1021,17 +1021,27 @@ button {
 
 /* =========================================================================
    Reveal on scroll
+   Progressive enhancement only: content is visible by default. The
+   opacity: 0 starting state is scoped to `scripting: enabled` so browsers
+   without JS (or JS blocked/failed) never hide it in the first place —
+   Reveal.tsx also carries a timeout fallback in case IntersectionObserver
+   never fires once JS is running.
    ========================================================================= */
 
 .reveal {
-  opacity: 0;
-  transform: translateY(18px);
   transition: opacity 0.9s var(--ease-soft), transform 0.9s var(--ease-soft);
 }
 
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+@media (scripting: enabled) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -82,11 +82,13 @@ export default function AtelierPage({ params }: { params: { locale: string } }) 
         </Reveal>
       </section>
 
-      <section className="section-tight">
-        <div className="container">
-          <p className="status-note">{dict.note}</p>
-        </div>
-      </section>
+      {dict.note ? (
+        <section className="section-tight">
+          <div className="container">
+            <p className="status-note">{dict.note}</p>
+          </div>
+        </section>
+      ) : null}
     </>
   );
 }
