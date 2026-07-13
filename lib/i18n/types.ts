@@ -8,6 +8,7 @@ export interface Dictionary {
   nav: {
     home: string;
     house: string;
+    founder: string;
     atelier: string;
     shop: string;
     membership: string;
@@ -52,6 +53,7 @@ export interface Dictionary {
     body: string[];
     name: string;
     role: string;
+    cta: string;
   };
   studioNotes: {
     eyebrow: string;
@@ -384,5 +386,26 @@ export interface Dictionary {
     forBody: string;
     cta: string;
     note: string;
+  };
+  founderPage: {
+    eyebrow: string;
+    heading: string;
+    letterHeading: string;
+    letter: string[];
+    bioHeading: string;
+    bioBody: string[];
+    worksHeading: string;
+    worksLead: string;
+    works: { title: string; category: string; detail: string; roles: string }[];
+    scopeHeading: string;
+    scopeLead: string;
+    scopePoints: string[];
+    studioHeading: string;
+    studioBody: string[];
+    webHeading: string;
+    webBody: string;
+    forHeading: string;
+    forBody: string;
+    cta: string;
   };
 }

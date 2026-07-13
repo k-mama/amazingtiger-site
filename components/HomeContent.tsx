@@ -224,6 +224,9 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
                   {dict.founder.role}
                 </span>
               </p>
+              <Link href={`${navBase}/founder`} className="btn btn-secondary" style={{ marginTop: "1.25rem" }}>
+                {dict.founder.cta}
+              </Link>
             </Reveal>
           </div>
         </div>
