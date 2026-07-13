@@ -1,15 +1,13 @@
 // Cloudflare Pages Function — POST /api/consultation
 //
-// Skeleton only. Not yet wired to the consultation form on the frontend.
-// Cloudflare Pages Functions run server-side, so this is the only place
-// SUPABASE_SERVICE_ROLE_KEY may be read. Never import it into app/ or
-// components/.
+// Runs server-side only, so this is the only place RESEND_API_KEY may be
+// read. Validates the inquiry, applies basic spam checks, and relays it by
+// email via Resend. Never import RESEND_API_KEY into app/ or components/.
 
 interface Env {
-  SUPABASE_URL: string;
-  SUPABASE_SERVICE_ROLE_KEY: string;
   RESEND_API_KEY: string;
-  TURNSTILE_SECRET_KEY: string;
+  CONSULTATION_TO_EMAIL: string;
+  CONSULTATION_FROM_EMAIL?: string;
 }
 
 interface RequestContext {
@@ -19,14 +17,20 @@ interface RequestContext {
 
 interface ConsultationPayload {
   locale?: string;
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
   phone?: string;
   project_type?: string;
-  message: string;
-  preferred_contact?: string;
-  turnstile_token?: string;
+  message?: string;
+  // Honeypot — must arrive empty. Real visitors never see or fill this field.
+  company?: string;
+  // Milliseconds between the form rendering and this submission.
+  elapsed_ms?: number;
 }
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_ELAPSED_MS = 2500;
+const MAX_LENGTHS = { name: 200, email: 254, phone: 40, project_type: 200, message: 5000 };
 
 function jsonResponse(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
@@ -35,45 +39,98 @@ function jsonResponse(body: unknown, status = 200): Response {
   });
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function onRequestPost({ request, env }: RequestContext): Promise<Response> {
   let payload: ConsultationPayload;
 
   try {
     payload = await request.json();
   } catch {
-    return jsonResponse({ error: "Invalid JSON body" }, 400);
+    return jsonResponse({ ok: false, error: "invalid_json" }, 400);
   }
 
-  if (!payload.name || !payload.email || !payload.message) {
-    return jsonResponse({ error: "name, email, and message are required" }, 400);
+  const name = (payload.name ?? "").trim();
+  const email = (payload.email ?? "").trim();
+  const phone = (payload.phone ?? "").trim();
+  const projectType = (payload.project_type ?? "").trim();
+  const message = (payload.message ?? "").trim();
+  const locale = (payload.locale ?? "en").trim();
+
+  if (!name || !email || !message || !EMAIL_PATTERN.test(email)) {
+    return jsonResponse({ ok: false, error: "invalid_input" }, 400);
   }
 
-  // TODO: verify payload.turnstile_token against env.TURNSTILE_SECRET_KEY
-  //       before accepting the submission.
+  if (
+    name.length > MAX_LENGTHS.name ||
+    email.length > MAX_LENGTHS.email ||
+    phone.length > MAX_LENGTHS.phone ||
+    projectType.length > MAX_LENGTHS.project_type ||
+    message.length > MAX_LENGTHS.message
+  ) {
+    return jsonResponse({ ok: false, error: "too_long" }, 400);
+  }
 
-  // TODO: insert into the `consultations` table using the Supabase REST API
-  //       (env.SUPABASE_URL + env.SUPABASE_SERVICE_ROLE_KEY), e.g.
-  //
-  //   await fetch(`${env.SUPABASE_URL}/rest/v1/consultations`, {
-  //     method: "POST",
-  //     headers: {
-  //       apikey: env.SUPABASE_SERVICE_ROLE_KEY,
-  //       Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`,
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       locale: payload.locale ?? "en",
-  //       name: payload.name,
-  //       email: payload.email,
-  //       phone: payload.phone,
-  //       project_type: payload.project_type,
-  //       message: payload.message,
-  //       preferred_contact: payload.preferred_contact,
-  //     }),
-  //   });
+  // Honeypot tripped, or submitted faster than a human could plausibly type
+  // this form: accept quietly so the sender (bot) sees a normal success
+  // response, but never actually send the email.
+  const isSpam =
+    Boolean(payload.company) ||
+    (typeof payload.elapsed_ms === "number" && payload.elapsed_ms < MIN_ELAPSED_MS);
 
-  // TODO: send an admin notification and a confirmation email via Resend
-  //       (env.RESEND_API_KEY).
+  if (isSpam) {
+    return jsonResponse({ ok: true });
+  }
 
-  return jsonResponse({ status: "not_implemented" }, 501);
+  if (!env.RESEND_API_KEY || !env.CONSULTATION_TO_EMAIL) {
+    return jsonResponse({ ok: false, error: "not_configured" }, 503);
+  }
+
+  const fromAddress = env.CONSULTATION_FROM_EMAIL || "Amazing Tiger Publishing <onboarding@resend.dev>";
+
+  const html = [
+    `<p><strong>Locale:</strong> ${escapeHtml(locale)}</p>`,
+    `<p><strong>Name:</strong> ${escapeHtml(name)}</p>`,
+    `<p><strong>Email:</strong> ${escapeHtml(email)}</p>`,
+    phone ? `<p><strong>Phone:</strong> ${escapeHtml(phone)}</p>` : "",
+    projectType ? `<p><strong>Project type:</strong> ${escapeHtml(projectType)}</p>` : "",
+    `<p><strong>Message:</strong></p>`,
+    `<p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>`,
+  ].join("\n");
+
+  try {
+    const resendResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        from: fromAddress,
+        to: env.CONSULTATION_TO_EMAIL,
+        reply_to: email,
+        subject: `New consultation inquiry — ${name}${projectType ? ` (${projectType})` : ""}`,
+        html,
+      }),
+    });
+
+    if (!resendResponse.ok) {
+      return jsonResponse({ ok: false, error: "send_failed" }, 502);
+    }
+  } catch {
+    return jsonResponse({ ok: false, error: "send_failed" }, 502);
+  }
+
+  return jsonResponse({ ok: true });
+}
+
+export async function onRequestGet(): Promise<Response> {
+  return jsonResponse({ ok: false, error: "method_not_allowed" }, 405);
 }

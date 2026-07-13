@@ -249,8 +249,15 @@ export interface Dictionary {
     projectTypeOptions: string[];
     messageLabel: string;
     submit: string;
+    submitting: string;
     note: string;
     errorNote: string;
+    privacyNote: string;
+    errors: {
+      name: string;
+      email: string;
+      message: string;
+    };
     shopInquiryPrefix: string;
     faqHeading: string;
   };
