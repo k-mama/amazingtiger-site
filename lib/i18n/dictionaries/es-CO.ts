@@ -528,6 +528,28 @@ const esCO: Dictionary = {
       { title: "Sistemas de Diseño Editorial", description: "Un lenguaje de diseño consistente a lo largo de un cuerpo de trabajo." },
       { title: "Consulta Privada", description: "Una primera conversación en confianza sobre el trabajo, antes de definir el alcance." },
     ],
+    process: {
+      heading: "Cómo se hace un libro aquí",
+      lead: "La misma secuencia, siempre: sin saltarnos pasos, sin apurarnos para cumplir una fecha límite.",
+      steps: [
+        { title: "Consulta", description: "Leemos personalmente lo que nos traes y hablamos con claridad sobre cómo debería quedar el libro terminado." },
+        { title: "Lectura Editorial", description: "El material completo —manuscrito, archivo o historia— lo lee de principio a fin la misma persona editora." },
+        { title: "Estructuración", description: "La estructura, la secuencia y la voz se definen antes de diseñar una sola página. Suele ser la etapa más lenta, y la más importante." },
+        { title: "Diseño y Diagramación", description: "La tipografía, el diseño y los materiales se eligen específicamente para este libro, nunca de una plantilla." },
+        { title: "Corrección", description: "Una última revisión, en silencio: se comprueba línea por línea antes de preparar cualquier cosa para imprenta." },
+        { title: "Entrega", description: "Un libro terminado y listo para imprenta, preparado según especificación real de producción: listo para leerse, regalarse o lanzarse al mundo." },
+      ],
+    },
+    craft: {
+      heading: "Lo que no negociamos",
+      lead: "Una breve lista de estándares con los que el Atelier no transige.",
+      points: [
+        { title: "Una sola mano editorial", description: "La misma persona que da forma a nuestra lista publicada edita tu libro, desde la primera lectura hasta la última corrección." },
+        { title: "Un número limitado de proyectos", description: "Aceptamos pocos proyectos a la vez, a propósito, para que cada uno reciba atención real en lugar de un lugar apurado en una cola." },
+        { title: "Sin trato de plantilla", description: "La tipografía, la estructura y los materiales se eligen para el libro específico, nunca de una biblioteca de diseño genérica." },
+        { title: "Preparado según especificación", description: "Todo libro sale del Atelier listo para imprenta según especificación real de producción, no solo terminado para que se vea bien." },
+      ],
+    },
     forHeading: "Para quién es esto",
     forBody: "El Atelier es selectivo, así lo decidimos. Aceptamos un número limitado de proyectos a la vez, para clientes listos para darle a un trabajo serio la atención que merece: autores, fundadores, artistas y escritores de memorias con algo que vale la pena encuadernar.",
     cta: "Iniciar una Conversación",

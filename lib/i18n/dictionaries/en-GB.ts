@@ -528,6 +528,28 @@ const enGB: Dictionary = {
       { title: "Editorial Design Systems", description: "A consistent design language across a body of work." },
       { title: "Private Consultation", description: "A quiet first conversation about the work, before anything is scoped." },
     ],
+    process: {
+      heading: "How a book gets made here",
+      lead: "The same sequence, every time — nothing skipped, nothing rushed to fit a deadline.",
+      steps: [
+        { title: "Consultation", description: "We read what you bring us personally, and talk plainly about what the finished book should be." },
+        { title: "Editorial Read", description: "The full material — manuscript, archive, or story — is read start to finish by the same editorial hand." },
+        { title: "Shaping", description: "Structure, sequence, and voice are worked out before a single page is designed. Usually the slowest stage, and the most important." },
+        { title: "Design & Typesetting", description: "Typography, layout, and materials are chosen for this book specifically — never pulled from a template." },
+        { title: "Proofing", description: "A final, quiet pass — checked line by line before anything is prepared for print." },
+        { title: "Delivery", description: "A finished, print-ready book — prepared to real production specification, ready to be read, gifted, or launched." },
+      ],
+    },
+    craft: {
+      heading: "What we hold to",
+      lead: "A short list of standards the Atelier does not compromise on.",
+      points: [
+        { title: "One editorial hand", description: "The same editor who shapes our published list edits your book, from the first read to the final proof." },
+        { title: "A limited number of projects", description: "We take on few projects at a time, on purpose, so each one gets real attention instead of a rushed slot in a queue." },
+        { title: "No template treatment", description: "Typography, structure, and materials are chosen for the specific book — never pulled from a stock design library." },
+        { title: "Prepared to specification", description: "Every book leaves the Atelier print-ready to real production specification, not just finished to look at." },
+      ],
+    },
     forHeading: "Who this is for",
     forBody: "The Atelier is selective by design. We take on a limited number of projects at a time, for clients ready to give a serious piece of work the attention it deserves — authors, founders, artists, and memoir writers with something worth binding.",
     cta: "Begin a Conversation",

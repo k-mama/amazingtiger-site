@@ -72,6 +72,50 @@ export default function AtelierPage({ params }: { params: { locale: string } }) 
         </div>
       </section>
 
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <h2 className="section-heading">{dict.process.heading}</h2>
+            <p className="section-lead">{dict.process.lead}</p>
+          </Reveal>
+          <div className="process-timeline">
+            {dict.process.steps.map((step, i) => (
+              <Reveal key={step.title} delay={i * 70}>
+                <div className="process-step">
+                  <div className="process-step__rail">
+                    <span className="process-step__index">{i + 1}</span>
+                    {i < dict.process.steps.length - 1 && <span className="process-step__connector" />}
+                  </div>
+                  <div className="process-step__body">
+                    <h3 className="process-step__title">{step.title}</h3>
+                    <p className="process-step__desc">{step.description}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <h2 className="section-heading">{dict.craft.heading}</h2>
+            <p className="section-lead">{dict.craft.lead}</p>
+          </Reveal>
+          <div className="craft-grid">
+            {dict.craft.points.map((point, i) => (
+              <Reveal key={point.title} delay={i * 70}>
+                <div className="craft-card">
+                  <h3 className="craft-card__title">{point.title}</h3>
+                  <p className="craft-card__desc">{point.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="panel">
         <Reveal>
           <span className="eyebrow">{dict.forHeading}</span>

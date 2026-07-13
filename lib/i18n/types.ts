@@ -370,6 +370,16 @@ export interface Dictionary {
     servicesHeading: string;
     servicesLead: string;
     services: { title: string; description: string }[];
+    process: {
+      heading: string;
+      lead: string;
+      steps: { title: string; description: string }[];
+    };
+    craft: {
+      heading: string;
+      lead: string;
+      points: { title: string; description: string }[];
+    };
     forHeading: string;
     forBody: string;
     cta: string;

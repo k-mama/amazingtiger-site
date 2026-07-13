@@ -528,6 +528,28 @@ const ptBR: Dictionary = {
       { title: "Sistemas de Design Editorial", description: "Uma linguagem de design consistente ao longo de um corpo de trabalho." },
       { title: "Consulta Privada", description: "Uma primeira conversa em confiança sobre o trabalho, antes de definir o escopo." },
     ],
+    process: {
+      heading: "Como um livro é feito aqui",
+      lead: "A mesma sequência, sempre — sem pular etapas, sem pressa para cumprir um prazo.",
+      steps: [
+        { title: "Consulta", description: "Lemos pessoalmente o que você nos traz e conversamos com clareza sobre como o livro terminado deve ser." },
+        { title: "Leitura Editorial", description: "O material completo — manuscrito, arquivo ou história — é lido do início ao fim pela mesma mão editorial." },
+        { title: "Construção da Estrutura", description: "Estrutura, sequência e voz são definidas antes de qualquer página ser desenhada. Geralmente a etapa mais lenta, e a mais importante." },
+        { title: "Design e Diagramação", description: "Tipografia, layout e materiais são escolhidos especificamente para este livro — nunca retirados de um modelo pronto." },
+        { title: "Revisão", description: "Uma última passada, em silêncio — conferida linha por linha antes de qualquer preparo para impressão." },
+        { title: "Entrega", description: "Um livro terminado e pronto para impressão, preparado conforme especificação real de produção — pronto para ser lido, presenteado ou lançado ao mundo." },
+      ],
+    },
+    craft: {
+      heading: "O que não negociamos",
+      lead: "Uma breve lista de padrões que o Atelier não abre mão.",
+      points: [
+        { title: "Uma única mão editorial", description: "O mesmo editor que dá forma à nossa lista publicada edita o seu livro, da primeira leitura à revisão final." },
+        { title: "Um número limitado de projetos", description: "Aceitamos poucos projetos por vez, de propósito, para que cada um receba atenção real em vez de um lugar apressado numa fila." },
+        { title: "Sem tratamento de modelo pronto", description: "Tipografia, estrutura e materiais são escolhidos para o livro específico — nunca retirados de uma biblioteca de design genérica." },
+        { title: "Preparado conforme especificação", description: "Todo livro sai do Atelier pronto para impressão conforme especificação real de produção, não apenas terminado para parecer bom." },
+      ],
+    },
     forHeading: "Para quem é isto",
     forBody: "O Atelier é seletivo por escolha. Aceitamos um número limitado de projetos por vez, para clientes prontos para dar a um trabalho sério a atenção que ele merece — autores, fundadores, artistas e escritores de memórias com algo que vale a pena encadernar.",
     cta: "Iniciar uma Conversa",
