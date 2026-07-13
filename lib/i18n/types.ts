@@ -382,6 +382,11 @@ export interface Dictionary {
       lead: string;
       points: { title: string; description: string }[];
     };
+    founderBridge: {
+      eyebrow: string;
+      body: string;
+      cta: string;
+    };
     forHeading: string;
     forBody: string;
     cta: string;

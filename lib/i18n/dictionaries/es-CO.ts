@@ -552,6 +552,11 @@ const esCO: Dictionary = {
         { title: "Preparado según especificación", description: "Todo libro sale del Atelier listo para imprenta según especificación real de producción, no solo terminado para que se vea bien." },
       ],
     },
+    founderBridge: {
+      eyebrow: "Quién hace esto",
+      body: "Este proceso lo lleva a cabo una sola persona, desde la primera lectura hasta la prueba final. Las obras que Emma Kwon ha publicado y lanzado ella misma —no un catálogo de intenciones— son la prueba más clara de cómo funciona realmente el Atelier.",
+      cta: "Conoce a la fundadora",
+    },
     forHeading: "Para quién es esto",
     forBody: "El Atelier es selectivo, así lo decidimos. Aceptamos un número limitado de proyectos a la vez, para clientes listos para darle a un trabajo serio la atención que merece: autores, fundadores, artistas y escritores de memorias con algo que vale la pena encuadernar.",
     cta: "Iniciar una Conversación",
@@ -622,7 +627,7 @@ const esCO: Dictionary = {
     webHeading: "Más allá de los libros.",
     webBody: "La misma dirección se extiende a la web: Emma Kwon diseña y construye ella misma su propio sitio y el de Amazing Tiger Publishing —arquitectura de información, textos y dirección visual— junto con algunos proyectos web de marca y creativos por encargo.",
     forHeading: "Para quienes están pensando en el Atelier",
-    forBody: "Si estás pensando en traer aquí un manuscrito, un archivo o un proyecto sin terminar, el trabajo de arriba es la respuesta más clara: esto es lo que de verdad se hace, y con cuánto cuidado se sostiene.",
+    forBody: "Si estás pensando en traer aquí un manuscrito, un archivo o un proyecto sin terminar, el trabajo de arriba es la respuesta más clara: esto es lo que de verdad se hace, y con cuánto cuidado se sostiene. Si esto se parece a lo que estás construyendo, el siguiente paso es, simplemente, una conversación.",
     cta: "Solicitar una Consulta",
   },
 };

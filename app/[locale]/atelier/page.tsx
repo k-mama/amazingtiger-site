@@ -116,6 +116,20 @@ export default function AtelierPage({ params }: { params: { locale: string } }) 
         </div>
       </section>
 
+      <section className="section-tight">
+        <div className="container">
+          <Reveal>
+            <div style={{ borderTop: "1px solid var(--color-stone-line)", paddingTop: "1.75rem" }}>
+              <span className="eyebrow">{dict.founderBridge.eyebrow}</span>
+              <p className="section-lead" style={{ maxWidth: "620px" }}>{dict.founderBridge.body}</p>
+              <Link href={`${navBase}/founder`} className="btn btn-secondary" style={{ marginTop: "0.75rem" }}>
+                {dict.founderBridge.cta}
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <section className="panel">
         <Reveal>
           <span className="eyebrow">{dict.forHeading}</span>

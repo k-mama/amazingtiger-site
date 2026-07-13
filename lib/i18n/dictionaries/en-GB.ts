@@ -552,6 +552,11 @@ const enGB: Dictionary = {
         { title: "Prepared to specification", description: "Every book leaves the Atelier print-ready to real production specification, not just finished to look at." },
       ],
     },
+    founderBridge: {
+      eyebrow: "Who Makes This",
+      body: "This process is carried out by one person, from the first read to the final proof. Emma Kwon's own published and released works — not a portfolio of intentions — are the clearest proof of how the Atelier actually works.",
+      cta: "Meet the Founder",
+    },
     forHeading: "Who this is for",
     forBody: "The Atelier is selective by design. We take on a limited number of projects at a time, for clients ready to give a serious piece of work the attention it deserves — authors, founders, artists, and memoir writers with something worth binding.",
     cta: "Begin a Conversation",
@@ -622,7 +627,7 @@ const enGB: Dictionary = {
     webHeading: "Beyond books.",
     webBody: "The same direction extends to the web: Emma Kwon designs and builds her own site and the Amazing Tiger Publishing site herself — information architecture, copy, and visual direction — alongside select commissioned brand and creative web projects.",
     forHeading: "For those considering the Atelier",
-    forBody: "If you are weighing whether to bring a manuscript, an archive, or an unfinished project here, the work above is the clearest answer: this is what actually gets made, and how closely it is held.",
+    forBody: "If you are weighing whether to bring a manuscript, an archive, or an unfinished project here, the work above is the clearest answer: this is what actually gets made, and how closely it is held. If it speaks to what you are building, the next step is simply a conversation.",
     cta: "Request a Consultation",
   },
 };
