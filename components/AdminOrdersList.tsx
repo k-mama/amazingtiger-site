@@ -12,6 +12,10 @@ interface AdminOrdersListProps {
 
 type LoadState = "loading" | "ready" | "error";
 type DetailState = "loading" | "ready" | "error";
+type OrderStatus = "pending_inquiry" | "contacted" | "completed" | "cancelled";
+type RowUpdateState = "idle" | "updating" | "success" | "error";
+
+const STATUS_VALUES: OrderStatus[] = ["pending_inquiry", "contacted", "completed", "cancelled"];
 
 interface OrderRow {
   id: string;
@@ -61,6 +65,7 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
   const [itemsById, setItemsById] = useState<Record<string, OrderItemRow[]>>({});
   const [addressById, setAddressById] = useState<Record<string, OrderAddressDetail>>({});
   const [detailState, setDetailState] = useState<Record<string, DetailState>>({});
+  const [rowUpdates, setRowUpdates] = useState<Record<string, RowUpdateState>>({});
 
   useEffect(() => {
     let active = true;
@@ -137,6 +142,20 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
     setDetailState((prev) => ({ ...prev, [orderId]: "ready" }));
   }
 
+  async function handleStatusChange(orderId: string, nextStatus: OrderStatus) {
+    setRowUpdates((prev) => ({ ...prev, [orderId]: "updating" }));
+
+    const { error } = await supabase.from("orders").update({ status: nextStatus }).eq("id", orderId);
+
+    if (error) {
+      setRowUpdates((prev) => ({ ...prev, [orderId]: "error" }));
+      return;
+    }
+
+    setRows((prev) => prev.map((row) => (row.id === orderId ? { ...row, status: nextStatus } : row)));
+    setRowUpdates((prev) => ({ ...prev, [orderId]: "success" }));
+  }
+
   function formatSubtotal(cents: number, currency: string) {
     const amount = cents / 100;
     return amount.toLocaleString(locale === "ko" ? "ko-KR" : "en-US", { style: "currency", currency });
@@ -171,6 +190,7 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
                 <th>{dict.columns.status}</th>
                 <th>{dict.columns.subtotal}</th>
                 <th>{dict.columns.items}</th>
+                <th>{dict.columns.updateStatus}</th>
                 <th aria-hidden="true" />
               </tr>
             </thead>
@@ -180,6 +200,7 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
                 const rowDetailState = detailState[row.id];
                 const rowItems = itemsById[row.id];
                 const address = addressById[row.id];
+                const updateState = rowUpdates[row.id] ?? "idle";
                 return (
                   <Fragment key={row.id}>
                     <tr>
@@ -203,6 +224,36 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
                       <td>{formatSubtotal(row.total_cents, row.currency)}</td>
                       <td>{itemCounts[row.id] ?? 0}</td>
                       <td>
+                        <div className="admin-status-update">
+                          <select
+                            aria-label={dict.statusUpdate.label}
+                            className="admin-status-select"
+                            value={row.status}
+                            disabled={updateState === "updating"}
+                            onChange={(event) => handleStatusChange(row.id, event.target.value as OrderStatus)}
+                          >
+                            {STATUS_VALUES.map((value) => (
+                              <option key={value} value={value}>
+                                {dict.statusLabels[value]}
+                              </option>
+                            ))}
+                          </select>
+                          {updateState === "updating" && (
+                            <span className="admin-status-message">{dict.statusUpdate.updating}</span>
+                          )}
+                          {updateState === "success" && (
+                            <span className="admin-status-message admin-status-message--success">
+                              {dict.statusUpdate.success}
+                            </span>
+                          )}
+                          {updateState === "error" && (
+                            <span className="admin-status-message admin-status-message--error">
+                              {dict.statusUpdate.error}
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td>
                         <button type="button" className="btn-link" onClick={() => toggleDetails(row.id)}>
                           {expanded ? dict.hideDetails : dict.viewDetails}
                         </button>
@@ -210,7 +261,7 @@ export default function AdminOrdersList({ dict, locale }: AdminOrdersListProps) 
                     </tr>
                     {expanded && (
                       <tr>
-                        <td colSpan={10}>
+                        <td colSpan={11}>
                           <div className="admin-order-items">
                             <span className="admin-order-items__heading">{dict.itemsHeading}</span>
                             {rowDetailState === "loading" && <p className="status-note">{dict.itemsLoading}</p>}

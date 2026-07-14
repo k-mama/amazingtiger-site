@@ -2726,6 +2726,18 @@ button {
   color: var(--color-ink);
 }
 
+.status-pill--contacted {
+  border-color: rgba(250, 200, 158, 0.9);
+  background: rgba(250, 200, 158, 0.22);
+  color: var(--color-ink);
+}
+
+.status-pill--completed {
+  border-color: rgba(163, 230, 218, 0.9);
+  background: rgba(163, 230, 218, 0.28);
+  color: var(--color-ink);
+}
+
 .status-pill--refunded {
   border-color: var(--color-stone-line);
   background: rgba(220, 216, 210, 0.3);

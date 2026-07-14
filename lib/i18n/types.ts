@@ -217,8 +217,15 @@ export interface Dictionary {
         status: string;
         subtotal: string;
         items: string;
+        updateStatus: string;
       };
-      statusLabels: Record<"pending_inquiry" | "pending" | "paid" | "fulfilled" | "cancelled" | "refunded", string>;
+      statusLabels: Record<"pending_inquiry" | "contacted" | "completed" | "cancelled", string>;
+      statusUpdate: {
+        label: string;
+        updating: string;
+        success: string;
+        error: string;
+      };
       viewDetails: string;
       hideDetails: string;
       itemsHeading: string;

@@ -591,3 +591,20 @@ create policy "Public can submit items for a pending order request"
 
 alter table orders add column if not exists discount_code text;
 alter table orders add column if not exists discount_amount_cents integer not null default 0;
+
+-- =========================================================================
+-- MIGRATION — Admin order status workflow (New / Contacted / Completed / Cancelled)
+--
+-- The admin dashboard now moves a private order request through a small,
+-- fixed lifecycle: 'pending_inquiry' ("New" in the UI) -> 'contacted' ->
+-- 'completed', or 'cancelled' at any point. Adds 'contacted' and
+-- 'completed' to the allowed values — additive only, so existing rows and
+-- the older 'pending'/'paid'/'fulfilled'/'refunded' values (never written
+-- by any current code path) keep working. The existing
+-- "Admins can manage orders" policy (for all, using is_admin()) already
+-- covers this UPDATE — no RLS change needed. Safe to run more than once.
+-- =========================================================================
+
+alter table orders drop constraint if exists orders_status_check;
+alter table orders add constraint orders_status_check
+  check (status in ('pending_inquiry', 'pending', 'contacted', 'completed', 'paid', 'fulfilled', 'cancelled', 'refunded'));

@@ -1,7 +1,7 @@
 // Client-side-only private cart for Shop V1: product ids and quantities in
 // localStorage, nothing else. No personal data, no pricing snapshot, no
 // payment fields — this is a selection tray, not an order. Real order
-// saving arrives in a later phase (functions/api/create-checkout.ts).
+// saving happens at checkout (lib/shop/orders.ts).
 
 const CART_STORAGE_KEY = "at_private_cart_v1";
 const DISCOUNT_STORAGE_KEY = "at_private_cart_discount_v1";
