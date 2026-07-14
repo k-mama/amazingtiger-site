@@ -39,8 +39,8 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.profiles (id, email)
-  values (new.id, new.email);
+  insert into public.profiles (id, email, display_name)
+  values (new.id, new.email, new.raw_user_meta_data ->> 'display_name');
   return new;
 end;
 $$;
@@ -638,3 +638,34 @@ drop policy if exists "Public can submit private order requests" on orders;
 create policy "Public can submit private order requests"
   on orders for insert
   with check (status = 'pending_inquiry' and (user_id is null or user_id = auth.uid()));
+
+-- =========================================================================
+-- MIGRATION — Fix handle_new_user() to actually store display_name
+--
+-- Bug: this trigger only ever inserted (id, email) — the display name
+-- typed at signup (sent as auth user_metadata) was silently dropped, so
+-- `profiles.display_name` has been null for every signup to date, even
+-- though SignupForm.tsx has always sent it. Fixes the trigger for new
+-- signups and backfills existing profiles from auth.users.raw_user_meta_data
+-- where it's available. Safe to run more than once.
+-- =========================================================================
+
+create or replace function handle_new_user()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  insert into public.profiles (id, email, display_name)
+  values (new.id, new.email, new.raw_user_meta_data ->> 'display_name');
+  return new;
+end;
+$$;
+
+update public.profiles p
+set display_name = u.raw_user_meta_data ->> 'display_name'
+from auth.users u
+where p.id = u.id
+  and p.display_name is null
+  and u.raw_user_meta_data ->> 'display_name' is not null;
