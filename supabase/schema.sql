@@ -608,3 +608,33 @@ alter table orders add column if not exists discount_amount_cents integer not nu
 alter table orders drop constraint if exists orders_status_check;
 alter table orders add constraint orders_status_check
   check (status in ('pending_inquiry', 'pending', 'contacted', 'completed', 'paid', 'fulfilled', 'cancelled', 'refunded'));
+
+-- =========================================================================
+-- MIGRATION — Member dashboard: own orders / own consultations
+--
+-- The member dashboard shows a signed-in visitor their own order requests
+-- and consultation history. `orders.user_id` already existed with a
+-- "Users can view their own orders" SELECT policy; `consultations` had no
+-- user_id at all, so a logged-in submitter's request could never be tied
+-- back to their account. Adds the column, its SELECT policy, and — for
+-- both tables — tightens the public INSERT policy so a submitter can only
+-- ever attach their own auth.uid() (or leave it null as a guest), never
+-- someone else's id. Safe to run more than once.
+-- =========================================================================
+
+alter table consultations add column if not exists user_id uuid references auth.users (id) on delete set null;
+
+drop policy if exists "Users can view their own consultations" on consultations;
+create policy "Users can view their own consultations"
+  on consultations for select
+  using (auth.uid() = user_id);
+
+drop policy if exists "Anyone can submit a consultation request" on consultations;
+create policy "Anyone can submit a consultation request"
+  on consultations for insert
+  with check (user_id is null or user_id = auth.uid());
+
+drop policy if exists "Public can submit private order requests" on orders;
+create policy "Public can submit private order requests"
+  on orders for insert
+  with check (status = 'pending_inquiry' and (user_id is null or user_id = auth.uid()));

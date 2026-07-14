@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/i18n/config";
 import { supabase } from "@/lib/supabaseClient";
 import type { Dictionary } from "@/lib/i18n/types";
@@ -18,6 +19,7 @@ type FieldErrors = Partial<Record<"email" | "password" | "confirmPassword", stri
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function SignupForm({ dict, navBase, locale }: SignupFormProps) {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,7 +56,7 @@ export default function SignupForm({ dict, navBase, locale }: SignupFormProps) {
 
     setStatus("loading");
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: email.trim(),
       password,
       options: {
@@ -77,6 +79,16 @@ export default function SignupForm({ dict, navBase, locale }: SignupFormProps) {
       } else {
         setFormError(dict.errors.generic);
       }
+      return;
+    }
+
+    // With email confirmation disabled in Supabase, signUp already returns
+    // an active session — the account is real and usable immediately, so go
+    // straight to the dashboard rather than asking for an email click that
+    // isn't required. If confirmation is still required, there's no session
+    // yet; fall back to the "check your email" message.
+    if (data.session) {
+      router.push(`${navBase}/dashboard`);
       return;
     }
 

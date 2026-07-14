@@ -151,11 +151,40 @@ export interface Dictionary {
     };
     loggedIn: {
       signedInAs: string;
+      nameLabel: string;
       statusLabel: string;
       statusValue: string;
       logout: string;
     };
-    cards: { title: string; description: string }[];
+    myOrders: {
+      heading: string;
+      lead: string;
+      loading: string;
+      empty: string;
+      emptyCta: string;
+      error: string;
+      columns: {
+        createdAt: string;
+        status: string;
+        items: string;
+        total: string;
+      };
+      statusLabels: Record<"pending_inquiry" | "contacted" | "completed" | "cancelled", string>;
+    };
+    myConsultations: {
+      heading: string;
+      lead: string;
+      loading: string;
+      empty: string;
+      emptyCta: string;
+      error: string;
+      columns: {
+        createdAt: string;
+        projectType: string;
+        status: string;
+      };
+      statusLabels: Record<"new" | "in_progress" | "closed", string>;
+    };
     note: string;
   };
   admin: {

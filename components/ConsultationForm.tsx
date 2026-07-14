@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
+import { supabase } from "@/lib/supabaseClient";
 import { getProductBySlug, getProductCopy } from "@/lib/shop/products";
 
 interface ConsultationFormProps {
@@ -20,6 +21,7 @@ const SHOP_SUPPORT_OPTION_INDEX = 3;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DUPLICATE_WINDOW_MS = 60_000;
 const LAST_INQUIRY_KEY = "atp_consultation_last";
+const MIN_ELAPSED_MS = 2500;
 
 function inquiryFingerprint(name: string, email: string, message: string): string {
   return `${name.trim().toLowerCase()}|${email.trim().toLowerCase()}|${message.trim()}`;
@@ -91,9 +93,39 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
     setStatus("loading");
 
     const honeypot = new FormData(event.currentTarget).get("company");
+    const elapsedMs = Date.now() - mountedAt.current;
+
+    // Same quiet-accept behavior as the server: a bot trips the honeypot or
+    // submits faster than a human could type this form. Skip the writes
+    // entirely rather than storing or emailing anything.
+    if (honeypot || elapsedMs < MIN_ELAPSED_MS) {
+      setStatus("success");
+      return;
+    }
 
     try {
-      const response = await fetch("/api/consultation", {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { error: insertError } = await supabase.from("consultations").insert({
+        locale,
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim() || null,
+        project_type: projectType,
+        message: message.trim(),
+        user_id: user?.id ?? null,
+      });
+
+      if (insertError) {
+        setStatus("error");
+        return;
+      }
+
+      // Best-effort admin email alert — the inquiry is already saved above,
+      // so a failure here never blocks or changes the success state.
+      fetch("/api/consultation", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -103,17 +135,11 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
           phone: phone.trim() || undefined,
           project_type: projectType,
           message: message.trim(),
-          company: honeypot,
-          elapsed_ms: Date.now() - mountedAt.current,
+          elapsed_ms: elapsedMs,
         }),
+      }).catch(() => {
+        // Ignore — the inquiry is already saved.
       });
-
-      const result = (await response.json().catch(() => null)) as { ok?: boolean } | null;
-
-      if (!response.ok || !result?.ok) {
-        setStatus("error");
-        return;
-      }
 
       window.sessionStorage.setItem(LAST_INQUIRY_KEY, JSON.stringify({ fingerprint, time: Date.now() }));
       setStatus("success");

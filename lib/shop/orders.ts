@@ -69,8 +69,16 @@ export async function submitCheckoutRequest(input: CheckoutRequestInput): Promis
   // rely on reading the row back after INSERT.
   const orderId = crypto.randomUUID();
 
+  // Attaches the order to the signed-in member's account, if any, so it
+  // shows up under "My Orders" on the dashboard. Guests (no session) leave
+  // this null, same as before.
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   const { error: orderError } = await supabase.from("orders").insert({
     id: orderId,
+    user_id: user?.id ?? null,
     status: "pending_inquiry",
     total_cents: totalCents,
     currency,

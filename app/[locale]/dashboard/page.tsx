@@ -12,5 +12,5 @@ export default function DashboardPage({ params }: { params: { locale: string } }
   const locale = (isLocale(params.locale) ? params.locale : "en") as Locale;
   const dict = getDictionary(locale).dashboard;
 
-  return <DashboardView dict={dict} navBase={`/${locale}`} />;
+  return <DashboardView dict={dict} navBase={`/${locale}`} locale={locale} />;
 }
