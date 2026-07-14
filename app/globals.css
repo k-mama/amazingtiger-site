@@ -986,7 +986,7 @@ button {
   position: relative;
   z-index: 1;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: center;
   gap: var(--space-4);
 }
@@ -998,9 +998,10 @@ button {
 .hero__cover {
   position: relative;
   width: 100%;
-  max-width: 220px;
+  max-width: 148px;
   aspect-ratio: 2 / 3;
   flex-shrink: 0;
+  margin-top: var(--space-1);
 }
 
 .hero__cover img {
