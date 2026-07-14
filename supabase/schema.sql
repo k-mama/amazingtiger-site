@@ -669,3 +669,27 @@ from auth.users u
 where p.id = u.id
   and p.display_name is null
   and u.raw_user_meta_data ->> 'display_name' is not null;
+
+-- =========================================================================
+-- MIGRATION — Grant service_role table privileges
+--
+-- Bug: the original role-grants block (Section "Role grants" above) only
+-- granted table privileges to anon and authenticated. On a project whose
+-- tables were created by running raw SQL in the SQL Editor (rather than the
+-- Table Editor UI, which grants all three roles automatically), service_role
+-- ends up with no table-level privileges at all — every PostgREST request
+-- made with the service role / secret key fails with
+-- "permission denied for table X" (42501), even though service_role is
+-- meant to bypass RLS entirely. No current code path was affected (the
+-- browser only ever uses the anon/authenticated key; functions/api/*.ts
+-- don't yet touch Postgres with the service key), but any future Cloudflare
+-- Pages Function or admin tooling that authenticates with
+-- SUPABASE_SERVICE_ROLE_KEY would hit this immediately. Safe to run more
+-- than once.
+-- =========================================================================
+
+grant usage on schema public to service_role;
+grant select, insert, update, delete on all tables in schema public to service_role;
+grant usage, select on all sequences in schema public to service_role;
+alter default privileges in schema public grant select, insert, update, delete on tables to service_role;
+alter default privileges in schema public grant usage, select on sequences to service_role;
