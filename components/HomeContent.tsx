@@ -50,22 +50,34 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             { color: "rgba(251,240,195,0.7)", size: 300, bottom: "-100px", right: "10%" },
           ]}
         />
-        <div className="container hero__inner">
-          <div className="hero__eyebrow">
-            <span className="hero__eyebrow-mark" />
-            <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.hero.eyebrow}</span>
+        <div className="container hero__layout">
+          <div className="hero__inner">
+            <div className="hero__eyebrow">
+              <span className="hero__eyebrow-mark" />
+              <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.hero.eyebrow}</span>
+            </div>
+            <h1>{dict.hero.headline}</h1>
+            <p className="hero__sub">
+              <NoBreakText text={dict.hero.subhead} />
+            </p>
+            <div className="hero__actions">
+              <Link href={`${basePath === "/" ? "" : basePath}#philosophy`} className="btn btn-primary">
+                {dict.hero.ctaPrimary}
+              </Link>
+              <Link href={`${navBase}/consultation`} className="btn btn-secondary">
+                {dict.hero.ctaSecondary}
+              </Link>
+            </div>
           </div>
-          <h1>{dict.hero.headline}</h1>
-          <p className="hero__sub">
-            <NoBreakText text={dict.hero.subhead} />
-          </p>
-          <div className="hero__actions">
-            <Link href={`${basePath === "/" ? "" : basePath}#philosophy`} className="btn btn-primary">
-              {dict.hero.ctaPrimary}
-            </Link>
-            <Link href={`${navBase}/consultation`} className="btn btn-secondary">
-              {dict.hero.ctaSecondary}
-            </Link>
+          <div className="hero__cover">
+            <Image
+              src="/images/homepage/covers/born-rare-cover.webp"
+              alt="BORN RARE — Emma Kwon's published memoir"
+              fill
+              priority
+              sizes="(min-width: 900px) 280px, 220px"
+              style={{ objectFit: "contain" }}
+            />
           </div>
         </div>
       </section>

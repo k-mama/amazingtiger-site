@@ -35,6 +35,7 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
   const [projectType, setProjectType] = useState(dict.projectTypeOptions[0]);
   const [message, setMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [productTitle, setProductTitle] = useState<string | null>(null);
   const mountedAt = useRef(Date.now());
 
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
       if (product) {
         const copy = getProductCopy(product, locale);
         setMessage(`${dict.shopInquiryPrefix}${copy.title}. `);
+        setProductTitle(copy.title);
       }
     }
     // Runs once on mount to read the initial URL — intentionally ignores
@@ -154,6 +156,12 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
 
   return (
     <form onSubmit={handleSubmit} noValidate>
+      {productTitle && (
+        <p className="status-note" style={{ marginBottom: "var(--space-3)" }}>
+          {dict.shopInquiryPrefix}
+          <strong>{productTitle}</strong>
+        </p>
+      )}
       <div className={`form-field${fieldErrors.name ? " has-error" : ""}`}>
         <label htmlFor="consult-name">{dict.nameLabel}</label>
         <input

@@ -996,8 +996,10 @@ button {
 }
 
 .hero__cover {
+  position: relative;
   width: 100%;
   max-width: 220px;
+  aspect-ratio: 2 / 3;
   flex-shrink: 0;
 }
 
