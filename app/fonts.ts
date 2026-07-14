@@ -1,9 +1,7 @@
-import type { Metadata } from "next";
 import { Forum, Bodoni_Moda, Manrope, Inter } from "next/font/google";
-import { locales } from "@/lib/i18n/config";
-import "./globals.css";
 
-// Four-tier type system:
+// Four-tier type system, shared by both root layouts ((marketing-root) and
+// (intl)/[locale]) so next/font's font loaders are only ever called once:
 // - Forum: an elegant classical serif for every content headline, h1-h4.
 // - Bodoni Moda: the wordmark's "Amazing Tiger" line. Cormorant Garamond
 //   read as a classic literary archive rather than a cinematic, editorial,
@@ -13,55 +11,32 @@ import "./globals.css";
 // - Manrope: the wordmark's "PUBLISHING" line — a quiet, geometric,
 //   supporting-cast sans, medium weight, wide tracking, uppercase.
 // - Inter: body copy and main navigation, untouched.
-const displaySerif = Forum({
+export const displaySerif = Forum({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-heading",
   display: "swap",
 });
 
-const wordmarkSerif = Bodoni_Moda({
+export const wordmarkSerif = Bodoni_Moda({
   subsets: ["latin"],
   weight: ["500"],
   variable: "--font-wordmark-serif",
   display: "swap",
 });
 
-const wordmarkSans = Manrope({
+export const wordmarkSans = Manrope({
   subsets: ["latin"],
   weight: ["500"],
   variable: "--font-wordmark-sans",
   display: "swap",
 });
 
-const inter = Inter({
+export const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-inter",
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://amazingtiger-site.pages.dev"),
-  title: "Amazing Tiger Publishing — A Quiet Entrance",
-  description:
-    "Amazing Tiger Publishing is a refined entrance into Emma Kwon's publishing universe: books, memoirs, music, and rare voices, shaped with care.",
-  alternates: {
-    canonical: "/",
-    languages: {
-      ...Object.fromEntries(locales.map((l) => [l, l === "en" ? "/en" : `/${l}`])),
-      "x-default": "/",
-    },
-  },
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html
-      lang="en"
-      className={`${displaySerif.variable} ${wordmarkSerif.variable} ${wordmarkSans.variable} ${inter.variable}`}
-    >
-      <body>{children}</body>
-    </html>
-  );
-}
+export const fontVariables = `${displaySerif.variable} ${wordmarkSerif.variable} ${wordmarkSans.variable} ${inter.variable}`;

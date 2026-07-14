@@ -100,7 +100,7 @@ export default function SignupForm({ dict, navBase, locale }: SignupFormProps) {
       <div className="auth-card">
         <span className="eyebrow">{dict.eyebrow}</span>
         <h1>{dict.heading}</h1>
-        <p className="status-note status-note--success" style={{ marginTop: "1.25rem" }}>
+        <p className="status-note status-note--success" role="status" style={{ marginTop: "1.25rem" }}>
           {dict.success}
         </p>
       </div>
@@ -135,8 +135,9 @@ export default function SignupForm({ dict, navBase, locale }: SignupFormProps) {
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === "loading"}
             aria-invalid={Boolean(fieldErrors.email)}
+            aria-describedby={fieldErrors.email ? "signup-email-error" : undefined}
           />
-          {fieldErrors.email && <p className="field-error">{fieldErrors.email}</p>}
+          {fieldErrors.email && <p id="signup-email-error" className="field-error" role="alert">{fieldErrors.email}</p>}
         </div>
         <div className="form-field">
           <label htmlFor="signup-password">{dict.passwordLabel}</label>
@@ -149,8 +150,11 @@ export default function SignupForm({ dict, navBase, locale }: SignupFormProps) {
             onChange={(e) => setPassword(e.target.value)}
             disabled={status === "loading"}
             aria-invalid={Boolean(fieldErrors.password)}
+            aria-describedby={fieldErrors.password ? "signup-password-error" : undefined}
           />
-          {fieldErrors.password && <p className="field-error">{fieldErrors.password}</p>}
+          {fieldErrors.password && (
+            <p id="signup-password-error" className="field-error" role="alert">{fieldErrors.password}</p>
+          )}
         </div>
         <div className="form-field">
           <label htmlFor="signup-confirm-password">{dict.confirmPasswordLabel}</label>
@@ -163,8 +167,11 @@ export default function SignupForm({ dict, navBase, locale }: SignupFormProps) {
             onChange={(e) => setConfirmPassword(e.target.value)}
             disabled={status === "loading"}
             aria-invalid={Boolean(fieldErrors.confirmPassword)}
+            aria-describedby={fieldErrors.confirmPassword ? "signup-confirm-password-error" : undefined}
           />
-          {fieldErrors.confirmPassword && <p className="field-error">{fieldErrors.confirmPassword}</p>}
+          {fieldErrors.confirmPassword && (
+            <p id="signup-confirm-password-error" className="field-error" role="alert">{fieldErrors.confirmPassword}</p>
+          )}
         </div>
         <button type="submit" className="btn btn-primary btn-block" disabled={status === "loading"}>
           {status === "loading" ? dict.submitting : dict.submit}
@@ -172,7 +179,7 @@ export default function SignupForm({ dict, navBase, locale }: SignupFormProps) {
       </form>
 
       {status === "error" && (
-        <p className="status-note status-note--error" style={{ marginTop: "1.25rem" }}>{formError}</p>
+        <p className="status-note status-note--error" role="alert" style={{ marginTop: "1.25rem" }}>{formError}</p>
       )}
 
       <p style={{ marginTop: "1.75rem", fontSize: "0.85rem" }}>

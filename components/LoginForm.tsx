@@ -71,7 +71,7 @@ export default function LoginForm({ dict, navBase }: LoginFormProps) {
       <p className="section-lead" style={{ marginBottom: "1.75rem" }}>{dict.lead}</p>
 
       {justConfirmed && (
-        <p className="status-note status-note--success" style={{ marginBottom: "1.5rem" }}>
+        <p className="status-note status-note--success" role="status" style={{ marginBottom: "1.5rem" }}>
           {dict.confirmedBanner}
         </p>
       )}
@@ -87,8 +87,9 @@ export default function LoginForm({ dict, navBase }: LoginFormProps) {
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === "loading"}
             aria-invalid={Boolean(fieldErrors.email)}
+            aria-describedby={fieldErrors.email ? "login-email-error" : undefined}
           />
-          {fieldErrors.email && <p className="field-error">{fieldErrors.email}</p>}
+          {fieldErrors.email && <p id="login-email-error" className="field-error" role="alert">{fieldErrors.email}</p>}
         </div>
         <div className="form-field">
           <label htmlFor="login-password">{dict.passwordLabel}</label>
@@ -100,8 +101,11 @@ export default function LoginForm({ dict, navBase }: LoginFormProps) {
             onChange={(e) => setPassword(e.target.value)}
             disabled={status === "loading"}
             aria-invalid={Boolean(fieldErrors.password)}
+            aria-describedby={fieldErrors.password ? "login-password-error" : undefined}
           />
-          {fieldErrors.password && <p className="field-error">{fieldErrors.password}</p>}
+          {fieldErrors.password && (
+            <p id="login-password-error" className="field-error" role="alert">{fieldErrors.password}</p>
+          )}
         </div>
         <button type="submit" className="btn btn-primary btn-block" disabled={status === "loading"}>
           {status === "loading" ? dict.submitting : dict.submit}
@@ -109,7 +113,7 @@ export default function LoginForm({ dict, navBase }: LoginFormProps) {
       </form>
 
       {status === "error" && (
-        <p className="status-note status-note--error" style={{ marginTop: "1.25rem" }}>{formError}</p>
+        <p className="status-note status-note--error" role="alert" style={{ marginTop: "1.25rem" }}>{formError}</p>
       )}
 
       <p style={{ marginTop: "1.75rem", fontSize: "0.85rem" }}>

@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { Suspense, useEffect, useId, useRef, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { locales, localeNames, type Locale } from "@/lib/i18n/config";
 
 function stripLocalePrefix(pathname: string): string {
@@ -58,16 +58,32 @@ function AmazingTigerGlobeMark() {
 }
 
 export default function LanguageSwitcher({ locale }: { locale: Locale }) {
+  return (
+    <Suspense fallback={<LanguageSwitcherView locale={locale} query="" />}>
+      <LanguageSwitcherWithQuery locale={locale} />
+    </Suspense>
+  );
+}
+
+// Isolated behind Suspense: useSearchParams() forces a client-side-only
+// render for anything below it during static export unless it sits under a
+// Suspense boundary — the fallback above keeps the switcher itself in the
+// static HTML (just without query-string preservation) for crawlers and
+// pre-hydration paint.
+function LanguageSwitcherWithQuery({ locale }: { locale: Locale }) {
+  const searchParams = useSearchParams();
+  return <LanguageSwitcherView locale={locale} query={searchParams?.toString() ?? ""} />;
+}
+
+function LanguageSwitcherView({ locale, query }: { locale: Locale; query: string }) {
   const pathname = usePathname() || "/";
   const subpath = stripLocalePrefix(pathname);
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
   const hrefFor = (target: Locale) => {
-    if (target === "en") {
-      return subpath === "" ? "/" : `/en${subpath}`;
-    }
-    return `/${target}${subpath}`;
+    const path = target === "en" ? (subpath === "" ? "/" : `/en${subpath}`) : `/${target}${subpath}`;
+    return query ? `${path}?${query}` : path;
   };
 
   useEffect(() => {

@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import AuthNavLink from "./AuthNavLink";
 import LanguageSwitcher from "./LanguageSwitcher";
 import WordmarkLogo from "./WordmarkLogo";
+import { useDialogFocus } from "./useDialogFocus";
 
 interface MobileMenuProps {
   locale: Locale;
@@ -17,8 +18,11 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ locale, dict, basePath }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
   const navBase = basePath === "/" ? "/en" : basePath;
   const anchor = (id: string) => `${basePath === "/" ? "" : basePath}#${id}`;
+
+  useDialogFocus(open, panelRef);
 
   useEffect(() => {
     if (!open) return;
@@ -66,7 +70,7 @@ export default function MobileMenu({ locale, dict, basePath }: MobileMenuProps) 
           // which establishes a new containing block for descendant
           // position:fixed elements — without the portal this panel would
           // be clipped to the header's own small box instead of the screen.
-          <div className="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+          <div className="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Site menu" ref={panelRef}>
             <div className="mobile-menu-panel__inner">
               <div className="mobile-menu-panel__header">
                 <span className="wordmark">

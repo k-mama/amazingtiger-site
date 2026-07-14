@@ -60,12 +60,14 @@ export default function DiscountCodeForm({ appliedCode, onApply, onRemove, dict,
           }}
           placeholder={dict.placeholder}
           disabled={disabled}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? "discount-code-error" : undefined}
         />
         <button type="button" className="btn btn-secondary" onClick={handleApply} disabled={disabled || !input.trim()}>
           {dict.apply}
         </button>
       </div>
-      {error && <p className="field-error">{error}</p>}
+      {error && <p id="discount-code-error" className="field-error" role="alert">{error}</p>}
     </div>
   );
 }

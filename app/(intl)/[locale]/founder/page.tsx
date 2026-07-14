@@ -3,13 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
+import { localeAlternates } from "@/lib/i18n/seo";
 import Reveal from "@/components/Reveal";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
 import EditorialObject from "@/components/EditorialObject";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
-  return { title: getDictionary(params.locale).founderPage.heading };
+  return {
+    title: getDictionary(params.locale).founderPage.heading,
+    alternates: localeAlternates(params.locale, "/founder"),
+  };
 }
 
 const workTones: Array<{ a: string; b: string; emblem: "ring" | "line" }> = [

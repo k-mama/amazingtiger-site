@@ -59,6 +59,7 @@ interface FieldProps {
 }
 
 function Field({ id, label, value, onChange, error, type = "text", disabled }: FieldProps) {
+  const errorId = `${id}-error`;
   return (
     <div className={`form-field${error ? " has-error" : ""}`}>
       <label htmlFor={id}>{label}</label>
@@ -68,8 +69,10 @@ function Field({ id, label, value, onChange, error, type = "text", disabled }: F
         value={value}
         onChange={(event) => onChange(event.target.value)}
         disabled={disabled}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? errorId : undefined}
       />
-      {error && <p className="field-error">{error}</p>}
+      {error && <p id={errorId} className="field-error" role="alert">{error}</p>}
     </div>
   );
 }
@@ -227,7 +230,7 @@ export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProp
       <div className="section">
         <div className="container checkout-result">
           <span className="eyebrow">{dict.successHeading}</span>
-          <p className="status-note status-note--success">{dict.successMessage}</p>
+          <p className="status-note status-note--success" role="status">{dict.successMessage}</p>
           {orderId && (
             <p className="status-note">
               {dict.orderReferenceLabel}: {orderId.slice(0, 8).toUpperCase()}
@@ -268,7 +271,7 @@ export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProp
         <form onSubmit={handleSubmit} className="checkout-grid">
           <div className="checkout-form-col">
             {errorEntries.length > 0 && (
-              <div className="checkout-error-panel">
+              <div className="checkout-error-panel" role="alert">
                 <strong>{dict.errorBannerHeading}</strong>
                 <ul>
                   {errorEntries.map(([key, message]) => (
@@ -280,7 +283,9 @@ export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProp
               </div>
             )}
 
-            {view === "error" && <p className="status-note status-note--error">{dict.errorMessage}</p>}
+            {view === "error" && (
+              <p className="status-note status-note--error" role="alert">{dict.errorMessage}</p>
+            )}
 
             <div className="glass-panel glass-panel--solid checkout-section">
               <h2>{dict.billingHeading}</h2>

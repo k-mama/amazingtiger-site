@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import type { Locale } from "@/lib/i18n/config";
@@ -10,6 +10,7 @@ import { CART_OPEN_EVENT } from "@/lib/shop/cart";
 import { useCart } from "./useCart";
 import EditorialObject from "./EditorialObject";
 import QuantityStepper from "./QuantityStepper";
+import { useDialogFocus } from "./useDialogFocus";
 
 interface CartWidgetProps {
   locale: Locale;
@@ -22,8 +23,10 @@ export default function CartWidget({ locale, dict, navBase, variant = "header" }
   const { items, count, setQuantity, removeFromCart } = useCart();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => setMounted(true), []);
+  useDialogFocus(open, panelRef);
 
   // Only the header instance owns the drawer — the inline trigger (shop
   // hero) just asks it to open, so there is never more than one drawer
@@ -103,6 +106,7 @@ export default function CartWidget({ locale, dict, navBase, variant = "header" }
               aria-modal="true"
               aria-label={dict.title}
               onClick={(event) => event.stopPropagation()}
+              ref={panelRef}
             >
               <div className="cart-drawer__header">
                 <div>

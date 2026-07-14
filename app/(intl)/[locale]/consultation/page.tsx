@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
+import { localeAlternates } from "@/lib/i18n/seo";
 import ConsultationForm from "@/components/ConsultationForm";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
 import NoBreakText from "@/components/NoBreakText";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
-  return { title: getDictionary(params.locale).consultationPage.heading };
+  return {
+    title: getDictionary(params.locale).consultationPage.heading,
+    alternates: localeAlternates(params.locale, "/consultation"),
+  };
 }
 
 export default function ConsultationPage({ params }: { params: { locale: string } }) {

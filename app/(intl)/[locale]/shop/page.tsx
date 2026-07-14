@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
+import { localeAlternates } from "@/lib/i18n/seo";
 import { getAllProducts, getHomeFeaturedProducts } from "@/lib/shop/products";
 import ProductCard from "@/components/ProductCard";
 import ShopCatalogue from "@/components/ShopCatalogue";
@@ -11,7 +12,10 @@ import AmbientBackdrop from "@/components/AmbientBackdrop";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
-  return { title: getDictionary(params.locale).shopPage.heading };
+  return {
+    title: getDictionary(params.locale).shopPage.heading,
+    alternates: localeAlternates(params.locale, "/shop"),
+  };
 }
 
 export default function ShopPage({ params }: { params: { locale: string } }) {

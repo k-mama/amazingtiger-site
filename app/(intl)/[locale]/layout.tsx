@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { locales, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
+import { localeAlternates } from "@/lib/i18n/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import LocaleHtmlLang from "@/components/LocaleHtmlLang";
+import { fontVariables } from "../../fonts";
+import "../../globals.css";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -18,22 +20,27 @@ interface LocaleLayoutProps {
 export function generateMetadata({ params }: LocaleLayoutProps): Metadata {
   if (!isLocale(params.locale)) return {};
   const dict = getDictionary(params.locale);
-  const canonical = params.locale === "en" ? "/" : `/${params.locale}`;
-
-  const languages: Record<string, string> = { "x-default": "/" };
-  for (const l of locales) {
-    languages[l] = l === "en" ? "/en" : `/${l}`;
-  }
 
   return {
+    metadataBase: new URL("https://amazingtiger-site.pages.dev"),
     title: {
       default: dict.meta.title,
       template: `%s — Amazing Tiger Publishing`,
     },
     description: dict.meta.description,
-    alternates: {
-      canonical,
-      languages,
+    alternates: localeAlternates(params.locale),
+    openGraph: {
+      type: "website",
+      siteName: "Amazing Tiger Publishing",
+      title: dict.meta.title,
+      description: dict.meta.description,
+      images: [{ url: "/images/homepage/editorial/emma-kwon-at-work.webp" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.title,
+      description: dict.meta.description,
+      images: ["/images/homepage/editorial/emma-kwon-at-work.webp"],
     },
   };
 }
@@ -45,11 +52,12 @@ export default function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const basePath = `/${locale}`;
 
   return (
-    <>
-      <LocaleHtmlLang locale={locale} />
-      <Header locale={locale} dict={dict} basePath={basePath} />
-      <main>{children}</main>
-      <Footer locale={locale} dict={dict} basePath={basePath} />
-    </>
+    <html lang={locale} className={fontVariables}>
+      <body>
+        <Header locale={locale} dict={dict} basePath={basePath} />
+        <main>{children}</main>
+        <Footer locale={locale} dict={dict} basePath={basePath} />
+      </body>
+    </html>
   );
 }

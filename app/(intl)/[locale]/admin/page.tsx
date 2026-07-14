@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
+import { noIndex } from "@/lib/i18n/seo";
 import AdminView from "@/components/AdminView";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
-  return { title: getDictionary(params.locale).admin.heading };
+  return { title: getDictionary(params.locale).admin.heading, robots: noIndex };
 }
 
 export default function AdminPage({ params }: { params: { locale: string } }) {

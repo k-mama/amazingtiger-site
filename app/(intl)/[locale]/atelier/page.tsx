@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
+import { localeAlternates } from "@/lib/i18n/seo";
 import Reveal from "@/components/Reveal";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
 import DreamGlassIcon, { atelierGlyphList, dreamGlassTones } from "@/components/DreamGlassIcon";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
-  return { title: getDictionary(params.locale).atelierPage.heading };
+  return {
+    title: getDictionary(params.locale).atelierPage.heading,
+    alternates: localeAlternates(params.locale, "/atelier"),
+  };
 }
 
 export default function AtelierPage({ params }: { params: { locale: string } }) {

@@ -1,2 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /*/admin
+Disallow: /*/dashboard
+Disallow: /*/cart
+Disallow: /*/checkout
+Disallow: /*/login
+Disallow: /*/signup
+
+Sitemap: https://amazingtiger-site.pages.dev/sitemap.xml

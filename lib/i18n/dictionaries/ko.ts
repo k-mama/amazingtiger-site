@@ -142,7 +142,7 @@ const ko: Dictionary = {
     cta: "출판 상담하기",
   },
   footer: {
-    rights: "Amazing Tiger Publishing. All rights reserved.",
+    rights: "Amazing Tiger Publishing. 모든 권리 보유.",
     links: [
       { label: "자주 묻는 질문", href: "/consultation#faq" },
       { label: "상담", href: "/consultation" },

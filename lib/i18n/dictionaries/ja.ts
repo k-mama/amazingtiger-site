@@ -142,7 +142,7 @@ const ja: Dictionary = {
     cta: "ご相談を申し込む",
   },
   footer: {
-    rights: "Amazing Tiger Publishing. All rights reserved.",
+    rights: "Amazing Tiger Publishing. 無断複写・転載を禁じます。",
     links: [
       { label: "よくある質問", href: "/consultation#faq" },
       { label: "ご相談", href: "/consultation" },

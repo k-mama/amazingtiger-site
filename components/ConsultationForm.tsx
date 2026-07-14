@@ -149,7 +149,7 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
   }
 
   if (status === "success") {
-    return <p className="status-note status-note--success">{dict.note}</p>;
+    return <p className="status-note status-note--success" role="status">{dict.note}</p>;
   }
 
   return (
@@ -163,8 +163,9 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
           onChange={(event) => setName(event.target.value)}
           disabled={status === "loading"}
           aria-invalid={Boolean(fieldErrors.name)}
+          aria-describedby={fieldErrors.name ? "consult-name-error" : undefined}
         />
-        {fieldErrors.name && <p className="field-error">{fieldErrors.name}</p>}
+        {fieldErrors.name && <p id="consult-name-error" className="field-error" role="alert">{fieldErrors.name}</p>}
       </div>
       <div className={`form-field${fieldErrors.email ? " has-error" : ""}`}>
         <label htmlFor="consult-email">{dict.emailLabel}</label>
@@ -175,8 +176,9 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
           onChange={(event) => setEmail(event.target.value)}
           disabled={status === "loading"}
           aria-invalid={Boolean(fieldErrors.email)}
+          aria-describedby={fieldErrors.email ? "consult-email-error" : undefined}
         />
-        {fieldErrors.email && <p className="field-error">{fieldErrors.email}</p>}
+        {fieldErrors.email && <p id="consult-email-error" className="field-error" role="alert">{fieldErrors.email}</p>}
       </div>
       <div className="form-field">
         <label htmlFor="consult-phone">{dict.phoneLabel}</label>
@@ -211,8 +213,11 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
           onChange={(event) => setMessage(event.target.value)}
           disabled={status === "loading"}
           aria-invalid={Boolean(fieldErrors.message)}
+          aria-describedby={fieldErrors.message ? "consult-message-error" : undefined}
         />
-        {fieldErrors.message && <p className="field-error">{fieldErrors.message}</p>}
+        {fieldErrors.message && (
+          <p id="consult-message-error" className="field-error" role="alert">{fieldErrors.message}</p>
+        )}
       </div>
 
       {/* Honeypot: hidden from sighted and screen-reader users. Real visitors never fill this in. */}
@@ -228,7 +233,7 @@ export default function ConsultationForm({ dict, locale }: ConsultationFormProps
         {status === "loading" ? dict.submitting : dict.submit}
       </button>
       {status === "error" && (
-        <p className="status-note status-note--error" style={{ marginTop: "1rem" }}>{dict.errorNote}</p>
+        <p className="status-note status-note--error" role="alert" style={{ marginTop: "1rem" }}>{dict.errorNote}</p>
       )}
       <p className="status-note" style={{ marginTop: "1rem" }}>{dict.privacyNote}</p>
     </form>
