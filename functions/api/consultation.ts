@@ -90,7 +90,14 @@ export async function onRequestPost({ request, env }: RequestContext): Promise<R
   }
 
   if (!env.RESEND_API_KEY || !env.CONSULTATION_TO_EMAIL) {
-    return jsonResponse({ ok: false, error: "not_configured" }, 503);
+    // Named, not valued — safe to return. Lets us tell a Cloudflare Pages
+    // environment-variable scoping/naming problem apart from a code bug
+    // without exposing secret values.
+    const missing = [
+      !env.RESEND_API_KEY ? "RESEND_API_KEY" : null,
+      !env.CONSULTATION_TO_EMAIL ? "CONSULTATION_TO_EMAIL" : null,
+    ].filter(Boolean);
+    return jsonResponse({ ok: false, error: "not_configured", missing }, 503);
   }
 
   const fromAddress = env.CONSULTATION_FROM_EMAIL || "Amazing Tiger Publishing <onboarding@resend.dev>";
@@ -122,10 +129,14 @@ export async function onRequestPost({ request, env }: RequestContext): Promise<R
     });
 
     if (!resendResponse.ok) {
-      return jsonResponse({ ok: false, error: "send_failed" }, 502);
+      // Resend's own error text (invalid `from` domain, bad key, etc.) — not
+      // a secret, and the fastest way to diagnose delivery problems.
+      const detail = await resendResponse.text().catch(() => "");
+      return jsonResponse({ ok: false, error: "send_failed", detail }, 502);
     }
-  } catch {
-    return jsonResponse({ ok: false, error: "send_failed" }, 502);
+  } catch (err) {
+    const detail = err instanceof Error ? err.message : "unknown error";
+    return jsonResponse({ ok: false, error: "send_failed", detail }, 502);
   }
 
   return jsonResponse({ ok: true });
