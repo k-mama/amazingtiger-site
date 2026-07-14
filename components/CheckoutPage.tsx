@@ -189,6 +189,33 @@ export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProp
       return;
     }
 
+    // Best-effort admin alert — the order itself is already saved above and
+    // is the source of truth, so a failure here must never block or change
+    // the success state the customer sees.
+    if (newOrderId) {
+      fetch("/api/order-notify", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          order_id: newOrderId,
+          locale,
+          customer_name: `${billing.firstName} ${billing.lastName}`.trim(),
+          customer_email: billing.email,
+          phone: billing.phone,
+          country: billing.country,
+          total_label: total !== null ? `$${formatMoney(total, numberLocale)}` : undefined,
+          discount_code: discount?.code ?? null,
+          items: rows.map(({ item, copy, product }) => ({
+            title: copy.title,
+            quantity: item.quantity,
+            price_label: product.priceLabel,
+          })),
+        }),
+      }).catch(() => {
+        // Ignore — the order is already saved; this is only a heads-up email.
+      });
+    }
+
     clearCart();
     clearDiscountCode();
     setOrderId(newOrderId);

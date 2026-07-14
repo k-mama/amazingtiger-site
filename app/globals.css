@@ -2080,6 +2080,7 @@ button {
 }
 
 .cart-page__item-media {
+  position: relative;
   width: 84px;
   height: 100px;
   border-radius: var(--radius-sm);

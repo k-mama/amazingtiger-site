@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
@@ -65,7 +66,18 @@ export default function CartPage({ locale, navBase, dict }: CartPageProps) {
                   <Reveal key={item.slug} delay={i * 60}>
                     <div className="cart-page__item">
                       <div className="cart-page__item-media">
-                        <EditorialObject toneA={product.visualToneA} toneB={product.visualToneB} emblem="none" />
+                        {product.image ? (
+                          <Image
+                            src={product.image}
+                            alt={copy.title}
+                            fill
+                            loading="lazy"
+                            sizes="96px"
+                            style={{ objectFit: "cover", objectPosition: "center" }}
+                          />
+                        ) : (
+                          <EditorialObject toneA={product.visualToneA} toneB={product.visualToneB} emblem="none" />
+                        )}
                       </div>
                       <div className="cart-page__item-body">
                         <p className="cart-page__item-title">{copy.title}</p>
