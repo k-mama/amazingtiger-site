@@ -615,10 +615,12 @@ const en: Dictionary = {
       "I started this house because I kept meeting stories that didn't fit anywhere — too quiet for the market, too true for the trend cycle. Amazing Tiger Publishing is where those stories are allowed to stay whole.",
       "Before any of this, I trained and worked in software. I still bring that instinct to publishing — I would rather build a careful system once than repeat the same manual work on every book.",
       "I still edit every line myself, before anyone else sees it. That will not change as the house grows.",
+      "Now I want to offer that same care to you — to stand beside you and help your story reach the world in writing that does it justice.",
     ],
     bioHeading: "Founder",
     bioBody: [
-      "Emma Kwon is the founder and creative director of Amazing Tiger Publishing. Her background is in software and development; she later moved through several fields before returning to writing and publishing.",
+      "Emma Kwon is the founder and creative director of Amazing Tiger Publishing. In her twenties she worked as a programmer — nothing extraordinary, by her own account, just a good job at a company building a good product in the internet's early years. A lucky magazine feature from that time ended up standing in for the employment record she never kept. She married soon after, and spent the years that followed as an ordinary homemaker, raising two children to adulthood.",
+      "When her children were grown and the AI era arrived, she went back to school and back to making things, meeting the wave right as it broke rather than years later. That return earned her a merit scholarship in a culture and arts management program, and the same willingness to begin again now shapes how she runs the house.",
       "She wrote and published her own English-language memoir, BORN RARE — handling the manuscript, the editorial direction, the visual identity, and the Amazon KDP release herself, from the product pages to the promotional material.",
       "That process became the starting point for Amazing Tiger Publishing. The house has since grown beyond her own titles to include manuscript development for other writers — carrying a project from raw material to a finished, considered book.",
     ],

@@ -615,10 +615,12 @@ const esCO: Dictionary = {
       "Fundé esta casa porque me seguía encontrando con historias que no encajaban en ningún lado: demasiado calladas para el mercado, demasiado verdaderas para la moda del momento. Amazing Tiger Publishing es el lugar donde esas historias pueden quedarse completas.",
       "Antes de todo esto, estudié y trabajé en software. Todavía traigo ese instinto a la edición: prefiero construir un sistema cuidadoso una sola vez, en lugar de repetir el mismo trabajo manual en cada libro.",
       "Todavía edito cada línea yo misma, antes de que nadie más la vea. Eso no va a cambiar a medida que la casa crezca.",
+      "Ahora quiero ofrecer ese mismo cuidado a tu historia: acompañarte y ayudar a que llegue al mundo con una escritura que la haga justicia.",
     ],
     bioHeading: "Fundadora",
     bioBody: [
-      "Emma Kwon es la fundadora y directora creativa de Amazing Tiger Publishing. Su formación es en software y desarrollo; después pasó por varios campos antes de volver a la escritura y la edición.",
+      "Emma Kwon es la fundadora y directora creativa de Amazing Tiger Publishing. En sus veinte trabajó como programadora: nada extraordinario, según cuenta ella misma, solo un buen empleo en una empresa que desarrollaba un buen producto en los primeros años de internet. Una nota de revista, pura suerte, terminó siendo la única prueba de esa etapa, en lugar del certificado laboral que nunca guardó. Se casó poco después y pasó los años siguientes como una ama de casa común, criando a sus dos hijos hasta la edad adulta.",
+      "Cuando sus hijos ya eran adultos y llegó la era de la inteligencia artificial, volvió a estudiar y a crear cosas, subiéndose a la ola justo cuando rompía y no años después. Ese regreso le dio una beca por mérito académico en un programa de gestión cultural y artística, y esa disposición a volver a empezar hoy define cómo dirige la casa.",
       "Escribió y publicó sus propias memorias en inglés, BORN RARE, encargándose ella misma del manuscrito, la dirección editorial, la identidad visual y el lanzamiento en Amazon KDP, desde las páginas de producto hasta el material promocional.",
       "Ese proceso se convirtió en el punto de partida de Amazing Tiger Publishing. Desde entonces, la casa creció más allá de sus propios títulos hasta incluir el desarrollo de manuscritos de otras escritoras: llevar un proyecto desde el material bruto hasta un libro terminado y bien pensado.",
     ],
