@@ -94,7 +94,7 @@ export default function FounderPage({ params }: { params: { locale: string } }) 
             <Reveal delay={100}>
               <div className="founder-portrait" style={{ aspectRatio: "4 / 3" }}>
                 <Image
-                  src="/images/homepage/editorial/emma-kwon-at-work.webp"
+                  src="/images/homepage/editorial/emma-kwon-portrait-2.jpg"
                   alt={dict.bioHeading}
                   fill
                   loading="lazy"
