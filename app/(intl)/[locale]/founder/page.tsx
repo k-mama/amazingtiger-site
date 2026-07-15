@@ -92,14 +92,14 @@ export default function FounderPage({ params }: { params: { locale: string } }) 
               ))}
             </Reveal>
             <Reveal delay={100}>
-              <div className="founder-portrait" style={{ aspectRatio: "4 / 3" }}>
+              <div className="founder-portrait" style={{ aspectRatio: "3 / 4" }}>
                 <Image
                   src="/images/homepage/editorial/emma-kwon-portrait-2.jpg"
                   alt={dict.bioHeading}
                   fill
                   loading="lazy"
                   sizes="(min-width: 900px) 50vw, 100vw"
-                  style={{ objectFit: "cover", objectPosition: "center 25%" }}
+                  style={{ objectFit: "cover", objectPosition: "center 15%" }}
                 />
               </div>
             </Reveal>
