@@ -82,28 +82,14 @@ export default function FounderPage({ params }: { params: { locale: string } }) 
 
       <section className="section">
         <div className="container">
-          <div className="grid-2" style={{ alignItems: "start" }}>
-            <Reveal>
-              <span className="eyebrow">{dict.bioHeading}</span>
-              {dict.bioBody.map((paragraph, i) => (
-                <p key={i} className="section-lead" style={{ maxWidth: "520px" }}>
-                  {paragraph}
-                </p>
-              ))}
-            </Reveal>
-            <Reveal delay={100}>
-              <div className="founder-portrait" style={{ aspectRatio: "3 / 5" }}>
-                <Image
-                  src="/images/homepage/editorial/emma-kwon-portrait-2.jpg"
-                  alt={dict.bioHeading}
-                  fill
-                  loading="lazy"
-                  sizes="(min-width: 900px) 50vw, 100vw"
-                  style={{ objectFit: "cover", objectPosition: "center 15%" }}
-                />
-              </div>
-            </Reveal>
-          </div>
+          <Reveal>
+            <span className="eyebrow">{dict.bioHeading}</span>
+            {dict.bioBody.map((paragraph, i) => (
+              <p key={i} className="section-lead" style={{ maxWidth: "520px" }}>
+                {paragraph}
+              </p>
+            ))}
+          </Reveal>
         </div>
       </section>
 
