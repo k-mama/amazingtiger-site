@@ -42,7 +42,9 @@ export default function ConsultationPage({ params }: { params: { locale: string 
             {faqItems.map((item) => (
               <details key={item.question} className="faq-item">
                 <summary>
-                  <NoBreakText text={item.question} />
+                  <span>
+                    <NoBreakText text={item.question} />
+                  </span>
                 </summary>
                 <p>
                   <NoBreakText text={item.answer} />
