@@ -46,24 +46,18 @@
   /* Glossy "soft UI" depth: sheen highlight + inner shadow + contact + ambient.
      Shadow tint is warm ink-bronze, not periwinkle. */
   --shadow-glossy:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -14px 22px -16px rgba(54, 42, 28, 0.16),
-    0 2px 5px rgba(54, 42, 28, 0.07),
-    0 26px 48px -20px rgba(54, 42, 28, 0.38);
+    0 1px 2px rgba(54, 42, 28, 0.05),
+    0 18px 34px -22px rgba(54, 42, 28, 0.24);
   --shadow-glossy-hover:
-    inset 0 1.5px 0 rgba(255, 255, 255, 1),
-    inset 0 -14px 22px -16px rgba(54, 42, 28, 0.18),
-    0 3px 7px rgba(54, 42, 28, 0.09),
-    0 34px 60px -22px rgba(54, 42, 28, 0.42);
+    0 2px 4px rgba(54, 42, 28, 0.06),
+    0 24px 42px -22px rgba(54, 42, 28, 0.28);
   --shadow-glossy-dark:
     inset 0 1.5px 0 rgba(255, 255, 255, 0.1),
     inset 0 -18px 30px -18px rgba(0, 0, 0, 0.5),
     0 3px 8px rgba(0, 0, 0, 0.25),
     0 46px 90px -34px rgba(0, 0, 0, 0.65);
   --shadow-glossy-tile:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.85),
-    inset 0 -8px 12px -8px rgba(54, 42, 28, 0.18),
-    0 14px 26px -14px rgba(54, 42, 28, 0.4);
+    0 10px 18px -12px rgba(54, 42, 28, 0.26);
 
   --radius-lg: 26px;
   --radius-md: 18px;
@@ -281,8 +275,8 @@ button {
 .glass-panel {
   position: relative;
   background: var(--glass-light-bg);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
   border: 1px solid var(--glass-light-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-glossy);
@@ -316,8 +310,8 @@ button {
       var(--dg-lavender) 86%,
       var(--dg-rose) 100%
     );
-  backdrop-filter: blur(22px) saturate(170%);
-  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
   border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: var(--radius-lg);
   color: var(--color-ink);
@@ -356,8 +350,8 @@ button {
       rgba(228, 220, 201, 0.14) 100%
     ),
     rgba(251, 248, 244, 0.72);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.4), 0 10px 30px -24px rgba(54, 42, 28, 0.2);
 }
@@ -609,8 +603,8 @@ button {
       radial-gradient(70% 50% at 8% 0%, rgba(201, 169, 122, 0.18), transparent 60%),
       radial-gradient(70% 55% at 20% 100%, rgba(228, 220, 201, 0.2), transparent 60%),
       rgba(251, 248, 244, 0.92);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
     animation: mobile-menu-in 0.3s var(--ease-soft);
     overflow-y: auto;
   }
@@ -763,8 +757,8 @@ button {
     radial-gradient(120% 140% at 8% 0%, rgba(201, 169, 122, 0.14), transparent 55%),
     radial-gradient(120% 140% at 100% 100%, rgba(228, 220, 201, 0.16), transparent 55%),
     var(--glass-light-bg-strong);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
   border: 1px solid var(--glass-light-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-glossy-hover);
@@ -1154,8 +1148,8 @@ button {
 .work-card {
   position: relative;
   background: var(--glass-light-bg-strong);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(125%);
+  -webkit-backdrop-filter: blur(16px) saturate(125%);
   border: 1px solid var(--glass-light-border);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -1337,8 +1331,8 @@ button {
   margin: var(--space-6) auto;
   padding: var(--space-4);
   background: var(--glass-light-bg-strong);
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(125%);
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
   border: 1px solid var(--glass-light-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-glossy);
@@ -1400,8 +1394,8 @@ button {
   padding: 1.1rem 1.4rem;
   margin-top: var(--space-3);
   background: var(--glass-light-bg-strong);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(125%);
+  -webkit-backdrop-filter: blur(16px) saturate(125%);
   border: 1px solid var(--glass-light-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-glossy);
@@ -1464,8 +1458,8 @@ button {
 .product-card {
   position: relative;
   background: var(--glass-light-bg-strong);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(125%);
+  -webkit-backdrop-filter: blur(16px) saturate(125%);
   border: 1px solid var(--glass-light-border);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -1725,8 +1719,8 @@ button {
   width: min(420px, 100%);
   height: 100%;
   background: var(--glass-light-bg-strong);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
   border-left: 1px solid var(--glass-light-border);
   box-shadow: var(--shadow-glossy-hover);
   display: flex;
@@ -2444,8 +2438,8 @@ button {
   gap: var(--space-2);
   text-align: center;
   background: var(--glass-light-bg-strong);
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(125%);
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
   border: 1px solid var(--glass-light-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-glossy);
@@ -2485,8 +2479,8 @@ button {
 .info-card {
   padding: var(--space-3);
   background: var(--glass-light-bg-strong);
-  backdrop-filter: blur(14px) saturate(150%);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(125%);
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
   border: 1px solid var(--glass-light-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-glossy);
@@ -2836,8 +2830,8 @@ button {
 .faq-item {
   padding: 1.3rem 1.4rem;
   background: var(--glass-light-bg-strong);
-  backdrop-filter: blur(14px) saturate(150%);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(125%);
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
   border: 1px solid var(--glass-light-border);
   border-radius: var(--radius-md);
 }
