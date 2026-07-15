@@ -31,8 +31,8 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
       <section className="shop-hero">
         <AmbientBackdrop
           blobs={[
-            { color: "rgba(201,238,232,0.85)", size: 360, top: "-110px", left: "-60px" },
-            { color: "rgba(248,215,222,0.7)", size: 320, top: "-80px", right: "-60px" },
+            { color: "rgba(201,169,122,0.2)", size: 360, top: "-110px", left: "-60px" },
+            { color: "rgba(228,220,201,0.26)", size: 320, top: "-80px", right: "-60px" },
           ]}
         />
         <div className="container">

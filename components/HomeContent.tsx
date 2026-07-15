@@ -44,10 +44,10 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
       <section className="hero">
         <AmbientBackdrop
           blobs={[
-            { color: "rgba(201,238,232,0.9)", size: 420, top: "-120px", left: "-80px" },
-            { color: "rgba(248,215,222,0.75)", size: 360, top: "-60px", right: "-100px" },
-            { color: "rgba(228,218,247,0.7)", size: 380, bottom: "-160px", left: "20%" },
-            { color: "rgba(251,240,195,0.7)", size: 300, bottom: "-100px", right: "10%" },
+            { color: "rgba(201,169,122,0.22)", size: 420, top: "-120px", left: "-80px" },
+            { color: "rgba(228,220,201,0.28)", size: 360, top: "-60px", right: "-100px" },
+            { color: "rgba(236,229,216,0.3)", size: 380, bottom: "-160px", left: "20%" },
+            { color: "rgba(201,169,122,0.16)", size: 300, bottom: "-100px", right: "10%" },
           ]}
         />
         <div className="container hero__layout">

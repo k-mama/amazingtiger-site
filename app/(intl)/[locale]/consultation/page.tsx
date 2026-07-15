@@ -24,8 +24,8 @@ export default function ConsultationPage({ params }: { params: { locale: string 
     <div className="section" style={{ position: "relative", overflow: "hidden" }}>
       <AmbientBackdrop
         blobs={[
-          { color: "rgba(228,218,247,0.7)", size: 340, top: "-100px", left: "8%" },
-          { color: "rgba(251,240,195,0.6)", size: 300, top: "-60px", right: "6%" },
+          { color: "rgba(228,220,201,0.22)", size: 340, top: "-100px", left: "8%" },
+          { color: "rgba(201,169,122,0.15)", size: 300, top: "-60px", right: "6%" },
         ]}
       />
       <div className="container" style={{ position: "relative", maxWidth: "640px" }}>

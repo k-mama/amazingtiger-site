@@ -43,8 +43,8 @@ export default function FounderPage({ params }: { params: { locale: string } }) 
       <section className="shop-hero">
         <AmbientBackdrop
           blobs={[
-            { color: "rgba(228,218,247,0.85)", size: 380, top: "-120px", right: "-60px" },
-            { color: "rgba(252,220,199,0.7)", size: 320, bottom: "-140px", left: "6%" },
+            { color: "rgba(228,220,201,0.24)", size: 380, top: "-120px", right: "-60px" },
+            { color: "rgba(201,169,122,0.18)", size: 320, bottom: "-140px", left: "6%" },
           ]}
         />
         <div className="container">
