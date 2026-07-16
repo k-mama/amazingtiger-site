@@ -51,8 +51,8 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             { color: "rgba(201,169,122,0.16)", size: 300, bottom: "-100px", right: "10%" },
           ]}
         />
-        <div className="container hero__layout">
-          <div className="hero__inner">
+        <div className="bleed-grid hero__layout">
+          <div className="hero__inner bleed-grid__copy">
             <div className="hero__eyebrow">
               <span className="hero__eyebrow-mark" />
               <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.hero.eyebrow}</span>
@@ -70,48 +70,48 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
               </Link>
             </div>
           </div>
-          <div className="hero__cover">
-            <Image
-              src="/images/homepage/covers/born-rare-cover.webp"
-              alt="BORN RARE — Emma Kwon's published memoir"
-              fill
-              priority
-              sizes="(min-width: 900px) 280px, 220px"
-              style={{ objectFit: "contain" }}
-            />
+          <div className="hero__media bleed-grid__media">
+            <div className="hero__cover">
+              <Image
+                src="/images/homepage/covers/born-rare-cover.webp"
+                alt="BORN RARE — Emma Kwon's published memoir"
+                fill
+                priority
+                sizes="(min-width: 900px) 380px, 240px"
+                style={{ objectFit: "contain" }}
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="philosophy" className="section">
-        <div className="container">
-          <Reveal>
-            <div className="section-kicker">
-              <span className="chapter-mark">01</span>
-              <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.philosophy.eyebrow}</span>
+      <section id="philosophy" className="section-tight">
+        <Reveal>
+          <div className="bleed-grid">
+            <div className="bleed-grid__copy">
+              <div className="section-kicker">
+                <span className="chapter-mark">01</span>
+                <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.philosophy.eyebrow}</span>
+              </div>
+              <h2 className="section-heading section-heading--display">{dict.philosophy.heading}</h2>
+              {dict.philosophy.body.map((paragraph, i) => (
+                <p key={i} className="section-lead" style={{ marginTop: i === 0 ? "1.5rem" : "1rem" }}>
+                  {paragraph}
+                </p>
+              ))}
             </div>
-            <h2 className="section-heading">{dict.philosophy.heading}</h2>
-          </Reveal>
-          <Reveal delay={60}>
-            <div className="philosophy-image">
+            <div className="bleed-grid__media philosophy-image">
               <Image
                 src="/images/homepage/editorial/atelier-worktable.webp"
                 alt={dict.philosophy.heading}
                 fill
                 loading="lazy"
-                sizes="(min-width: 900px) 760px, 100vw"
+                sizes="(min-width: 900px) 50vw, 100vw"
                 style={{ objectFit: "cover", objectPosition: "center" }}
               />
             </div>
-          </Reveal>
-          <div className="grid-2" style={{ marginTop: "2.5rem", alignItems: "start" }}>
-            {dict.philosophy.body.map((paragraph, i) => (
-              <Reveal key={i} delay={i * 90}>
-                <p className="section-lead">{paragraph}</p>
-              </Reveal>
-            ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section id="works" className="section">
@@ -124,7 +124,7 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             <h2 className="section-heading">{dict.works.heading}</h2>
             <p className="section-lead">{dict.works.lead}</p>
           </Reveal>
-          <div className="grid-3" style={{ marginTop: "2.5rem" }}>
+          <div className="works-grid" style={{ marginTop: "2.5rem" }}>
             {dict.works.items.map((item, i) => {
               const tone = workTones[i % workTones.length];
               const image = workImages[i];
@@ -172,13 +172,14 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
         </div>
       </section>
 
-      <section id="house" className="panel">
+      <section id="house" className="panel panel--bleed">
+        <div className="container">
         <Reveal>
           <div className="section-kicker">
             <span className="chapter-mark">03</span>
             <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.house.eyebrow}</span>
           </div>
-          <h2 className="section-heading">{dict.house.heading}</h2>
+          <h2 className="section-heading section-heading--display">{dict.house.heading}</h2>
         </Reveal>
         <div className="grid-2" style={{ marginTop: "2.5rem", alignItems: "start" }}>
           <Reveal>
@@ -208,6 +209,7 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             </ul>
           </Reveal>
         </div>
+        </div>
       </section>
 
       <AtelierPreview dict={dict} basePath={basePath} />
@@ -226,13 +228,13 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             <h2 className="section-heading">{dict.studioNotes.heading}</h2>
             <p className="section-lead">{dict.studioNotes.lead}</p>
           </Reveal>
-          <div style={{ marginTop: "2rem" }}>
+          <div className="notes-grid" style={{ marginTop: "2rem" }}>
             {dict.studioNotes.notes.map((note, i) => (
               <Reveal key={note.title} delay={i * 80}>
                 <div className="note-card">
                   <div className="note-card__date">{note.date}</div>
                   <h3 className="note-card__title">{note.title}</h3>
-                  <p style={{ margin: 0, maxWidth: "620px" }}>{note.excerpt}</p>
+                  <p style={{ margin: 0 }}>{note.excerpt}</p>
                 </div>
               </Reveal>
             ))}

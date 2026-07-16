@@ -933,48 +933,49 @@ button {
 .hero {
   position: relative;
   overflow: hidden;
-  padding: var(--space-6) 0 var(--space-5);
+  padding: var(--space-5) 0;
 }
 
 .hero__layout {
   position: relative;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
+  width: 100%;
 }
 
 .hero__inner {
-  max-width: 760px;
+  max-width: 620px;
+}
+
+.hero__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero__cover {
   position: relative;
   width: 100%;
-  max-width: 148px;
+  max-width: 200px;
   aspect-ratio: 2 / 3;
-  flex-shrink: 0;
-  margin-top: var(--space-1);
+  transform: rotate(-4deg);
 }
 
 .hero__cover img {
   display: block;
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-glossy);
+  box-shadow: var(--shadow-glossy-hover);
 }
 
 @media (min-width: 900px) {
-  .hero__layout {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-5);
+  .hero {
+    min-height: 86vh;
+    display: flex;
+    align-items: center;
+    padding: var(--space-6) 0;
   }
 
   .hero__cover {
-    max-width: 280px;
-    margin-top: var(--space-2);
+    max-width: 340px;
   }
 }
 
@@ -992,8 +993,8 @@ button {
 }
 
 .hero h1 {
-  font-size: clamp(2.4rem, 5.4vw, 4.1rem);
-  letter-spacing: -0.015em;
+  font-size: clamp(2.6rem, 6.4vw, 5.6rem);
+  letter-spacing: -0.02em;
 }
 
 .hero__sub {
@@ -1233,6 +1234,102 @@ button {
 }
 
 /* =========================================================================
+   Bleed grid — a full-viewport-width section with a text column padded to
+   line up with the normal .container edge, and a media column that runs
+   all the way to the browser edge. No new colors/type — same palette and
+   fonts as everywhere else, just a much less "boxed-in" composition for
+   the homepage's editorial moments (Hero, Philosophy).
+   ========================================================================= */
+
+.bleed-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+}
+
+.bleed-grid__copy {
+  padding: var(--space-4) var(--space-3) var(--space-4) max(var(--space-3), calc((100vw - var(--max-width)) / 2 + var(--space-3)));
+  z-index: 1;
+}
+
+.bleed-grid__media {
+  position: relative;
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .bleed-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bleed-grid__copy {
+    padding: var(--space-4) var(--space-3) var(--space-3);
+  }
+
+  .bleed-grid__media {
+    min-height: 320px;
+  }
+}
+
+/* A big, full-bleed statement panel — breaks the section rhythm on
+   purpose, edge to edge with no rounded corners, for one moment of
+   emphasis rather than every section looking the same width. */
+.panel--bleed {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+}
+
+.panel--bleed .container {
+  max-width: var(--max-width);
+}
+
+.section-heading--display {
+  font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+  letter-spacing: -0.01em;
+  max-width: 760px;
+}
+
+/* Asymmetric editorial grid for Selected Works — one tall lead card,
+   two stacked beside it, instead of three equal-weight columns. */
+.works-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: var(--space-3);
+}
+
+.works-grid > *:first-child {
+  grid-row: 1 / 3;
+}
+
+.works-grid .work-card__media {
+  aspect-ratio: auto;
+  height: 100%;
+  min-height: 220px;
+}
+
+@media (max-width: 860px) {
+  .works-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .works-grid > *:first-child {
+    grid-row: auto;
+  }
+
+  .works-grid .work-card__media {
+    min-height: 260px;
+  }
+}
+
+/* =========================================================================
    Editorial object — abstract CSS "book cover" / collectible object mark.
    Replaces text-baked placeholder images (which cannot render non-Latin
    scripts). Purely decorative gradient + glass sweep + a small emblem —
@@ -1368,13 +1465,24 @@ button {
   margin-bottom: 0.3rem;
 }
 
-.note-card {
-  padding: var(--space-3) 0;
-  border-top: 1px solid var(--color-stone-line);
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
 }
 
-.note-card:last-child {
-  border-bottom: 1px solid var(--color-stone-line);
+@media (max-width: 860px) {
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.note-card {
+  padding: var(--space-3);
+  border-top: 2px solid var(--color-bronze);
+  background: var(--glass-light-bg);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  height: 100%;
 }
 
 .note-card__date {
