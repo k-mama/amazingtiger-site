@@ -27,7 +27,6 @@ export default function Header({ locale, dict, basePath }: HeaderProps) {
         <div className="site-nav">
           <ul className="site-nav__links">
             <li><Link href={basePath}>{dict.nav.home}</Link></li>
-            <li><Link href={anchor("house")}>{dict.nav.house}</Link></li>
             <li><Link href={`${navBase}/founder`}>{dict.nav.founder}</Link></li>
             <li><Link href={`${navBase}/atelier`}>{dict.nav.atelier}</Link></li>
             <li><Link href={`${navBase}/shop`}>{dict.nav.shop}</Link></li>
