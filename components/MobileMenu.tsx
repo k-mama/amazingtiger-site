@@ -61,7 +61,7 @@ export default function MobileMenu({ locale, dict, basePath }: MobileMenuProps) 
         onClick={() => setOpen(true)}
       >
         <span className="mobile-menu-toggle-line" />
-        Menu
+        <span className="mobile-menu-toggle-label">Menu</span>
       </button>
 
       {open &&

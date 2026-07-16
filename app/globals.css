@@ -423,6 +423,51 @@ button {
   gap: var(--space-4);
 }
 
+/* Below this width, logo + cart + language switcher + Menu button no
+   longer all fit on one line at the --space-4 gap this row uses on
+   desktop — tighten the gap and drop the Menu button down to an
+   icon-only circle (matching the cart/language buttons) so nothing
+   gets pushed off-screen. */
+@media (max-width: 640px) {
+  .site-nav {
+    gap: var(--space-1);
+  }
+
+  .mobile-menu-toggle {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 999px;
+  }
+
+  .mobile-menu-toggle-label {
+    display: none;
+  }
+}
+
+/* On real phone widths, logo + cart + language switcher + Menu still
+   doesn't fit even at the tighter 640px sizing above — the wordmark
+   text alone is wider than the remaining budget. Fold the language
+   switcher into the Menu panel only (it already renders its own
+   LanguageSwitcher in the panel header — see MobileMenu.tsx), and trim
+   the header's own side padding, so the three items that matter most
+   at a glance — logo, cart, Menu — stay fully on screen. */
+@media (max-width: 480px) {
+  .site-header__inner {
+    padding-left: var(--space-2);
+    padding-right: var(--space-2);
+  }
+
+  .site-nav > .lang-switch {
+    display: none;
+  }
+
+  .cart-trigger {
+    padding: 0.5rem 0.55rem;
+  }
+}
+
 .site-nav__login {
   position: relative;
   overflow: hidden;
