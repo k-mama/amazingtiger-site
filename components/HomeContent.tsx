@@ -21,6 +21,22 @@ const workTones: Array<{ a: string; b: string; emblem: "ring" | "line" }> = [
   { a: "var(--dg-lemon)", b: "var(--dg-mint)", emblem: "ring" },
 ];
 
+const founderWorkTones: Array<{ a: string; b: string; emblem: "ring" | "line" }> = [
+  { a: "var(--dg-aqua)", b: "var(--dg-periwinkle)", emblem: "ring" },
+  { a: "var(--dg-rose)", b: "var(--dg-peach)", emblem: "line" },
+  { a: "var(--dg-lemon)", b: "var(--dg-mint)", emblem: "ring" },
+  { a: "var(--dg-lavender)", b: "var(--dg-turquoise)", emblem: "line" },
+];
+
+// Real photography for the Founder page's works, matched by position. Works
+// without a photographed asset yet fall back to EditorialObject.
+const founderWorkImages: Array<string | null> = [
+  "/images/homepage/projects/born-rare-project.webp",
+  "/images/homepage/projects/emmaestro-project.webp",
+  null,
+  null,
+];
+
 // Real photography for the three Selected Works cards, matched by position —
 // the underlying dict.works.items copy is unchanged in every locale.
 const workImages = [
@@ -236,12 +252,144 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
                   {dict.founder.role}
                 </span>
               </p>
-              <Link href={`${navBase}/founder`} className="btn btn-secondary" style={{ marginTop: "1.25rem" }}>
-                {dict.founder.cta}
-              </Link>
             </Reveal>
           </div>
         </div>
+
+        <div className="container" style={{ marginTop: "3.5rem" }}>
+          <Reveal>
+            <span className="eyebrow">{dict.founderPage.letterHeading}</span>
+            {dict.founderPage.letter.map((paragraph, i) => (
+              <p key={i} className="section-lead" style={{ maxWidth: "620px" }}>
+                {paragraph}
+              </p>
+            ))}
+          </Reveal>
+        </div>
+
+        <div className="container" style={{ marginTop: "3rem" }}>
+          <Reveal>
+            <span className="eyebrow">{dict.founderPage.bioHeading}</span>
+            {dict.founderPage.bioBody.map((paragraph, i) => (
+              <p key={i} className="section-lead" style={{ maxWidth: "620px" }}>
+                {paragraph}
+              </p>
+            ))}
+          </Reveal>
+        </div>
+
+        <div className="container" style={{ marginTop: "3rem" }}>
+          <Reveal>
+            <h3 className="section-heading" style={{ fontSize: "clamp(1.4rem, 2.2vw, 1.9rem)" }}>
+              {dict.founderPage.worksHeading}
+            </h3>
+            <p className="section-lead">{dict.founderPage.worksLead}</p>
+          </Reveal>
+          <div className="grid-3" style={{ marginTop: "2rem" }}>
+            {dict.founderPage.works.map((work, i) => {
+              const tone = founderWorkTones[i % founderWorkTones.length];
+              const image = founderWorkImages[i];
+              return (
+                <Reveal key={work.title} delay={i * 90}>
+                  <article className="work-card">
+                    <div className="work-card__media">
+                      {image ? (
+                        <Image
+                          src={image}
+                          alt={work.title}
+                          fill
+                          loading="lazy"
+                          sizes="(min-width: 900px) 33vw, 100vw"
+                          style={{ objectFit: "cover", objectPosition: "center" }}
+                        />
+                      ) : (
+                        <EditorialObject toneA={tone.a} toneB={tone.b} emblem={tone.emblem} />
+                      )}
+                    </div>
+                    <div className="work-card__body">
+                      <div className="work-card__label">{work.category}</div>
+                      <h3 className="work-card__title">{work.title}</h3>
+                      <p style={{ margin: 0, fontSize: "0.9rem" }}>{work.detail}</p>
+                      <p style={{ margin: "0.6rem 0 0", fontSize: "0.8rem", color: "var(--color-bronze)" }}>
+                        {work.roles}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="container" style={{ marginTop: "3rem" }}>
+          <Reveal>
+            <h3 className="section-heading" style={{ fontSize: "clamp(1.4rem, 2.2vw, 1.9rem)" }}>
+              {dict.founderPage.scopeHeading}
+            </h3>
+            <p className="section-lead">{dict.founderPage.scopeLead}</p>
+          </Reveal>
+          <div className="grid-2" style={{ marginTop: "1.5rem", alignItems: "start" }}>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              {dict.founderPage.scopePoints.slice(0, Math.ceil(dict.founderPage.scopePoints.length / 2)).map((point) => (
+                <li
+                  key={point}
+                  style={{
+                    padding: "0.9rem 0",
+                    borderTop: "1px solid var(--color-stone-line)",
+                    color: "var(--color-ink-soft)",
+                    fontSize: "0.95rem",
+                  }}
+                >
+                  {point}
+                </li>
+              ))}
+            </ul>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              {dict.founderPage.scopePoints.slice(Math.ceil(dict.founderPage.scopePoints.length / 2)).map((point) => (
+                <li
+                  key={point}
+                  style={{
+                    padding: "0.9rem 0",
+                    borderTop: "1px solid var(--color-stone-line)",
+                    color: "var(--color-ink-soft)",
+                    fontSize: "0.95rem",
+                  }}
+                >
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="container" style={{ marginTop: "3rem" }}>
+          <Reveal>
+            <h3 className="section-heading" style={{ fontSize: "clamp(1.4rem, 2.2vw, 1.9rem)" }}>
+              {dict.founderPage.studioHeading}
+            </h3>
+            {dict.founderPage.studioBody.map((paragraph, i) => (
+              <p key={i} className="section-lead" style={{ maxWidth: "720px" }}>
+                {paragraph}
+              </p>
+            ))}
+          </Reveal>
+          <Reveal delay={90}>
+            <div style={{ marginTop: "1.5rem", paddingTop: "1.5rem", borderTop: "1px solid var(--color-stone-line)" }}>
+              <h4 style={{ marginBottom: "0.4rem" }}>{dict.founderPage.webHeading}</h4>
+              <p className="section-lead" style={{ maxWidth: "720px" }}>{dict.founderPage.webBody}</p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="panel">
+        <Reveal>
+          <span className="eyebrow">{dict.founderPage.forHeading}</span>
+          <p style={{ maxWidth: "620px" }}>{dict.founderPage.forBody}</p>
+          <Link href={`${navBase}/consultation`} className="btn btn-gold" style={{ marginTop: "1rem" }}>
+            {dict.founderPage.cta}
+          </Link>
+        </Reveal>
       </section>
 
       <section id="studio-notes" className="section">

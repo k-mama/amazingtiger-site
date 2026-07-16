@@ -7,7 +7,7 @@ const SITE_URL = "https://amazingtiger-site.pages.dev";
 // Only public, indexable marketing/catalogue pages — private or
 // transactional routes (cart, checkout, login, signup, dashboard, admin)
 // are excluded here and marked noindex in their own page metadata.
-const staticPaths = ["", "/atelier", "/founder", "/consultation", "/shop"];
+const staticPaths = ["", "/atelier", "/consultation", "/shop"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const productPaths = getAllProducts().map((product) => `/shop/${product.slug}`);
