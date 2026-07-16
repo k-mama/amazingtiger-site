@@ -8,7 +8,7 @@ const enGB: Dictionary = {
   },
   nav: {
     home: "Home",
-    house: "Publishing House",
+    house: "House",
     founder: "Founder",
     atelier: "Atelier",
     shop: "Shop",
