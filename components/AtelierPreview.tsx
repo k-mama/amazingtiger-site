@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n/types";
-import PanelCarousel from "./PanelCarousel";
+import HybridScrollStory from "./HybridScrollStory";
 import DreamGlassIcon, { atelierGlyphList, dreamGlassTones } from "./DreamGlassIcon";
 
 interface AtelierPreviewProps {
@@ -95,5 +95,5 @@ export default function AtelierPreview({ dict, basePath }: AtelierPreviewProps) 
     </div>,
   ];
 
-  return <PanelCarousel id="atelier" ariaLabel={atelierPreview.heading} panels={panels} />;
+  return <HybridScrollStory id="atelier" ariaLabel={atelierPreview.heading} panels={panels} />;
 }

@@ -1114,8 +1114,11 @@ button {
 
 @media (max-width: 640px) {
   .panel-carousel__viewport {
-    height: auto;
-    min-height: min(560px, 82vh);
+    /* Fixed (not auto) so one content-heavy panel — e.g. a full work-card
+       grid — can't stretch every other, shorter panel's empty space out
+       to match it. Panels that don't fit scroll internally instead (see
+       .panel-carousel__panel's own overflow-y: auto). */
+    height: min(560px, 82vh);
   }
 
   .panel-carousel__arrow {
@@ -1143,6 +1146,73 @@ button {
 }
 
 .panel-carousel__dot.is-active {
+  background: var(--color-bronze);
+  transform: scale(1.4);
+}
+
+/* =========================================================================
+   Scroll story — the hybrid pin+pan mode of HybridScrollStory.tsx.
+   A tall native-scroll track holds a `position: sticky` stage; the inner
+   track is translated horizontally in step with scroll position (no
+   wheel/touch hijacking — see useScrollStory.ts). The same chevron
+   (.panel-carousel__arrow, reused as-is) and dot controls call
+   scrollToPanel(), which moves the real page scroll position rather than
+   any separate local state — scrolling and clicking always agree. Only
+   ever mounted above 768px and outside prefers-reduced-motion; otherwise
+   HybridScrollStory renders PanelCarousel's plain click-only mode instead.
+   ========================================================================= */
+
+.scroll-story {
+  position: relative;
+}
+
+.scroll-story__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.scroll-story__track {
+  display: flex;
+  height: 100%;
+  will-change: transform;
+}
+
+.scroll-story__panel {
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 var(--space-3);
+  overflow-y: auto;
+}
+
+.scroll-story__dots {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-3);
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem;
+  z-index: 2;
+}
+
+.scroll-story__dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-stone-line);
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease-soft), transform 0.3s var(--ease-soft);
+}
+
+.scroll-story__dot.is-active {
   background: var(--color-bronze);
   transform: scale(1.4);
 }
@@ -2101,7 +2171,8 @@ button {
 }
 
 .product-detail__media {
-  position: relative;
+  position: sticky;
+  top: calc(var(--space-4) + 70px);
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -2484,6 +2555,7 @@ button {
   }
 
   .product-detail__media {
+    position: static;
     max-width: 420px;
   }
 

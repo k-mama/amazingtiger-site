@@ -9,6 +9,8 @@ import ShopCatalogue from "@/components/ShopCatalogue";
 import CartWidget from "@/components/CartWidget";
 import Reveal from "@/components/Reveal";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
+import PageHero from "@/components/PageHero";
+import HybridScrollStory from "@/components/HybridScrollStory";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
@@ -36,32 +38,32 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
           ]}
         />
         <div className="container">
-          <span className="eyebrow">{dict.eyebrow}</span>
-          <h1 className="section-heading">{dict.heading}</h1>
-          <p className="section-lead">{dict.lead}</p>
-
-          <div className="cart-preview">
-            <span className="cart-preview__label">{dict.cartNote}</span>
-            <CartWidget locale={locale} dict={fullDict.cart} navBase={navBase} variant="inline" />
-          </div>
+          <PageHero eyebrow={dict.eyebrow} heading={dict.heading} lead={dict.lead}>
+            <div className="cart-preview">
+              <span className="cart-preview__label">{dict.cartNote}</span>
+              <CartWidget locale={locale} dict={fullDict.cart} navBase={navBase} variant="inline" />
+            </div>
+          </PageHero>
         </div>
       </section>
 
-      <section id="featured" className="shop-section">
-        <div className="container">
-          <Reveal>
+      <HybridScrollStory
+        id="featured"
+        ariaLabel={dict.sections.featured.heading}
+        panels={[
+          <div key="intro" style={{ maxWidth: "560px" }}>
             <h2 className="section-heading">{dict.sections.featured.heading}</h2>
-            <p className="section-lead">{dict.sections.featured.lead}</p>
-          </Reveal>
-          <div className="product-grid">
-            {featured.map((product, i) => (
-              <Reveal key={product.id} delay={i * 70}>
-                <ProductCard product={product} locale={locale} navBase={navBase} dict={dict} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+            <p className="section-lead" style={{ maxWidth: "none", margin: "0 auto" }}>
+              {dict.sections.featured.lead}
+            </p>
+          </div>,
+          ...featured.map((product) => (
+            <div key={product.id} style={{ width: "100%", maxWidth: "360px" }}>
+              <ProductCard product={product} locale={locale} navBase={navBase} dict={dict} />
+            </div>
+          )),
+        ]}
+      />
 
       <section id="collection" className="shop-section">
         <div className="container">

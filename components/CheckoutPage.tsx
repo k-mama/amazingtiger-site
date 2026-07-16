@@ -9,6 +9,7 @@ import { formatMoney } from "@/lib/shop/format";
 import { getProductBySlug, getProductCopy } from "@/lib/shop/products";
 import { submitCheckoutRequest, type AddressFields } from "@/lib/shop/orders";
 import DiscountCodeForm from "./DiscountCodeForm";
+import PageHero from "./PageHero";
 import { useCart } from "./useCart";
 
 interface CheckoutPageProps {
@@ -248,12 +249,12 @@ export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProp
     return (
       <div className="section">
         <div className="container checkout-result">
-          <span className="eyebrow">{dict.eyebrow}</span>
-          <h1 className="section-heading">{dict.heading}</h1>
-          <p className="status-note">{dict.emptyNote}</p>
-          <Link href={`${navBase}/shop`} className="btn btn-primary">
-            {dict.backToCart}
-          </Link>
+          <PageHero eyebrow={dict.eyebrow} heading={dict.heading}>
+            <p className="status-note">{dict.emptyNote}</p>
+            <Link href={`${navBase}/shop`} className="btn btn-primary">
+              {dict.backToCart}
+            </Link>
+          </PageHero>
         </div>
       </div>
     );
@@ -264,9 +265,7 @@ export default function CheckoutPage({ locale, navBase, dict }: CheckoutPageProp
   return (
     <div className="section">
       <div className="container">
-        <span className="eyebrow">{dict.eyebrow}</span>
-        <h1 className="section-heading">{dict.heading}</h1>
-        <p className="section-lead">{dict.lead}</p>
+        <PageHero eyebrow={dict.eyebrow} heading={dict.heading} lead={dict.lead} />
 
         <form onSubmit={handleSubmit} className="checkout-grid">
           <div className="checkout-form-col">

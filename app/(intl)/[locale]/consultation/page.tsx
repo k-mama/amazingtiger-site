@@ -5,6 +5,7 @@ import { localeAlternates } from "@/lib/i18n/seo";
 import ConsultationForm from "@/components/ConsultationForm";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
 import NoBreakText from "@/components/NoBreakText";
+import PageHero from "@/components/PageHero";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
@@ -29,10 +30,8 @@ export default function ConsultationPage({ params }: { params: { locale: string 
         ]}
       />
       <div className="container" style={{ position: "relative", maxWidth: "640px" }}>
-        <span className="eyebrow">{dict.eyebrow}</span>
-        <h1 className="section-heading">{dict.heading}</h1>
-        <p className="section-lead" style={{ marginBottom: "var(--space-4)" }}>{dict.lead}</p>
-        <div className="glass-panel glass-panel--solid" style={{ padding: "var(--space-4)" }}>
+        <PageHero eyebrow={dict.eyebrow} heading={dict.heading} lead={dict.lead} />
+        <div className="glass-panel glass-panel--solid" style={{ padding: "var(--space-4)", marginTop: "var(--space-4)" }}>
           <ConsultationForm dict={dict} locale={locale} />
         </div>
 

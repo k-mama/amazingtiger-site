@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n/types";
 import NoBreakText from "./NoBreakText";
-import PanelCarousel from "./PanelCarousel";
+import HybridScrollStory from "./HybridScrollStory";
 
 interface FounderStoryProps {
   dict: Dictionary;
@@ -90,5 +90,5 @@ export default function FounderStory({ dict, basePath }: FounderStoryProps) {
     </div>,
   ];
 
-  return <PanelCarousel id="founder" ariaLabel={founder.heading} panels={panels} />;
+  return <HybridScrollStory id="founder" ariaLabel={founder.heading} panels={panels} />;
 }
