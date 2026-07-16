@@ -4,7 +4,7 @@ import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
 import { localeAlternates } from "@/lib/i18n/seo";
 import Reveal from "@/components/Reveal";
-import HybridScrollStory from "@/components/HybridScrollStory";
+import AmbientBackdrop from "@/components/AmbientBackdrop";
 import DreamGlassIcon, { atelierGlyphList, dreamGlassTones } from "@/components/DreamGlassIcon";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
@@ -20,84 +20,105 @@ export default function AtelierPage({ params }: { params: { locale: string } }) 
   const dict = getDictionary(locale).atelierPage;
   const navBase = `/${locale}`;
 
-  const panels = [
-    <div key="intro" style={{ maxWidth: "680px" }}>
-      <span className="eyebrow">{dict.eyebrow}</span>
-      <h1 className="section-heading">{dict.heading}</h1>
-      <p className="section-lead" style={{ maxWidth: "none", margin: "0 auto" }}>{dict.lead}</p>
-      <div style={{ marginTop: "1.5rem", textAlign: "left" }}>
-        {dict.intro.map((paragraph, i) => (
-          <p key={i} className="section-lead" style={{ maxWidth: "none" }}>
-            {paragraph}
-          </p>
-        ))}
-      </div>
-    </div>,
-
-    <div key="services" style={{ width: "100%", maxWidth: "1000px" }}>
-      <h2 className="section-heading" style={{ fontSize: "clamp(1.5rem, 2.4vw, 2rem)", margin: "0 auto" }}>
-        {dict.servicesHeading}
-      </h2>
-      <p className="section-lead" style={{ maxWidth: "none", margin: "0 auto" }}>{dict.servicesLead}</p>
-      <div className="info-grid" style={{ textAlign: "left" }}>
-        {dict.services.map((service, i) => {
-          const Glyph = atelierGlyphList[i % atelierGlyphList.length];
-          const tone = dreamGlassTones[i % dreamGlassTones.length];
-          return (
-            <div className="info-card" style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }} key={service.title}>
-              <DreamGlassIcon tone={tone}>
-                <Glyph />
-              </DreamGlassIcon>
-              <div>
-                <h3 style={{ marginBottom: "0.3rem" }}>{service.title}</h3>
-                <p style={{ margin: 0 }}>{service.description}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>,
-
-    <div key="process" style={{ width: "100%", maxWidth: "760px" }}>
-      <h2 className="section-heading" style={{ fontSize: "clamp(1.5rem, 2.4vw, 2rem)", margin: "0 auto" }}>
-        {dict.process.heading}
-      </h2>
-      <p className="section-lead" style={{ maxWidth: "none", margin: "0 auto" }}>{dict.process.lead}</p>
-      <div className="process-timeline" style={{ textAlign: "left" }}>
-        {dict.process.steps.map((step, i) => (
-          <div className="process-step" key={step.title}>
-            <div className="process-step__rail">
-              <span className="process-step__index">{i + 1}</span>
-              {i < dict.process.steps.length - 1 && <span className="process-step__connector" />}
-            </div>
-            <div className="process-step__body">
-              <h3 className="process-step__title">{step.title}</h3>
-              <p className="process-step__desc">{step.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>,
-
-    <div key="craft" style={{ width: "100%", maxWidth: "760px" }}>
-      <h2 className="section-heading" style={{ fontSize: "clamp(1.5rem, 2.4vw, 2rem)", margin: "0 auto" }}>
-        {dict.craft.heading}
-      </h2>
-      <p className="section-lead" style={{ maxWidth: "none", margin: "0 auto" }}>{dict.craft.lead}</p>
-      <div className="craft-grid" style={{ textAlign: "left" }}>
-        {dict.craft.points.map((point) => (
-          <div className="craft-card" key={point.title}>
-            <h3 className="craft-card__title">{point.title}</h3>
-            <p className="craft-card__desc">{point.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>,
-  ];
-
   return (
     <>
-      <HybridScrollStory id="atelier-page" ariaLabel={dict.heading} panels={panels} />
+      <section className="shop-hero">
+        <AmbientBackdrop
+          blobs={[
+            { color: "rgba(228,220,201,0.24)", size: 380, top: "-120px", right: "-60px" },
+            { color: "rgba(201,169,122,0.18)", size: 320, bottom: "-140px", left: "6%" },
+          ]}
+        />
+        <div className="container">
+          <span className="eyebrow">{dict.eyebrow}</span>
+          <h1 className="section-heading">{dict.heading}</h1>
+          <p className="section-lead">{dict.lead}</p>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="grid-2" style={{ alignItems: "start" }}>
+            {dict.intro.map((paragraph, i) => (
+              <Reveal key={i} delay={i * 90}>
+                <p className="section-lead">{paragraph}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <h2 className="section-heading">{dict.servicesHeading}</h2>
+            <p className="section-lead">{dict.servicesLead}</p>
+          </Reveal>
+          <div className="info-grid">
+            {dict.services.map((service, i) => {
+              const Glyph = atelierGlyphList[i % atelierGlyphList.length];
+              const tone = dreamGlassTones[i % dreamGlassTones.length];
+              return (
+                <Reveal key={service.title} delay={(i % 3) * 70}>
+                  <div className="info-card" style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                    <DreamGlassIcon tone={tone}>
+                      <Glyph />
+                    </DreamGlassIcon>
+                    <div>
+                      <h3 style={{ marginBottom: "0.3rem" }}>{service.title}</h3>
+                      <p style={{ margin: 0 }}>{service.description}</p>
+                    </div>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <h2 className="section-heading">{dict.process.heading}</h2>
+            <p className="section-lead">{dict.process.lead}</p>
+          </Reveal>
+          <div className="process-timeline">
+            {dict.process.steps.map((step, i) => (
+              <Reveal key={step.title} delay={i * 70}>
+                <div className="process-step">
+                  <div className="process-step__rail">
+                    <span className="process-step__index">{i + 1}</span>
+                    {i < dict.process.steps.length - 1 && <span className="process-step__connector" />}
+                  </div>
+                  <div className="process-step__body">
+                    <h3 className="process-step__title">{step.title}</h3>
+                    <p className="process-step__desc">{step.description}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <h2 className="section-heading">{dict.craft.heading}</h2>
+            <p className="section-lead">{dict.craft.lead}</p>
+          </Reveal>
+          <div className="craft-grid">
+            {dict.craft.points.map((point, i) => (
+              <Reveal key={point.title} delay={i * 70}>
+                <div className="craft-card">
+                  <h3 className="craft-card__title">{point.title}</h3>
+                  <p className="craft-card__desc">{point.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="section-tight">
         <div className="container">

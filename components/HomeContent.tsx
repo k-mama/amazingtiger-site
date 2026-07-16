@@ -5,7 +5,6 @@ import type { Dictionary } from "@/lib/i18n/types";
 import Reveal from "./Reveal";
 import ShopPreview from "./ShopPreview";
 import AtelierPreview from "./AtelierPreview";
-import FounderStory from "./FounderStory";
 import AmbientBackdrop from "./AmbientBackdrop";
 import EditorialObject from "./EditorialObject";
 import NoBreakText from "./NoBreakText";
@@ -51,8 +50,8 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             { color: "rgba(201,169,122,0.16)", size: 300, bottom: "-100px", right: "10%" },
           ]}
         />
-        <div className="bleed-grid hero__layout">
-          <div className="hero__inner bleed-grid__copy">
+        <div className="container hero__layout">
+          <div className="hero__inner">
             <div className="hero__eyebrow">
               <span className="hero__eyebrow-mark" />
               <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.hero.eyebrow}</span>
@@ -70,61 +69,55 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
               </Link>
             </div>
           </div>
-          <div className="hero__media bleed-grid__media">
-            <div className="hero__cover">
-              <Image
-                src="/images/homepage/covers/born-rare-cover.webp"
-                alt="BORN RARE — Emma Kwon's published memoir"
-                fill
-                priority
-                sizes="(min-width: 900px) 380px, 240px"
-                style={{ objectFit: "contain" }}
-              />
-            </div>
+          <div className="hero__cover">
+            <Image
+              src="/images/homepage/covers/born-rare-cover.webp"
+              alt="BORN RARE — Emma Kwon's published memoir"
+              fill
+              priority
+              sizes="(min-width: 900px) 280px, 220px"
+              style={{ objectFit: "contain" }}
+            />
           </div>
         </div>
       </section>
 
-      <section id="philosophy" className="section-tight">
-        <Reveal>
-          <div className="bleed-grid">
-            <div className="bleed-grid__copy">
-              <div className="section-kicker">
-                <span className="chapter-mark">01</span>
-                <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.philosophy.eyebrow}</span>
-              </div>
-              <h2 className="section-heading section-heading--display">{dict.philosophy.heading}</h2>
-              {dict.philosophy.body.map((paragraph, i) => (
-                <p key={i} className="section-lead" style={{ marginTop: i === 0 ? "1.5rem" : "1rem" }}>
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            <div className="bleed-grid__media philosophy-image">
+      <section id="philosophy" className="section">
+        <div className="container">
+          <Reveal>
+            <span className="eyebrow">{dict.philosophy.eyebrow}</span>
+            <h2 className="section-heading">{dict.philosophy.heading}</h2>
+          </Reveal>
+          <Reveal delay={60}>
+            <div className="philosophy-image">
               <Image
                 src="/images/homepage/editorial/atelier-worktable.webp"
                 alt={dict.philosophy.heading}
                 fill
                 loading="lazy"
-                sizes="(min-width: 900px) 50vw, 100vw"
+                sizes="(min-width: 900px) 760px, 100vw"
                 style={{ objectFit: "cover", objectPosition: "center" }}
               />
             </div>
+          </Reveal>
+          <div className="grid-2" style={{ marginTop: "2.5rem", alignItems: "start" }}>
+            {dict.philosophy.body.map((paragraph, i) => (
+              <Reveal key={i} delay={i * 90}>
+                <p className="section-lead">{paragraph}</p>
+              </Reveal>
+            ))}
           </div>
-        </Reveal>
+        </div>
       </section>
 
       <section id="works" className="section">
         <div className="container">
           <Reveal>
-            <div className="section-kicker">
-              <span className="chapter-mark">02</span>
-              <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.works.eyebrow}</span>
-            </div>
+            <span className="eyebrow">{dict.works.eyebrow}</span>
             <h2 className="section-heading">{dict.works.heading}</h2>
             <p className="section-lead">{dict.works.lead}</p>
           </Reveal>
-          <div className="works-grid" style={{ marginTop: "2.5rem" }}>
+          <div className="grid-3" style={{ marginTop: "2.5rem" }}>
             {dict.works.items.map((item, i) => {
               const tone = workTones[i % workTones.length];
               const image = workImages[i];
@@ -172,14 +165,10 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
         </div>
       </section>
 
-      <section id="house" className="panel panel--bleed">
-        <div className="container">
+      <section id="house" className="panel">
         <Reveal>
-          <div className="section-kicker">
-            <span className="chapter-mark">03</span>
-            <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.house.eyebrow}</span>
-          </div>
-          <h2 className="section-heading section-heading--display">{dict.house.heading}</h2>
+          <span className="eyebrow">{dict.house.eyebrow}</span>
+          <h2 className="section-heading">{dict.house.heading}</h2>
         </Reveal>
         <div className="grid-2" style={{ marginTop: "2.5rem", alignItems: "start" }}>
           <Reveal>
@@ -209,32 +198,66 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             </ul>
           </Reveal>
         </div>
-        </div>
       </section>
 
       <AtelierPreview dict={dict} basePath={basePath} />
 
       <ShopPreview dict={dict} basePath={basePath} locale={locale} />
 
-      <FounderStory dict={dict} basePath={basePath} />
+      <section id="founder" className="section">
+        <div className="container">
+          <div className="grid-2">
+            <Reveal>
+              <div className="founder-portrait">
+                <Image
+                  src="/images/homepage/editorial/emma-kwon-at-work.webp"
+                  alt={`${dict.founder.name} — ${dict.founder.role}`}
+                  fill
+                  loading="lazy"
+                  sizes="(min-width: 900px) 50vw, 100vw"
+                  style={{ objectFit: "cover", objectPosition: "center" }}
+                />
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <span className="eyebrow">{dict.founder.eyebrow}</span>
+              <h2 className="section-heading">
+                <NoBreakText text={dict.founder.heading} />
+              </h2>
+              {dict.founder.body.map((paragraph, i) => (
+                <p key={i} className="section-lead" style={{ maxWidth: "520px" }}>
+                  {paragraph}
+                </p>
+              ))}
+              <p style={{ marginTop: "1.5rem", fontFamily: "var(--font-display)", fontSize: "1.05rem" }}>
+                <NoBreakText text={dict.founder.name} />
+                <br />
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "0.85rem", color: "var(--color-bronze)" }}>
+                  {dict.founder.role}
+                </span>
+              </p>
+              <Link href={`${navBase}/founder`} className="btn btn-secondary" style={{ marginTop: "1.25rem" }}>
+                {dict.founder.cta}
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </section>
 
       <section id="studio-notes" className="section">
         <div className="container">
           <Reveal>
-            <div className="section-kicker">
-              <span className="chapter-mark">04</span>
-              <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.studioNotes.eyebrow}</span>
-            </div>
+            <span className="eyebrow">{dict.studioNotes.eyebrow}</span>
             <h2 className="section-heading">{dict.studioNotes.heading}</h2>
             <p className="section-lead">{dict.studioNotes.lead}</p>
           </Reveal>
-          <div className="notes-grid" style={{ marginTop: "2rem" }}>
+          <div style={{ marginTop: "2rem" }}>
             {dict.studioNotes.notes.map((note, i) => (
               <Reveal key={note.title} delay={i * 80}>
                 <div className="note-card">
                   <div className="note-card__date">{note.date}</div>
                   <h3 className="note-card__title">{note.title}</h3>
-                  <p style={{ margin: 0 }}>{note.excerpt}</p>
+                  <p style={{ margin: 0, maxWidth: "620px" }}>{note.excerpt}</p>
                 </div>
               </Reveal>
             ))}
@@ -246,10 +269,7 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
         <div className="container">
           <div className="grid-2" style={{ alignItems: "start" }}>
             <Reveal>
-              <div className="section-kicker">
-                <span className="chapter-mark">05</span>
-                <span className="eyebrow" style={{ marginBottom: 0 }}>{dict.membership.eyebrow}</span>
-              </div>
+              <span className="eyebrow">{dict.membership.eyebrow}</span>
               <h2 className="section-heading">{dict.membership.heading}</h2>
               <p className="section-lead">{dict.membership.body}</p>
               <ul style={{ listStyle: "none", margin: "1.2rem 0 1.5rem", padding: 0 }}>

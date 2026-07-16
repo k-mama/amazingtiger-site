@@ -41,7 +41,9 @@ export default function MobileMenu({ locale, dict, basePath }: MobileMenuProps) 
   }, [open]);
 
   const links = [
-    { label: dict.nav.house, href: basePath },
+    { label: dict.nav.home, href: basePath },
+    { label: dict.nav.house, href: anchor("house") },
+    { label: dict.nav.founder, href: `${navBase}/founder` },
     { label: dict.nav.atelier, href: `${navBase}/atelier` },
     { label: dict.nav.shop, href: `${navBase}/shop` },
     { label: dict.nav.membership, href: anchor("membership") },
@@ -59,7 +61,7 @@ export default function MobileMenu({ locale, dict, basePath }: MobileMenuProps) 
         onClick={() => setOpen(true)}
       >
         <span className="mobile-menu-toggle-line" />
-        <span className="mobile-menu-toggle-label">Menu</span>
+        Menu
       </button>
 
       {open &&

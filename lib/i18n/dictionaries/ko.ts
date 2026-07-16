@@ -8,7 +8,7 @@ const ko: Dictionary = {
   },
   nav: {
     home: "홈",
-    house: "출판사",
+    house: "출판사 소개",
     founder: "설립자",
     atelier: "아틀리에",
     shop: "숍",

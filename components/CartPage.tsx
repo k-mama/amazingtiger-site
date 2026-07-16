@@ -12,7 +12,6 @@ import { useCart } from "./useCart";
 import EditorialObject from "./EditorialObject";
 import QuantityStepper from "./QuantityStepper";
 import Reveal from "./Reveal";
-import PageHero from "./PageHero";
 
 interface CartPageProps {
   locale: Locale;
@@ -45,7 +44,9 @@ export default function CartPage({ locale, navBase, dict }: CartPageProps) {
   return (
     <div className="section">
       <div className="container">
-        <PageHero eyebrow={dict.eyebrow} heading={dict.heading} lead={dict.lead} />
+        <span className="eyebrow">{dict.eyebrow}</span>
+        <h1 className="section-heading">{dict.heading}</h1>
+        <p className="section-lead">{dict.lead}</p>
 
         {rows.length === 0 && (
           <div className="glass-panel glass-panel--solid cart-page-empty">

@@ -194,24 +194,6 @@ button {
   max-width: 640px;
 }
 
-/* Quiet magazine-folio pacing cue ahead of each major section's eyebrow —
-   purely typographic, no motion, reinforcing "next chapter" progression
-   down the page. */
-.section-kicker {
-  display: flex;
-  align-items: baseline;
-  gap: 0.85rem;
-  margin-bottom: var(--space-2);
-}
-
-.chapter-mark {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  letter-spacing: 0.05em;
-  color: var(--color-bronze);
-  opacity: 0.6;
-}
-
 .section-lead {
   max-width: 560px;
   font-size: 1.05rem;
@@ -315,14 +297,18 @@ button {
   margin: var(--space-5) auto;
   padding: var(--space-5) var(--space-4);
   background:
-    radial-gradient(65% 65% at 10% 0%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(65% 65% at 10% 0%, rgba(255, 255, 255, 0.5), transparent 60%),
     linear-gradient(
       115deg,
-      var(--color-ivory) 0%,
-      var(--color-ivory-deep) 45%,
-      var(--color-gold-soft) 100%
+      var(--dg-peach) 0%,
+      var(--dg-lemon) 20%,
+      var(--dg-mint) 38%,
+      var(--dg-aqua) 54%,
+      var(--dg-periwinkle) 70%,
+      var(--dg-lavender) 86%,
+      var(--dg-rose) 100%
     );
-  backdrop-filter: blur(22px) saturate(120%);
+  backdrop-filter: blur(22px) saturate(135%);
   -webkit-backdrop-filter: blur(22px) saturate(135%);
   border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: var(--radius-lg);
@@ -423,49 +409,60 @@ button {
   gap: var(--space-4);
 }
 
-/* Below this width, logo + cart + language switcher + Menu button no
-   longer all fit on one line at the --space-4 gap this row uses on
-   desktop — tighten the gap and drop the Menu button down to an
-   icon-only circle (matching the cart/language buttons) so nothing
-   gets pushed off-screen. */
-@media (max-width: 640px) {
-  .site-nav {
-    gap: var(--space-1);
-  }
-
-  .mobile-menu-toggle {
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    justify-content: center;
-    border-radius: 999px;
-  }
-
-  .mobile-menu-toggle-label {
-    display: none;
-  }
+.site-nav__links {
+  display: flex;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* On real phone widths, logo + cart + language switcher + Menu still
-   doesn't fit even at the tighter 640px sizing above — the wordmark
-   text alone is wider than the remaining budget. Fold the language
-   switcher into the Menu panel only (it already renders its own
-   LanguageSwitcher in the panel header — see MobileMenu.tsx), and trim
-   the header's own side padding, so the three items that matter most
-   at a glance — logo, cart, Menu — stay fully on screen. */
-@media (max-width: 480px) {
-  .site-header__inner {
-    padding-left: var(--space-2);
-    padding-right: var(--space-2);
-  }
+.site-nav__links li {
+  position: relative;
+}
 
-  .site-nav > .lang-switch {
-    display: none;
-  }
+.site-nav__links a {
+  display: inline-block;
+  font-size: 0.86rem;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-soft);
+  position: relative;
+  padding: 0.3rem 0.1rem;
+}
 
-  .cart-trigger {
-    padding: 0.5rem 0.55rem;
-  }
+.site-nav__links a:hover,
+.site-nav__links a:focus-visible {
+  color: var(--color-ink);
+}
+
+/* Pearl shimmer — a soft iridescent sheen, not a flat colour fill */
+.site-nav__links a::before {
+  content: "";
+  position: absolute;
+  left: -0.5rem;
+  right: -0.5rem;
+  top: -0.2rem;
+  bottom: -0.2rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(240, 231, 212, 0.6) 28%,
+    rgba(255, 255, 255, 0.9) 52%,
+    rgba(236, 229, 216, 0.6) 76%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 4px 14px -8px rgba(54, 42, 28, 0.35);
+  opacity: 0;
+  transform: scale(0.88);
+  transition: opacity 0.3s var(--ease-soft), transform 0.3s var(--ease-soft);
+  z-index: -1;
+}
+
+.site-nav__links a:hover::before,
+.site-nav__links a:focus-visible::before {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .site-nav__login {
@@ -518,158 +515,169 @@ button {
    Mobile menu — a "private salon" panel, not a hamburger drawer
    ========================================================================= */
 
-/* The trigger is the only nav control shown at every breakpoint — logo,
-   cart, language switcher, then this single "Menu" button opens every
-   link (incl. login/dashboard) in the full-screen panel below. */
 .mobile-menu-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid var(--color-stone-line);
-  color: var(--color-ink-soft);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.55rem 0.9rem;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  box-shadow:
-    0 8px 16px -12px rgba(54, 42, 28, 0.18);
-  transition: border-color 0.25s var(--ease-soft), color 0.25s var(--ease-soft), background-color 0.25s var(--ease-soft), box-shadow 0.25s var(--ease-soft), transform 0.25s var(--ease-soft);
+  display: none;
 }
 
-.mobile-menu-toggle:hover,
-.mobile-menu-toggle[aria-expanded="true"] {
-  border-color: var(--color-bronze);
-  color: var(--color-ink);
-  background: rgba(255, 255, 255, 0.65);
-  transform: translateY(-1px);
-  box-shadow:
-    0 12px 22px -12px rgba(54, 42, 28, 0.24);
-}
-
-.mobile-menu-toggle-line {
-  display: block;
-  width: 15px;
-  height: 1px;
-  background: currentColor;
-  position: relative;
-}
-
-.mobile-menu-toggle-line::before,
-.mobile-menu-toggle-line::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-}
-
-.mobile-menu-toggle-line::before {
-  top: -5px;
-}
-
-.mobile-menu-toggle-line::after {
-  top: 5px;
-}
-
-/* Rendered only while `open` (see MobileMenu.tsx), so no display:none
-   gate is needed here — and no breakpoint gate either, since the trigger
-   button that opens it is now shown at every viewport width. */
 .mobile-menu-panel {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  background:
-    radial-gradient(70% 50% at 8% 0%, rgba(201, 169, 122, 0.18), transparent 60%),
-    radial-gradient(70% 55% at 20% 100%, rgba(228, 220, 201, 0.2), transparent 60%),
-    rgba(251, 248, 244, 0.92);
-  backdrop-filter: blur(24px) saturate(140%);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
-  animation: mobile-menu-in 0.3s var(--ease-soft);
-  overflow-y: auto;
+  display: none;
 }
 
-.mobile-menu-panel__inner {
-  padding: 1.05rem var(--space-3) var(--space-5);
-  min-height: 100%;
-  max-width: 640px;
-  margin: 0 auto;
-}
+@media (max-width: 860px) {
+  .site-nav__links {
+    display: none;
+  }
 
-.mobile-menu-panel__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: var(--space-4);
-}
+  .site-nav__login {
+    display: none;
+  }
 
-.mobile-menu-panel__close {
-  width: 42px;
-  height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--color-stone-line);
-  border-radius: 999px;
-  color: var(--color-ink-soft);
-  cursor: pointer;
-  box-shadow:
-    0 8px 16px -12px rgba(54, 42, 28, 0.18);
-  transition: background-color 0.25s var(--ease-soft), box-shadow 0.25s var(--ease-soft), transform 0.25s var(--ease-soft);
-}
+  .mobile-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--color-stone-line);
+    color: var(--color-ink-soft);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.55rem 0.9rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    box-shadow:
+      0 8px 16px -12px rgba(54, 42, 28, 0.18);
+    transition: border-color 0.25s var(--ease-soft), color 0.25s var(--ease-soft), background-color 0.25s var(--ease-soft), box-shadow 0.25s var(--ease-soft), transform 0.25s var(--ease-soft);
+  }
 
-.mobile-menu-panel__close:hover {
-  background: rgba(255, 255, 255, 0.75);
-  transform: translateY(-1px);
-}
+  .mobile-menu-toggle:hover,
+  .mobile-menu-toggle[aria-expanded="true"] {
+    border-color: var(--color-bronze);
+    color: var(--color-ink);
+    background: rgba(255, 255, 255, 0.65);
+    transform: translateY(-1px);
+    box-shadow:
+      0 12px 22px -12px rgba(54, 42, 28, 0.24);
+  }
 
-.mobile-menu-panel__links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  .mobile-menu-toggle-line {
+    display: block;
+    width: 15px;
+    height: 1px;
+    background: currentColor;
+    position: relative;
+  }
 
-.mobile-menu-panel__links li {
-  border-bottom: 1px solid var(--color-stone-line);
-}
+  .mobile-menu-toggle-line::before,
+  .mobile-menu-toggle-line::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+  }
 
-.mobile-menu-panel__links a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.15rem 0.4rem;
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: var(--color-ink);
-}
+  .mobile-menu-toggle-line::before {
+    top: -5px;
+  }
 
-.mobile-menu-panel__links li:nth-child(7n+1) a:hover { color: var(--color-bronze); }
-.mobile-menu-panel__links li:nth-child(7n+2) a:hover { color: var(--color-bronze); }
+  .mobile-menu-toggle-line::after {
+    top: 5px;
+  }
 
-.mobile-menu-panel__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--dot-tint, var(--dg-aqua));
-  flex-shrink: 0;
-}
+  .mobile-menu-panel {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background:
+      radial-gradient(70% 50% at 8% 0%, rgba(201, 169, 122, 0.18), transparent 60%),
+      radial-gradient(70% 55% at 20% 100%, rgba(228, 220, 201, 0.2), transparent 60%),
+      rgba(251, 248, 244, 0.92);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    animation: mobile-menu-in 0.3s var(--ease-soft);
+    overflow-y: auto;
+  }
 
-.mobile-menu-panel__links li:nth-child(6n+1) { --dot-tint: var(--dg-aqua); }
-.mobile-menu-panel__links li:nth-child(6n+2) { --dot-tint: var(--dg-rose); }
-.mobile-menu-panel__links li:nth-child(6n+3) { --dot-tint: var(--dg-lemon); }
-.mobile-menu-panel__links li:nth-child(6n+4) { --dot-tint: var(--dg-lavender); }
-.mobile-menu-panel__links li:nth-child(6n+5) { --dot-tint: var(--dg-peach); }
-.mobile-menu-panel__links li:nth-child(6n+6) { --dot-tint: var(--dg-periwinkle); }
+  .mobile-menu-panel__inner {
+    padding: 1.05rem var(--space-3) var(--space-5);
+    min-height: 100%;
+  }
 
-.mobile-menu-panel__foot {
-  margin-top: var(--space-4);
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  .mobile-menu-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--space-4);
+  }
+
+  .mobile-menu-panel__close {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--color-stone-line);
+    border-radius: 999px;
+    color: var(--color-ink-soft);
+    cursor: pointer;
+    box-shadow:
+      0 8px 16px -12px rgba(54, 42, 28, 0.18);
+    transition: background-color 0.25s var(--ease-soft), box-shadow 0.25s var(--ease-soft), transform 0.25s var(--ease-soft);
+  }
+
+  .mobile-menu-panel__close:hover {
+    background: rgba(255, 255, 255, 0.75);
+    transform: translateY(-1px);
+  }
+
+  .mobile-menu-panel__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-menu-panel__links li {
+    border-bottom: 1px solid var(--color-stone-line);
+  }
+
+  .mobile-menu-panel__links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.15rem 0.4rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-ink);
+  }
+
+  .mobile-menu-panel__links li:nth-child(7n+1) a:hover { color: var(--color-bronze); }
+  .mobile-menu-panel__links li:nth-child(7n+2) a:hover { color: var(--color-bronze); }
+
+  .mobile-menu-panel__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--dot-tint, var(--dg-aqua));
+    flex-shrink: 0;
+  }
+
+  .mobile-menu-panel__links li:nth-child(6n+1) { --dot-tint: var(--dg-aqua); }
+  .mobile-menu-panel__links li:nth-child(6n+2) { --dot-tint: var(--dg-rose); }
+  .mobile-menu-panel__links li:nth-child(6n+3) { --dot-tint: var(--dg-lemon); }
+  .mobile-menu-panel__links li:nth-child(6n+4) { --dot-tint: var(--dg-lavender); }
+  .mobile-menu-panel__links li:nth-child(6n+5) { --dot-tint: var(--dg-peach); }
+  .mobile-menu-panel__links li:nth-child(6n+6) { --dot-tint: var(--dg-periwinkle); }
+
+  .mobile-menu-panel__foot {
+    margin-top: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
 }
 
 @keyframes mobile-menu-in {
@@ -933,49 +941,48 @@ button {
 .hero {
   position: relative;
   overflow: hidden;
-  padding: var(--space-5) 0;
+  padding: var(--space-6) 0 var(--space-5);
 }
 
 .hero__layout {
   position: relative;
   z-index: 1;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
 }
 
 .hero__inner {
-  max-width: 620px;
-}
-
-.hero__media {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 760px;
 }
 
 .hero__cover {
   position: relative;
   width: 100%;
-  max-width: 200px;
+  max-width: 148px;
   aspect-ratio: 2 / 3;
-  transform: rotate(-4deg);
+  flex-shrink: 0;
+  margin-top: var(--space-1);
 }
 
 .hero__cover img {
   display: block;
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-glossy-hover);
+  box-shadow: var(--shadow-glossy);
 }
 
 @media (min-width: 900px) {
-  .hero {
-    min-height: 86vh;
-    display: flex;
-    align-items: center;
-    padding: var(--space-6) 0;
+  .hero__layout {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-5);
   }
 
   .hero__cover {
-    max-width: 340px;
+    max-width: 280px;
+    margin-top: var(--space-2);
   }
 }
 
@@ -993,8 +1000,8 @@ button {
 }
 
 .hero h1 {
-  font-size: clamp(2.6rem, 6.4vw, 5.6rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(2.4rem, 5.4vw, 4.1rem);
+  letter-spacing: -0.015em;
 }
 
 .hero__sub {
@@ -1036,188 +1043,6 @@ button {
   }
 }
 
-/* =========================================================================
-   Panel carousel — the Founder / Atelier chapter modules.
-   A plain click-driven carousel: fixed-height viewport, a flex track
-   translated by whole panel-widths, left/right chevrons and dots to
-   navigate. Normal document flow — no scroll hijacking, no pinning.
-   ========================================================================= */
-
-.panel-carousel {
-  position: relative;
-  padding: var(--space-6) 0;
-}
-
-.panel-carousel__viewport {
-  position: relative;
-  overflow: hidden;
-  height: min(640px, 78vh);
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
-
-.panel-carousel__track {
-  display: flex;
-  height: 100%;
-  transition: transform 0.6s var(--ease-soft);
-}
-
-.panel-carousel__panel {
-  flex: 0 0 100%;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 var(--space-3);
-  overflow-y: auto;
-}
-
-.panel-carousel__arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  width: 44px;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid var(--color-stone-line);
-  border-radius: 999px;
-  color: var(--color-ink-soft);
-  cursor: pointer;
-  box-shadow: 0 8px 16px -12px rgba(54, 42, 28, 0.18);
-  transition: color 0.25s var(--ease-soft), border-color 0.25s var(--ease-soft), background-color 0.25s var(--ease-soft), transform 0.25s var(--ease-soft), opacity 0.25s var(--ease-soft);
-}
-
-.panel-carousel__arrow:hover:not(:disabled),
-.panel-carousel__arrow:focus-visible:not(:disabled) {
-  color: var(--color-ink);
-  border-color: var(--color-bronze);
-  background: rgba(255, 255, 255, 0.8);
-}
-
-.panel-carousel__arrow:disabled {
-  opacity: 0.25;
-  cursor: default;
-}
-
-.panel-carousel__arrow--prev {
-  left: 0;
-}
-
-.panel-carousel__arrow--next {
-  right: 0;
-}
-
-@media (max-width: 640px) {
-  .panel-carousel__viewport {
-    /* Fixed (not auto) so one content-heavy panel — e.g. a full work-card
-       grid — can't stretch every other, shorter panel's empty space out
-       to match it. Panels that don't fit scroll internally instead (see
-       .panel-carousel__panel's own overflow-y: auto). */
-    height: min(560px, 82vh);
-  }
-
-  .panel-carousel__arrow {
-    width: 38px;
-    height: 38px;
-  }
-}
-
-.panel-carousel__dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.6rem;
-  margin-top: var(--space-3);
-}
-
-.panel-carousel__dot {
-  width: 7px;
-  height: 7px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: var(--color-stone-line);
-  cursor: pointer;
-  transition: background-color 0.3s var(--ease-soft), transform 0.3s var(--ease-soft);
-}
-
-.panel-carousel__dot.is-active {
-  background: var(--color-bronze);
-  transform: scale(1.4);
-}
-
-/* =========================================================================
-   Scroll story — the hybrid pin+pan mode of HybridScrollStory.tsx.
-   A tall native-scroll track holds a `position: sticky` stage; the inner
-   track is translated horizontally in step with scroll position (no
-   wheel/touch hijacking — see useScrollStory.ts). The same chevron
-   (.panel-carousel__arrow, reused as-is) and dot controls call
-   scrollToPanel(), which moves the real page scroll position rather than
-   any separate local state — scrolling and clicking always agree. Only
-   ever mounted above 768px and outside prefers-reduced-motion; otherwise
-   HybridScrollStory renders PanelCarousel's plain click-only mode instead.
-   ========================================================================= */
-
-.scroll-story {
-  position: relative;
-}
-
-.scroll-story__stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.scroll-story__track {
-  display: flex;
-  height: 100%;
-  will-change: transform;
-}
-
-.scroll-story__panel {
-  flex: 0 0 100vw;
-  width: 100vw;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 var(--space-3);
-  overflow-y: auto;
-}
-
-.scroll-story__dots {
-  position: absolute;
-  left: 50%;
-  bottom: var(--space-3);
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.6rem;
-  z-index: 2;
-}
-
-.scroll-story__dot {
-  width: 7px;
-  height: 7px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: var(--color-stone-line);
-  cursor: pointer;
-  transition: background-color 0.3s var(--ease-soft), transform 0.3s var(--ease-soft);
-}
-
-.scroll-story__dot.is-active {
-  background: var(--color-bronze);
-  transform: scale(1.4);
-}
-
 /* Grids */
 
 .grid-3 {
@@ -1231,102 +1056,6 @@ button {
   grid-template-columns: 1fr 1fr;
   gap: var(--space-4);
   align-items: center;
-}
-
-/* =========================================================================
-   Bleed grid — a full-viewport-width section with a text column padded to
-   line up with the normal .container edge, and a media column that runs
-   all the way to the browser edge. No new colors/type — same palette and
-   fonts as everywhere else, just a much less "boxed-in" composition for
-   the homepage's editorial moments (Hero, Philosophy).
-   ========================================================================= */
-
-.bleed-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-}
-
-.bleed-grid__copy {
-  padding: var(--space-4) var(--space-3) var(--space-4) max(var(--space-3), calc((100vw - var(--max-width)) / 2 + var(--space-3)));
-  z-index: 1;
-}
-
-.bleed-grid__media {
-  position: relative;
-  height: 100%;
-  min-height: 480px;
-  overflow: hidden;
-}
-
-@media (max-width: 900px) {
-  .bleed-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .bleed-grid__copy {
-    padding: var(--space-4) var(--space-3) var(--space-3);
-  }
-
-  .bleed-grid__media {
-    min-height: 320px;
-  }
-}
-
-/* A big, full-bleed statement panel — breaks the section rhythm on
-   purpose, edge to edge with no rounded corners, for one moment of
-   emphasis rather than every section looking the same width. */
-.panel--bleed {
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  border-radius: 0;
-  border-left: none;
-  border-right: none;
-}
-
-.panel--bleed .container {
-  max-width: var(--max-width);
-}
-
-.section-heading--display {
-  font-size: clamp(2.6rem, 5.4vw, 4.4rem);
-  letter-spacing: -0.01em;
-  max-width: 760px;
-}
-
-/* Asymmetric editorial grid for Selected Works — one tall lead card,
-   two stacked beside it, instead of three equal-weight columns. */
-.works-grid {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  grid-auto-rows: 1fr;
-  gap: var(--space-3);
-}
-
-.works-grid > *:first-child {
-  grid-row: 1 / 3;
-}
-
-.works-grid .work-card__media {
-  aspect-ratio: auto;
-  height: 100%;
-  min-height: 220px;
-}
-
-@media (max-width: 860px) {
-  .works-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .works-grid > *:first-child {
-    grid-row: auto;
-  }
-
-  .works-grid .work-card__media {
-    min-height: 260px;
-  }
 }
 
 /* =========================================================================
@@ -1465,24 +1194,13 @@ button {
   margin-bottom: 0.3rem;
 }
 
-.notes-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-3);
-}
-
-@media (max-width: 860px) {
-  .notes-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 .note-card {
-  padding: var(--space-3);
-  border-top: 2px solid var(--color-bronze);
-  background: var(--glass-light-bg);
-  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-  height: 100%;
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-stone-line);
+}
+
+.note-card:last-child {
+  border-bottom: 1px solid var(--color-stone-line);
 }
 
 .note-card__date {
@@ -1505,73 +1223,6 @@ button {
   border-radius: var(--radius-lg);
   border: 1px solid var(--glass-light-border);
   box-shadow: var(--shadow-glossy);
-}
-
-.founder-story__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
-  align-items: center;
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  text-align: left;
-}
-
-.founder-story__portrait {
-  max-width: 340px;
-}
-
-.founder-story__quote {
-  max-width: 720px;
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
-  line-height: 1.4;
-  color: var(--color-ink);
-}
-
-.founder-story__quote p {
-  margin: 0 0 1.2rem;
-}
-
-.founder-story__quote p:first-child::before {
-  content: "\201C";
-  color: var(--color-bronze);
-}
-
-@media (max-width: 767px) {
-  .founder-story__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .founder-story__portrait {
-    max-width: 220px;
-    margin: 0 auto;
-  }
-}
-
-.atelier-story__steps {
-  list-style: none;
-  margin: 1.5rem 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-}
-
-.atelier-story__steps li {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
-.atelier-story__step-index {
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  color: var(--color-bronze);
-  padding-top: 0.15rem;
-  flex-shrink: 0;
 }
 
 /* =========================================================================
@@ -2279,8 +1930,7 @@ button {
 }
 
 .product-detail__media {
-  position: sticky;
-  top: calc(var(--space-4) + 70px);
+  position: relative;
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -2663,7 +2313,6 @@ button {
   }
 
   .product-detail__media {
-    position: static;
     max-width: 420px;
   }
 

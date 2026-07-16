@@ -8,7 +8,7 @@ const en: Dictionary = {
   },
   nav: {
     home: "Home",
-    house: "House",
+    house: "Publishing House",
     founder: "Founder",
     atelier: "Atelier",
     shop: "Shop",

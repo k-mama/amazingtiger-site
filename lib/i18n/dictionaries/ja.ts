@@ -8,7 +8,7 @@ const ja: Dictionary = {
   },
   nav: {
     home: "ホーム",
-    house: "出版社",
+    house: "出版社について",
     founder: "創業者",
     atelier: "アトリエ",
     shop: "ショップ",
