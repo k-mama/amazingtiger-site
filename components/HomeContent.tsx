@@ -258,23 +258,27 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
 
         <div className="container" style={{ marginTop: "3.5rem" }}>
           <Reveal>
-            <span className="eyebrow">{dict.founderPage.letterHeading}</span>
-            {dict.founderPage.letter.map((paragraph, i) => (
-              <p key={i} className="section-lead" style={{ maxWidth: "620px" }}>
-                {paragraph}
-              </p>
-            ))}
+            <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+              <span className="eyebrow">{dict.founderPage.letterHeading}</span>
+              {dict.founderPage.letter.map((paragraph, i) => (
+                <p key={i} className="section-lead" style={{ maxWidth: "none" }}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </Reveal>
         </div>
 
         <div className="container" style={{ marginTop: "3rem" }}>
           <Reveal>
-            <span className="eyebrow">{dict.founderPage.bioHeading}</span>
-            {dict.founderPage.bioBody.map((paragraph, i) => (
-              <p key={i} className="section-lead" style={{ maxWidth: "620px" }}>
-                {paragraph}
-              </p>
-            ))}
+            <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+              <span className="eyebrow">{dict.founderPage.bioHeading}</span>
+              {dict.founderPage.bioBody.map((paragraph, i) => (
+                <p key={i} className="section-lead" style={{ maxWidth: "none" }}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </Reveal>
         </div>
 
@@ -364,19 +368,21 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
 
         <div className="container" style={{ marginTop: "3rem" }}>
           <Reveal>
-            <h3 className="section-heading" style={{ fontSize: "clamp(1.4rem, 2.2vw, 1.9rem)" }}>
-              {dict.founderPage.studioHeading}
-            </h3>
-            {dict.founderPage.studioBody.map((paragraph, i) => (
-              <p key={i} className="section-lead" style={{ maxWidth: "720px" }}>
-                {paragraph}
-              </p>
-            ))}
+            <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+              <h3 className="section-heading" style={{ fontSize: "clamp(1.4rem, 2.2vw, 1.9rem)" }}>
+                {dict.founderPage.studioHeading}
+              </h3>
+              {dict.founderPage.studioBody.map((paragraph, i) => (
+                <p key={i} className="section-lead" style={{ maxWidth: "none" }}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </Reveal>
           <Reveal delay={90}>
-            <div style={{ marginTop: "1.5rem", paddingTop: "1.5rem", borderTop: "1px solid var(--color-stone-line)" }}>
+            <div style={{ maxWidth: "720px", margin: "1.5rem auto 0", paddingTop: "1.5rem", borderTop: "1px solid var(--color-stone-line)" }}>
               <h4 style={{ marginBottom: "0.4rem" }}>{dict.founderPage.webHeading}</h4>
-              <p className="section-lead" style={{ maxWidth: "720px" }}>{dict.founderPage.webBody}</p>
+              <p className="section-lead" style={{ maxWidth: "none" }}>{dict.founderPage.webBody}</p>
             </div>
           </Reveal>
         </div>
