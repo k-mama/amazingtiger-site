@@ -63,7 +63,7 @@ export default function BornRareProjectPage({ params }: { params: { locale: stri
             <div className="hero__cover" style={{ maxWidth: "200px", marginTop: "2rem" }}>
               <Image
                 src="/images/homepage/covers/born-rare-cover.webp"
-                alt="BORN RARE — Emma Kwon's literary memoir in progress"
+                alt="BORN RARE — Emma Kwon's memoir, originally published; a newly reimagined literary edition in development"
                 width={200}
                 height={300}
                 style={{ width: "100%", height: "auto", objectFit: "contain" }}

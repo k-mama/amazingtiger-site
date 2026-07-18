@@ -44,7 +44,7 @@ const ko: Dictionary = {
       {
         label: "회고록",
         title: "BORN RARE",
-        description: "Emma Kwon의 영문 회고록으로, Kindle과 페이퍼백, 하드커버 에디션으로 출간되었습니다.",
+        description: "Emma Kwon의 영문 회고록으로, Kindle과 페이퍼백, 하드커버 에디션으로 이미 출간되었으며 — 새롭게 재구성한 문학 에디션이 현재 편집 개발 중입니다.",
       },
       {
         label: "음악",
@@ -59,7 +59,7 @@ const ko: Dictionary = {
     ],
   },
   homeStatusLabels: {
-    published: "출간됨",
+    published: "출간됨 — 새로운 에디션 편집 개발 중",
     forthcoming: "출간 예정",
     studioConcept: "스튜디오 콘셉트",
     viewConcept: "콘셉트 보기",
@@ -609,7 +609,7 @@ const ko: Dictionary = {
     },
     caseStudy: {
       eyebrow: "작업대에서",
-      heading: "BORN RARE, 아직 쓰이고 있습니다.",
+      heading: "BORN RARE, 새로운 에디션이 만들어지고 있습니다.",
       body: "아틀리에가 Emma Kwon의 문학 회고록을 어떻게 만들어가고 있는지 좀 더 가까이에서 들여다봅니다 — 편집의 질문들, 구조, 그리고 우리가 다듬기를 거부한 문장들까지.",
       viewProjectCta: "케이스 스터디 보기",
       readLetterCta: "아틀리에의 편지 읽기",
@@ -643,7 +643,7 @@ const ko: Dictionary = {
       {
         title: "BORN RARE",
         category: "회고록",
-        detail: "Kindle, 페이퍼백, 하드커버 에디션으로 출간되었습니다.",
+        detail: "Kindle, 페이퍼백, 하드커버 에디션으로 이미 출간되었습니다. 새롭게 재구성한 문학 에디션이 현재 편집 개발 중입니다.",
         roles: "저자 · 크리에이티브 디렉션 · 편집 및 제작 총괄",
       },
       {
@@ -694,7 +694,7 @@ const ko: Dictionary = {
     kicker: "아틀리에 케이스 스터디",
     kickerSecondary: "편집 진행 중",
     title: "BORN RARE",
-    tagline: "지금도 쓰이고 있는 문학 회고록.",
+    tagline: "이미 출간된 문학 회고록. 새롭게 재구성한 에디션이 지금 편집 개발 중입니다.",
     heroLines: [
       "한 사람의 삶이 수천 개의 기억으로 도착했습니다.",
       "우리의 일은 그것을 더 깔끔하게 다듬는 것이 아니었습니다.",
@@ -706,7 +706,7 @@ const ko: Dictionary = {
     info: [
       { label: "형식", value: "문학 회고록" },
       { label: "원어", value: "북미 영어" },
-      { label: "현재 단계", value: "편집 진행 중" },
+      { label: "현재 단계", value: "편집 개발 중 — 새로운 문학 에디션" },
     ],
     scopeLabel: "작업 범위",
     scopeItems: [
@@ -796,7 +796,7 @@ const ko: Dictionary = {
     ],
     stageHeading: "현재 단계",
     stageBody: [
-      "BORN RARE는 여전히 편집 개발 단계에 있습니다.",
+      "BORN RARE의 원본 에디션은 Kindle, 페이퍼백, 하드커버로 이미 출간되어 있습니다. 새롭게 재구성한 문학 에디션이 지금 편집 개발 중입니다.",
       "구조와 영어 문체 체계는 이미 세워졌습니다. 각 장은 지금도 쓰이고, 시험되고, 잘려나가고, 다시 고쳐지고 있습니다.",
       "우리는 아직 끝나지 않은 책을 완성된 책처럼 내놓지 않습니다.",
       "이 페이지는 작업이 여전히 살아 움직이는 동안의 그 결을 기록합니다.",

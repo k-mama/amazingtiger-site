@@ -43,7 +43,7 @@ const ja: Dictionary = {
       {
         label: "回想録",
         title: "BORN RARE",
-        description: "Emma Kwonによる英語の回想録。Kindle、ペーパーバック、ハードカバー版で刊行されています。",
+        description: "Emma Kwonによる英語の回想録。もとの版はKindle、ペーパーバック、ハードカバーとしてすでに刊行されており、新たに構想し直した文学的な版が、いま編集開発中です。",
       },
       {
         label: "音楽",
@@ -58,7 +58,7 @@ const ja: Dictionary = {
     ],
   },
   homeStatusLabels: {
-    published: "刊行済み",
+    published: "刊行済み——新しい版を編集開発中",
     forthcoming: "刊行予定",
     studioConcept: "スタジオコンセプト",
     viewConcept: "コンセプトを見る",
@@ -604,7 +604,7 @@ const ja: Dictionary = {
     },
     caseStudy: {
       eyebrow: "アトリエの机から",
-      heading: "BORN RARE、制作の途中。",
+      heading: "BORN RAREの新版、制作の途中。",
       body: "アトリエがEmma Kwonの文学的回想録をどのように形づくっているか——編集上の問い、構成、そして私たちがあえて手を加えなかった文章について、より近くから見つめます。",
       viewProjectCta: "ケーススタディを見る",
       readLetterCta: "アトリエからの手紙を読む",
@@ -638,7 +638,7 @@ const ja: Dictionary = {
       {
         title: "BORN RARE",
         category: "回想録",
-        detail: "Kindle、ペーパーバック、ハードカバー版で刊行。",
+        detail: "Kindle、ペーパーバック、ハードカバー版としてすでに刊行。新たに構想し直した文学的な版が、いま編集開発中です。",
         roles: "著者・クリエイティブディレクション・編集及び制作統括",
       },
       {
@@ -689,7 +689,7 @@ const ja: Dictionary = {
     kicker: "アトリエのケーススタディ",
     kickerSecondary: "編集開発中",
     title: "BORN RARE",
-    tagline: "制作途中の、文学的回想録。",
+    tagline: "すでに刊行された回想録。新たに構想し直した文学的な版を、いま編集開発しています。",
     heroLines: [
       "ひとつの人生は、幾千もの記憶として届いた。",
       "仕事は、それを整えることではなかった。",
@@ -701,7 +701,7 @@ const ja: Dictionary = {
     info: [
       { label: "形式", value: "文学的回想録" },
       { label: "原語", value: "北米英語" },
-      { label: "現在の段階", value: "編集開発中" },
+      { label: "現在の段階", value: "編集開発中——新しい文学版" },
     ],
     scopeLabel: "業務範囲",
     scopeItems: [
@@ -791,7 +791,7 @@ const ja: Dictionary = {
     ],
     stageHeading: "現在の段階",
     stageBody: [
-      "BORN RAREは、いまも編集開発の途中にある。",
+      "BORN RAREの原版は、すでにKindle、ペーパーバック、ハードカバーとして刊行されている。新たに構想し直した文学的な版が、いま編集開発の途中にある。",
       "その構成と英語の声の体系はすでに確立している。個々の章は、いまも書かれ、試され、削られ、書き直され続けている。",
       "私たちは、まだ完成していない本を、完成したものとして差し出すつもりはない。",
       "このページは、仕事がまだ生きているあいだの、その仕事の質を記録している。",

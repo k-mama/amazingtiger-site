@@ -43,7 +43,7 @@ const zhTW: Dictionary = {
       {
         label: "回憶錄",
         title: "BORN RARE",
-        description: "Emma Kwon 的英文回憶錄,已推出 Kindle、平裝與精裝版本。",
+        description: "Emma Kwon 的英文回憶錄。原版已推出 Kindle、平裝與精裝版本——全新構思的文學版本現正編輯製作中。",
       },
       {
         label: "音樂",
@@ -58,7 +58,7 @@ const zhTW: Dictionary = {
     ],
   },
   homeStatusLabels: {
-    published: "已出版",
+    published: "已出版——全新版本編輯製作中",
     forthcoming: "即將出版",
     studioConcept: "工作室概念",
     viewConcept: "查看概念",
@@ -604,7 +604,7 @@ const zhTW: Dictionary = {
     },
     caseStudy: {
       eyebrow: "來自工作檯",
-      heading: "BORN RARE,進行中。",
+      heading: "BORN RARE 的全新版本,製作進行中。",
       body: "近距離觀察工作坊如何形塑 Emma Kwon 的文學回憶錄——那些編輯上的提問、正在搭建的架構,以及我們拒絕修飾的句子。",
       viewProjectCta: "查看案例研究",
       readLetterCta: "閱讀工作坊書信",
@@ -638,7 +638,7 @@ const zhTW: Dictionary = {
       {
         title: "BORN RARE",
         category: "回憶錄",
-        detail: "已推出 Kindle、平裝與精裝版本。",
+        detail: "原版已推出 Kindle、平裝與精裝版本。全新構思的文學版本現正編輯製作中。",
         roles: "作者・創意總監・編輯暨製作統籌",
       },
       {
@@ -689,7 +689,7 @@ const zhTW: Dictionary = {
     kicker: "工作坊案例研究",
     kickerSecondary: "編輯製作階段",
     title: "BORN RARE",
-    tagline: "一部仍在寫作中的文學回憶錄。",
+    tagline: "原版已出版。全新構思的文學版本現正編輯製作中。",
     heroLines: [
       "一段人生,以千萬段記憶的樣貌到來。",
       "這份工作,不是要讓它變得更整齊。",
@@ -701,7 +701,7 @@ const zhTW: Dictionary = {
     info: [
       { label: "體裁", value: "文學回憶錄" },
       { label: "原文語言", value: "北美英文" },
-      { label: "目前階段", value: "編輯製作中" },
+      { label: "目前階段", value: "編輯製作階段——全新文學版本" },
     ],
     scopeLabel: "工作範疇",
     scopeItems: [
@@ -791,7 +791,7 @@ const zhTW: Dictionary = {
     ],
     stageHeading: "目前階段",
     stageBody: [
-      "BORN RARE 目前仍在編輯製作階段。",
+      "BORN RARE 的原版——Kindle、平裝與精裝版本——已經出版。全新構思的文學版本現正編輯製作中。",
       "其架構與英文語調系統已經確立。個別章節仍持續進行寫作、試驗、刪修與修訂。",
       "在尚未完成之前,我們不會將它當作一本完成的書來呈現。",
       "這個頁面,記錄的是這份工作仍鮮活進行時的樣貌與品質。",

@@ -88,7 +88,7 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
           <div className="hero__cover">
             <Image
               src="/images/homepage/covers/born-rare-cover.webp"
-              alt="BORN RARE — Emma Kwon's published memoir"
+              alt="BORN RARE — Emma Kwon's memoir, originally published; a newly reimagined literary edition now in development"
               fill
               priority
               sizes="(min-width: 900px) 280px, 220px"

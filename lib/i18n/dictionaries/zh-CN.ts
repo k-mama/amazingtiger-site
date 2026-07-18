@@ -43,7 +43,7 @@ const zhCN: Dictionary = {
       {
         label: "回忆录",
         title: "BORN RARE",
-        description: "Emma Kwon 的英文回忆录,已推出 Kindle、平装与精装版本。",
+        description: "Emma Kwon 的英文回忆录。原著已推出 Kindle、平装与精装版本——一部全新构思的文学版本,现正编辑开发中。",
       },
       {
         label: "音乐",
@@ -58,7 +58,7 @@ const zhCN: Dictionary = {
     ],
   },
   homeStatusLabels: {
-    published: "已出版",
+    published: "已出版 — 全新版本编辑开发中",
     forthcoming: "即将出版",
     studioConcept: "工作室概念",
     viewConcept: "查看概念",
@@ -604,7 +604,7 @@ const zhCN: Dictionary = {
     },
     caseStudy: {
       eyebrow: "来自工作台",
-      heading: "BORN RARE,进行中。",
+      heading: "全新版本的 BORN RARE,进行中。",
       body: "深入了解工作坊如何雕琢 Emma Kwon 的文学回忆录——编辑上的提问、整体架构,以及我们拒绝修饰的句子。",
       viewProjectCta: "查看案例研究",
       readLetterCta: "阅读工作坊书信",
@@ -638,7 +638,7 @@ const zhCN: Dictionary = {
       {
         title: "BORN RARE",
         category: "回忆录",
-        detail: "已推出 Kindle、平装与精装版本。",
+        detail: "原著已推出 Kindle、平装与精装版本。一部全新构思的文学版本,现正编辑开发中。",
         roles: "作者・创意总监・编辑暨制作统筹",
       },
       {
@@ -689,7 +689,7 @@ const zhCN: Dictionary = {
     kicker: "工作坊案例研究",
     kickerSecondary: "编辑开发中",
     title: "BORN RARE",
-    tagline: "一部仍在进行中的文学回忆录。",
+    tagline: "原著已出版。一部全新构思的文学版本,现正编辑开发中。",
     heroLines: [
       "一段人生,以千万段记忆的形式到来。",
       "我们的工作,不是把它整理得更整齐。",
@@ -701,7 +701,7 @@ const zhCN: Dictionary = {
     info: [
       { label: "体裁", value: "文学回忆录" },
       { label: "原始语言", value: "北美英语" },
-      { label: "当前阶段", value: "编辑开发中" },
+      { label: "当前阶段", value: "编辑开发中 — 全新文学版本" },
     ],
     scopeLabel: "工作范围",
     scopeItems: [
@@ -791,7 +791,7 @@ const zhCN: Dictionary = {
     ],
     stageHeading: "当前阶段",
     stageBody: [
-      "BORN RARE 目前仍处于编辑开发阶段。",
+      "BORN RARE 的原著已经出版——推出了 Kindle、平装与精装版本。一部全新构思的文学版本,现正编辑开发中。",
       "其整体架构与英文语调系统已经确立。各个章节仍在持续写作、试验、删减与修订之中。",
       "在完成之前,我们不会将它当作一本已完成的书来呈现。",
       "这个页面,记录的是这项工作仍然鲜活时的样貌与质地。",

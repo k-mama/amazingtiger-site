@@ -43,7 +43,7 @@ const ptBR: Dictionary = {
       {
         label: "Memórias",
         title: "BORN RARE",
-        description: "As memórias em inglês de Emma Kwon, lançadas em edições Kindle, brochura e capa dura.",
+        description: "As memórias em inglês de Emma Kwon. Originalmente publicadas em edições Kindle, brochura e capa dura — uma nova edição literária, reimaginada, está agora em desenvolvimento editorial.",
       },
       {
         label: "Música",
@@ -58,7 +58,7 @@ const ptBR: Dictionary = {
     ],
   },
   homeStatusLabels: {
-    published: "Publicado",
+    published: "Publicado — Nova Edição em Desenvolvimento",
     forthcoming: "Em Breve",
     studioConcept: "Conceito de Estúdio",
     viewConcept: "Ver Conceito",
@@ -604,7 +604,7 @@ const ptBR: Dictionary = {
     },
     caseStudy: {
       eyebrow: "Da Mesa de Trabalho",
-      heading: "BORN RARE, em andamento.",
+      heading: "Uma nova edição de BORN RARE, em andamento.",
       body: "Um olhar mais de perto sobre como o Atelier está moldando as memórias literárias de Emma Kwon — as perguntas editoriais, a arquitetura e as frases que nos recusamos a aperfeiçoar.",
       viewProjectCta: "Ver o Estudo de Caso",
       readLetterCta: "Ler a Carta do Atelier",
@@ -638,7 +638,7 @@ const ptBR: Dictionary = {
       {
         title: "BORN RARE",
         category: "Memórias",
-        detail: "Lançado em edições Kindle, brochura e capa dura.",
+        detail: "Originalmente lançado em edições Kindle, brochura e capa dura. Uma nova edição literária, reimaginada, está agora em desenvolvimento editorial.",
         roles: "Autora · Direção Criativa · Direção Editorial e de Produção",
       },
       {
@@ -689,7 +689,7 @@ const ptBR: Dictionary = {
     kicker: "Um Estudo de Caso do Atelier",
     kickerSecondary: "Em Desenvolvimento Editorial",
     title: "BORN RARE",
-    tagline: "Memórias literárias em andamento.",
+    tagline: "Originalmente publicadas. Uma nova edição literária, reimaginada, está agora em desenvolvimento editorial.",
     heroLines: [
       "Uma vida chegou como milhares de memórias.",
       "O trabalho não era deixá-la mais arrumada.",
@@ -701,7 +701,7 @@ const ptBR: Dictionary = {
     info: [
       { label: "Forma", value: "Memórias Literárias" },
       { label: "Idioma de Origem", value: "Inglês Norte-Americano" },
-      { label: "Etapa Atual", value: "Desenvolvimento Editorial" },
+      { label: "Etapa Atual", value: "Desenvolvimento Editorial — Nova Edição Literária" },
     ],
     scopeLabel: "Escopo",
     scopeItems: [
@@ -791,7 +791,7 @@ const ptBR: Dictionary = {
     ],
     stageHeading: "Etapa Atual",
     stageBody: [
-      "BORN RARE permanece em desenvolvimento editorial.",
+      "A edição original de BORN RARE já está publicada — em Kindle, brochura e capa dura. Uma nova edição literária, reimaginada, está agora em desenvolvimento editorial.",
       "Sua arquitetura e o sistema de voz em inglês já estão estabelecidos. Os capítulos individuais continuam sendo escritos, testados, cortados e revisados.",
       "Não estamos apresentando um livro terminado antes de ele estar terminado.",
       "Esta página registra a qualidade do trabalho enquanto ele ainda está vivo.",

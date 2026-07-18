@@ -43,7 +43,7 @@ const en: Dictionary = {
       {
         label: "Memoir",
         title: "BORN RARE",
-        description: "Emma Kwon's English-language memoir, released in Kindle, paperback, and hardcover editions.",
+        description: "Emma Kwon's English-language memoir. Originally published in Kindle, paperback, and hardcover editions — a newly reimagined literary edition is now in editorial development.",
       },
       {
         label: "Music",
@@ -58,7 +58,7 @@ const en: Dictionary = {
     ],
   },
   homeStatusLabels: {
-    published: "Published",
+    published: "Published — New Edition in Development",
     forthcoming: "Forthcoming",
     studioConcept: "Studio Concept",
     viewConcept: "View Concept",
@@ -604,7 +604,7 @@ const en: Dictionary = {
     },
     caseStudy: {
       eyebrow: "From the Worktable",
-      heading: "BORN RARE, in progress.",
+      heading: "A new edition of BORN RARE, in progress.",
       body: "A closer look at how the Atelier is shaping Emma Kwon's literary memoir — the editorial questions, the architecture, and the sentences we refused to improve.",
       viewProjectCta: "View the Case Study",
       readLetterCta: "Read the Atelier Letter",
@@ -638,7 +638,7 @@ const en: Dictionary = {
       {
         title: "BORN RARE",
         category: "Memoir",
-        detail: "Released in Kindle, paperback, and hardcover editions.",
+        detail: "Originally published in Kindle, paperback, and hardcover editions. A newly reimagined literary edition is now in editorial development.",
         roles: "Author · Creative Direction · Editorial & Production Lead",
       },
       {
@@ -689,7 +689,7 @@ const en: Dictionary = {
     kicker: "An Atelier Case Study",
     kickerSecondary: "In Editorial Development",
     title: "BORN RARE",
-    tagline: "A literary memoir in progress.",
+    tagline: "Originally published. A newly reimagined literary edition is now in editorial development.",
     heroLines: [
       "One life arrived as thousands of memories.",
       "The work was not to make it neater.",
@@ -701,7 +701,7 @@ const en: Dictionary = {
     info: [
       { label: "Form", value: "Literary Memoir" },
       { label: "Source Language", value: "North American English" },
-      { label: "Current Stage", value: "Editorial Development" },
+      { label: "Current Stage", value: "Editorial Development — New Literary Edition" },
     ],
     scopeLabel: "Scope",
     scopeItems: [
@@ -791,7 +791,7 @@ const en: Dictionary = {
     ],
     stageHeading: "Current Stage",
     stageBody: [
-      "BORN RARE remains in editorial development.",
+      "The original edition of BORN RARE is already published — in Kindle, paperback, and hardcover. A newly reimagined literary edition is now in editorial development.",
       "Its architecture and English voice system are established. Individual chapters continue to be written, tested, cut, and revised.",
       "We are not presenting a finished book before it is finished.",
       "This page records the quality of the work while the work is still alive.",
