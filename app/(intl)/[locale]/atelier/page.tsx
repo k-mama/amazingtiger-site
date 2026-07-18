@@ -134,6 +134,28 @@ export default function AtelierPage({ params }: { params: { locale: string } }) 
         </div>
       </section>
 
+      <section className="section-tight">
+        <div className="container">
+          <Reveal>
+            <div style={{ borderTop: "1px solid var(--color-stone-line)", paddingTop: "1.75rem" }}>
+              <span className="eyebrow">{dict.caseStudy.eyebrow}</span>
+              <h3 className="section-heading" style={{ fontSize: "clamp(1.3rem, 2vw, 1.7rem)" }}>
+                {dict.caseStudy.heading}
+              </h3>
+              <p className="section-lead" style={{ maxWidth: "620px" }}>{dict.caseStudy.body}</p>
+              <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginTop: "0.75rem" }}>
+                <Link href={`${navBase}/projects/born-rare`} className="btn btn-secondary">
+                  {dict.caseStudy.viewProjectCta}
+                </Link>
+                <Link href={`${navBase}/journal/the-sentence-we-refused-to-improve`} className="btn btn-link">
+                  {dict.caseStudy.readLetterCta}
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <section className="panel">
         <Reveal>
           <span className="eyebrow">{dict.forHeading}</span>

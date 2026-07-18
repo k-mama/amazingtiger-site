@@ -1140,6 +1140,17 @@ button {
   box-shadow: var(--shadow-glossy-hover);
 }
 
+.work-card-link {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-md);
+}
+
+.work-card-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
 .work-card__media {
   /* Landscape to suit real desk/editorial photography (was 4/5 for the
      abstract EditorialObject placeholder, which worked at any ratio). */

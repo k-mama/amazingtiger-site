@@ -138,42 +138,51 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
               const tone = workTones[i % workTones.length];
               const image = workImages[i];
               const statusKey = workStatusKeys[i];
+              const card = (
+                <article className="work-card">
+                  <div className="work-card__media">
+                    {image ? (
+                      <Image
+                        src={image}
+                        alt={item.title}
+                        fill
+                        loading="lazy"
+                        sizes="(min-width: 900px) 33vw, 100vw"
+                        style={{ objectFit: "cover", objectPosition: "center" }}
+                      />
+                    ) : (
+                      <EditorialObject toneA={tone.a} toneB={tone.b} emblem={tone.emblem} />
+                    )}
+                    {statusKey && (
+                      <span className="product-card__badge">{dict.homeStatusLabels[statusKey]}</span>
+                    )}
+                    {i === 0 && (
+                      <div className="work-card__cover-inset">
+                        <Image
+                          src="/images/homepage/covers/born-rare-cover.webp"
+                          alt="BORN RARE — Emma Kwon"
+                          width={90}
+                          height={134}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <div className="work-card__body">
+                    <div className="work-card__label">{item.label}</div>
+                    <h3 className="work-card__title">{item.title}</h3>
+                    <p style={{ margin: 0, fontSize: "0.92rem" }}>{item.description}</p>
+                  </div>
+                </article>
+              );
               return (
                 <Reveal key={item.title} delay={i * 100}>
-                  <article className="work-card">
-                    <div className="work-card__media">
-                      {image ? (
-                        <Image
-                          src={image}
-                          alt={item.title}
-                          fill
-                          loading="lazy"
-                          sizes="(min-width: 900px) 33vw, 100vw"
-                          style={{ objectFit: "cover", objectPosition: "center" }}
-                        />
-                      ) : (
-                        <EditorialObject toneA={tone.a} toneB={tone.b} emblem={tone.emblem} />
-                      )}
-                      {statusKey && (
-                        <span className="product-card__badge">{dict.homeStatusLabels[statusKey]}</span>
-                      )}
-                      {i === 0 && (
-                        <div className="work-card__cover-inset">
-                          <Image
-                            src="/images/homepage/covers/born-rare-cover.webp"
-                            alt="BORN RARE — Emma Kwon"
-                            width={90}
-                            height={134}
-                          />
-                        </div>
-                      )}
-                    </div>
-                    <div className="work-card__body">
-                      <div className="work-card__label">{item.label}</div>
-                      <h3 className="work-card__title">{item.title}</h3>
-                      <p style={{ margin: 0, fontSize: "0.92rem" }}>{item.description}</p>
-                    </div>
-                  </article>
+                  {i === 0 ? (
+                    <Link href={`${navBase}/projects/born-rare`} className="work-card-link">
+                      {card}
+                    </Link>
+                  ) : (
+                    card
+                  )}
                 </Reveal>
               );
             })}
