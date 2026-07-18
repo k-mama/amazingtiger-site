@@ -8,27 +8,6 @@ import AtelierPreview from "./AtelierPreview";
 import AmbientBackdrop from "./AmbientBackdrop";
 import EditorialObject from "./EditorialObject";
 import NoBreakText from "./NoBreakText";
-import FeaturedStoryVideo from "./FeaturedStoryVideo";
-
-// Five Rooms: order matches dict.rooms.items. Hrefs are structural, not
-// translatable, so they live here rather than in the dictionary. Anchors
-// point at real, existing homepage sections/cards; only Publishing and
-// BORN RARE have dedicated routes.
-const roomImages: Array<string | null> = [
-  "/images/homepage/projects/emmaestro-project.webp",
-  "/images/homepage/editorial/atelier-worktable.webp",
-  "/images/homepage/covers/born-rare-cover.webp",
-  "/images/homepage/projects/esther-cho-project.webp",
-  null,
-];
-
-const roomTones: Array<{ a: string; b: string; emblem: "ring" | "line" }> = [
-  { a: "var(--dg-aqua)", b: "var(--dg-periwinkle)", emblem: "ring" },
-  { a: "var(--dg-rose)", b: "var(--dg-peach)", emblem: "line" },
-  { a: "var(--dg-lemon)", b: "var(--dg-mint)", emblem: "ring" },
-  { a: "var(--dg-lavender)", b: "var(--dg-turquoise)", emblem: "line" },
-  { a: "var(--dg-peach)", b: "var(--dg-rose)", emblem: "ring" },
-];
 
 interface HomeContentProps {
   locale: Locale;
@@ -75,28 +54,16 @@ const workStatusKeys: Array<keyof Dictionary["homeStatusLabels"] | null> = [
 
 export default function HomeContent({ dict, basePath, locale }: HomeContentProps) {
   const navBase = basePath === "/" ? "/en" : basePath;
-  const homeBase = basePath === "/" ? "" : basePath;
-
-  const roomHrefs = [
-    `${homeBase}#emmaestro`,
-    `${navBase}/atelier`,
-    `${navBase}/projects/born-rare`,
-    `${homeBase}#works`,
-    `${homeBase}#kmama`,
-  ];
-
-  // Closing Doors: music / books / make-something, matching dict.closingDoors.choices order.
-  const closingDoorHrefs = [`${homeBase}#emmaestro`, `${navBase}/atelier`, `${navBase}/consultation`];
 
   return (
     <>
       <section className="hero">
         <AmbientBackdrop
           blobs={[
-            { color: "rgba(201,169,122,0.18)", size: 360, top: "-120px", left: "-90px", opacity: 0.5 },
-            { color: "rgba(228,220,201,0.22)", size: 320, top: "-70px", right: "-110px", opacity: 0.5 },
-            { color: "rgba(236,229,216,0.24)", size: 340, bottom: "-150px", left: "22%", opacity: 0.45 },
-            { color: "rgba(201,169,122,0.14)", size: 260, bottom: "-90px", right: "8%", opacity: 0.45 },
+            { color: "rgba(201,169,122,0.22)", size: 420, top: "-120px", left: "-80px" },
+            { color: "rgba(228,220,201,0.28)", size: 360, top: "-60px", right: "-100px" },
+            { color: "rgba(236,229,216,0.3)", size: 380, bottom: "-160px", left: "20%" },
+            { color: "rgba(201,169,122,0.16)", size: 300, bottom: "-100px", right: "10%" },
           ]}
         />
         <div className="container hero__layout">
@@ -110,7 +77,7 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
               <NoBreakText text={dict.hero.subhead} />
             </p>
             <div className="hero__actions">
-              <Link href={`${homeBase}#rooms`} className="btn btn-primary">
+              <Link href={`${basePath === "/" ? "" : basePath}#philosophy`} className="btn btn-primary">
                 {dict.hero.ctaPrimary}
               </Link>
               <Link href={`${navBase}/consultation`} className="btn btn-secondary">
@@ -118,123 +85,15 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
               </Link>
             </div>
           </div>
-          <div className="hero__cover hero__cover--photo">
+          <div className="hero__cover">
             <Image
-              src="/images/homepage/editorial/emma-kwon-at-work.webp"
-              alt={dict.hero.eyebrow}
+              src="/images/homepage/covers/born-rare-cover.webp"
+              alt="BORN RARE — Emma Kwon's memoir, originally published; a newly reimagined literary edition now in development"
               fill
               priority
               sizes="(min-width: 900px) 280px, 220px"
-              style={{ objectFit: "cover", objectPosition: "center 20%" }}
+              style={{ objectFit: "contain" }}
             />
-          </div>
-        </div>
-      </section>
-
-      <section id="rooms" className="section">
-        <div className="container">
-          <Reveal>
-            <span className="eyebrow">{dict.rooms.eyebrow}</span>
-            <p className="section-lead" style={{ marginBottom: 0 }}>{dict.rooms.lead}</p>
-          </Reveal>
-          <ol className="rooms-toc">
-            {dict.rooms.items.map((room, i) => {
-              const image = roomImages[i];
-              const tone = roomTones[i % roomTones.length];
-              return (
-                <Reveal key={room.title} delay={i * 70}>
-                  <li className="rooms-toc__item">
-                    <Link href={roomHrefs[i]} className="rooms-toc__link">
-                      <span className="rooms-toc__index">{String(i + 1).padStart(2, "0")}</span>
-                      <span className="rooms-toc__media">
-                        {image ? (
-                          <Image
-                            src={image}
-                            alt={room.title}
-                            fill
-                            loading="lazy"
-                            sizes="72px"
-                            style={{ objectFit: "cover", objectPosition: "center" }}
-                          />
-                        ) : (
-                          <EditorialObject toneA={tone.a} toneB={tone.b} emblem={tone.emblem} />
-                        )}
-                      </span>
-                      <span className="rooms-toc__body">
-                        <span className="rooms-toc__title">{room.title}</span>
-                        <span className="rooms-toc__lines">
-                          {room.lines.map((line, li) => (
-                            <span key={li} className="rooms-toc__line">{line}</span>
-                          ))}
-                        </span>
-                        <span className="rooms-toc__cta">{room.cta} →</span>
-                      </span>
-                    </Link>
-                  </li>
-                </Reveal>
-              );
-            })}
-          </ol>
-        </div>
-      </section>
-
-      <section className="section featured-story">
-        <div className="container">
-          <Reveal>
-            <span className="eyebrow">{dict.featuredStory.eyebrow}</span>
-            <h2 className="section-heading">{dict.featuredStory.question}</h2>
-            <p className="section-lead">{dict.featuredStory.caption}</p>
-          </Reveal>
-          <Reveal delay={80}>
-            <FeaturedStoryVideo
-              posterSrc="/images/homepage/projects/born-rare-project.webp"
-              posterAlt={dict.featuredStory.caption}
-              playLabel={dict.featuredStory.playLabel}
-            />
-            <Link href={`${navBase}/projects/born-rare`} className="btn btn-secondary" style={{ marginTop: "1.25rem" }}>
-              {dict.featuredStory.cta}
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      <section id="living-window" className="section">
-        <div className="container">
-          <Reveal>
-            <span className="eyebrow">{dict.livingWindow.eyebrow}</span>
-            <h2 className="section-heading">{dict.livingWindow.heading}</h2>
-            <p className="section-lead">{dict.livingWindow.lead}</p>
-          </Reveal>
-          <div className="grid-2" style={{ marginTop: "2rem" }}>
-            {[0, 1].map((i) => {
-              const item = dict.works.items[i];
-              const image = workImages[i];
-              return (
-                <Reveal key={item.title} delay={i * 90}>
-                  <Link href={roomHrefs[i === 0 ? 2 : 0]} className="work-card-link">
-                    <article className="work-card">
-                      <div className="work-card__media">
-                        {image && (
-                          <Image
-                            src={image}
-                            alt={item.title}
-                            fill
-                            loading="lazy"
-                            sizes="(min-width: 900px) 50vw, 100vw"
-                            style={{ objectFit: "cover", objectPosition: "center" }}
-                          />
-                        )}
-                      </div>
-                      <div className="work-card__body">
-                        <div className="work-card__label">{item.label}</div>
-                        <h3 className="work-card__title">{item.title}</h3>
-                        <p style={{ margin: 0, fontSize: "0.92rem" }}>{item.description}</p>
-                      </div>
-                    </article>
-                  </Link>
-                </Reveal>
-              );
-            })}
           </div>
         </div>
       </section>
@@ -443,10 +302,9 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
             {dict.founderPage.works.map((work, i) => {
               const tone = founderWorkTones[i % founderWorkTones.length];
               const image = founderWorkImages[i];
-              const anchorId = i === 1 ? "emmaestro" : i === 2 ? "kmama" : undefined;
               return (
                 <Reveal key={work.title} delay={i * 90}>
-                  <article className="work-card" id={anchorId}>
+                  <article className="work-card">
                     <div className="work-card__media">
                       {image ? (
                         <Image
@@ -570,21 +428,6 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
         </div>
       </section>
 
-      <section className="section-tight">
-        <div className="container">
-          <Reveal>
-            <div className="stats-strip">
-              <span className="stats-strip__eyebrow">{dict.stats.eyebrow}</span>
-              <ul className="stats-strip__list">
-                {dict.stats.items.map((item) => (
-                  <li key={item} className="stats-strip__item">{item}</li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       <section id="membership" className="section-tight">
         <div className="container">
           <div className="grid-2" style={{ alignItems: "start" }}>
@@ -620,23 +463,6 @@ export default function HomeContent({ dict, basePath, locale }: HomeContentProps
               </Link>
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      <section className="section closing-doors">
-        <div className="container">
-          <Reveal>
-            <h2 className="section-heading">{dict.closingDoors.heading}</h2>
-            <ul className="closing-doors__list">
-              {dict.closingDoors.choices.map((choice, i) => (
-                <li key={choice}>
-                  <Link href={closingDoorHrefs[i]} className="closing-doors__choice">
-                    {choice}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
         </div>
       </section>
     </>

@@ -19,63 +19,12 @@ const ptBR: Dictionary = {
     dashboard: "Painel",
   },
   hero: {
-    eyebrow: "Emma Kwon",
-    headline: "Emma Kwon é a casa.",
+    eyebrow: "Amazing Tiger Publishing",
+    headline: "Isto não é uma loja. É uma entrada.",
     subhead:
-      "Música, memórias, publicação, mundos projetados e histórias para corações jovens vivem dentro dela.",
+      "Uma porta silenciosa para o universo editorial de Emma Kwon — livros, memórias, música e vozes raras, moldados com cuidado e inteligência.",
     ctaPrimary: "Entrar na Casa",
     ctaSecondary: "Solicitar uma Consultoria",
-  },
-  rooms: {
-    eyebrow: "Cinco Salas",
-    lead: "Uma casa. Cinco entradas.",
-    items: [
-      {
-        title: "EMMAESTRO",
-        lines: ["Três álbuns.", "Vinte faixas.", "Um sistema climático particular."],
-        cta: "Entrar em EMMAESTRO",
-      },
-      {
-        title: "Amazing Tiger Publishing",
-        lines: ["Livros construídos devagar o bastante para durar."],
-        cta: "Abrir a sala editorial",
-      },
-      {
-        title: "BORN RARE",
-        lines: ["O sorriso era perfeito.", "O que ele escondia virou um livro."],
-        cta: "Entrar em BORN RARE",
-      },
-      {
-        title: "Obras",
-        lines: ["Objetos, interfaces e mundos tornados visíveis."],
-        cta: "Ver o trabalho",
-      },
-      {
-        title: "K MAMA",
-        lines: ["Histórias calorosas para corações jovens."],
-        cta: "Conhecer K MAMA",
-      },
-    ],
-  },
-  featuredStory: {
-    eyebrow: "História em Destaque",
-    question: "Por que ele estava sorrindo?",
-    caption: "Uma cena do universo de BORN RARE.",
-    cta: "Entrar em BORN RARE",
-    playLabel: "Assistir à cena",
-  },
-  livingWindow: {
-    eyebrow: "A Janela Viva",
-    heading: "O que está na mesa agora.",
-    lead: "Um olhar silencioso sobre o trabalho que já está no mundo.",
-  },
-  stats: {
-    eyebrow: "Em Números Reais",
-    items: ["3 Álbuns", "20 Faixas", "Streaming Mundial", "BORN RARE", "K MAMA"],
-  },
-  closingDoors: {
-    heading: "O que trouxe você até aqui?",
-    choices: ["Vim pela música.", "Vim pelos livros.", "Vim para criar algo."],
   },
   philosophy: {
     eyebrow: "Filosofia",

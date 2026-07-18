@@ -24,31 +24,6 @@ export interface Dictionary {
     ctaPrimary: string;
     ctaSecondary: string;
   };
-  rooms: {
-    eyebrow: string;
-    lead: string;
-    items: { title: string; lines: string[]; cta: string }[];
-  };
-  featuredStory: {
-    eyebrow: string;
-    question: string;
-    caption: string;
-    cta: string;
-    playLabel: string;
-  };
-  livingWindow: {
-    eyebrow: string;
-    heading: string;
-    lead: string;
-  };
-  stats: {
-    eyebrow: string;
-    items: string[];
-  };
-  closingDoors: {
-    heading: string;
-    choices: string[];
-  };
   philosophy: {
     eyebrow: string;
     heading: string;

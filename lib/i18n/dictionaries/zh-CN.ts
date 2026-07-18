@@ -19,63 +19,12 @@ const zhCN: Dictionary = {
     dashboard: "会员中心",
   },
   hero: {
-    eyebrow: "Emma Kwon",
-    headline: "Emma Kwon,就是这座出版之家。",
+    eyebrow: "Amazing Tiger Publishing",
+    headline: "这里不是商店,而是一道入口。",
     subhead:
-      "音乐、回忆录、出版、精心设计的世界,以及献给年轻心灵的故事,都栖居于此。",
+      "通往 Emma Kwon 出版世界的静谧之门——书籍、回忆录、音乐,以及稀有的声音,以细腻与智性雕琢而成。",
     ctaPrimary: "进入这座出版之家",
     ctaSecondary: "预约咨询",
-  },
-  rooms: {
-    eyebrow: "五间房",
-    lead: "一座出版之家,五扇门。",
-    items: [
-      {
-        title: "EMMAESTRO",
-        lines: ["三张专辑。", "二十首歌。", "一套私人的天气系统。"],
-        cta: "进入 EMMAESTRO",
-      },
-      {
-        title: "Amazing Tiger Publishing",
-        lines: ["以足够缓慢的步伐,打造经得起时间的书。"],
-        cta: "开启出版之室",
-      },
-      {
-        title: "BORN RARE",
-        lines: ["那个微笑,无懈可击。", "它所掩藏的,成了一本书。"],
-        cta: "进入 BORN RARE",
-      },
-      {
-        title: "作品",
-        lines: ["物件、界面,与被具象化的世界。"],
-        cta: "查看作品",
-      },
-      {
-        title: "K MAMA",
-        lines: ["献给年轻心灵的温暖故事。"],
-        cta: "认识 K MAMA",
-      },
-    ],
-  },
-  featuredStory: {
-    eyebrow: "精选故事",
-    question: "他为什么在笑？",
-    caption: "一个来自 BORN RARE 世界的场景。",
-    cta: "进入 BORN RARE",
-    playLabel: "播放这个场景",
-  },
-  livingWindow: {
-    eyebrow: "鲜活之窗",
-    heading: "此刻,案头正在进行的。",
-    lead: "静静一瞥,那些已然面世的作品。",
-  },
-  stats: {
-    eyebrow: "真实数字",
-    items: ["3 张专辑", "20 首歌", "全球流媒体", "BORN RARE", "K MAMA"],
-  },
-  closingDoors: {
-    heading: "是什么带你来到这里？",
-    choices: ["我为音乐而来。", "我为书籍而来。", "我为创作而来。"],
   },
   philosophy: {
     eyebrow: "理念",

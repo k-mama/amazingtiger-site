@@ -19,63 +19,12 @@ const ko: Dictionary = {
     dashboard: "대시보드",
   },
   hero: {
-    eyebrow: "Emma Kwon",
-    headline: "Emma Kwon이 곧 하우스입니다.",
+    eyebrow: "책과 이야기를 만드는 작은 출판사",
+    headline: "책과 이야기가 머무는 곳.",
     subhead:
-      "음악과 회고록, 출판, 정교하게 설계된 세계, 그리고 어린 마음을 위한 이야기가 그 안에 살아 있습니다.",
-    ctaPrimary: "하우스로 들어가기",
-    ctaSecondary: "출판 상담하기",
-  },
-  rooms: {
-    eyebrow: "다섯 개의 방",
-    lead: "하나의 하우스. 다섯 개의 입구.",
-    items: [
-      {
-        title: "EMMAESTRO",
-        lines: ["세 장의 앨범.", "스무 곡의 노래.", "한 사람만의 기후."],
-        cta: "EMMAESTRO로 들어가기",
-      },
-      {
-        title: "Amazing Tiger Publishing",
-        lines: ["오래 남도록, 천천히 지어진 책들."],
-        cta: "출판의 방 열기",
-      },
-      {
-        title: "BORN RARE",
-        lines: ["그 미소는 흠 없이 완벽했다.", "그것이 감춘 것이 한 권의 책이 되었다."],
-        cta: "BORN RARE로 들어가기",
-      },
-      {
-        title: "작품",
-        lines: ["눈에 보이게 된 사물과 인터페이스, 그리고 세계들."],
-        cta: "작업 보기",
-      },
-      {
-        title: "K MAMA",
-        lines: ["어린 마음을 위한 따뜻한 이야기들."],
-        cta: "K MAMA 만나기",
-      },
-    ],
-  },
-  featuredStory: {
-    eyebrow: "선별된 이야기",
-    question: "그는 왜 웃고 있었을까?",
-    caption: "BORN RARE의 세계에서 온 한 장면.",
-    cta: "BORN RARE로 들어가기",
-    playLabel: "장면 재생하기",
-  },
-  livingWindow: {
-    eyebrow: "살아 있는 창",
-    heading: "지금, 책상 위에 있는 것들.",
-    lead: "이미 세상에 나온 작업들을 조용히 들여다봅니다.",
-  },
-  stats: {
-    eyebrow: "숫자로 보면",
-    items: ["앨범 3장", "노래 20곡", "전 세계 스트리밍", "BORN RARE", "K MAMA"],
-  },
-  closingDoors: {
-    heading: "무엇이 당신을 이곳으로 이끌었나요?",
-    choices: ["나는 음악 때문에 왔습니다.", "나는 책 때문에 왔습니다.", "나는 무언가를 만들기 위해 왔습니다."],
+      "Amazing Tiger Publishing은 한 사람의 목소리가 한 권의 책으로 자라나는 과정을 함께합니다. 책에서 시작해 음악과 이미지로 이어지는 작업들을 천천히 둘러보세요.",
+    ctaPrimary: "출간작 보기",
+    ctaSecondary: "출판 상담",
   },
   philosophy: {
     eyebrow: "철학",
