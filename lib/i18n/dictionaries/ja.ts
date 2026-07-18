@@ -19,12 +19,63 @@ const ja: Dictionary = {
     dashboard: "ダッシュボード",
   },
   hero: {
-    eyebrow: "Amazing Tiger Publishing",
-    headline: "ここは店ではありません。入口です。",
+    eyebrow: "Emma Kwon",
+    headline: "Emma Kwonが、この家そのものです。",
     subhead:
-      "Emma Kwonの出版世界への静かな扉——本、回想録、音楽、そして稀有な声を、丁寧に、知性を持って紡いでいます。",
+      "音楽、回想録、出版、デザインされた世界、そして幼い心のための物語が、その中に息づいています。",
     ctaPrimary: "ハウスへ入る",
     ctaSecondary: "ご相談を申し込む",
+  },
+  rooms: {
+    eyebrow: "五つの部屋",
+    lead: "ひとつの家。五つの入口。",
+    items: [
+      {
+        title: "EMMAESTRO",
+        lines: ["アルバム三枚。", "楽曲二十曲。", "ひとつの、私的な気象システム。"],
+        cta: "EMMAESTROへ入る",
+      },
+      {
+        title: "Amazing Tiger Publishing",
+        lines: ["ゆっくりと、残るように作られた本。"],
+        cta: "出版の部屋を開く",
+      },
+      {
+        title: "BORN RARE",
+        lines: ["微笑みは、完璧だった。", "その裏にあったものが、一冊の本になった。"],
+        cta: "BORN RAREへ入る",
+      },
+      {
+        title: "作品",
+        lines: ["物、インターフェース、そして目に見える形になった世界。"],
+        cta: "作品を見る",
+      },
+      {
+        title: "K MAMA",
+        lines: ["幼い心のための、温かな物語。"],
+        cta: "K MAMAに出会う",
+      },
+    ],
+  },
+  featuredStory: {
+    eyebrow: "特集ストーリー",
+    question: "彼はなぜ、微笑んでいたのか。",
+    caption: "BORN RAREの世界からの、ひとつの場面。",
+    cta: "BORN RAREへ入る",
+    playLabel: "場面を再生する",
+  },
+  livingWindow: {
+    eyebrow: "生きた窓",
+    heading: "いま、机の上にあるもの。",
+    lead: "すでに世に出た仕事を、静かに見つめる。",
+  },
+  stats: {
+    eyebrow: "確かな数字で",
+    items: ["アルバム3枚", "楽曲20曲", "世界配信中", "BORN RARE", "K MAMA"],
+  },
+  closingDoors: {
+    heading: "何が、あなたをここへ連れてきたのか。",
+    choices: ["私は、音楽のために来た。", "私は、本のために来た。", "私は、何かを作るために来た。"],
   },
   philosophy: {
     eyebrow: "理念",

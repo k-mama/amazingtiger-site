@@ -19,12 +19,63 @@ const es: Dictionary = {
     dashboard: "Panel",
   },
   hero: {
-    eyebrow: "Amazing Tiger Publishing",
-    headline: "Esto no es una tienda. Es una entrada.",
+    eyebrow: "Emma Kwon",
+    headline: "Emma Kwon es la casa.",
     subhead:
-      "Una puerta silenciosa al universo editorial de Emma Kwon — libros, memorias, música y voces singulares, moldeados con cuidado e inteligencia.",
+      "Música, memorias, edición, mundos diseñados e historias para corazones jóvenes viven dentro de ella.",
     ctaPrimary: "Entrar a la Casa",
     ctaSecondary: "Solicitar una Consulta",
+  },
+  rooms: {
+    eyebrow: "Cinco Salas",
+    lead: "Una casa. Cinco entradas.",
+    items: [
+      {
+        title: "EMMAESTRO",
+        lines: ["Tres álbumes.", "Veinte canciones.", "Un sistema climático privado."],
+        cta: "Entrar a EMMAESTRO",
+      },
+      {
+        title: "Amazing Tiger Publishing",
+        lines: ["Libros construidos con la lentitud necesaria para perdurar."],
+        cta: "Abrir la sala editorial",
+      },
+      {
+        title: "BORN RARE",
+        lines: ["La sonrisa era perfecta.", "Lo que ocultaba se convirtió en un libro."],
+        cta: "Entrar a BORN RARE",
+      },
+      {
+        title: "Obras",
+        lines: ["Objetos, interfaces y mundos hechos visibles."],
+        cta: "Ver el trabajo",
+      },
+      {
+        title: "K MAMA",
+        lines: ["Historias cálidas para corazones jóvenes."],
+        cta: "Conocer a K MAMA",
+      },
+    ],
+  },
+  featuredStory: {
+    eyebrow: "Historia Destacada",
+    question: "¿Por qué sonreía?",
+    caption: "Una escena del mundo de BORN RARE.",
+    cta: "Entrar a BORN RARE",
+    playLabel: "Reproducir la escena",
+  },
+  livingWindow: {
+    eyebrow: "La Ventana Viva",
+    heading: "Lo que hay ahora sobre el escritorio.",
+    lead: "Una mirada silenciosa al trabajo que ya existe en el mundo.",
+  },
+  stats: {
+    eyebrow: "En Números Reales",
+    items: ["3 Álbumes", "20 Canciones", "Streaming Mundial", "BORN RARE", "K MAMA"],
+  },
+  closingDoors: {
+    heading: "¿Qué te trajo aquí?",
+    choices: ["Vine por la música.", "Vine por los libros.", "Vine a crear algo."],
   },
   philosophy: {
     eyebrow: "Filosofía",

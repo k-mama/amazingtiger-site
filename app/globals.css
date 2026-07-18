@@ -1017,6 +1017,256 @@ button {
   flex-wrap: wrap;
 }
 
+.hero__cover--photo img {
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* =========================================================================
+   Five Rooms (homepage only) — a quiet, magazine-contents style list of
+   entry points into Emma Kwon's five worlds. Deliberately not five
+   competing ad cards: one column, thin dividers, small media, typography
+   led. Anchors used by this list get breathing room from the sticky header.
+   ========================================================================= */
+
+#rooms,
+#works,
+#emmaestro,
+#kmama {
+  scroll-margin-top: 84px;
+}
+
+.rooms-toc {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--color-stone-line);
+}
+
+.rooms-toc__item {
+  border-bottom: 1px solid var(--color-stone-line);
+}
+
+.rooms-toc__link {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.rooms-toc__index {
+  flex-shrink: 0;
+  width: 28px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--color-bronze);
+}
+
+.rooms-toc__media {
+  position: relative;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--dg-porcelain);
+}
+
+.rooms-toc__body {
+  display: block;
+  flex: 1;
+  min-width: 0;
+}
+
+.rooms-toc__title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.rooms-toc__lines {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--color-ink-soft);
+  font-size: 0.92rem;
+}
+
+.rooms-toc__line {
+  display: block;
+}
+
+.rooms-toc__cta {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  color: var(--color-bronze);
+  transition: transform 0.3s var(--ease-soft);
+}
+
+.rooms-toc__link:hover .rooms-toc__cta,
+.rooms-toc__link:focus-visible .rooms-toc__cta {
+  transform: translateX(4px);
+}
+
+.rooms-toc__link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 640px) {
+  .rooms-toc__link {
+    gap: 0.9rem;
+    padding: 1.15rem 0;
+  }
+
+  .rooms-toc__media {
+    width: 52px;
+    height: 52px;
+  }
+
+  .rooms-toc__title {
+    font-size: 1.1rem;
+  }
+}
+
+/* =========================================================================
+   Featured Story video (homepage only) — poster image first, native
+   controls only appear after an explicit click. No autoplay, ever.
+   ========================================================================= */
+
+.featured-story__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-top: 1.75rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-ink);
+  box-shadow: var(--shadow-glossy);
+}
+
+.featured-story__poster {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.featured-story__play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(251, 248, 244, 0.92);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-glossy);
+  transition: transform 0.3s var(--ease-soft);
+}
+
+.featured-story__play svg {
+  margin-left: 3px;
+}
+
+.featured-story__poster:hover .featured-story__play,
+.featured-story__poster:focus-visible .featured-story__play {
+  transform: scale(1.08);
+}
+
+.featured-story__poster:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.featured-story__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+/* =========================================================================
+   Stats strip (homepage only) — the track record, placed quietly later in
+   the page rather than competing with the first screen.
+   ========================================================================= */
+
+.stats-strip {
+  text-align: center;
+}
+
+.stats-strip__eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-bronze);
+  margin-bottom: 1rem;
+}
+
+.stats-strip__list {
+  list-style: none;
+  margin: 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--color-stone-line);
+  border-bottom: 1px solid var(--color-stone-line);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+}
+
+.stats-strip__item {
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-soft);
+}
+
+/* =========================================================================
+   Closing Doors (homepage only) — the last question before the footer.
+   ========================================================================= */
+
+.closing-doors {
+  text-align: center;
+}
+
+.closing-doors__list {
+  list-style: none;
+  margin: 2rem auto 0;
+  padding: 0;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.closing-doors__choice {
+  display: block;
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--color-stone-line);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--color-ink);
+  transition: border-color 0.3s var(--ease-soft), background 0.3s var(--ease-soft);
+}
+
+.closing-doors__choice:hover,
+.closing-doors__choice:focus-visible {
+  border-color: var(--color-bronze);
+  background: var(--glass-light-bg-strong);
+}
+
 /* =========================================================================
    Reveal on scroll
    Content is never gated by this: opacity stays 1 unconditionally, in every

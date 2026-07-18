@@ -19,12 +19,63 @@ const zhTW: Dictionary = {
     dashboard: "會員專區",
   },
   hero: {
-    eyebrow: "Amazing Tiger Publishing",
-    headline: "這裡不是商店,而是一道入口。",
+    eyebrow: "Emma Kwon",
+    headline: "Emma Kwon 就是這座出版之家。",
     subhead:
-      "通往 Emma Kwon 出版世界的靜謐之門——書籍、回憶錄、音樂,以及稀有的聲音,以細膩與智性雕琢而成。",
+      "音樂、回憶錄、出版、精心設計的世界,以及獻給年輕心靈的故事,都棲居於此。",
     ctaPrimary: "進入這座出版之家",
     ctaSecondary: "預約諮詢",
+  },
+  rooms: {
+    eyebrow: "五個房間",
+    lead: "一棟房子。五種入口。",
+    items: [
+      {
+        title: "EMMAESTRO",
+        lines: ["三張專輯。", "二十首歌。", "一套私人的氣候系統。"],
+        cta: "進入 EMMAESTRO",
+      },
+      {
+        title: "Amazing Tiger Publishing",
+        lines: ["以足夠緩慢的速度打造,得以長存的書籍。"],
+        cta: "走進出版房間",
+      },
+      {
+        title: "BORN RARE",
+        lines: ["那笑容,無懈可擊。", "它所隱藏的,成了一本書。"],
+        cta: "進入 BORN RARE",
+      },
+      {
+        title: "作品",
+        lines: ["物件、介面,與被具象化的世界。"],
+        cta: "查看作品",
+      },
+      {
+        title: "K MAMA",
+        lines: ["獻給年輕心靈的溫暖故事。"],
+        cta: "認識 K MAMA",
+      },
+    ],
+  },
+  featuredStory: {
+    eyebrow: "精選故事",
+    question: "他為什麼在笑？",
+    caption: "一幕來自 BORN RARE 世界的場景。",
+    cta: "進入 BORN RARE",
+    playLabel: "播放這一幕",
+  },
+  livingWindow: {
+    eyebrow: "此刻之窗",
+    heading: "此刻,書桌上的光景。",
+    lead: "靜靜看一眼,那些已經存在於世界上的作品。",
+  },
+  stats: {
+    eyebrow: "真實數字",
+    items: ["3 張專輯", "20 首歌", "全球串流", "BORN RARE", "K MAMA"],
+  },
+  closingDoors: {
+    heading: "是什麼帶你來到這裡？",
+    choices: ["我來,是為了音樂。", "我來,是為了書。", "我來,是想創作些什麼。"],
   },
   philosophy: {
     eyebrow: "理念",

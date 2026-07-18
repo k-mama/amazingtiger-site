@@ -19,12 +19,63 @@ const en: Dictionary = {
     dashboard: "Dashboard",
   },
   hero: {
-    eyebrow: "Amazing Tiger Publishing",
-    headline: "This is not a store. This is an entrance.",
+    eyebrow: "Emma Kwon",
+    headline: "Emma Kwon is the house.",
     subhead:
-      "A quiet gateway into Emma Kwon's publishing universe — books, memoirs, music, and rare voices, shaped with care and intelligence.",
+      "Music, memoir, publishing, designed worlds, and stories for young hearts live inside it.",
     ctaPrimary: "Enter the House",
     ctaSecondary: "Request a Consultation",
+  },
+  rooms: {
+    eyebrow: "Five Rooms",
+    lead: "One house. Five ways in.",
+    items: [
+      {
+        title: "EMMAESTRO",
+        lines: ["Three albums.", "Twenty songs.", "A private weather system."],
+        cta: "Enter EMMAESTRO",
+      },
+      {
+        title: "Amazing Tiger Publishing",
+        lines: ["Books built slowly enough to last."],
+        cta: "Open the publishing room",
+      },
+      {
+        title: "BORN RARE",
+        lines: ["The smile was flawless.", "What it hid became a book."],
+        cta: "Enter BORN RARE",
+      },
+      {
+        title: "Works",
+        lines: ["Objects, interfaces, and worlds made visible."],
+        cta: "See the work",
+      },
+      {
+        title: "K MAMA",
+        lines: ["Warm stories for young hearts."],
+        cta: "Meet K MAMA",
+      },
+    ],
+  },
+  featuredStory: {
+    eyebrow: "Featured Story",
+    question: "Why was he smiling?",
+    caption: "A scene from the world of BORN RARE.",
+    cta: "Enter BORN RARE",
+    playLabel: "Play the scene",
+  },
+  livingWindow: {
+    eyebrow: "The Living Window",
+    heading: "What's on the desk right now.",
+    lead: "A quiet look at the work already out in the world.",
+  },
+  stats: {
+    eyebrow: "In Real Numbers",
+    items: ["3 Albums", "20 Songs", "Streaming Worldwide", "BORN RARE", "K MAMA"],
+  },
+  closingDoors: {
+    heading: "What brought you here?",
+    choices: ["I came for the music.", "I came for the books.", "I came to make something."],
   },
   philosophy: {
     eyebrow: "Philosophy",
